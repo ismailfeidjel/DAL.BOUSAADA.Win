@@ -11,19 +11,15 @@ namespace DevExpress.ProductsDemo.Win.Forms {
             DevExpress.Utils.LocalizationHelper.SetCurrentCulture(DataHelper.ApplicationArguments);
             InitializeComponent();
             labelControl1.Text = string.Format("{0}{1}", labelControl1.Text, GetYearString());
-            this.DemoText = "Build Your Own Office";
-            this.ProductText = "WinForms";
+            this.DemoText = "Bousaada";
+            this.ProductText = "????? ??????? ????? ?????? ??????? ????????";
             Timer tmr = new Timer();
-            tmr.Interval = 400;
-            tmr.Tick += new EventHandler(tmr_Tick);
+            tmr.Interval = 300;
+           // tmr.Tick += new EventHandler(tmr_Tick);
             tmr.Start();
         }
 
-        void tmr_Tick(object sender, EventArgs e) {
-            if(++dotCount > 3) dotCount = 0;
-            labelControl2.Text = string.Format("{1}{0}", GetDots(dotCount), DevExpress.ProductsDemo.Win.Properties.Resources.Starting);
-        }
-
+        
         string GetDots(int count) {
             string ret = string.Empty;
             for(int i = 0; i < count; i++) ret += ".";
@@ -32,6 +28,21 @@ namespace DevExpress.ProductsDemo.Win.Forms {
         int GetYearString() {
             int ret = TutorialConstants.Now.Year;
             return (ret < 2012 ? 2012 : ret);
+        }
+
+        private void marqueeProgressBarControl1_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ssMain_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureEdit2_EditValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

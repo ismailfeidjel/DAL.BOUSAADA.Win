@@ -19,11 +19,11 @@ namespace DevExpress.ProductsDemo.Win.Controls {
 
         void HelpControl_Load(object sender, EventArgs e) {
             if(isLoaded) return;
-            aboutPanel = new AboutForm12(new ProductInfo(ProductKind.DXperienceWin, new ProductStringInfo("WinForms Controls", "Build Your Own Office")));
+            aboutPanel = new AboutForm12(new ProductInfo(ProductKind.DXperienceWin, new ProductStringInfo("Bousaada ")));
             aboutPanel.TopLevel = false;
             aboutPanel.Parent = splitContainer1.Panel2;
             ResizeAbout();
-            aboutPanel.Show();
+            //aboutPanel.Show();
             splitContainer1.Panel2.Resize += new EventHandler(Panel2_Resize);
             ResizeAbout();
             isLoaded = true;
@@ -39,9 +39,9 @@ namespace DevExpress.ProductsDemo.Win.Controls {
         private void galleryControlGallery1_ItemClick(object sender, DevExpress.XtraBars.Ribbon.GalleryItemClickEventArgs e) {
             string link = string.Format("{0}", e.Item.Tag);
             switch(link) {
-                case "LinkHelp": link = AssemblyInfo.DXLinkHelp; break;
-                case "LinkGetSupport": link = AssemblyInfo.DXLinkGetSupport; break;
-                case "LinkGetStarted": link = AssemblyInfo.DXLinkGetStartedWinGrid; break;
+                case "LinkHelp": link = ""; break;
+                case "LinkGetSupport": link = ""; break;
+                case "LinkGetStarted": link = ""; break;
             }
             if(!string.IsNullOrEmpty(link)) ObjectHelper.StartProcess(link);
         }

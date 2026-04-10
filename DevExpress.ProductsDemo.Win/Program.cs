@@ -37,7 +37,6 @@ namespace DevExpress.ProductsDemo.Win {
             EnumProcessingHelper.RegisterEnum(typeof(TaskStatus), "DevExpress.ProductsDemo.Win.TaskStatus");
             MainFormHelper.InitTakeScreen(Environment.GetCommandLineArgs());
             if(!MainFormHelper.TakeScreens)
-              //  SplashScreenManager.ShowSkinSplashScreen(Tutorials.ucOverviewPage.GetSVGLogoImage(), "ولاية بوسعادة متابعة البرامج التنموية");
                 SplashScreenManager.ShowForm(typeof(SplashScreen1));
 
             Application.EnableVisualStyles();

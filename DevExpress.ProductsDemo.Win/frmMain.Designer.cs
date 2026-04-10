@@ -246,6 +246,7 @@
             // 
             resources.ApplyResources(this.bvbiSaveAttachment, "bvbiSaveAttachment");
             this.bvbiSaveAttachment.Name = "bvbiSaveAttachment";
+            this.bvbiSaveAttachment.ItemClick += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.bvbiSaveAttachment_ItemClick);
             // 
             // bvtiInfo
             // 
@@ -253,6 +254,7 @@
             this.bvtiInfo.ContentControl = this.backstageViewClientControl1;
             this.bvtiInfo.Name = "bvtiInfo";
             this.bvtiInfo.Selected = true;
+            this.bvtiInfo.SelectedChanged += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.bvtiInfo_SelectedChanged);
             // 
             // bvtiPrint
             // 
@@ -783,7 +785,6 @@
             this.nbgModules.Name = "nbgModules";
             this.nbgModules.NavigationPaneVisible = false;
             this.nbgModules.SelectedLinkIndex = 11;
-            this.nbgModules.TopVisibleLinkIndex = 2;
             // 
             // nbiGrid
             // 
@@ -882,10 +883,12 @@
             this.Controls.Add(this.navBarControl1);
             this.Controls.Add(this.ribbonStatusBar1);
             this.Controls.Add(this.ribbonControl1);
+            this.IconOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("frmMain.IconOptions.LargeImage")));
             this.KeyPreview = true;
             this.Name = "frmMain";
             this.Ribbon = this.ribbonControl1;
             this.StatusBar = this.ribbonStatusBar1;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmMain_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).EndInit();

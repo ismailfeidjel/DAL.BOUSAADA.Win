@@ -39,6 +39,7 @@ namespace DevExpress.ProductsDemo.Win.Forms {
             this.marqueeProgressBarControl1.Properties.LookAndFeel.SkinName = "Visual Studio 2013 Blue";
             this.marqueeProgressBarControl1.Properties.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat;
             this.marqueeProgressBarControl1.Properties.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.marqueeProgressBarControl1.EditValueChanged += new System.EventHandler(this.marqueeProgressBarControl1_EditValueChanged);
             // 
             // labelControl1
             // 
@@ -50,39 +51,49 @@ namespace DevExpress.ProductsDemo.Win.Forms {
             // 
             // pictureEdit1
             // 
-            this.pictureEdit1.Properties.Appearance.BackColor = ((System.Drawing.Color)(resources.GetObject("pictureEdit1.Properties.Appearance.BackColor")));
+            resources.ApplyResources(this.pictureEdit1, "pictureEdit1");
+            this.pictureEdit1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.pictureEdit1.Properties.Appearance.Options.UseBackColor = true;
+            this.pictureEdit1.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Clip;
+            this.pictureEdit1.Properties.ZoomPercent = 50D;
             // 
             // panelControl
             // 
-            this.panelControl.Appearance.BackColor = ((System.Drawing.Color)(resources.GetObject("panelControl.Appearance.BackColor")));
+            this.panelControl.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(148)))), ((int)(((byte)(30)))));
             this.panelControl.Appearance.Options.UseBackColor = true;
             // 
             // panelControl1
             // 
-            this.panelControl1.Appearance.BackColor = ((System.Drawing.Color)(resources.GetObject("panelControl1.Appearance.BackColor")));
+            this.panelControl1.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.panelControl1.Appearance.Options.UseBackColor = true;
             // 
             // labelDemoText
             // 
             this.labelDemoText.Appearance.Font = ((System.Drawing.Font)(resources.GetObject("labelDemoText.Appearance.Font")));
-            this.labelDemoText.Appearance.ForeColor = ((System.Drawing.Color)(resources.GetObject("labelDemoText.Appearance.ForeColor")));
+            this.labelDemoText.Appearance.ForeColor = System.Drawing.Color.White;
+            this.labelDemoText.Appearance.Options.UseFont = true;
+            this.labelDemoText.Appearance.Options.UseForeColor = true;
             // 
             // pictureEdit2
             // 
-            this.pictureEdit2.Properties.Appearance.BackColor = ((System.Drawing.Color)(resources.GetObject("pictureEdit2.Properties.Appearance.BackColor")));
+            this.pictureEdit2.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
             this.pictureEdit2.Properties.Appearance.Options.UseBackColor = true;
+            this.pictureEdit2.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Stretch;
+            this.pictureEdit2.EditValueChanged += new System.EventHandler(this.pictureEdit2_EditValueChanged);
             // 
             // labelProductText
             // 
             this.labelProductText.Appearance.Font = ((System.Drawing.Font)(resources.GetObject("labelProductText.Appearance.Font")));
             this.labelProductText.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(252)))), ((int)(((byte)(216)))), ((int)(((byte)(188)))));
+            this.labelProductText.Appearance.Options.UseFont = true;
+            this.labelProductText.Appearance.Options.UseForeColor = true;
             // 
             // ssMain
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "ssMain";
+            this.Load += new System.EventHandler(this.ssMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.marqueeProgressBarControl1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEdit1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl)).EndInit();

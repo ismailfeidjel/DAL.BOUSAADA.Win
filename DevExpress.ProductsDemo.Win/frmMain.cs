@@ -166,7 +166,7 @@ namespace DevExpress.ProductsDemo.Win {
             if(count == null) bsiInfo.Caption = string.Empty;
             else
                 bsiInfo.Caption = string.Format(Properties.Resources.InfoText, count.Value);
-            HtmlText = "Build Your Own Office"; // string.Format("{0}{1}", GetModuleName(), GetModulePartName());
+            HtmlText = "ولاية بوسعادة تطبيق متابعة البرامج التنموية"; // string.Format("{0}{1}", GetModuleName(), GetModulePartName());
         }
         string GetModuleName() {
             if(string.IsNullOrEmpty(modulesNavigator.CurrentModule.PartName)) return CurrentModuleName;
@@ -298,6 +298,16 @@ namespace DevExpress.ProductsDemo.Win {
         }
 
         private void bbiThisWeekFlag_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void bvtiInfo_SelectedChanged(object sender, BackstageViewItemEventArgs e)
+        {
+
+        }
+
+        private void bvbiSaveAttachment_ItemClick(object sender, BackstageViewItemEventArgs e)
         {
 
         }

@@ -902,7 +902,7 @@ Left:	19 mm	Right:	19 mm</value>
     <value>Engadget</value>
   </data>
   <data name="ProgressPanelDescription" xml:space="preserve">
-    <value>Loading ...</value>
+    <value>...جاري التحمــيل</value>
   </data>
   <data name="DateDeleted" xml:space="preserve">
     <value>Date</value>
@@ -1001,7 +1001,7 @@ Left:	19 mm	Right:	19 mm</value>
     <value>..\Resources\ThisWeek_Flag.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ProgressPanelCaption" xml:space="preserve">
-    <value>Please Wait</value>
+    <value>الرجاء الانتظار</value>
   </data>
   <data name="PageMarginsNormal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PageMarginsNormal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

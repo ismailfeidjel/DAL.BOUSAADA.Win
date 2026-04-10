@@ -274,7 +274,10 @@
     <value>اغلاق البرنامج</value>
   </data>
   <data name="backstageViewControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 20</value>
+    <value>950, 21</value>
+  </data>
+  <data name="backstageViewControl1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
   </data>
   <data name="backstageViewControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 461</value>
@@ -643,6 +646,33 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>1290, 787</value>
+  </data>
+  <data name="frmMain.IconOptions.LargeImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAUdEVYdFRpdGxlAENvbG9yO1BhbGV0dGU7tmQQnwAA
+        BLRJREFUWEfF12dXFFcYB/CN2LClfJrkXQ5NDeZVQhVBSBHBGATBaBKjYixAQFjpQuidBSGWAGHBpS3L
+        sgKCiCfJt3CnAE+e595pO2dEMJpwzu9M3fv/z8yds6xN+duGgrZg+2vaoaB1GucdZNvW4PA6m3p9sJFG
+        0mPBQctZaCCOl6vvVnmZ2o7pEaWELai2cwb+67/KlinAbLobtu01HbzA6uoayKurCnWdlkb8uGQ4h9Yl
+        XJdk5RguN7K+vg7lTZNUYCcrUN3ugXUsYAywwkLYkmP7TYOLFkuVur2GBcqMBapap7EVsINUQpL51TAU
+        ZlwaGAcXJdO6yriN64LIC5Q2TFCBXVRgR2WLmxdQTlQHNwZpgeqgSDDsE4i6T9028QsyvBCwwNo62OvH
+        9QIVzVOsALUTEZ2shSnrbJ8JG1g5ZgnH8jMULCsFZFaguM6lF+itqgFXTz8427s1Ix0O3NcHE/33mXHS
+        d08zdvc31A9jvZzL4BGOxTj6wNnZA0Mt7TDY3AYDpKkVhnHsNnsZFdhNBXb+3d0D8spzkObmQXpsMrcA
+        0pNFkBafKpZw+yUW8DzmCf+cbw6k2ccgeX0B5KfLsIxltAJ/dTlAfoYFzOEMDkIDESo4j4Mbgwjtm8dA
+        NdQUqJmZZWS8kKWmFioQTAV2/dnRZShgCDSjq7FiFcbwQDMZ7+JiY7OpwPKKKdAiSGUZhizCGI83ABVY
+        qG/UCzxv7+QFrMKIVRixCiOmQGZ6RiPjI5uva6ACe6jA7pXWdpwYz95aoOT26KY8IONcmfu1Ti/QdToD
+        lhsawVd4C2Z/KeIKCsGbXwgz+QUwk1cAnrx8ZvpGHriZm+C+fhOmrt2AyavXYILk/syM5V6FsSu5jOvy
+        FXh0Cf10GUbJxUswXVQMVckpVGAvFQhe+uEiSI4eEGtqQbxjUF2jq7qjq6zmKqp05ZVcWQVXWs4Iqttl
+        nL0UxKZm8Gbn6AUWL/wIEr6K/ypQCbUK1JTcZkScgJ6sbCqwjxVYuPA9SPgmvNHAEj1QKLbrbpWAiBPQ
+        nXlWK7Bn/jwWwDdBrNwgsPQVgXYlzCKQKSLFjFhbB5NnsqjAflZg7tx5kPBN2NoVbj5QwMmtwQlOc20i
+        44xWYK8v5zuQWto2/QytA5Uwi0ANvlmE5tj4t4YCFR+HgBtLOFO+BGfyFzB8PAUlwx9J3FBiEgwqBhKO
+        wcOjKJ4kwAN0Py6euUdi46A/Jg76YmKhLzqGuRsVA72fR6Mo6P0sCga/ToXrH35EBQ5QgX2eI5+CkH0O
+        /BjOYAEmiSRzicd1x5K4hER4ocJSAbCYJu6oQTz4007BaMQhrcB+dyQWOJuDoUrYBoFa6GYDY0m8Du+O
+        /2Q6OHmBd1mBqcgjIGRmvZlAvEJzYIDoWPCnpsFwxEEq8B4rMHE4EoSMzNe8pegVgWZ+nANDYRFagQPj
+        hz8BP34fvJXAKBITgAoMhIbrd8B1CAucOq1L/yYQThp/WjqHzy/AiZMmqSzA0lcnNMYCwTgjR2lWjiho
+        gjjxGTHhB2E4PCIA3T6jwbDwAL+HhulCuIcmD0JCXZjNvozolzH9Z0KvBM1KQs224v0t+ADRZyg8yIa/
+        yP5HYPsHlCtNSoiJJnsAAAAASUVORK5CYII=
+</value>
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>800, 600</value>

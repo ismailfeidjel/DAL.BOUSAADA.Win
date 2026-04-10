@@ -2977,7 +2977,7 @@ namespace DevExpress.ProductsDemo.Win.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please Wait.
+        ///   Looks up a localized string similar to الرجاء الانتظار.
         /// </summary>
         internal static string ProgressPanelCaption {
             get {
@@ -2986,7 +2986,7 @@ namespace DevExpress.ProductsDemo.Win.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loading ....
+        ///   Looks up a localized string similar to ...جاري التحمــيل.
         /// </summary>
         internal static string ProgressPanelDescription {
             get {

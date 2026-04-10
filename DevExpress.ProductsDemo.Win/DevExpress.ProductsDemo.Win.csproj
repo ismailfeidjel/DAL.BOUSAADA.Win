@@ -652,6 +652,9 @@
     <EmbeddedResource Include="Forms\ssMain.resx">
       <DependentUpon>ssMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\wfMain.resx">
+      <DependentUpon>wfMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
       <SubType>Designer</SubType>

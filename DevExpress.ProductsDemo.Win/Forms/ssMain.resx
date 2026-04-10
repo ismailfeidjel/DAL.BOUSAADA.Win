@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"></xsd:import>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"></xsd:element>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"></xsd:attribute>
-              <xsd:attribute name="type" type="xsd:string"></xsd:attribute>
-              <xsd:attribute name="mimetype" type="xsd:string"></xsd:attribute>
-              <xsd:attribute ref="xml:space"></xsd:attribute>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"></xsd:attribute>
-              <xsd:attribute name="name" type="xsd:string"></xsd:attribute>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"></xsd:element>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"></xsd:element>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"></xsd:attribute>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"></xsd:attribute>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"></xsd:attribute>
-              <xsd:attribute ref="xml:space"></xsd:attribute>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"></xsd:element>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"></assembly>
+  <metadata name="marqueeProgressBarControl1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="marqueeProgressBarControl1.Properties.Appearance.BorderColor" type="System.Drawing.Color, System.Drawing">
     <value>195, 194, 194</value>
   </data>
@@ -125,7 +128,7 @@
     <value>marqueeProgressBarControl1</value>
   </data>
   <data name="&gt;&gt;marqueeProgressBarControl1.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.MarqueeProgressBarControl, DevExpress.XtraEditors.v24.1, Culture=neutral</value>
+    <value>DevExpress.XtraEditors.MarqueeProgressBarControl, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;marqueeProgressBarControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -133,6 +136,9 @@
   <data name="&gt;&gt;marqueeProgressBarControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="labelControl1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="labelControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 48</value>
   </data>
@@ -143,7 +149,7 @@
     <value>labelControl1</value>
   </data>
   <data name="&gt;&gt;labelControl1.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.LabelControl, DevExpress.XtraEditors.v24.1, Culture=neutral</value>
+    <value>DevExpress.XtraEditors.LabelControl, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;labelControl1.Parent" xml:space="preserve">
     <value>panelControl1</value>
@@ -151,7 +157,10 @@
   <data name="&gt;&gt;labelControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <assembly alias="DevExpress.XtraEditors.v24.1" name="DevExpress.XtraEditors.v24.1, Culture=neutral"></assembly>
+  <metadata name="labelControl2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="DevExpress.XtraEditors.v24.1" name="DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
   <data name="labelControl2.AutoSizeMode" type="DevExpress.XtraEditors.LabelAutoSizeMode, DevExpress.XtraEditors.v24.1">
     <value>None</value>
   </data>
@@ -162,7 +171,7 @@
     <value>labelControl2</value>
   </data>
   <data name="&gt;&gt;labelControl2.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.LabelControl, DevExpress.XtraEditors.v24.1, Culture=neutral</value>
+    <value>DevExpress.XtraEditors.LabelControl, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;labelControl2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -170,14 +179,97 @@
   <data name="&gt;&gt;labelControl2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="pictureEdit1.Properties.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
-    <value>Transparent</value>
+  <metadata name="pictureEdit1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="pictureEdit1.EditValue" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
   </data>
   <data name="&gt;&gt;pictureEdit1.Name" xml:space="preserve">
     <value>pictureEdit1</value>
   </data>
   <data name="&gt;&gt;pictureEdit1.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.PictureEdit, DevExpress.XtraEditors.v24.1, Culture=neutral</value>
+    <value>DevExpress.XtraEditors.PictureEdit, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;pictureEdit1.Parent" xml:space="preserve">
     <value>panelControl1</value>
@@ -185,14 +277,14 @@
   <data name="&gt;&gt;pictureEdit1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="panelControl.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
-    <value>247, 148, 30</value>
-  </data>
+  <metadata name="panelControl.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="&gt;&gt;panelControl.Name" xml:space="preserve">
     <value>panelControl</value>
   </data>
   <data name="&gt;&gt;panelControl.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.PanelControl, DevExpress.Utils.v24.1, Culture=neutral</value>
+    <value>DevExpress.XtraEditors.PanelControl, DevExpress.Utils.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;panelControl.Parent" xml:space="preserve">
     <value>$this</value>
@@ -200,14 +292,14 @@
   <data name="&gt;&gt;panelControl.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="panelControl1.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
-    <value>238, 238, 238</value>
-  </data>
+  <metadata name="panelControl1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="&gt;&gt;panelControl1.Name" xml:space="preserve">
     <value>panelControl1</value>
   </data>
   <data name="&gt;&gt;panelControl1.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.PanelControl, DevExpress.Utils.v24.1, Culture=neutral</value>
+    <value>DevExpress.XtraEditors.PanelControl, DevExpress.Utils.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;panelControl1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -215,17 +307,17 @@
   <data name="&gt;&gt;panelControl1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <metadata name="labelDemoText.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="labelDemoText.Appearance.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Light, 26.25pt</value>
-  </data>
-  <data name="labelDemoText.Appearance.ForeColor" type="System.Drawing.Color, System.Drawing">
-    <value>White</value>
   </data>
   <data name="&gt;&gt;labelDemoText.Name" xml:space="preserve">
     <value>labelDemoText</value>
   </data>
   <data name="&gt;&gt;labelDemoText.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.LabelControl, DevExpress.XtraEditors.v24.1, Culture=neutral</value>
+    <value>DevExpress.XtraEditors.LabelControl, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;labelDemoText.Parent" xml:space="preserve">
     <value>panelControl</value>
@@ -233,14 +325,14 @@
   <data name="&gt;&gt;labelDemoText.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="pictureEdit2.Properties.Appearance.BackColor" type="System.Drawing.Color, System.Drawing">
-    <value>Transparent</value>
-  </data>
+  <metadata name="pictureEdit2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="&gt;&gt;pictureEdit2.Name" xml:space="preserve">
     <value>pictureEdit2</value>
   </data>
   <data name="&gt;&gt;pictureEdit2.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.PictureEdit, DevExpress.XtraEditors.v24.1, Culture=neutral</value>
+    <value>DevExpress.XtraEditors.PictureEdit, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;pictureEdit2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -248,17 +340,17 @@
   <data name="&gt;&gt;pictureEdit2.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="labelProductText.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="labelProductText.Appearance.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI Light, 14.25pt</value>
-  </data>
-  <data name="labelProductText.Appearance.ForeColor" type="System.Drawing.Color, System.Drawing">
-    <value>White</value>
   </data>
   <data name="&gt;&gt;labelProductText.Name" xml:space="preserve">
     <value>labelProductText</value>
   </data>
   <data name="&gt;&gt;labelProductText.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.LabelControl, DevExpress.XtraEditors.v24.1, Culture=neutral</value>
+    <value>DevExpress.XtraEditors.LabelControl, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;labelProductText.Parent" xml:space="preserve">
     <value>panelControl</value>
@@ -267,6 +359,9 @@
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
@@ -279,6 +374,6 @@
     <value>ssMain</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DevExpress.XtraSplashScreen.DemoSplashScreen, DevExpress.XtraEditors.v24.1, Culture=neutral</value>
+    <value>DevExpress.XtraSplashScreen.DemoSplashScreen, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
 </root>

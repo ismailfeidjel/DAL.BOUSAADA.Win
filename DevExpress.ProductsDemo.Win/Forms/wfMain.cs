@@ -14,8 +14,10 @@ namespace DevExpress.ProductsDemo.Win.Forms {
         public wfMain() {
             DevExpress.Utils.LocalizationHelper.SetCurrentCulture(DataHelper.ApplicationArguments);
             InitializeComponent();
-            ProgressPanel.Caption = DevExpress.ProductsDemo.Win.Properties.Resources.ProgressPanelCaption;
-            ProgressPanel.Description = DevExpress.ProductsDemo.Win.Properties.Resources.ProgressPanelDescription;
+            this.RightToLeft=RightToLeft.Yes;
+             ProgressPanel.Caption = DevExpress.ProductsDemo.Win.Properties.Resources.ProgressPanelCaption;
+
+             ProgressPanel.Description = DevExpress.ProductsDemo.Win.Properties.Resources.ProgressPanelDescription;
         }
     }
 }
