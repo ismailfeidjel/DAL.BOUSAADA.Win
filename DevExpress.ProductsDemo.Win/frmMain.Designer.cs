@@ -105,7 +105,6 @@
             this.nbiSnap = new DevExpress.XtraNavBar.NavBarItem();
             this.nbiReports = new DevExpress.XtraNavBar.NavBarItem();
             this.nbiPivot = new DevExpress.XtraNavBar.NavBarItem();
-            this.nbiCharts = new DevExpress.XtraNavBar.NavBarItem();
             this.nbiMaps = new DevExpress.XtraNavBar.NavBarItem();
             this.nbiScheduler = new DevExpress.XtraNavBar.NavBarItem();
             this.nbiPdf = new DevExpress.XtraNavBar.NavBarItem();
@@ -745,7 +744,6 @@
             this.nbiSnap,
             this.nbiReports,
             this.nbiPivot,
-            this.nbiCharts,
             this.nbiMaps,
             this.nbiScheduler,
             this.nbiGridCardView,
@@ -762,6 +760,7 @@
             this.navBarControl1.StoreDefaultPaintStyleName = true;
             this.navBarControl1.SelectedLinkChanged += new DevExpress.XtraNavBar.ViewInfo.NavBarSelectedLinkChangedEventHandler(this.navBarControl1_SelectedLinkChanged);
             this.navBarControl1.NavPaneStateChanged += new System.EventHandler(this.navBarControl1_NavPaneStateChanged);
+            this.navBarControl1.Click += new System.EventHandler(this.navBarControl1_Click);
             // 
             // nbgModules
             // 
@@ -777,77 +776,81 @@
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbiSnap),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbiReports),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbiPivot),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.nbiCharts),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbiMaps),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbiScheduler),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbiPdf)});
             this.nbgModules.Name = "nbgModules";
             this.nbgModules.NavigationPaneVisible = false;
-            this.nbgModules.SelectedLinkIndex = 9;
+            this.nbgModules.SelectedLinkIndex = 11;
+            this.nbgModules.TopVisibleLinkIndex = 2;
             // 
             // nbiGrid
             // 
             resources.ApplyResources(this.nbiGrid, "nbiGrid");
-            this.nbiGrid.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.GridTasks1;
+            this.nbiGrid.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.adsec;
             this.nbiGrid.Name = "nbiGrid";
             // 
             // nbiGridCardView
             // 
             resources.ApplyResources(this.nbiGridCardView, "nbiGridCardView");
-            this.nbiGridCardView.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.GridContacts1;
+            this.nbiGridCardView.Enabled = false;
+            this.nbiGridCardView.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.csgcl;
+            this.nbiGridCardView.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.CommonPalette;
             this.nbiGridCardView.Name = "nbiGridCardView";
             // 
             // nbiSpreadsheet
             // 
             resources.ApplyResources(this.nbiSpreadsheet, "nbiSpreadsheet");
+            this.nbiSpreadsheet.Enabled = false;
             this.nbiSpreadsheet.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Spreadsheet1;
             this.nbiSpreadsheet.Name = "nbiSpreadsheet";
             // 
             // nbiWord
             // 
             resources.ApplyResources(this.nbiWord, "nbiWord");
+            this.nbiWord.Enabled = false;
             this.nbiWord.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.WordProcessing1;
             this.nbiWord.Name = "nbiWord";
             // 
             // nbiSnap
             // 
             resources.ApplyResources(this.nbiSnap, "nbiSnap");
+            this.nbiSnap.Enabled = false;
             this.nbiSnap.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.WYSIWYGReports1;
             this.nbiSnap.Name = "nbiSnap";
             // 
             // nbiReports
             // 
             resources.ApplyResources(this.nbiReports, "nbiReports");
+            this.nbiReports.Enabled = false;
             this.nbiReports.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.BandedReports;
             this.nbiReports.Name = "nbiReports";
             // 
             // nbiPivot
             // 
             resources.ApplyResources(this.nbiPivot, "nbiPivot");
+            this.nbiPivot.Enabled = false;
             this.nbiPivot.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Pivot1;
             this.nbiPivot.Name = "nbiPivot";
-            // 
-            // nbiCharts
-            // 
-            resources.ApplyResources(this.nbiCharts, "nbiCharts");
-            this.nbiCharts.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Analytics1;
-            this.nbiCharts.Name = "nbiCharts";
             // 
             // nbiMaps
             // 
             resources.ApplyResources(this.nbiMaps, "nbiMaps");
+            this.nbiMaps.Enabled = false;
             this.nbiMaps.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.WeatherMap1;
             this.nbiMaps.Name = "nbiMaps";
             // 
             // nbiScheduler
             // 
             resources.ApplyResources(this.nbiScheduler, "nbiScheduler");
+            this.nbiScheduler.Enabled = false;
             this.nbiScheduler.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Scheduler1;
             this.nbiScheduler.Name = "nbiScheduler";
             // 
             // nbiPdf
             // 
             resources.ApplyResources(this.nbiPdf, "nbiPdf");
+            this.nbiPdf.Enabled = false;
             this.nbiPdf.ImageOptions.LargeImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.PDFViewer;
             this.nbiPdf.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.PDFViewer_Preview;
             this.nbiPdf.Name = "nbiPdf";
@@ -956,7 +959,6 @@
         private XtraNavBar.NavBarItem nbiSnap;
         private XtraNavBar.NavBarItem nbiReports;
         private XtraNavBar.NavBarItem nbiPivot;
-        private XtraNavBar.NavBarItem nbiCharts;
         private XtraNavBar.NavBarItem nbiMaps;
         private XtraNavBar.NavBarItem nbiScheduler;
         private XtraNavBar.NavBarItem nbiGridCardView;

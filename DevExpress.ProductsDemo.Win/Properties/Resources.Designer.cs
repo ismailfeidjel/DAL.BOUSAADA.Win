@@ -169,6 +169,16 @@ namespace DevExpress.ProductsDemo.Win.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage adsec {
+            get {
+                object obj = ResourceManager.GetObject("adsec", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All files (*.*)|*.*.
         /// </summary>
         internal static string AllFilesFilter {
@@ -684,6 +694,16 @@ namespace DevExpress.ProductsDemo.Win.Properties {
         internal static string ContactTitleProf {
             get {
                 return ResourceManager.GetString("ContactTitleProf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage csgcl {
+            get {
+                object obj = ResourceManager.GetObject("csgcl", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }
         
@@ -1459,6 +1479,26 @@ namespace DevExpress.ProductsDemo.Win.Properties {
         internal static string HTMLFilter {
             get {
                 return ResourceManager.GetString("HTMLFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_a_32px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_a_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_c_32px_1 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_c_32px_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

@@ -126,7 +126,7 @@
     <value>0, 0</value>
   </data>
   <data name="helpControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 399</value>
+    <value>0, 397</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="helpControl1.TabIndex" type="System.Int32, mscorlib">
@@ -145,10 +145,10 @@
     <value>0</value>
   </data>
   <data name="backstageViewClientControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 62</value>
+    <value>1, 63</value>
   </data>
   <data name="backstageViewClientControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 399</value>
+    <value>0, 397</value>
   </data>
   <data name="backstageViewClientControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -190,7 +190,7 @@
     <value>0</value>
   </data>
   <data name="backstageViewClientControl3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 62</value>
+    <value>171, 62</value>
   </data>
   <data name="backstageViewClientControl3.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 399</value>
@@ -235,7 +235,7 @@
     <value>0</value>
   </data>
   <data name="backstageViewClientControl4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 62</value>
+    <value>171, 62</value>
   </data>
   <data name="backstageViewClientControl4.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 399</value>
@@ -256,25 +256,25 @@
     <value>3</value>
   </data>
   <data name="bvbiSaveAs.Caption" xml:space="preserve">
-    <value>Save As</value>
+    <value>حفظ المستند باسم</value>
   </data>
   <data name="bvbiSaveAttachment.Caption" xml:space="preserve">
-    <value>Save Attachment</value>
+    <value>حفظ المستند</value>
   </data>
   <data name="bvtiInfo.Caption" xml:space="preserve">
-    <value>Info</value>
+    <value>معلومات</value>
   </data>
   <data name="bvtiPrint.Caption" xml:space="preserve">
-    <value>Print</value>
+    <value>طباعة</value>
   </data>
   <data name="bvtiExport.Caption" xml:space="preserve">
-    <value>Export</value>
+    <value>تصدير</value>
   </data>
   <data name="bvbiExit.Caption" xml:space="preserve">
-    <value>Exit</value>
+    <value>اغلاق البرنامج</value>
   </data>
   <data name="backstageViewControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>926, 15</value>
+    <value>121, 20</value>
   </data>
   <data name="backstageViewControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 461</value>
@@ -415,13 +415,14 @@
     <value>Custom</value>
   </data>
   <data name="bbiNewTask.Caption" xml:space="preserve">
-    <value>New Task</value>
+    <value>عملية جديدة</value>
   </data>
   <data name="bbiEditTask.Caption" xml:space="preserve">
-    <value>Edit Task</value>
+    <value>تعديل عملية</value>
   </data>
   <data name="bbiDeleteTask.Caption" xml:space="preserve">
-    <value>Delete</value>
+    <value>حذف
+عملية</value>
   </data>
   <data name="bbiNewContact.Caption" xml:space="preserve">
     <value>New Contact</value>
@@ -472,7 +473,7 @@
     <value>Current View</value>
   </data>
   <data name="rpTasks.Text" xml:space="preserve">
-    <value>TASKS</value>
+    <value>العمليات</value>
   </data>
   <data name="rpgContacts.Text" xml:space="preserve">
     <value>New / Edit</value>
@@ -484,7 +485,7 @@
     <value>Layout</value>
   </data>
   <data name="rpContacts.Text" xml:space="preserve">
-    <value>CONTACTS</value>
+    <value>العمليات</value>
   </data>
   <data name="rpgNavigation.Text" xml:space="preserve">
     <value>Navigation</value>
@@ -496,7 +497,7 @@
     <value>Print</value>
   </data>
   <data name="rpView.Text" xml:space="preserve">
-    <value>VIEW</value>
+    <value>عرض</value>
   </data>
   <data name="repositoryItemSpinEdit1.AutoHeight" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -545,37 +546,34 @@
     <value>WinForms Products</value>
   </data>
   <data name="nbiGrid.Caption" xml:space="preserve">
-    <value>Grid: Tasks</value>
+    <value>ADSEC</value>
   </data>
   <data name="nbiGridCardView.Caption" xml:space="preserve">
-    <value>Grid: Contacts</value>
+    <value>CSGCL</value>
   </data>
   <data name="nbiSpreadsheet.Caption" xml:space="preserve">
-    <value>Spreadsheet</value>
+    <value>مصنفات excel</value>
   </data>
   <data name="nbiWord.Caption" xml:space="preserve">
-    <value>Word Processing</value>
+    <value>مستندات word</value>
   </data>
   <data name="nbiSnap.Caption" xml:space="preserve">
-    <value>WYSIWYG Reports</value>
+    <value>تقارير مخصصة</value>
   </data>
   <data name="nbiReports.Caption" xml:space="preserve">
-    <value>Banded Reports</value>
+    <value>تقارير دورية</value>
   </data>
   <data name="nbiPivot.Caption" xml:space="preserve">
-    <value>Pivot Table</value>
-  </data>
-  <data name="nbiCharts.Caption" xml:space="preserve">
-    <value>Analytics</value>
+    <value>احصائيات</value>
   </data>
   <data name="nbiMaps.Caption" xml:space="preserve">
-    <value>Map Elements</value>
+    <value>البريد الالكتروني</value>
   </data>
   <data name="nbiScheduler.Caption" xml:space="preserve">
-    <value>Scheduler</value>
+    <value>تذكير بالتواريخ</value>
   </data>
   <data name="nbiPdf.Caption" xml:space="preserve">
-    <value>Pdf Viewer</value>
+    <value>قارئ ملفات pdf</value>
   </data>
   <data name="navBarControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -637,6 +635,9 @@
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
   </data>
@@ -645,6 +646,12 @@
   </data>
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>800, 600</value>
+  </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
+  <data name="$this.RightToLeftLayout" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -986,12 +993,6 @@
     <value>nbiPivot</value>
   </data>
   <data name="&gt;&gt;nbiPivot.Type" xml:space="preserve">
-    <value>DevExpress.XtraNavBar.NavBarItem, DevExpress.XtraNavBar.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="&gt;&gt;nbiCharts.Name" xml:space="preserve">
-    <value>nbiCharts</value>
-  </data>
-  <data name="&gt;&gt;nbiCharts.Type" xml:space="preserve">
     <value>DevExpress.XtraNavBar.NavBarItem, DevExpress.XtraNavBar.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;nbiMaps.Name" xml:space="preserve">

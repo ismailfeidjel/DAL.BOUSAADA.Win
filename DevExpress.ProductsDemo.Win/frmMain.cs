@@ -133,7 +133,7 @@ namespace DevExpress.ProductsDemo.Win {
             nbiPivot.Visible = false;
 #endif
             nbiSnap.Visible = false;
-            nbiCharts.Tag = new NavBarGroupTagObject("Charts", typeof(DevExpress.ProductsDemo.Win.Modules.AnalyticsModule));
+            //nbiCharts.Tag = new NavBarGroupTagObject("Charts", typeof(DevExpress.ProductsDemo.Win.Modules.AnalyticsModule));
             nbiScheduler.Tag = new NavBarGroupTagObject("Scheduler", typeof(DevExpress.ProductsDemo.Win.Modules.SchedulerModule), RibbonControlColorScheme.Purple);
             nbiPdf.Tag = new NavBarGroupTagObject("PdfViewer", typeof(DevExpress.ProductsDemo.Win.Modules.PdfViewerModule), RibbonControlColorScheme.Orange);
             nbiMaps.Tag = new NavBarGroupTagObject("Maps", typeof(DevExpress.ProductsDemo.Win.Modules.MapsModule), RibbonControlColorScheme.Red);
@@ -288,6 +288,11 @@ namespace DevExpress.ProductsDemo.Win {
                     modulesNavigator.CurrentModule.ButtonClick(TagResources.TaskEdit);
                 }
             }
+
+        }
+
+        private void navBarControl1_Click(object sender, EventArgs e)
+        {
 
         }
     }

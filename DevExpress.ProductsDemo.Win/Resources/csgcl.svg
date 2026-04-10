@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 64 64">
+  <radialGradient id="~~~6emvhhNC8KNyq3TAJwa" cx="33.787" cy="31.383" r="19.951" gradientTransform="translate(0 2)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#f4e9c3" />
+    <stop offset=".219" stop-color="#f8eecd" />
+    <stop offset=".644" stop-color="#fdf4dc" />
+    <stop offset="1" stop-color="#fff6e1" />
+  </radialGradient>
+  <path fill="url(#~~~6emvhhNC8KNyq3TAJwa)" d="M4,9L4,9c2.209,0,4-1.791,4-4l0,0c0-2.209-1.791-4-4-4l0,0C1.791,1,0,2.791,0,5l0,0C0,7.209,1.791,9,4,9z" />
+  <radialGradient id="~~~6emvhhNC8KNyq3TAJwb" cx="32.501" cy="30.149" r="23.894" gradientTransform="translate(0 2)" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#f4e9c3" />
+    <stop offset=".219" stop-color="#f8eecd" />
+    <stop offset=".644" stop-color="#fdf4dc" />
+    <stop offset="1" stop-color="#fff6e1" />
+  </radialGradient>
+  <path fill="url(#~~~6emvhhNC8KNyq3TAJwb)" d="M52,49.5L52,49.5c0,3.59,2.91,6.5,6.5,6.5h1c2,0,3.6,1.67,3.5,3.69C62.9,61.58,61.2,63,59.3,63H7.5C5.567,63,4,61.433,4,59.5v-0.01C4,57.62,5.46,56.1,7.31,56c0.06-0.01,0.12-0.01,0.18-0.01L9,56l0,0c3.314,0,6-2.686,6-6l0,0c0-3.314-2.686-6-6-6H4.88C2.737,44,1,42.263,1,40.12v-0.24C1,37.737,2.737,36,4.88,36H15c1.94,0,3.68-0.78,4.95-2.05c1.219-1.219,1.987-2.873,2.046-4.72c0.126-3.974-3.311-7.23-7.287-7.23H6.5c-2.631,0-4.733-2.263-4.48-4.944C2.24,14.717,4.341,13,6.69,13H17c1.105,0,2-0.895,2-2v0c0-1.105-0.895-2-2-2h-2c-2.342,0-4.222-2.023-3.979-4.405C11.233,2.516,13.109,1,15.198,1L57,1c2.342,0,4.222,2.023,3.979,4.405C60.767,7.484,58.891,9,56.802,9H55c-0.16,0-0.32,0.01-0.47,0.03C50.88,9.45,51.37,15,55.05,15h4.45c2.63,0,4.74,2.26,4.48,4.94C63.76,22.28,61.66,24,59.31,24H58.5c-1.52,0-2.9,0.62-3.89,1.61c-0.961,0.961-1.574,2.291-1.609,3.76c-0.073,3.096,2.643,5.63,5.74,5.63h1.073c2.09,0,3.961,1.523,4.165,3.603C64.214,40.987,62.342,43,60,43h-1.5C54.91,43,52,45.91,52,49.5z" />
+  <linearGradient id="~~~6emvhhNC8KNyq3TAJwc" x1="32" x2="32" y1="52" y2="9.988" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#155cde" />
+    <stop offset=".278" stop-color="#1f7fe5" />
+    <stop offset=".569" stop-color="#279ceb" />
+    <stop offset=".82" stop-color="#2cafef" />
+    <stop offset="1" stop-color="#2eb5f0" />
+  </linearGradient>
+  <path fill="url(#~~~6emvhhNC8KNyq3TAJwc)" d="M34.093,9.009c7.085,0,16.76,2.935,16.76,9.805c0,2.907-2.337,5.188-5.188,5.188 c-5.243,0-4.313-6.385-11.572-6.385c-5.416,0-9.577,4.048-9.577,13.682c0,9.977,4.39,14.024,9.577,14.024 c7.604,0,6.349-7.313,11.898-7.313C48.898,38.009,51,40.035,51,43c0,7.049-9.28,10.93-16.907,10.93 C20.183,53.93,13,45.493,13,31.812C13,18.301,21.152,9.009,34.093,9.009z" />
+</svg>

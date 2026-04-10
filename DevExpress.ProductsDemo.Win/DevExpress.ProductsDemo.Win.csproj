@@ -715,6 +715,10 @@
     <Compile Include="Resources.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\icons8_a_32px.png" />
+    <None Include="Resources\icons8_c_32px_1.png" />
+    <None Include="Resources\adsec.svg" />
+    <None Include="Resources\csgcl.svg" />
     <Content Include="Resources\Plane.svg" />
     <Content Include="Resources\WYSIWYGReports.svg" />
     <Content Include="Icons\DevExpress.ico">
