@@ -38,7 +38,8 @@ namespace DevExpress.ProductsDemo.Win {
         protected override void OnLoad(EventArgs e) {
             base.OnLoad(e);
             SplashScreenManager.CloseForm(false);
-            if(MainFormHelper.TakeScreens) {
+           // DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
+            if (MainFormHelper.TakeScreens) {
                 this.StartPosition = FormStartPosition.Manual;
                 this.Location = new Point(0, 0);
                 this.Height = 700;
@@ -292,6 +293,11 @@ namespace DevExpress.ProductsDemo.Win {
         }
 
         private void navBarControl1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bbiThisWeekFlag_ItemClick(object sender, ItemClickEventArgs e)
         {
 
         }

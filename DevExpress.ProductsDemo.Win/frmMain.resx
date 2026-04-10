@@ -373,16 +373,16 @@
     <value>Group</value>
   </data>
   <data name="galleryItem1.Caption" xml:space="preserve">
-    <value>List</value>
+    <value>مسجلة</value>
   </data>
   <data name="galleryItem2.Caption" xml:space="preserve">
-    <value>ToDoList</value>
+    <value>غير مسجلة</value>
   </data>
   <data name="galleryItem3.Caption" xml:space="preserve">
-    <value>Completed</value>
+    <value>جارية</value>
   </data>
   <data name="galleryItem4.Caption" xml:space="preserve">
-    <value>Today</value>
+    <value>مغلقة</value>
   </data>
   <data name="galleryItem5.Caption" xml:space="preserve">
     <value>Prioritized</value>
@@ -397,13 +397,13 @@
     <value>Deferred</value>
   </data>
   <data name="bbiTodayFlag.Caption" xml:space="preserve">
-    <value>Today</value>
+    <value>بن سني</value>
   </data>
   <data name="bbiTomorrowFlag.Caption" xml:space="preserve">
-    <value>Tomorrow</value>
+    <value>بن سني</value>
   </data>
   <data name="bbiThisWeekFlag.Caption" xml:space="preserve">
-    <value>This Week</value>
+    <value>اسماعيل</value>
   </data>
   <data name="bbiNextWeekFlag.Caption" xml:space="preserve">
     <value>Next Week</value>
@@ -464,13 +464,13 @@
     <value>0, 0</value>
   </data>
   <data name="rpgTasks.Text" xml:space="preserve">
-    <value>New / Edit</value>
+    <value>جديد / تعديل</value>
   </data>
   <data name="rpgFollowUp.Text" xml:space="preserve">
-    <value>Follow Up</value>
+    <value>متابعة العلامات المرجعية</value>
   </data>
   <data name="rpdCurrentViewTasks.Text" xml:space="preserve">
-    <value>Current View</value>
+    <value>متابعة حالة وتقدم العمليات</value>
   </data>
   <data name="rpTasks.Text" xml:space="preserve">
     <value>العمليات</value>
@@ -657,7 +657,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Mail Client</value>
+    <value>ولاية بوسعادة -متابعة البرامج التنموية</value>
   </data>
   <data name="&gt;&gt;bvbiSaveAs.Name" xml:space="preserve">
     <value>bvbiSaveAs</value>

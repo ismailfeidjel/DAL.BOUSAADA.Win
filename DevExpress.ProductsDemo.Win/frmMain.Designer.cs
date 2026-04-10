@@ -365,15 +365,15 @@
             galleryItem1.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ListByDate;
             galleryItem1.Tag = "TaskList";
             resources.ApplyResources(galleryItem2, "galleryItem2");
-            galleryItem2.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ToDoList;
-            galleryItem2.Tag = "TaskToDoList";
+            galleryItem2.Checked = true;
+            galleryItem2.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Today1;
+            galleryItem2.Tag = "TaskToday";
             resources.ApplyResources(galleryItem3, "galleryItem3");
-            galleryItem3.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Completed__2_;
-            galleryItem3.Tag = "TaskCompleted";
+            galleryItem3.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ToDoList;
+            galleryItem3.Tag = "TaskToDoList";
             resources.ApplyResources(galleryItem4, "galleryItem4");
-            galleryItem4.Checked = true;
-            galleryItem4.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Today1;
-            galleryItem4.Tag = "TaskToday";
+            galleryItem4.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Completed__2_;
+            galleryItem4.Tag = "Completed";
             resources.ApplyResources(galleryItem5, "galleryItem5");
             galleryItem5.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.important;
             galleryItem5.Tag = "TaskPrioritized";
@@ -432,6 +432,7 @@
             this.bbiThisWeekFlag.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ThisWeek_Flag1;
             this.bbiThisWeekFlag.Name = "bbiThisWeekFlag";
             this.bbiThisWeekFlag.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText;
+            this.bbiThisWeekFlag.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiThisWeekFlag_ItemClick);
             // 
             // bbiNextWeekFlag
             // 

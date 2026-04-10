@@ -7,6 +7,7 @@ using DevExpress.Data.Filtering;
 using DevExpress.DXperience.Demos;
 using DevExpress.MailClient.Win;
 using DevExpress.MailDemo.Win;
+using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
@@ -36,7 +37,9 @@ namespace DevExpress.ProductsDemo.Win {
             EnumProcessingHelper.RegisterEnum(typeof(TaskStatus), "DevExpress.ProductsDemo.Win.TaskStatus");
             MainFormHelper.InitTakeScreen(Environment.GetCommandLineArgs());
             if(!MainFormHelper.TakeScreens)
-                SplashScreenManager.ShowSkinSplashScreen(Tutorials.ucOverviewPage.GetSVGLogoImage(), "Build Your Own Office");
+              //  SplashScreenManager.ShowSkinSplashScreen(Tutorials.ucOverviewPage.GetSVGLogoImage(), "ولاية بوسعادة متابعة البرامج التنموية");
+                SplashScreenManager.ShowForm(typeof(SplashScreen1));
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain());
