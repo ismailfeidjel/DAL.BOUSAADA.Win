@@ -196,10 +196,11 @@
             resources.ApplyResources(this.backstageViewControl1, "backstageViewControl1");
             this.backstageViewControl1.Name = "backstageViewControl1";
             this.backstageViewControl1.OwnerControl = this.ribbonControl1;
-            this.backstageViewControl1.SelectedTab = this.bvtiInfo;
-            this.backstageViewControl1.SelectedTabIndex = 2;
+            this.backstageViewControl1.SelectedTab = this.bvtiExport;
+            this.backstageViewControl1.SelectedTabIndex = 4;
             this.backstageViewControl1.VisibleInDesignTime = true;
             this.backstageViewControl1.ItemClick += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.backstageViewControl1_ItemClick);
+            this.backstageViewControl1.Click += new System.EventHandler(this.backstageViewControl1_Click);
             // 
             // backstageViewClientControl1
             // 
@@ -253,7 +254,6 @@
             resources.ApplyResources(this.bvtiInfo, "bvtiInfo");
             this.bvtiInfo.ContentControl = this.backstageViewClientControl1;
             this.bvtiInfo.Name = "bvtiInfo";
-            this.bvtiInfo.Selected = true;
             this.bvtiInfo.SelectedChanged += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.bvtiInfo_SelectedChanged);
             // 
             // bvtiPrint
@@ -268,6 +268,7 @@
             resources.ApplyResources(this.bvtiExport, "bvtiExport");
             this.bvtiExport.ContentControl = this.backstageViewClientControl4;
             this.bvtiExport.Name = "bvtiExport";
+            this.bvtiExport.Selected = true;
             // 
             // bvbiExit
             // 
@@ -279,6 +280,7 @@
             // bsiNavigation
             // 
             resources.ApplyResources(this.bsiNavigation, "bsiNavigation");
+            this.bsiNavigation.Enabled = false;
             this.bsiNavigation.Id = 16;
             this.bsiNavigation.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.NavigationBar;
             this.bsiNavigation.Name = "bsiNavigation";
@@ -573,6 +575,7 @@
             // bbiReminder
             // 
             this.bbiReminder.CategoryGuid = new System.Guid("6ffddb2b-9015-4d97-a4c1-91613e0ef537");
+            this.bbiReminder.Enabled = false;
             this.bbiReminder.Id = 103;
             this.bbiReminder.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.reminder1;
             this.bbiReminder.Name = "bbiReminder";
@@ -817,14 +820,12 @@
             // nbiSnap
             // 
             resources.ApplyResources(this.nbiSnap, "nbiSnap");
-            this.nbiSnap.Enabled = false;
             this.nbiSnap.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.WYSIWYGReports1;
             this.nbiSnap.Name = "nbiSnap";
             // 
             // nbiReports
             // 
             resources.ApplyResources(this.nbiReports, "nbiReports");
-            this.nbiReports.Enabled = false;
             this.nbiReports.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.BandedReports;
             this.nbiReports.Name = "nbiReports";
             // 

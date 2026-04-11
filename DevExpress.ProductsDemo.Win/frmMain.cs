@@ -311,5 +311,10 @@ namespace DevExpress.ProductsDemo.Win {
         {
 
         }
+
+        private void backstageViewControl1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

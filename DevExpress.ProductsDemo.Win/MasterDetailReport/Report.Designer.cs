@@ -21,7 +21,6 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Report));
             DevExpress.XtraReports.UI.XRSummary xrSummary1 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.XtraReports.UI.XRSummary xrSummary2 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.DataAccess.Sql.SelectQuery selectQuery1 = new DevExpress.DataAccess.Sql.SelectQuery();
@@ -72,6 +71,7 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo2 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
             DevExpress.DataAccess.Sql.MasterDetailInfo masterDetailInfo2 = new DevExpress.DataAccess.Sql.MasterDetailInfo();
             DevExpress.DataAccess.Sql.RelationColumnInfo relationColumnInfo3 = new DevExpress.DataAccess.Sql.RelationColumnInfo();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Report));
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow1 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -106,7 +106,6 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell57 = new DevExpress.XtraReports.UI.XRTableCell();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
-            this.xrPictureBox4 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrPageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.xrPageInfo3 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.DetailReportBand = new DevExpress.XtraReports.UI.DetailReportBand();
@@ -235,7 +234,7 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             this.xrTableCell3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrTableCell3.Text = "Company";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.xrTableCell3.Weight = 0.15384615384615386D;
+            this.xrTableCell3.Weight = 0.15384615384615385D;
             // 
             // cellCompanyName
             // 
@@ -591,7 +590,6 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             // BottomMargin
             // 
             this.BottomMargin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrPictureBox4,
             this.xrPageInfo1,
             this.xrPageInfo3,
             this.xrLabel1,
@@ -600,18 +598,6 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             this.BottomMargin.Name = "BottomMargin";
             this.BottomMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.BottomMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            // 
-            // xrPictureBox4
-            // 
-            this.xrPictureBox4.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox4.ImageSource"));
-            this.xrPictureBox4.LocationFloat = new DevExpress.Utils.PointFloat(258F, 63F);
-            this.xrPictureBox4.Name = "xrPictureBox4";
-            this.xrPictureBox4.NavigateUrl = "http://www.devexpress.com/Products/NET/Reporting/";
-            this.xrPictureBox4.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrPictureBox4.SizeF = new System.Drawing.SizeF(165.625F, 30.20833F);
-            this.xrPictureBox4.Sizing = DevExpress.XtraPrinting.ImageSizeMode.AutoSize;
-            this.xrPictureBox4.StylePriority.UseBackColor = false;
-            this.xrPictureBox4.UseImageResolution = false;
             // 
             // xrPageInfo1
             // 
@@ -1189,7 +1175,7 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             this.xrPageBreak1,
             this.xrTable5});
             this.ReportFooter.Font = new DevExpress.Drawing.DXFont("Verdana", 9F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.ReportFooter.HeightF = 33.54169F;
+            this.ReportFooter.HeightF = 90.41653F;
             this.ReportFooter.Name = "ReportFooter";
             this.ReportFooter.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.ReportFooter.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -1428,7 +1414,7 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             // 
             // topMarginBand1
             // 
-            this.topMarginBand1.HeightF = 119F;
+            this.topMarginBand1.HeightF = 28.37499F;
             this.topMarginBand1.Name = "topMarginBand1";
             // 
             // ProductData
@@ -1528,7 +1514,7 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             this.DataMember = "Suppliers";
             this.DataSource = this.dsMasterDetail1;
             this.DisplayName = "Suppliers";
-            this.Margins = new DevExpress.Drawing.DXMargins(100F, 80F, 119F, 142F);
+            this.Margins = new DevExpress.Drawing.DXMargins(100F, 80F, 28.37499F, 142F);
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
             this.ProductData,
             this.OddStyle,
@@ -1537,7 +1523,7 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             this.SupplierTitle,
             this.EvenStyle,
             this.SupplierInfo});
-            this.Version = "23.1";
+            this.Version = "24.1";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable7)).EndInit();
@@ -1584,7 +1570,6 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell57;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox4;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo1;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo3;
         private DevExpress.XtraReports.UI.DetailReportBand DetailReportBand;

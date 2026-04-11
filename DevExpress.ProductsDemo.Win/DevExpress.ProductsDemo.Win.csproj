@@ -502,6 +502,12 @@
       <DependentUpon>Contacts.cs</DependentUpon>
     </Compile>
     <Compile Include="DemoUtils.cs" />
+    <Compile Include="Modules\Adsec.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Adsec.Designer.cs">
+      <DependentUpon>Adsec.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\PdfViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -668,6 +674,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Contacts.resx">
       <DependentUpon>Contacts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Adsec.resx">
+      <DependentUpon>Adsec.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Grid.resx">
       <DependentUpon>Grid.cs</DependentUpon>
