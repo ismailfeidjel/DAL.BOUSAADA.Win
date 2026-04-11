@@ -39,9 +39,12 @@ namespace DevExpress.ProductsDemo.Win {
             if(!MainFormHelper.TakeScreens)
                 SplashScreenManager.ShowForm(typeof(SplashScreen1));
 
+
+            DbHelper db = new DbHelper();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+          //  Application.Run(new frmMain());
         }
         //
         static Assembly OnCurrentDomainAssemblyResolve(object sender, ResolveEventArgs args) {

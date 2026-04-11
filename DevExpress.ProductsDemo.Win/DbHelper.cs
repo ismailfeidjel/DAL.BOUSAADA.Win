@@ -1,42 +1,84 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using System.Data.OleDb;
 
-namespace DevExpress.ProductsDemo.Win
+public class DbHelper
 {
-    using System;
-    using System.Data;
-    using System.Data.OleDb;
+    private readonly string connectionString =
+    @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Database\dbb.accdb;";
 
-    public class DbHelper
+    // 🔌 Get connection
+    private OleDbConnection GetConnection()
     {
-        private string connectionString =
-            @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\db.accdb;";
+        return new OleDbConnection(connectionString);
+    }
 
-        public DataTable GetData(string query)
+    // 🧪 Test connection
+    public bool TestConnection()
+    {
+        try
         {
-            using (OleDbConnection con = new OleDbConnection(connectionString))
-            {
-                using (OleDbDataAdapter da = new OleDbDataAdapter(query, con))
-                {
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    return dt;
-                }
-            }
-        }
-
-        public int Execute(string query)
-        {
-            using (OleDbConnection con = new OleDbConnection(connectionString))
+            using (var con = new OleDbConnection(connectionString))
             {
                 con.Open();
-                using (OleDbCommand cmd = new OleDbCommand(query, con))
-                {
-                    return cmd.ExecuteNonQuery();
-                }
+                return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            System.Windows.Forms.MessageBox.Show(ex.Message);
+            return false;
+        }
+    }
+
+    // 📊 Get Data (SELECT)
+    public DataTable GetData(string query, OleDbParameter[] parameters = null)
+    {
+        DataTable dt = new DataTable();
+
+        using (var con = GetConnection())
+        using (var cmd = new OleDbCommand(query, con))
+        using (var da = new OleDbDataAdapter(cmd))
+        {
+            if (parameters != null)
+                cmd.Parameters.AddRange(parameters);
+
+            da.Fill(dt);
+        }
+
+        return dt;
+    }
+
+    // ⚙️ Execute INSERT / UPDATE / DELETE
+    public int Execute(string query, OleDbParameter[] parameters = null)
+    {
+        using (var con = GetConnection())
+        {
+            con.Open();
+
+            using (var cmd = new OleDbCommand(query, con))
+            {
+                if (parameters != null)
+                    cmd.Parameters.AddRange(parameters);
+
+                return cmd.ExecuteNonQuery();
+            }
+        }
+    }
+
+    // 🔢 Get single value (SUM, COUNT, etc.)
+    public object ExecuteScalar(string query, OleDbParameter[] parameters = null)
+    {
+        using (var con = GetConnection())
+        {
+            con.Open();
+
+            using (var cmd = new OleDbCommand(query, con))
+            {
+                if (parameters != null)
+                    cmd.Parameters.AddRange(parameters);
+
+                return cmd.ExecuteScalar();
             }
         }
     }
