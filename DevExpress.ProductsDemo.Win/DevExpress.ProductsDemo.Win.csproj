@@ -432,6 +432,7 @@
     <Compile Include="Controls\ucCalendar.Designer.cs">
       <DependentUpon>ucCalendar.cs</DependentUpon>
     </Compile>
+    <Compile Include="DbHelper.cs" />
     <Compile Include="Forms\frmCustomDate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -735,6 +736,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="DataBase\DBB.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="nwindDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>nwindDataSet1.Designer.cs</LastGenOutput>

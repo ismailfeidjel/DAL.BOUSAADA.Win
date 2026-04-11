@@ -56,6 +56,8 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.nwindDataSet = new DevExpress.ProductsDemo.Win.nwindDataSet();
+            this.nwindDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
@@ -74,6 +76,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nwindDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nwindDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -110,6 +114,7 @@
             // 
             // gridControl1
             // 
+            this.gridControl1.DataSource = this.nwindDataSetBindingSource;
             resources.ApplyResources(this.gridControl1, "gridControl1");
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
@@ -408,6 +413,16 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
+            // nwindDataSet
+            // 
+            this.nwindDataSet.DataSetName = "nwindDataSet";
+            this.nwindDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // nwindDataSetBindingSource
+            // 
+            this.nwindDataSetBindingSource.DataSource = this.nwindDataSet;
+            this.nwindDataSetBindingSource.Position = 0;
+            // 
             // GridModule
             // 
             resources.ApplyResources(this, "$this");
@@ -432,6 +447,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nwindDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nwindDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -469,5 +486,7 @@
         private Utils.SvgImageCollection icEditorsSVG;
         private Utils.SvgImageCollection icCategorySVG;
         private Utils.SvgImageCollection icColumns;
+        private System.Windows.Forms.BindingSource nwindDataSetBindingSource;
+        private nwindDataSet nwindDataSet;
     }
 }

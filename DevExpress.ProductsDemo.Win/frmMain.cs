@@ -122,7 +122,7 @@ namespace DevExpress.ProductsDemo.Win {
             buttonItem.Tag = tag;
         }
         void InitNavBarItemLinks() {
-            nbiGrid.Tag = new NavBarGroupTagObject("Tasks", typeof(DevExpress.ProductsDemo.Win.Modules.GridModule));
+            nbiGrid.Tag = new NavBarGroupTagObject("Tasks", typeof(DevExpress.ProductsDemo.Win.Modules.AdsecModule));
             nbiGridCardView.Tag = new NavBarGroupTagObject("Contacts", typeof(DevExpress.ProductsDemo.Win.Modules.Contacts));
             nbiSpreadsheet.Tag = new NavBarGroupTagObject("Spreadsheet", typeof(DevExpress.ProductsDemo.Win.Modules.SpreadsheetModule), RibbonControlColorScheme.Green);
             nbiWord.Tag = new NavBarGroupTagObject("Word", typeof(DevExpress.ProductsDemo.Win.Modules.WordModule), RibbonControlColorScheme.DarkBlue);

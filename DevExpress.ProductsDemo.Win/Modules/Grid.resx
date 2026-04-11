@@ -149,6 +149,12 @@
   <data name="&gt;&gt;navBarControl1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <metadata name="nwindDataSetBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>501, 17</value>
+  </metadata>
+  <metadata name="nwindDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>374, 17</value>
+  </metadata>
   <data name="gridControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
   </data>
@@ -413,6 +419,9 @@
   <metadata name="icColumns.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>141, 19</value>
   </metadata>
+  <data name="gridControl1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
   <data name="gridControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>879, 581</value>
   </data>
@@ -652,6 +661,18 @@
   </data>
   <data name="&gt;&gt;layoutControlItem2.Type" xml:space="preserve">
     <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;nwindDataSet.Name" xml:space="preserve">
+    <value>nwindDataSet</value>
+  </data>
+  <data name="&gt;&gt;nwindDataSet.Type" xml:space="preserve">
+    <value>DevExpress.ProductsDemo.Win.nwindDataSet, nwindDataSet1.Designer.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;nwindDataSetBindingSource.Name" xml:space="preserve">
+    <value>nwindDataSetBindingSource</value>
+  </data>
+  <data name="&gt;&gt;nwindDataSetBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>GridModule</value>

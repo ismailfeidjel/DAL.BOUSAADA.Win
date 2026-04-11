@@ -1414,7 +1414,7 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             // 
             // topMarginBand1
             // 
-            this.topMarginBand1.HeightF = 28.37499F;
+            this.topMarginBand1.HeightF = 0F;
             this.topMarginBand1.Name = "topMarginBand1";
             // 
             // ProductData
@@ -1514,7 +1514,7 @@ namespace DevExpress.ProductsDemo.Win.MasterDetailReport {
             this.DataMember = "Suppliers";
             this.DataSource = this.dsMasterDetail1;
             this.DisplayName = "Suppliers";
-            this.Margins = new DevExpress.Drawing.DXMargins(100F, 80F, 28.37499F, 142F);
+            this.Margins = new DevExpress.Drawing.DXMargins(26F, 26F, 0F, 142F);
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
             this.ProductData,
             this.OddStyle,

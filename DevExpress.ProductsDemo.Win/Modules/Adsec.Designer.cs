@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GridModule));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdsecModule));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.nbgEmployees = new DevExpress.XtraNavBar.NavBarGroup();
@@ -413,12 +413,12 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
-            // GridModule
+            // AdsecModule
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutControl1);
-            this.Name = "GridModule";
+            this.Name = "AdsecModule";
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
