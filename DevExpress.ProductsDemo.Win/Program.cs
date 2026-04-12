@@ -36,15 +36,14 @@ namespace DevExpress.ProductsDemo.Win {
             EnumProcessingHelper.RegisterEnum<TaskStatus>();
             EnumProcessingHelper.RegisterEnum(typeof(TaskStatus), "DevExpress.ProductsDemo.Win.TaskStatus");
             MainFormHelper.InitTakeScreen(Environment.GetCommandLineArgs());
-            if(!MainFormHelper.TakeScreens)
-                SplashScreenManager.ShowForm(typeof(SplashScreen1));
+            //if(!MainFormHelper.TakeScreens)
+            //    SplashScreenManager.ShowForm(typeof(SplashScreen1));
 
 
-            DbHelper db = new DbHelper();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-          //  Application.Run(new frmMain());
+            Application.Run(new frmMain());
         }
         //
         static Assembly OnCurrentDomainAssemblyResolve(object sender, ResolveEventArgs args) {

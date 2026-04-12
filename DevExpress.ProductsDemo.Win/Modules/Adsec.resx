@@ -149,6 +149,12 @@
   <data name="&gt;&gt;navBarControl1.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <metadata name="adsecTBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>928, 17</value>
+  </metadata>
+  <metadata name="dBBDataSet2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>806, 17</value>
+  </metadata>
   <data name="gridControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
   </data>
@@ -470,6 +476,18 @@
   <data name="&gt;&gt;layoutControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="dBBDataSetBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>490, 17</value>
+  </metadata>
+  <metadata name="dBBDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>374, 17</value>
+  </metadata>
+  <metadata name="dBBDataSet1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>684, 17</value>
+  </metadata>
+  <metadata name="adsecTTableAdapter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 56</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -484,6 +502,18 @@
   </data>
   <data name="&gt;&gt;nbgEmployees.Type" xml:space="preserve">
     <value>DevExpress.XtraNavBar.NavBarGroup, DevExpress.XtraNavBar.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;dBBDataSetBindingSource.Name" xml:space="preserve">
+    <value>dBBDataSetBindingSource</value>
+  </data>
+  <data name="&gt;&gt;dBBDataSetBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;dBBDataSet.Name" xml:space="preserve">
+    <value>dBBDataSet</value>
+  </data>
+  <data name="&gt;&gt;dBBDataSet.Type" xml:space="preserve">
+    <value>DevExpress.ProductsDemo.Win.DBBDataSet, DBBDataSet.Designer.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;gridView1.Name" xml:space="preserve">
     <value>gridView1</value>
@@ -646,6 +676,30 @@
   </data>
   <data name="&gt;&gt;layoutControlItem2.Type" xml:space="preserve">
     <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;dBBDataSet1.Name" xml:space="preserve">
+    <value>dBBDataSet1</value>
+  </data>
+  <data name="&gt;&gt;dBBDataSet1.Type" xml:space="preserve">
+    <value>DevExpress.ProductsDemo.Win.DBBDataSet1, DBBDataSet1.Designer.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;dBBDataSet2.Name" xml:space="preserve">
+    <value>dBBDataSet2</value>
+  </data>
+  <data name="&gt;&gt;dBBDataSet2.Type" xml:space="preserve">
+    <value>DevExpress.ProductsDemo.Win.DBBDataSet2, DBBDataSet2.Designer.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;adsecTBindingSource.Name" xml:space="preserve">
+    <value>adsecTBindingSource</value>
+  </data>
+  <data name="&gt;&gt;adsecTBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;adsecTTableAdapter.Name" xml:space="preserve">
+    <value>adsecTTableAdapter</value>
+  </data>
+  <data name="&gt;&gt;adsecTTableAdapter.Type" xml:space="preserve">
+    <value>DevExpress.ProductsDemo.Win.DBBDataSet2TableAdapters.AdsecTTableAdapter, DBBDataSet2.Designer.cs.dll, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AdsecModule</value>

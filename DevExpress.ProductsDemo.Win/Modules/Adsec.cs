@@ -14,6 +14,7 @@ using DevExpress.MailClient.Win;
 using DevExpress.MailDemo.Win;
 using DevExpress.Utils.Svg;
 using DevExpress.DXperience.Demos;
+using DevExpress.ProductsDemo.Win.Repositories;
 
 namespace DevExpress.ProductsDemo.Win.Modules {
     public partial class AdsecModule : BaseModule {
@@ -28,13 +29,17 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             public object Data { get { return _data; } }
         }
         Dictionary<object, object> tasks = new Dictionary<object, object>();
+
+        private ProjectService _service;
+
         ContactToolTipController tooltip;
         Object _currentKey = null;
         public override string ModuleName { get { return Properties.Resources.TasksName; } }
         public AdsecModule() {
             InitializeComponent();
         }
-        internal override void InitModule(DevExpress.Utils.Menu.IDXMenuManager manager, object data) {
+        internal override void InitModule(DevExpress.Utils.Menu.IDXMenuManager manager, object data)
+        {
             base.InitModule(manager, data);
             EditorHelper.CreateTaskStatusImageComboBox(repositoryItemImageComboBox3);
             EditorHelper.CreateTaskCategoryImageComboBox(repositoryItemImageComboBox4);
@@ -44,7 +49,50 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             CreateNavBarItems(group);
             tooltip = new ContactToolTipController(group.NavBar);
             group.NavBar.MouseMove += new MouseEventHandler(NavBar_MouseMove);
+            IProjectRepository repo = new ProjectRepository();
+            _service = new ProjectService(repo);
+            ConfigureGrid();
+            LoadData();
         }
+       
+        private void ConfigureGrid()
+        {
+            gridView1.Columns.Clear();
+
+            gridView1.OptionsBehavior.AutoPopulateColumns = false;
+            gridView1.OptionsBehavior.Editable = false;
+
+            gridView1.OptionsView.ShowAutoFilterRow = true;
+            gridView1.OptionsView.ShowGroupPanel = true;
+        }
+
+        private void LoadData()
+        {
+            var data = _service.GetAllProjects();
+
+            gridControl1.DataSource = null;
+            gridView1.Columns.Clear();
+
+            gridControl1.DataSource = data;
+            gridView1.PopulateColumns();
+
+            FormatColumns();
+        }
+        private void FormatColumns()
+        {
+            if (gridView1.Columns["RegistrationMont"] != null)
+                gridView1.Columns["RegistrationMont"].DisplayFormat.FormatString = "n2";
+
+            if (gridView1.Columns["FinancialConsumption"] != null)
+                gridView1.Columns["FinancialConsumption"].DisplayFormat.FormatString = "n2";
+
+            if (gridView1.Columns["FinancialProgress"] != null)
+                gridView1.Columns["FinancialProgress"].DisplayFormat.FormatString = "n2";
+        }
+
+
+
+
         void NavBar_MouseMove(object sender, MouseEventArgs e) {
             NavBarControl navBar = sender as NavBarControl;
             NavBarHitInfo info = navBar.CalcHitInfo(e.Location);
@@ -57,30 +105,37 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             group.NavBar.LinkSelectionMode = LinkSelectionModeType.OneInControl;
             NavBarItemLink link = AddNavBarItem(group, Properties.Resources.OwnerName, global::DevExpress.ProductsDemo.Win.Properties.Resources.Owner1, GetTasksData(null), null);
             link.Item.Appearance.Font = new Font(AppearanceObject.DefaultFont, FontStyle.Underline);
-            foreach(Contact contact in TaskGenerator.Customers)
-                AddNavBarItem(group, contact.Name, contact.SvgIcon, GetTasksData(contact), contact);
+            //foreach(Contact contact in TaskGenerator.Customers)
+            //    AddNavBarItem(group, contact.Name, contact.SvgIcon, GetTasksData(contact), contact);
+            AddNavBarItem(group, "Projects", null, null, null);
             NavBarItemLink allTasks = AddNavBarItem(group, "All tasks", null, DataHelper.Tasks, null);
             allTasks.Item.Appearance.Font = new Font(AppearanceObject.DefaultFont, FontStyle.Bold);
             group.SelectedLink = link;
             ShowData(group.SelectedLink.Item);
         }
-        protected override void ShowReminder() {
-            ColumnView view = gridControl1.MainView as ColumnView;
-            if(view != null && OwnerForm != null) {
-                OwnerForm.ShowReminder(GetReminders(gridControl1.DataSource as List<Task>));
-            } else base.ShowReminder();
-        }
+        //protected override void ShowReminder() {
+        //    ColumnView view = gridControl1.MainView as ColumnView;
+        //    if(view != null && OwnerForm != null) {
+        //        OwnerForm.ShowReminder(GetReminders(gridControl1.DataSource as List<Task>));
+        //    } else base.ShowReminder();
+        //}
         List<Task> GetReminders(List<Task> tasks) {
             var data = from task in tasks
                        where !task.Complete && task.DueDate <= TutorialConstants.Now
                        select task;
             return data.ToList<Task>();
         }
-        object GetTasksData(Contact contact) {
-            IEnumerable ret = from task in DataHelper.Tasks
-                   where task.AssignTo == contact
-                   select task;
-            return ret.Cast<Task>().ToList();
+        //object GetTasksData(Contact contact) {
+        //    IEnumerable ret = from task in DataHelper.Tasks
+        //           where task.AssignTo == contact
+        //           select task;
+        //    return ret.Cast<Task>().ToList();
+        //}
+
+        object GetTasksData(Contact contact)
+        {
+            DbHelper db = new DbHelper();
+            return db.GetTasks(); // returns DataTable
         }
         NavBarItemLink AddNavBarItem(NavBarGroup group, string caption, SvgImage image, object data, Contact contact) {
             NavBarItem item = new NavBarItem(caption);
@@ -95,24 +150,41 @@ namespace DevExpress.ProductsDemo.Win.Modules {
         void item_LinkClicked(object sender, NavBarLinkEventArgs e) {
             ShowData(e.Link.Item);
         }
-        void ShowData(NavBarItem item) {
-            _currentKey = item.Tag;
-            _partName = item.Caption;
-            gridControl1.DataSource = ((NavBarData)item.Tag).Data;
-            ShowInfo(gridView1);
-        }
-        protected override DevExpress.XtraGrid.GridControl Grid { get { return gridControl1; } }
-        internal override void ShowModule(bool firstShow) {
-            base.ShowModule(firstShow);
-            if(firstShow) {
-                GalleryItem item = OwnerForm.TaskGallery.Groups[0].Items[0];
-                item.Checked = true;
-                ButtonClick(string.Format("{0}", item.Tag));
+        //void ShowData(NavBarItem item) {
+        //    _currentKey = item.Tag;
+        //    _partName = item.Caption;
+        //    gridControl1.DataSource = ((NavBarData)item.Tag).Data;
+        //    ShowInfo(gridView1);
+        //}
+        void ShowData(NavBarItem item)
+        {
+            try
+            {
+                DbHelper db = new DbHelper();
+                var data = db.GetTasks();
+                gridView1.Columns.Clear();
+                gridControl1.RefreshDataSource();
+                gridView1.PopulateColumns();
+
+                gridControl1.DataSource = data;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR: " + ex.Message);
+            }
+        }
+
+        protected override DevExpress.XtraGrid.GridControl Grid { get { return gridControl1; } }
+        internal override void ShowModule(bool firstShow)
+        {
+            base.ShowModule(firstShow);
+
+            DbHelper db = new DbHelper();
+            gridControl1.DataSource = db.GetTasks();
         }
         protected override void LookAndFeelStyleChanged() {
             base.LookAndFeelStyleChanged();
-            ShowReminder();
+           // ShowReminder();
         }
         private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e) {
             if(e.Column.ColumnType == typeof(DateTime?)) {
@@ -214,7 +286,7 @@ namespace DevExpress.ProductsDemo.Win.Modules {
                     gridView1.EndUpdate();
                 }
             } else {
-                DoFlagStatusButtonClick(tag);
+               // DoFlagStatusButtonClick(tag);
                 DoEditTaskButtonClick(tag);
             }
         }
@@ -250,23 +322,23 @@ namespace DevExpress.ProductsDemo.Win.Modules {
                     if(CurrentKey != null) {
                         Task task = new Task(Properties.Resources.NewTaskName, TaskCategory.Office);
                         task.AssignTo = CurrentKey.Contact;
-                        if(EditTask(task) == DialogResult.OK) {
-                            gridControl1.MainView.BeginDataUpdate();
-                            try {
-                                ((List<Task>)tasks[CurrentKey]).Add(task);
-                            } finally {
-                                gridControl1.MainView.EndDataUpdate();
-                            }
-                            ColumnView view = gridControl1.MainView as ColumnView;
-                            if(view != null) {
-                                GridHelper.GridViewFocusObject(view, task);
-                                ShowInfo(view);
-                            }
-                        }
+                        //if(EditTask(task) == DialogResult.OK) {
+                        //    gridControl1.MainView.BeginDataUpdate();
+                        //    try {
+                        //        ((List<Task>)tasks[CurrentKey]).Add(task);
+                        //    } finally {
+                        //        gridControl1.MainView.EndDataUpdate();
+                        //    }
+                        //    ColumnView view = gridControl1.MainView as ColumnView;
+                        //    if(view != null) {
+                        //        GridHelper.GridViewFocusObject(view, task);
+                        //        ShowInfo(view);
+                        //    }
+                        //}
                     }
                     break;
                 case TagResources.TaskEdit:
-                    EditTask(CurrentTask);
+                    //EditTask(CurrentTask);
                     break;
             }
         }
@@ -284,7 +356,7 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             }
             UpdateCurrentTask();
             Cursor.Current = Cursors.Default;
-            ShowReminder();
+           // ShowReminder();
             return ret;
         }
         void DoFlagStatusButtonClick(string tag) {
@@ -356,9 +428,9 @@ namespace DevExpress.ProductsDemo.Win.Modules {
                 if(e.Button == MouseButtons.Right) OwnerForm.FlagStatusMenu.ShowPopup(gridControl1.PointToScreen(e.Location));
                 gridView1.LayoutChanged();
             }
-            if(e.Button == MouseButtons.Left && e.RowHandle >= 0 && e.Clicks == 2) {
-                EditTask(CurrentTask);
-            }
+            //if(e.Button == MouseButtons.Left && e.RowHandle >= 0 && e.Clicks == 2) {
+            //    EditTask(CurrentTask);
+            //}
         }
 
         private void gridView1_KeyDown(object sender, KeyEventArgs e) {

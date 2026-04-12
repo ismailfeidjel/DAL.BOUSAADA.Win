@@ -432,7 +432,19 @@
     <Compile Include="Controls\ucCalendar.Designer.cs">
       <DependentUpon>ucCalendar.cs</DependentUpon>
     </Compile>
+    <Compile Include="DBBDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DbHelper.cs" />
+    <Compile Include="Domain\Project.cs" />
+    <Compile Include="Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmCustomDate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -613,11 +625,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\ProjectRepository.cs" />
+    <Compile Include="Repositories\IProjectRepository.cs" />
     <Compile Include="Sales.Model\BusinessObjects.cs" />
     <Compile Include="Sales.Model\Interfaces.cs" />
     <Compile Include="Sales.Model\OleDataProvider.cs" />
     <Compile Include="Sales.Model\SalesForecastMaker.cs" />
     <Compile Include="Sales.Model\Utils.cs" />
+    <Compile Include="Service\ProjectService.cs" />
     <Compile Include="XRDesignRibbonControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -640,6 +655,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ucCalendar.resx">
       <DependentUpon>ucCalendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCustomDate.resx">
       <DependentUpon>frmCustomDate.cs</DependentUpon>
@@ -744,6 +762,17 @@
       <LastGenOutput>nwindDataSet1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="DBBDataSet.xsc">
+      <DependentUpon>DBBDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DBBDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DBBDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DBBDataSet.xss">
+      <DependentUpon>DBBDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

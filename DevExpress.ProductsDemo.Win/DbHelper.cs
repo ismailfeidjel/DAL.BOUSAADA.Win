@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.XtraCharts.Native;
+using System;
 using System.Data;
 using System.Data.OleDb;
 
@@ -6,6 +7,8 @@ public class DbHelper
 {
     private readonly string connectionString =
     @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Database\dbb.accdb;";
+    private string conn =
+   @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Database\dbb.accdb;";
 
     // 🔌 Get connection
     private OleDbConnection GetConnection()
@@ -28,6 +31,20 @@ public class DbHelper
         {
             System.Windows.Forms.MessageBox.Show(ex.Message);
             return false;
+        }
+    }
+
+    public DataTable GetTasks()
+    {
+        using (OleDbConnection con = new OleDbConnection(conn))
+        {
+            using (OleDbDataAdapter da =
+                new OleDbDataAdapter("SELECT * FROM AdsecT", con))
+            {
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
         }
     }
 

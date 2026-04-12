@@ -34,6 +34,7 @@
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.nbgEmployees = new DevExpress.XtraNavBar.NavBarGroup();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.dBBDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colComplete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIcon = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -61,6 +62,7 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.adsecTBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
@@ -79,6 +81,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.adsecTBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -115,6 +118,7 @@
             // 
             // gridControl1
             // 
+            this.gridControl1.DataSource = this.adsecTBindingSource;
             resources.ApplyResources(this.gridControl1, "gridControl1");
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
@@ -129,6 +133,10 @@
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
+           
+            // 
+            // dBBDataSet
+          
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -413,6 +421,9 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextVisible = false;
             // 
+            
+            
+            // 
             // AdsecModule
             // 
             resources.ApplyResources(this, "$this");
@@ -437,6 +448,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+           ((System.ComponentModel.ISupportInitialize)(this.adsecTBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -474,5 +486,7 @@
         private Utils.SvgImageCollection icEditorsSVG;
         private Utils.SvgImageCollection icCategorySVG;
         private Utils.SvgImageCollection icColumns;
+        private System.Windows.Forms.BindingSource dBBDataSetBindingSource;
+        private System.Windows.Forms.BindingSource adsecTBindingSource;
     }
 }
