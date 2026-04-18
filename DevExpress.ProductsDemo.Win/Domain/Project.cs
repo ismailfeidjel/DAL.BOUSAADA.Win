@@ -8,7 +8,7 @@ namespace DevExpress.ProductsDemo.Win
 {
     public class AProject
     {
-        public int ProjectID { get; set; }
+        public int Id { get; set; }
 
         // Daira / Commune
         public string Daira { get; set; }
@@ -26,13 +26,11 @@ namespace DevExpress.ProductsDemo.Win
 
         public string Status { get; set; }
 
-        // AdsecP
-        public decimal FinancialMontontPre { get; set; }
-        public decimal FinancialRemaining { get; set; }
-        public string Contructor { get; set; }
-        public int Duration { get; set; }
-        public string Ods { get; set; }
-        public double PhysicalProgress { get; set; }
-        public string Notes { get; set; }
+
+        public List<ProjectTask> Tasks { get; set; } = new List<ProjectTask>();
+
+
+
+
     }
 }
