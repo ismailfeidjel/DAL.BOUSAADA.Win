@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.Odbc;
+using System.Data;
 using System.Linq;
 
 namespace DevExpress.ProductsDemo.Win.Repositories
@@ -18,9 +18,13 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
         public List<AProject> GetAllProjects()
         {
-            var dict = new Dictionary<int, AProject>();
+            try
+            {
 
-            const string sql = @"
+
+                var dict = new Dictionary<int, AProject>();
+
+                const string sql = @"
 SELECT
     p.id AS Id,
     d.name AS Daira,
@@ -28,8 +32,8 @@ SELECT
     p.intitule_pri AS IntutulePri,
     p.programme_year AS ProgrammeYe,
     p.field_name AS Field,
-    p.sector AS Sector,
-    p.registration_montanat AS RegistrationMont,
+    p.sector_name AS Sector,
+    p.registration_montat AS RegistrationMont,
     p.financial_consumption AS FinancialConsumption,
     p.financial_progress AS FinancialProgress,
     p.project_status AS Status,
@@ -48,55 +52,62 @@ LEFT JOIN daira d ON d.id = c.iddaira
 LEFT JOIN adsec_project_tasks t ON t.parent_id = p.id
 ORDER BY p.id, t.id;";
 
-            using (var con = new OdbcConnection(_conn))
-            {
-                con.Open();
+                DataTable dt = _db.GetData(sql);
 
-                using (var cmd = new OdbcCommand(sql, con))
-                using (var r = cmd.ExecuteReader())
+
+                foreach (DataRow r in dt.Rows)
                 {
-                    while (r.Read())
+                    int id = SafeInt(r["Id"]);
+
+                    // ?? Create project if not exists
+                    if (!dict.TryGetValue(id, out var project))
                     {
-                        int id = SafeInt(r["ProjectID"]);
-
-                        if (!dict.ContainsKey(id))
+                        project = new AProject
                         {
-                            dict[id] = new AProject
-                            {
-                                Id = id,
-                                Daira = SafeString(r["daira"]),
-                                Commune = SafeString(r["commune"]),
-                                IntutulePri = SafeString(r["IntutulePri"]),
-                                ProgrammeYe = SafeString(r["ProgrammeYe"]),
-                                Field = SafeString(r["Field"]),
-                                Sector = SafeString(r["Sector"]),
-                                RegistrationMont = SafeDecimal(r["RegistrationMont"]),
-                                FinancialConsumption = SafeDecimal(r["FinancialConsumption"]),
-                                FinancialProgress = SafeDecimal(r["FinancialProgress"]),
-                                Status = SafeString(r["Status"])
-                            };
-                        }
+                            Id = id,
+                            Daira = SafeString(r["Daira"]),
+                            Commune = SafeString(r["Commune"]),
+                            IntutulePri = SafeString(r["IntutulePri"]),
+                            ProgrammeYe = SafeString(r["ProgrammeYe"]),
+                            Field = SafeString(r["Field"]),
+                            Sector = SafeString(r["Sector"]),
+                            RegistrationMont = SafeDecimal(r["RegistrationMont"]),
+                            FinancialConsumption = SafeDecimal(r["FinancialConsumption"]),
+                            FinancialProgress = SafeDecimal(r["FinancialProgress"]),
+                            Status = SafeString(r["Status"]),
+                            Tasks = new List<ProjectTask>() // important
+                        };
 
-                        if (!string.IsNullOrWhiteSpace(SafeString(r["TaskTitle"])))
+                        dict[id] = project;
+                    }
+
+                    //  Add task only if exists
+                    if (!string.IsNullOrWhiteSpace(SafeString(r["TaskTitle"])))
+                    {
+                        var task = new ProjectTask
                         {
-                            var task = new ProjectTask
-                            {
-                                FinancialMontontPre = SafeDecimal(r["FinancialMontontPre"]),
-                                FinancialRemaining = SafeDecimal(r["FinancialRemaining"]),
-                                Contructor = SafeString(r["Contructor"]),
-                                Duration = SafeInt(r["Duration"]),
-                                Ods = SafeDateString(r["Ods"]),
-                                PhysicalProgress = SafeDouble(r["PhysicalProgress"]),
-                                Notes = SafeString(r["Notes"])
-                            };
+                            FinancialMontontPre = SafeDecimal(r["FinancialMontontPre"]),
+                            FinancialRemaining = SafeDecimal(r["FinancialRemaining"]),
+                            Contructor = SafeString(r["Contructor"]),
+                            Duration = SafeInt(r["Duration"]),
+                            Ods = SafeDateString(r["Ods"]),
+                            PhysicalProgress = SafeDouble(r["PhysicalProgress"]),
+                            Notes = SafeString(r["Notes"])
+                        };
 
-                            dict[id].Tasks.Add(task);
-                        }
+                        project.Tasks.Add(task);
                     }
                 }
-            }
 
-            return dict.Values.ToList();
+
+                return dict.Values.ToList();
+            }
+            catch (Exception ex)
+            {
+                // ?? VERY IMPORTANT: keep original exception
+                throw new Exception("Error loading projects from MySQL database.", ex);
+
+            }
         }
 
         private string SafeString(object value)

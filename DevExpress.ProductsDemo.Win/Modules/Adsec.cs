@@ -46,15 +46,11 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             EditorHelper.CreateFlagStatusImageComboBox(repositoryItemImageComboBox5);
             EditorHelper.InitPriorityComboBox(repositoryItemImageComboBox1);
             NavBarGroup group = nbgEmployees;
-            //CreateNavBarItems(group);
-            //tooltip = new ContactToolTipController(group.NavBar);
-            //group.NavBar.MouseMove += new MouseEventHandler(NavBar_MouseMove);
+            CreateNavBarItems(group);
+            tooltip = new ContactToolTipController(group.NavBar);
+            group.NavBar.MouseMove += new MouseEventHandler(NavBar_MouseMove);
             IProjectRepository repo = new ProjectRepository();
             _service = new ProjectService(repo);
-            NavBarGroup group = nbgEmployees;
-            //CreateNavBarItems(group);
-            //tooltip = new ContactToolTipController(group.NavBar);
-          //  group.NavBar.MouseMove += new MouseEventHandler(NavBar_MouseMove);
             ConfigureGrid();
             LoadData();
         }
@@ -73,7 +69,6 @@ namespace DevExpress.ProductsDemo.Win.Modules {
         private void LoadData()
         {
             var data = _service.GetAllProjects();
-
             gridControl1.DataSource = null;
             gridView1.Columns.Clear();
 
@@ -107,40 +102,13 @@ namespace DevExpress.ProductsDemo.Win.Modules {
         }
         void CreateNavBarItems(NavBarGroup group) {
             group.NavBar.LinkSelectionMode = LinkSelectionModeType.OneInControl;
-           // NavBarItemLink link = AddNavBarItem(group, Properties.Resources.OwnerName, global::DevExpress.ProductsDemo.Win.Properties.Resources.Owner1, GetTasksData(null), null);
-           // link.Item.Appearance.Font = new Font(AppearanceObject.DefaultFont, FontStyle.Underline);
-            //foreach(Contact contact in TaskGenerator.Customers)
-            //    AddNavBarItem(group, contact.Name, contact.SvgIcon, GetTasksData(contact), contact);
+            foreach(Contact contact in TaskGenerator.Customers)
+                //AddNavBarItem(group, contact.Name, contact.SvgIcon, GetTasksData(contact), contact);
             AddNavBarItem(group, "Projects", null, null, null);
             NavBarItemLink allTasks = AddNavBarItem(group, "All tasks", null, DataHelper.Tasks, null);
             allTasks.Item.Appearance.Font = new Font(AppearanceObject.DefaultFont, FontStyle.Bold);
-          //  group.SelectedLink = link;
-            ShowData(group.SelectedLink.Item);
+         //   group.SelectedLink = link;
         }
-        //protected override void ShowReminder() {
-        //    ColumnView view = gridControl1.MainView as ColumnView;
-        //    if(view != null && OwnerForm != null) {
-        //        OwnerForm.ShowReminder(GetReminders(gridControl1.DataSource as List<Task>));
-        //    } else base.ShowReminder();
-        //}
-        List<Task> GetReminders(List<Task> tasks) {
-            var data = from task in tasks
-                       where !task.Complete && task.DueDate <= TutorialConstants.Now
-                       select task;
-            return data.ToList<Task>();
-        }
-        //object GetTasksData(Contact contact) {
-        //    IEnumerable ret = from task in DataHelper.Tasks
-        //           where task.AssignTo == contact
-        //           select task;
-        //    return ret.Cast<Task>().ToList();
-        //}
-
-        //object GetTasksData(Contact contact)
-        //{
-        //    DbHelper db = new DbHelper();
-        //    return db.GetTasks(); // returns DataTable
-        //}
         NavBarItemLink AddNavBarItem(NavBarGroup group, string caption, SvgImage image, object data, Contact contact) {
             NavBarItem item = new NavBarItem(caption);
             item.ImageOptions.SvgImage = image;
@@ -152,43 +120,21 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             return link;
         }
         void item_LinkClicked(object sender, NavBarLinkEventArgs e) {
-            ShowData(e.Link.Item);
+            //ShowData(e.Link.Item);
         }
-        //void ShowData(NavBarItem item) {
-        //    _currentKey = item.Tag;
-        //    _partName = item.Caption;
-        //    gridControl1.DataSource = ((NavBarData)item.Tag).Data;
-        //    ShowInfo(gridView1);
-        //}
-        void ShowData(NavBarItem item)
-        {
-            try
-            {
-                DbHelper db = new DbHelper();
-                var data = db.GetTasks();
-                gridView1.Columns.Clear();
-                gridControl1.RefreshDataSource();
-                gridView1.PopulateColumns();
-
-                gridControl1.DataSource = data;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("ERROR: " + ex.Message);
-            }
-        }
+       
+   
 
         protected override DevExpress.XtraGrid.GridControl Grid { get { return gridControl1; } }
         internal override void ShowModule(bool firstShow)
         {
             base.ShowModule(firstShow);
 
-            DbHelper db = new DbHelper();
-            gridControl1.DataSource = db.GetTasks();
+           // DbHelper db = new DbHelper();
+           // gridControl1.DataSource = db.GetTasks();
         }
         protected override void LookAndFeelStyleChanged() {
             base.LookAndFeelStyleChanged();
-           // ShowReminder();
         }
         private void gridView1_CustomColumnDisplayText(object sender, DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventArgs e) {
             if(e.Column.ColumnType == typeof(DateTime?)) {
@@ -326,19 +272,6 @@ namespace DevExpress.ProductsDemo.Win.Modules {
                     if(CurrentKey != null) {
                         Task task = new Task(Properties.Resources.NewTaskName, TaskCategory.Office);
                         task.AssignTo = CurrentKey.Contact;
-                        //if(EditTask(task) == DialogResult.OK) {
-                        //    gridControl1.MainView.BeginDataUpdate();
-                        //    try {
-                        //        ((List<Task>)tasks[CurrentKey]).Add(task);
-                        //    } finally {
-                        //        gridControl1.MainView.EndDataUpdate();
-                        //    }
-                        //    ColumnView view = gridControl1.MainView as ColumnView;
-                        //    if(view != null) {
-                        //        GridHelper.GridViewFocusObject(view, task);
-                        //        ShowInfo(view);
-                        //    }
-                        //}
                     }
                     break;
                 case TagResources.TaskEdit:
