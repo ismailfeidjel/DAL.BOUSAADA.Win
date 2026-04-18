@@ -46,11 +46,15 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             EditorHelper.CreateFlagStatusImageComboBox(repositoryItemImageComboBox5);
             EditorHelper.InitPriorityComboBox(repositoryItemImageComboBox1);
             NavBarGroup group = nbgEmployees;
-            CreateNavBarItems(group);
-            tooltip = new ContactToolTipController(group.NavBar);
-            group.NavBar.MouseMove += new MouseEventHandler(NavBar_MouseMove);
+            //CreateNavBarItems(group);
+            //tooltip = new ContactToolTipController(group.NavBar);
+            //group.NavBar.MouseMove += new MouseEventHandler(NavBar_MouseMove);
             IProjectRepository repo = new ProjectRepository();
             _service = new ProjectService(repo);
+            NavBarGroup group = nbgEmployees;
+            //CreateNavBarItems(group);
+            //tooltip = new ContactToolTipController(group.NavBar);
+          //  group.NavBar.MouseMove += new MouseEventHandler(NavBar_MouseMove);
             ConfigureGrid();
             LoadData();
         }
@@ -103,14 +107,14 @@ namespace DevExpress.ProductsDemo.Win.Modules {
         }
         void CreateNavBarItems(NavBarGroup group) {
             group.NavBar.LinkSelectionMode = LinkSelectionModeType.OneInControl;
-            NavBarItemLink link = AddNavBarItem(group, Properties.Resources.OwnerName, global::DevExpress.ProductsDemo.Win.Properties.Resources.Owner1, GetTasksData(null), null);
-            link.Item.Appearance.Font = new Font(AppearanceObject.DefaultFont, FontStyle.Underline);
+           // NavBarItemLink link = AddNavBarItem(group, Properties.Resources.OwnerName, global::DevExpress.ProductsDemo.Win.Properties.Resources.Owner1, GetTasksData(null), null);
+           // link.Item.Appearance.Font = new Font(AppearanceObject.DefaultFont, FontStyle.Underline);
             //foreach(Contact contact in TaskGenerator.Customers)
             //    AddNavBarItem(group, contact.Name, contact.SvgIcon, GetTasksData(contact), contact);
             AddNavBarItem(group, "Projects", null, null, null);
             NavBarItemLink allTasks = AddNavBarItem(group, "All tasks", null, DataHelper.Tasks, null);
             allTasks.Item.Appearance.Font = new Font(AppearanceObject.DefaultFont, FontStyle.Bold);
-            group.SelectedLink = link;
+          //  group.SelectedLink = link;
             ShowData(group.SelectedLink.Item);
         }
         //protected override void ShowReminder() {
@@ -132,11 +136,11 @@ namespace DevExpress.ProductsDemo.Win.Modules {
         //    return ret.Cast<Task>().ToList();
         //}
 
-        object GetTasksData(Contact contact)
-        {
-            DbHelper db = new DbHelper();
-            return db.GetTasks(); // returns DataTable
-        }
+        //object GetTasksData(Contact contact)
+        //{
+        //    DbHelper db = new DbHelper();
+        //    return db.GetTasks(); // returns DataTable
+        //}
         NavBarItemLink AddNavBarItem(NavBarGroup group, string caption, SvgImage image, object data, Contact contact) {
             NavBarItem item = new NavBarItem(caption);
             item.ImageOptions.SvgImage = image;
