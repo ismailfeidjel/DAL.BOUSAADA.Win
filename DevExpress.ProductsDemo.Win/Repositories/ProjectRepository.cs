@@ -16,8 +16,10 @@ namespace DevExpress.ProductsDemo.Win.Repositories
         }
 
 
+
         public List<AProject> GetAllProjects()
         {
+
             try
             {
 
@@ -25,32 +27,32 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                 var dict = new Dictionary<int, AProject>();
 
                 const string sql = @"
-SELECT
-    p.id AS Id,
-    d.name AS Daira,
-    c.name AS Commune,
-    p.intitule_pri AS IntutulePri,
-    p.programme_year AS ProgrammeYe,
-    p.field_name AS Field,
-    p.sector_name AS Sector,
-    p.registration_montat AS RegistrationMont,
-    p.financial_consumption AS FinancialConsumption,
-    p.financial_progress AS FinancialProgress,
-    p.project_status AS Status,
+            SELECT
+                p.id AS Id,
+                d.name AS Daira,
+                c.name AS Commune,
+                p.intitule_pri AS IntutulePri,
+                p.programme_year AS ProgrammeYe,
+                p.field_name AS Field,
+                p.sector_name AS Sector,
+                p.registration_montat AS RegistrationMont,
+                p.financial_consumption AS FinancialConsumption,
+                p.financial_progress AS FinancialProgress,
+                p.project_status AS Status,
 
-    t.task_title AS TaskTitle,
-    t.financial_montont_pre AS FinancialMontontPre,
-    t.financial_remaining AS FinancialRemaining,
-    t.contructor AS Contructor,
-    t.duration AS Duration,
-    t.ods_date AS Ods,
-    t.pysical_progress AS PhysicalProgress,
-    t.notes AS Notes
-FROM adsec_projects p
-LEFT JOIN comunes c ON c.id = p.comune_id
-LEFT JOIN daira d ON d.id = c.iddaira
-LEFT JOIN adsec_project_tasks t ON t.parent_id = p.id
-ORDER BY p.id, t.id;";
+                t.task_title AS TaskTitle,
+                t.financial_montont_pre AS FinancialMontontPre,
+                t.financial_remaining AS FinancialRemaining,
+                t.contructor AS Contructor,
+                t.duration AS Duration,
+                t.ods_date AS Ods,
+                t.pysical_progress AS PhysicalProgress,
+                t.notes AS Notes
+            FROM adsec_projects p
+            LEFT JOIN comunes c ON c.id = p.comune_id
+            LEFT JOIN daira d ON d.id = c.iddaira
+            LEFT JOIN adsec_project_tasks t ON t.parent_id = p.id
+            ORDER BY p.id, t.id;";
 
                 DataTable dt = _db.GetData(sql);
 

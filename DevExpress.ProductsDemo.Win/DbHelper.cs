@@ -77,18 +77,20 @@ namespace DevExpress.ProductsDemo.Win
         }
 
         // 🔹 Test connection
-        public bool TestConnection()
+        public bool TestConnection(out string message)
         {
             try
             {
                 using (var con = GetConnection())
                 {
                     con.Open();
+                    message = "Connection successful!";
                     return true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                message = ex.Message;
                 return false;
             }
         }
