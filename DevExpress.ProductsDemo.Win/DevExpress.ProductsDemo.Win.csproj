@@ -486,7 +486,6 @@
       <DependentUpon>DBBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="DbHelper.cs" />
-    <Compile Include="Domain\ProjectTask.cs" />
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>

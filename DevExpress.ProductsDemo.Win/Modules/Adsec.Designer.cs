@@ -33,22 +33,23 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.nbgEmployees = new DevExpress.XtraNavBar.NavBarGroup();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.adsecTBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.icEditorsSVG = new DevExpress.Utils.SvgImageCollection(this.components);
-            this.icCategorySVG = new DevExpress.Utils.SvgImageCollection(this.components);
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.icColumns = new DevExpress.Utils.SvgImageCollection(this.components);
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.dBBDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.icEditorsSVG = new DevExpress.Utils.SvgImageCollection(this.components);
             this.repositoryItemImageComboBox2 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.repositoryItemImageComboBox3 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
             this.repositoryItemProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemProgressBar();
             this.repositoryItemImageComboBox4 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
+            this.icCategorySVG = new DevExpress.Utils.SvgImageCollection(this.components);
             this.repositoryItemTrackBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemTrackBar();
             this.repositoryItemImageComboBox5 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dBBDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.colComplete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colIcon = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPriority = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -62,27 +63,26 @@
             this.colCategory = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colFlagStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colOverdue = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.adsecTBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.icEditorsSVG)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.icCategorySVG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.icColumns)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dBBDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.icEditorsSVG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.icCategorySVG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTrackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dBBDataSetBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -117,18 +117,44 @@
             this.nbgEmployees.Name = "nbgEmployees";
             this.nbgEmployees.NavigationPaneVisible = false;
             // 
-            // icEditorsSVG
+            // gridControl1
             // 
-            this.icEditorsSVG.Add("low", "low", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
-            this.icEditorsSVG.Add("important", "important", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
-            this.icEditorsSVG.Add("BO_Task_Large", "BO_Task_Large", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
-            this.icEditorsSVG.Add("BandedReports", "BandedReports", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
+            resources.ApplyResources(this.gridControl1, "gridControl1");
+            this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Name = "gridControl1";
+            this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemImageComboBox1,
+            this.repositoryItemImageComboBox2,
+            this.repositoryItemImageComboBox3,
+            this.repositoryItemProgressBar1,
+            this.repositoryItemImageComboBox4,
+            this.repositoryItemTrackBar1,
+            this.repositoryItemImageComboBox5});
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
             // 
-            // icCategorySVG
+            // gridView1
             // 
-            this.icCategorySVG.Add("Home", "Home", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
-            this.icCategorySVG.Add("BO_Cart", "BO_Cart", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
-            this.icCategorySVG.Add("BO_Organization", "BO_Organization", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
+            this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridGroupSummaryItem(((DevExpress.Data.SummaryItemType)(resources.GetObject("gridView1.GroupSummary"))), resources.GetString("gridView1.GroupSummary1"), ((DevExpress.XtraGrid.Columns.GridColumn)(resources.GetObject("gridView1.GroupSummary2"))), resources.GetString("gridView1.GroupSummary3"))});
+            this.gridView1.Images = this.icColumns;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.AllowFixedGroups = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.OptionsBehavior.AllowPixelScrolling = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.OptionsBehavior.AutoExpandAllGroups = true;
+            this.gridView1.OptionsFilter.ColumnFilterPopupMode = DevExpress.XtraGrid.Columns.ColumnFilterPopupMode.Excel;
+            this.gridView1.OptionsFind.AlwaysVisible = true;
+            this.gridView1.OptionsFind.FindFilterColumns = "Subject";
+            this.gridView1.OptionsPrint.PrintHorzLines = false;
+            this.gridView1.OptionsPrint.PrintVertLines = false;
+            this.gridView1.OptionsSelection.CheckBoxSelectorColumnWidth = 35;
+            this.gridView1.OptionsSelection.MultiSelect = true;
+            this.gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
+            this.gridView1.RowCellStyle += new DevExpress.XtraGrid.Views.Grid.RowCellStyleEventHandler(this.gridView1_RowCellStyle);
             // 
             // icColumns
             // 
@@ -136,40 +162,6 @@
             this.icColumns.Add("Icon", "image://svgimages/outlook inspired/new.svg");
             this.icColumns.Add("Complete", "image://svgimages/outlook inspired/markcomplete.svg");
             this.icColumns.Add("Flag", "NoDate_Flag1", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
-            // 
-            // layoutControlGroup1
-            // 
-            resources.ApplyResources(this.layoutControlGroup1, "layoutControlGroup1");
-            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
-            this.layoutControlGroup1.GroupBordersVisible = false;
-            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem1,
-            this.layoutControlItem2});
-            this.layoutControlGroup1.Name = "Root";
-            this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 6, 6);
-            this.layoutControlGroup1.Size = new System.Drawing.Size(1075, 593);
-            this.layoutControlGroup1.TextVisible = false;
-            // 
-            // layoutControlItem2
-            // 
-            this.layoutControlItem2.Control = this.navBarControl1;
-            resources.ApplyResources(this.layoutControlItem2, "layoutControlItem2");
-            this.layoutControlItem2.Location = new System.Drawing.Point(879, 0);
-            this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(184, 581);
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem2.TextVisible = false;
-            // 
-            // layoutControlItem1
-            // 
-            this.layoutControlItem1.Control = this.gridControl1;
-            resources.ApplyResources(this.layoutControlItem1, "layoutControlItem1");
-            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlItem1.Size = new System.Drawing.Size(879, 581);
-            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
-            this.layoutControlItem1.TextVisible = false;
             // 
             // repositoryItemImageComboBox1
             // 
@@ -180,6 +172,13 @@
             new DevExpress.XtraEditors.Controls.ImageComboBoxItem(resources.GetString("repositoryItemImageComboBox1.Items6"), ((object)(resources.GetObject("repositoryItemImageComboBox1.Items7"))), ((int)(resources.GetObject("repositoryItemImageComboBox1.Items8"))))});
             this.repositoryItemImageComboBox1.Name = "repositoryItemImageComboBox1";
             this.repositoryItemImageComboBox1.SmallImages = this.icEditorsSVG;
+            // 
+            // icEditorsSVG
+            // 
+            this.icEditorsSVG.Add("low", "low", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
+            this.icEditorsSVG.Add("important", "important", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
+            this.icEditorsSVG.Add("BO_Task_Large", "BO_Task_Large", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
+            this.icEditorsSVG.Add("BandedReports", "BandedReports", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
             // 
             // repositoryItemImageComboBox2
             // 
@@ -212,6 +211,12 @@
             this.repositoryItemImageComboBox4.Name = "repositoryItemImageComboBox4";
             this.repositoryItemImageComboBox4.SmallImages = this.icCategorySVG;
             // 
+            // icCategorySVG
+            // 
+            this.icCategorySVG.Add("Home", "Home", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
+            this.icCategorySVG.Add("BO_Cart", "BO_Cart", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
+            this.icCategorySVG.Add("BO_Organization", "BO_Organization", typeof(DevExpress.ProductsDemo.Win.Properties.Resources));
+            // 
             // repositoryItemTrackBar1
             // 
             this.repositoryItemTrackBar1.LargeChange = 10;
@@ -228,27 +233,39 @@
             new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("repositoryItemImageComboBox5.Buttons"))))});
             this.repositoryItemImageComboBox5.Name = "repositoryItemImageComboBox5";
             // 
-            // gridView1
+            // layoutControlGroup1
             // 
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
-            new DevExpress.XtraGrid.GridGroupSummaryItem(((DevExpress.Data.SummaryItemType)(resources.GetObject("gridView1.GroupSummary"))), resources.GetString("gridView1.GroupSummary1"), ((DevExpress.XtraGrid.Columns.GridColumn)(resources.GetObject("gridView1.GroupSummary2"))), resources.GetString("gridView1.GroupSummary3"))});
-            this.gridView1.Images = this.icColumns;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.AllowFixedGroups = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.OptionsBehavior.AllowPixelScrolling = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.OptionsBehavior.AutoExpandAllGroups = true;
-            this.gridView1.OptionsFilter.ColumnFilterPopupMode = DevExpress.XtraGrid.Columns.ColumnFilterPopupMode.Excel;
-            this.gridView1.OptionsFind.AlwaysVisible = true;
-            this.gridView1.OptionsFind.FindFilterColumns = "Subject";
-            this.gridView1.OptionsPrint.PrintHorzLines = false;
-            this.gridView1.OptionsPrint.PrintVertLines = false;
-            this.gridView1.OptionsSelection.CheckBoxSelectorColumnWidth = 35;
-            this.gridView1.OptionsSelection.MultiSelect = true;
-            this.gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
-            this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            this.gridView1.OptionsView.ShowVerticalLines = DevExpress.Utils.DefaultBoolean.False;
+            resources.ApplyResources(this.layoutControlGroup1, "layoutControlGroup1");
+            this.layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            this.layoutControlGroup1.GroupBordersVisible = false;
+            this.layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem1,
+            this.layoutControlItem2});
+            this.layoutControlGroup1.Name = "Root";
+            this.layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(6, 6, 6, 6);
+            this.layoutControlGroup1.Size = new System.Drawing.Size(1075, 593);
+            this.layoutControlGroup1.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            this.layoutControlItem1.Control = this.gridControl1;
+            resources.ApplyResources(this.layoutControlItem1, "layoutControlItem1");
+            this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlItem1.Name = "layoutControlItem1";
+            this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            this.layoutControlItem1.Size = new System.Drawing.Size(879, 581);
+            this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.navBarControl1;
+            resources.ApplyResources(this.layoutControlItem2, "layoutControlItem2");
+            this.layoutControlItem2.Location = new System.Drawing.Point(879, 0);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(184, 581);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextVisible = false;
             // 
             // colComplete
             // 
@@ -371,23 +388,6 @@
             this.colOverdue.Name = "colOverdue";
             this.colOverdue.OptionsColumn.ShowInCustomizationForm = false;
             // 
-            // gridControl1
-            // 
-            this.gridControl1.DataSource = this.adsecTBindingSource;
-            resources.ApplyResources(this.gridControl1, "gridControl1");
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemImageComboBox1,
-            this.repositoryItemImageComboBox2,
-            this.repositoryItemImageComboBox3,
-            this.repositoryItemProgressBar1,
-            this.repositoryItemImageComboBox4,
-            this.repositoryItemTrackBar1,
-            this.repositoryItemImageComboBox5});
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            // 
             // AdsecModule
             // 
             resources.ApplyResources(this, "$this");
@@ -397,23 +397,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.adsecTBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.icEditorsSVG)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.icCategorySVG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.icColumns)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dBBDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.icEditorsSVG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.icCategorySVG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemTrackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dBBDataSetBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

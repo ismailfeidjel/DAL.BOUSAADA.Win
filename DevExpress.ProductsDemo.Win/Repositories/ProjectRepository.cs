@@ -9,106 +9,81 @@ namespace DevExpress.ProductsDemo.Win.Repositories
     public class ProjectRepository : IProjectRepository
     {
         private readonly DbHelper _db;
-
         public ProjectRepository()
         {
             _db = new DbHelper();
         }
-
-
-
         public List<AProject> GetAllProjects()
         {
-
             try
             {
-
-
                 var dict = new Dictionary<int, AProject>();
-
                 const string sql = @"
-            SELECT
-                p.id AS Id,
-                d.name AS Daira,
-                c.name AS Commune,
-                p.intitule_pri AS IntutulePri,
-                p.programme_year AS ProgrammeYe,
-                p.field_name AS Field,
-                p.sector_name AS Sector,
-                p.registration_montat AS RegistrationMont,
-                p.financial_consumption AS FinancialConsumption,
-                p.financial_progress AS FinancialProgress,
-                p.project_status AS Status,
+        SELECT
+            p.id AS Id,
+            d.name AS Daira,
+            c.name AS Commune,
+            p.intitule_pri AS IntutulePri,
+            p.programme_year AS ProgrammeYe,
+            p.field_name AS Field,
+            p.sector_name AS Sector,
+            p.registration_montat AS RegistrationMont,
+            p.financial_consumption AS FinancialConsumption,
+            p.financial_progress AS FinancialProgress,
+            p.project_status AS Status,
 
-                t.task_title AS TaskTitle,
-                t.financial_montont_pre AS FinancialMontontPre,
-                t.financial_remaining AS FinancialRemaining,
-                t.contructor AS Contructor,
-                t.duration AS Duration,
-                t.ods_date AS Ods,
-                t.pysical_progress AS PhysicalProgress,
-                t.notes AS Notes
-            FROM adsec_projects p
-            LEFT JOIN comunes c ON c.id = p.comune_id
-            LEFT JOIN daira d ON d.id = c.iddaira
-            LEFT JOIN adsec_project_tasks t ON t.parent_id = p.id
-            ORDER BY p.id, t.id;";
+            t.task_title AS TaskTitle,
+            t.financial_montont_pre AS FinancialMontontPre,
+            t.financial_remaining AS FinancialRemaining,
+            t.contructor AS Contructor,
+            t.duration AS Duration,
+            t.ods_date AS Ods,
+            t.pysical_progress AS PhysicalProgress,
+            t.notes AS Notes
+        FROM adsec_projects p
+        LEFT JOIN comunes c ON c.id = p.comune_id
+        LEFT JOIN daira d ON d.id = c.iddaira
+        LEFT JOIN adsec_project_tasks t ON t.parent_id = p.id
+        ORDER BY p.id, t.id;";
 
                 DataTable dt = _db.GetData(sql);
-
+                var list = new List<AProject>();
 
                 foreach (DataRow r in dt.Rows)
                 {
-                    int id = SafeInt(r["Id"]);
-
-                    // ?? Create project if not exists
-                    if (!dict.TryGetValue(id, out var project))
+                    var project = new AProject
                     {
-                        project = new AProject
-                        {
-                            Id = id,
-                            Daira = SafeString(r["Daira"]),
-                            Commune = SafeString(r["Commune"]),
-                            IntutulePri = SafeString(r["IntutulePri"]),
-                            ProgrammeYe = SafeString(r["ProgrammeYe"]),
-                            Field = SafeString(r["Field"]),
-                            Sector = SafeString(r["Sector"]),
-                            RegistrationMont = SafeDecimal(r["RegistrationMont"]),
-                            FinancialConsumption = SafeDecimal(r["FinancialConsumption"]),
-                            FinancialProgress = SafeDecimal(r["FinancialProgress"]),
-                            Status = SafeString(r["Status"]),
-                            Tasks = new List<ProjectTask>() // important
-                        };
+                        Id = SafeInt(r["Id"]),
+                        Daira = SafeString(r["Daira"]),
+                        Commune = SafeString(r["Commune"]),
+                        IntutulePri = SafeString(r["IntutulePri"]),
+                        ProgrammeYe = SafeString(r["ProgrammeYe"]),
+                        Field = SafeString(r["Field"]),
+                        Sector = SafeString(r["Sector"]),
+                        RegistrationMont = SafeDecimal(r["RegistrationMont"]),
+                        FinancialConsumption = SafeDecimal(r["FinancialConsumption"]),
+                        FinancialProgress = SafeDecimal(r["FinancialProgress"]),
+                        Status = SafeString(r["Status"]),
 
-                        dict[id] = project;
-                    }
+                        // ? task fields (same row)
+                        TaskTitle = SafeString(r["TaskTitle"]),
+                        FinancialMontontPre = SafeDecimal(r["FinancialMontontPre"]),
+                        FinancialRemaining = SafeDecimal(r["FinancialRemaining"]),
+                        Contructor = SafeString(r["Contructor"]),
+                        Duration = SafeInt(r["Duration"]),
+                        Ods = SafeDateString(r["Ods"]),
+                        PhysicalProgress = SafeDouble(r["PhysicalProgress"]),
+                        Notes = SafeString(r["Notes"])
+                    };
 
-                    //  Add task only if exists
-                    if (!string.IsNullOrWhiteSpace(SafeString(r["TaskTitle"])))
-                    {
-                        var task = new ProjectTask
-                        {
-                            FinancialMontontPre = SafeDecimal(r["FinancialMontontPre"]),
-                            FinancialRemaining = SafeDecimal(r["FinancialRemaining"]),
-                            Contructor = SafeString(r["Contructor"]),
-                            Duration = SafeInt(r["Duration"]),
-                            Ods = SafeDateString(r["Ods"]),
-                            PhysicalProgress = SafeDouble(r["PhysicalProgress"]),
-                            Notes = SafeString(r["Notes"])
-                        };
-
-                        project.Tasks.Add(task);
-                    }
+                    list.Add(project);
                 }
 
-
-                return dict.Values.ToList();
+                return list;
             }
             catch (Exception ex)
             {
-                // ?? VERY IMPORTANT: keep original exception
                 throw new Exception("Error loading projects from MySQL database.", ex);
-
             }
         }
 
