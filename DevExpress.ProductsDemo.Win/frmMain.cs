@@ -278,7 +278,7 @@ namespace DevExpress.ProductsDemo.Win {
         }
 
         internal void OnModuleShown(BaseModule baseModule) {
-            rpgPrint.Visible = CurrentPrintableComponent != null;
+            //rpgPrint.Visible = CurrentPrintableComponent != null;
         }
 
         private void bbiReminder_ItemClick(object sender, ItemClickEventArgs e) {

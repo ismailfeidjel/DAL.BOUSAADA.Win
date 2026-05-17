@@ -89,10 +89,6 @@
             this.rpgContacts = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgCurrentView = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgLayoutContacts = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.rpView = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.rpgNavigation = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.prgAppearance = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.rpgPrint = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemSpinEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemSpinEdit();
             this.repositoryItemDuration1 = new DevExpress.XtraScheduler.UI.RepositoryItemDuration();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -170,8 +166,7 @@
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.rpTasks,
-            this.rpContacts,
-            this.rpView});
+            this.rpContacts});
             this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemZoomTrackBar1,
             this.repositoryItemSpinEdit1,
@@ -663,39 +658,6 @@
             this.rpgLayoutContacts.Name = "rpgLayoutContacts";
             resources.ApplyResources(this.rpgLayoutContacts, "rpgLayoutContacts");
             // 
-            // rpView
-            // 
-            this.rpView.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.rpgNavigation,
-            this.prgAppearance,
-            this.rpgPrint});
-            this.rpView.Name = "rpView";
-            resources.ApplyResources(this.rpView, "rpView");
-            // 
-            // rpgNavigation
-            // 
-            this.rpgNavigation.AllowTextClipping = false;
-            this.rpgNavigation.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.rpgNavigation.ItemLinks.Add(this.bsiNavigation);
-            this.rpgNavigation.Name = "rpgNavigation";
-            resources.ApplyResources(this.rpgNavigation, "rpgNavigation");
-            // 
-            // prgAppearance
-            // 
-            this.prgAppearance.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.prgAppearance.ItemLinks.Add(this.skinDropDownButtonItem1);
-            this.prgAppearance.ItemLinks.Add(this.skinPaletteRibbonGalleryBarItem1);
-            this.prgAppearance.Name = "prgAppearance";
-            resources.ApplyResources(this.prgAppearance, "prgAppearance");
-            // 
-            // rpgPrint
-            // 
-            this.rpgPrint.AllowTextClipping = false;
-            this.rpgPrint.CaptionButtonVisible = DevExpress.Utils.DefaultBoolean.False;
-            this.rpgPrint.ItemLinks.Add(this.biPrintPreview);
-            this.rpgPrint.Name = "rpgPrint";
-            resources.ApplyResources(this.rpgPrint, "rpgPrint");
-            // 
             // repositoryItemSpinEdit1
             // 
             resources.ApplyResources(this.repositoryItemSpinEdit1, "repositoryItemSpinEdit1");
@@ -806,7 +768,6 @@
             // nbiSpreadsheet
             // 
             resources.ApplyResources(this.nbiSpreadsheet, "nbiSpreadsheet");
-            this.nbiSpreadsheet.Enabled = false;
             this.nbiSpreadsheet.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Spreadsheet1;
             this.nbiSpreadsheet.Name = "nbiSpreadsheet";
             // 
@@ -917,9 +878,6 @@
         private DevExpress.XtraEditors.PanelControl pcMain;
         private DevExpress.XtraNavBar.NavBarGroup nbgModules;
         private DevExpress.XtraBars.Ribbon.RibbonPage rpTasks;
-        private DevExpress.XtraBars.Ribbon.RibbonPage rpView;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpgNavigation;
-        private DevExpress.XtraBars.Ribbon.RibbonPageGroup prgAppearance;
         private DevExpress.XtraBars.BarSubItem bsiNavigation;
         private DevExpress.XtraBars.Ribbon.BackstageViewControl backstageViewControl1;
         private DevExpress.XtraBars.Ribbon.BackstageViewButtonItem bvbiSaveAs;
@@ -978,7 +936,6 @@
         private XtraBars.RibbonGalleryBarItem rgbiCurrentView;
         private XtraNavBar.NavBarItem nbiPdf;
         private XtraBars.BarButtonItem biPrintPreview;
-        private XtraBars.Ribbon.RibbonPageGroup rpgPrint;
         private XtraBars.BarButtonItem bbiReminder;
         private XtraBars.SkinDropDownButtonItem skinDropDownButtonItem1;
         private XtraBars.SkinPaletteRibbonGalleryBarItem skinPaletteRibbonGalleryBarItem1;

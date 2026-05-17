@@ -358,6 +358,7 @@
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration">
       <Private>False</Private>
     </Reference>
@@ -570,6 +571,9 @@
     <Compile Include="Modules\Adsec.Designer.cs">
       <DependentUpon>Adsec.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\OutgoingMail\Models\OutgoingMail.cs" />
+    <Compile Include="Modules\OutgoingMail\Repositories\IOutgoingMailRepository.cs" />
+    <Compile Include="Modules\OutgoingMail\Repositories\OutgoingMailRepository.cs" />
     <Compile Include="Modules\PdfViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
