@@ -14,7 +14,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
     {
         private ProjectService _service;
 
-        public override string ModuleName => "Projects";
+        public override string ModuleName => "AProjects";
 
         public AdsecModule()
         {
@@ -26,10 +26,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             base.InitModule(manager, data);
 
             InitGrid();
-            InitMasterDetail();
-
             _service = new ProjectService(new ProjectRepository());
-
             LoadData();
         }
 
@@ -42,45 +39,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             gridView1.OptionsBehavior.AutoPopulateColumns = true;
             gridView1.OptionsBehavior.Editable = false;
-
             gridView1.OptionsView.ShowAutoFilterRow = true;
             gridView1.OptionsView.ShowGroupPanel = true;
-        }
-
-        // =========================
-        // MASTER DETAIL SETUP
-        // =========================
-        private void InitMasterDetail()
-        {
-
-            gridView1.OptionsDetail.EnableMasterViewMode = true;
-            gridView1.OptionsDetail.ShowDetailTabs = false;
-            gridView1.OptionsDetail.AllowExpandEmptyDetails = true;
-            gridView1.OptionsView.ShowIndicator = true;
-
-            gridView1.MasterRowGetRelationCount += (s, e) =>
-            {
-                e.RelationCount = 1;
-            };
-
-            gridView1.MasterRowGetRelationName += (s, e) =>
-            {
-                e.RelationName = "Tasks";
-            };
-
-            gridView1.MasterRowGetChildList += (s, e) =>
-            {
-                var project = gridView1.GetRow(e.RowHandle) as AProject;
-                MessageBox.Show("FIRED"); // DEBUG
-
-                // VERY IMPORTANT FIX
-                if (project != null && project.Tasks != null)
-                    e.ChildList = project.Tasks;
-                else
-                    e.ChildList = new List<ProjectTask>();
-            };
-
-            gridView1.MasterRowExpanded += gridView1_MasterRowExpanded;
         }
 
         // =========================
@@ -92,13 +52,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             gridControl1.DataSource = null;
             gridControl1.DataSource = data;
-         //   MessageBox.Show(data == null ? "NULL" : $"Count = {data.Count}");
-
             gridView1.PopulateColumns();
-
             gridView1.RefreshData();
             gridControl1.RefreshDataSource();
-
             FormatMasterColumns();
         }
 
@@ -109,41 +65,13 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
 
         }
-
-        private void SetCurrencyFormat(string columnName)
+        private void gridView1_RowCellStyle(object sender, XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
-            var col = gridView1.Columns[columnName];
-            if (col != null)
-                col.DisplayFormat.FormatString = "n2";
-        }
-
-        // =========================
-        // DETAIL GRID (TASKS)
-        // =========================
-        private void gridView1_MasterRowExpanded(object sender, CustomMasterRowEventArgs e)
-        {
-            GridView detailView = gridView1.GetDetailView(e.RowHandle, e.RelationIndex) as GridView;
-
-            if (detailView == null) return;
-
-            detailView.PopulateColumns();
-
-            detailView.RowCellStyle += DetailView_RowCellStyle;
-        }
-
-        private void SetDetailFormat(GridView view, string columnName)
-        {
-            var col = view.Columns[columnName];
-            if (col != null)
-                col.DisplayFormat.FormatString = "n2";
-        }
-
-        // =========================
-        // OPTIONAL: STYLE TASK ROWS
-        // =========================
-        private void DetailView_RowCellStyle(object sender, RowCellStyleEventArgs e)
-        {
-           
+            if (e.RowHandle == gridView1.FocusedRowHandle && gridView1.FocusedColumn != e.Column)
+            {
+                e.Appearance.BackColor = gridView1.PaintAppearance.FocusedRow.BackColor;
+                e.Appearance.ForeColor = gridView1.PaintAppearance.FocusedRow.ForeColor;
+            }
         }
 
         // =========================
