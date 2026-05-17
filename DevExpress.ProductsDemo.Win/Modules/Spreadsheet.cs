@@ -23,7 +23,6 @@ namespace DevExpress.ProductsDemo.Win.Modules {
         public override bool AllowRtfTitle { get { return false; } }
         internal override void ShowModule(bool firstShow) {
             base.ShowModule(firstShow);
-           // MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(homeRibbonPage1.Name);
         }
 
         private void spreadsheetCommandBarButtonItem2_ItemClick(object sender, XtraBars.ItemClickEventArgs e)
