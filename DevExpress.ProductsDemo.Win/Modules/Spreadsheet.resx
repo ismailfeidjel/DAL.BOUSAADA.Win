@@ -272,35 +272,35 @@
         4dSxM6yYe/hN2EE2ILbWG/Dzm+//a3lT+e/xr/JHv42KIPwDHxb20BRI/sQAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="spreadsheetCommandGalleryItem77.Description" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem436.Description" xml:space="preserve">
     <value>Use this chart type to:
 • Show the percentage contribution to a whole over time or categories.
 • Show the change to the percentage that each value contributes over time.
 
 Consider using a 100% stacked area chart because stacked line charts can be hard to read.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem77.Hint" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem436.Hint" xml:space="preserve">
     <value>Use this chart type to:
 • Show the percentage contribution to a whole over time or categories.
 • Show the change to the percentage that each value contributes over time.
 
 Consider using a 100% stacked area chart because stacked line charts can be hard to read.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem80.Description" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem439.Description" xml:space="preserve">
     <value>Use this chart type to:
 • Show the percentage contribution to a whole over time or categories.
 • Show the change to the percentage that each value contributes over time.
 
 Consider using a 100% stacked area chart because stacked line charts can be hard to read.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem80.Hint" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem439.Hint" xml:space="preserve">
     <value>Use this chart type to:
 • Show the percentage contribution to a whole over time or categories.
 • Show the change to the percentage that each value contributes over time.
 
 Consider using a 100% stacked area chart because stacked line charts can be hard to read.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem90.Description" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem449.Description" xml:space="preserve">
     <value>Use this chart type to:
 • Compare the percentage that each value contributes to a total.
 • Show how the percentage that each value contributes changes over time
@@ -308,7 +308,7 @@ Consider using a 100% stacked area chart because stacked line charts can be hard
 Use it when:
 • The category text is long.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem90.Hint" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem449.Hint" xml:space="preserve">
     <value>Use this chart type to:
 • Compare the percentage that each value contributes to a total.
 • Show how the percentage that each value contributes changes over time
@@ -316,7 +316,7 @@ Use it when:
 Use it when:
 • The category text is long.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem93.Description" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem452.Description" xml:space="preserve">
     <value>Use this chart type to:
 • Compare the percentage that each value contributes to a total.
 • Show how the percentage that each value contributes changes over time
@@ -324,7 +324,7 @@ Use it when:
 Use it when:
 • The category text is long.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem93.Hint" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem452.Hint" xml:space="preserve">
     <value>Use this chart type to:
 • Compare the percentage that each value contributes to a total.
 • Show how the percentage that each value contributes changes over time
@@ -332,7 +332,7 @@ Use it when:
 Use it when:
 • The category text is long.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem96.Description" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem455.Description" xml:space="preserve">
     <value>Use this chart type to:
 • Compare the percentage that each value contributes to a total.
 • Show how the percentage that each value contributes changes over time
@@ -340,7 +340,7 @@ Use it when:
 Use it when:
 • The category text is long.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem96.Hint" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem455.Hint" xml:space="preserve">
     <value>Use this chart type to:
 • Compare the percentage that each value contributes to a total.
 • Show how the percentage that each value contributes changes over time
@@ -348,7 +348,7 @@ Use it when:
 Use it when:
 • The category text is long.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem99.Description" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem458.Description" xml:space="preserve">
     <value>Use this chart type to:
 • Compare the percentage that each value contributes to a total.
 • Show how the percentage that each value contributes changes over time
@@ -356,7 +356,7 @@ Use it when:
 Use it when:
 • The category text is long.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem99.Hint" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem458.Hint" xml:space="preserve">
     <value>Use this chart type to:
 • Compare the percentage that each value contributes to a total.
 • Show how the percentage that each value contributes changes over time
@@ -364,7 +364,7 @@ Use it when:
 Use it when:
 • The category text is long.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem102.Description" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem461.Description" xml:space="preserve">
     <value>Use this chart type to:
 • Compare the percentage that each value contributes to a total.
 • Show how the percentage that each value contributes changes over time
@@ -372,7 +372,7 @@ Use it when:
 Use it when:
 • The category text is long.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem102.Hint" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem461.Hint" xml:space="preserve">
     <value>Use this chart type to:
 • Compare the percentage that each value contributes to a total.
 • Show how the percentage that each value contributes changes over time
@@ -380,7 +380,7 @@ Use it when:
 Use it when:
 • The category text is long.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem106.Description" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem465.Description" xml:space="preserve">
     <value>Use this chart type to:
 • Show trends over time (years, months, and days) or categories.
 • Show data on a third axis which will show some areas in front of others.
@@ -389,7 +389,7 @@ Use it when:
 • Category order is important.
 • To highlight the magnitude of change over time.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem106.Hint" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem465.Hint" xml:space="preserve">
     <value>Use this chart type to:
 • Show trends over time (years, months, and days) or categories.
 • Show data on a third axis which will show some areas in front of others.
@@ -398,7 +398,7 @@ Use it when:
 • Category order is important.
 • To highlight the magnitude of change over time.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem114.Description" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem473.Description" xml:space="preserve">
     <value>Use this chart type to:
 • Compare at least three sets of values or pairs of data.
 • Show relationships between sets of values
@@ -406,7 +406,7 @@ Use it when:
 Use it when:
 • You have a third value that can be used to determine the relative size of the bubble.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem114.Hint" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem473.Hint" xml:space="preserve">
     <value>Use this chart type to:
 • Compare at least three sets of values or pairs of data.
 • Show relationships between sets of values
@@ -414,7 +414,7 @@ Use it when:
 Use it when:
 • You have a third value that can be used to determine the relative size of the bubble.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem115.Description" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem474.Description" xml:space="preserve">
     <value>Use this chart type to:
 • Compare at least three sets of values or pairs of data.
 • Show relationships between sets of values
@@ -422,7 +422,7 @@ Use it when:
 Use it when:
 • You have a third value that can be used to determine the relative size of the bubble.</value>
   </data>
-  <data name="spreadsheetCommandGalleryItem115.Hint" xml:space="preserve">
+  <data name="spreadsheetCommandGalleryItem474.Hint" xml:space="preserve">
     <value>Use this chart type to:
 • Compare at least three sets of values or pairs of data.
 • Show relationships between sets of values

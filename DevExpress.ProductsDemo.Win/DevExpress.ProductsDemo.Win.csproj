@@ -1245,7 +1245,9 @@
   <ItemGroup>
     <Content Include="AppIcon.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Documents\" />
+  </ItemGroup>
   <!--ONLY NETCORE3  
   <ItemGroup>
     <PackageReference Include="DevExpress.Design.Nuget" Version="24.1.0" Condition="$(DEMO_REMOVE)==''" />
