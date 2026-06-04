@@ -1,39 +1,55 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DevExpress.ProductsDemo.Win
+namespace DevExpress.ProductsDemo.Win.Domain
 {
-    public class AProject
+    public class Project
     {
         public int Id { get; set; }
 
-        // Daira / Commune
-        public string Daira { get; set; }
-        public string Commune { get; set; }
+        public string OperationNumber { get; set; }
 
-        // AdsecT
-        public string IntutulePri { get; set; }
-        public string ProgrammeYe { get; set; }
-        public string Field { get; set; }
-        public string Sector { get; set; }
+        public string OperationName { get; set; }
 
-        public decimal RegistrationMont { get; set; }
-        public decimal FinancialConsumption { get; set; }
-        public decimal FinancialProgress { get; set; }
+        public int ProgramId { get; set; }
 
-        public string Status { get; set; }
+        public int DairaId { get; set; }
 
-        public string TaskTitle { get; set; }
-        public decimal FinancialMontontPre { get; set; }
-        public decimal FinancialRemaining { get; set; }
-        public string Contructor { get; set; }
-        public int Duration { get; set; }
-        public string Ods { get; set; }
-        public double PhysicalProgress { get; set; }
+        public int CommuneId { get; set; }
+
+        public int DomainId { get; set; }
+
+        public int SectorId { get; set; }
+
+        public decimal TotalBudget { get; set; }
+
+        public decimal RegisteredAmount { get; set; }
+
+        public decimal ConsumedAmount { get; set; }
+
+        public bool HasLots { get; set; }
+
         public string Notes { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+
+        public int? UpdatedBy { get; set; }
+
+        public decimal RemainingAmount
+        {
+            get { return RegisteredAmount - ConsumedAmount; }
+        }
+
+        public decimal FinancialProgress
+        {
+            get
+            {
+                if (RegisteredAmount <= 0)
+                    return 0;
+
+                return (ConsumedAmount / RegisteredAmount) * 100;
+            }
+        }
     }
 }

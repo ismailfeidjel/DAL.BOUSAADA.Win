@@ -488,6 +488,7 @@
       <DependentUpon>DBBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="DbHelper.cs" />
+    <Compile Include="Domain\Lot.cs" />
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
@@ -678,13 +679,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\LookupRepository.cs" />
+    <Compile Include="Repositories\LotRepository.cs" />
     <Compile Include="Repositories\ProjectRepository.cs" />
     <Compile Include="Repositories\IProjectRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Sales.Model\BusinessObjects.cs" />
     <Compile Include="Sales.Model\Interfaces.cs" />
     <Compile Include="Sales.Model\OleDataProvider.cs" />
     <Compile Include="Sales.Model\SalesForecastMaker.cs" />
     <Compile Include="Sales.Model\Utils.cs" />
+    <Compile Include="Service\LotService.cs" />
     <Compile Include="Service\ProjectService.cs" />
     <Compile Include="XRDesignRibbonControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>

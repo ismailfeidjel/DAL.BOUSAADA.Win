@@ -1,122 +1,123 @@
+using DevExpress.ProductsDemo.Win.Domain;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
 
 namespace DevExpress.ProductsDemo.Win.Repositories
 {
-    public class ProjectRepository : IProjectRepository
+    public class ProjectRepository
     {
-        private readonly DbHelper _db;
-        public ProjectRepository()
+        private readonly DbHelper _db = new DbHelper();
+
+        public List<Project> GetAll()
         {
-            _db = new DbHelper();
-        }
-        public List<AProject> GetAllProjects()
-        {
-            try
+            List<Project> list = new List<Project>();
+
+            using (var conn = _db.GetConnection())
             {
-                var dict = new Dictionary<int, AProject>();
-                const string sql = @"
-        SELECT
-            p.id AS Id,
-            d.name AS Daira,
-            c.name AS Commune,
-            p.intitule_pri AS IntutulePri,
-            p.programme_year AS ProgrammeYe,
-            p.field_name AS Field,
-            p.sector_name AS Sector,
-            p.registration_montat AS RegistrationMont,
-            p.financial_consumption AS FinancialConsumption,
-            p.financial_progress AS FinancialProgress,
-            p.project_status AS Status,
+                conn.Open();
 
-            t.task_title AS TaskTitle,
-            t.financial_montont_pre AS FinancialMontontPre,
-            t.financial_remaining AS FinancialRemaining,
-            t.contructor AS Contructor,
-            t.duration AS Duration,
-            t.ods_date AS Ods,
-            t.pysical_progress AS PhysicalProgress,
-            t.notes AS Notes
-        FROM adsec_projects p
-        LEFT JOIN comunes c ON c.id = p.comune_id
-        LEFT JOIN daira d ON d.id = c.iddaira
-        LEFT JOIN adsec_project_tasks t ON t.parent_id = p.id
-        ORDER BY p.id, t.id;";
+                string sql = @"
+                SELECT *
+                FROM projects
+                ORDER BY operation_number";
 
-                DataTable dt = _db.GetData(sql);
-                var list = new List<AProject>();
-
-                foreach (DataRow r in dt.Rows)
+                using (var cmd = new MySqlCommand(sql, conn))
+                using (var rd = cmd.ExecuteReader())
                 {
-                    var project = new AProject
+                    while (rd.Read())
                     {
-                        Id = SafeInt(r["Id"]),
-                        Daira = SafeString(r["Daira"]),
-                        Commune = SafeString(r["Commune"]),
-                        IntutulePri = SafeString(r["IntutulePri"]),
-                        ProgrammeYe = SafeString(r["ProgrammeYe"]),
-                        Field = SafeString(r["Field"]),
-                        Sector = SafeString(r["Sector"]),
-                        RegistrationMont = SafeDecimal(r["RegistrationMont"]),
-                        FinancialConsumption = SafeDecimal(r["FinancialConsumption"]),
-                        FinancialProgress = SafeDecimal(r["FinancialProgress"]),
-                        Status = SafeString(r["Status"]),
+                        list.Add(new Project
+                        {
+                            Id = Convert.ToInt32(rd["id"]),
+                            OperationNumber = rd["operation_number"].ToString(),
+                            OperationName = rd["operation_name"].ToString(),
 
-                        // ? task fields (same row)
-                        TaskTitle = SafeString(r["TaskTitle"]),
-                        FinancialMontontPre = SafeDecimal(r["FinancialMontontPre"]),
-                        FinancialRemaining = SafeDecimal(r["FinancialRemaining"]),
-                        Contructor = SafeString(r["Contructor"]),
-                        Duration = SafeInt(r["Duration"]),
-                        Ods = SafeDateString(r["Ods"]),
-                        PhysicalProgress = SafeDouble(r["PhysicalProgress"]),
-                        Notes = SafeString(r["Notes"])
-                    };
+                            TotalBudget =
+                                Convert.ToDecimal(rd["total_budget"]),
 
-                    list.Add(project);
+                            RegisteredAmount =
+                                Convert.ToDecimal(rd["registered_amount"]),
+
+                            ConsumedAmount =
+                                Convert.ToDecimal(rd["consumed_amount"]),
+
+                            HasLots =
+                                Convert.ToBoolean(rd["has_lots"]),
+
+                            Notes =
+                                rd["notes"]?.ToString()
+                        });
+                    }
                 }
-
-                return list;
             }
-            catch (Exception ex)
+
+            return list;
+        }
+
+        public int Insert(Project p)
+        {
+            using (var conn = _db.GetConnection())
             {
-                throw new Exception("Error loading projects from MySQL database.", ex);
+                conn.Open();
+
+                string sql = @"
+        INSERT INTO projects
+        (
+            operation_number,
+            operation_name,
+            program_id,
+            daira_id,
+            commune_id,
+            domain_id,
+            sector_id,
+            total_budget,
+            registered_amount,
+            consumed_amount,
+            has_lots,
+            notes
+        )
+        VALUES
+        (
+            @operation_number,
+            @operation_name,
+            @program_id,
+            @daira_id,
+            @commune_id,
+            @domain_id,
+            @sector_id,
+            @total_budget,
+            @registered_amount,
+            @consumed_amount,
+            @has_lots,
+            @notes
+        );
+
+        SELECT LAST_INSERT_ID();";
+
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@operation_number", p.OperationNumber);
+                    cmd.Parameters.AddWithValue("@operation_name", p.OperationName);
+
+                    cmd.Parameters.AddWithValue("@program_id", p.ProgramId);
+                    cmd.Parameters.AddWithValue("@daira_id", p.DairaId);
+                    cmd.Parameters.AddWithValue("@commune_id", p.CommuneId);
+
+                    cmd.Parameters.AddWithValue("@domain_id", p.DomainId);
+                    cmd.Parameters.AddWithValue("@sector_id", p.SectorId);
+
+                    cmd.Parameters.AddWithValue("@total_budget", p.TotalBudget);
+                    cmd.Parameters.AddWithValue("@registered_amount", p.RegisteredAmount);
+                    cmd.Parameters.AddWithValue("@consumed_amount", p.ConsumedAmount);
+
+                    cmd.Parameters.AddWithValue("@has_lots", p.HasLots);
+
+                    cmd.Parameters.AddWithValue("@notes", p.Notes);
+
+                    return Convert.ToInt32(cmd.ExecuteScalar());
+                }
             }
-        }
-
-        private string SafeString(object value)
-        {
-            return value == DBNull.Value ? string.Empty : value.ToString();
-        }
-
-        private string SafeDateString(object value)
-        {
-            if (value == DBNull.Value)
-                return string.Empty;
-
-            DateTime date;
-            if (DateTime.TryParse(value.ToString(), out date))
-                return date.ToString("yyyy-MM-dd");
-
-            return value.ToString();
-        }
-
-        private int SafeInt(object value)
-        {
-            return value == DBNull.Value ? 0 : Convert.ToInt32(value);
-        }
-
-        private decimal SafeDecimal(object value)
-        {
-            return value == DBNull.Value ? 0m : Convert.ToDecimal(value);
-        }
-
-        private double SafeDouble(object value)
-        {
-            return value == DBNull.Value ? 0d : Convert.ToDouble(value);
         }
     }
 }

@@ -55,16 +55,23 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.PopulateColumns();
             gridView1.RefreshData();
             gridControl1.RefreshDataSource();
-            FormatMasterColumns();
+            if (gridControl1 == null)
+                throw new Exception("gridControl1 is NULL");
+
+            if (gridView1 == null)
+                throw new Exception("gridView1 is NULL");
+
+            if (_service == null)
+                throw new Exception("_service is NULL");
+
+            if (data == null)
+                throw new Exception("Data is NULL");
         }
 
         // =========================
         // MASTER GRID FORMATTING
         // =========================
-        private void FormatMasterColumns()
-        {
-
-        }
+     
         private void gridView1_RowCellStyle(object sender, XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
             if (e.RowHandle == gridView1.FocusedRowHandle && gridView1.FocusedColumn != e.Column)

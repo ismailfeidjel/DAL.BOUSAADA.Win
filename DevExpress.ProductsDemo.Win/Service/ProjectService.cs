@@ -1,24 +1,22 @@
-﻿using DevExpress.DataProcessing.InMemoryDataProcessor;
-using System;
+﻿using DevExpress.ProductsDemo.Win.Domain;
+using DevExpress.ProductsDemo.Win.Repositories;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DevExpress.ProductsDemo.Win
+namespace DevExpress.ProductsDemo.Win.Service
 {
     public class ProjectService
     {
-        private readonly IProjectRepository _repo;
+        private readonly ProjectRepository _repo =
+            new ProjectRepository();
 
-        public ProjectService(IProjectRepository repo)
+        public List<Project> GetProjects()
         {
-            _repo = repo;
+            return _repo.GetAll();
         }
 
-        public List<AProject> GetAllProjects()
+        public int Save(Project project)
         {
-            return _repo.GetAllProjects();
+            return _repo.Insert(project);
         }
     }
 }
