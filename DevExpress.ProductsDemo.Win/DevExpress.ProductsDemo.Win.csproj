@@ -816,6 +816,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="DataBase\dbb.sql" />
+    <Content Include="Modules\dal.sql" />
     <Content Include="nwindDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>nwindDataSet1.Designer.cs</LastGenOutput>
