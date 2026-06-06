@@ -33,20 +33,25 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                             OperationNumber = rd["operation_number"].ToString(),
                             OperationName = rd["operation_name"].ToString(),
 
-                            TotalBudget =
-                                Convert.ToDecimal(rd["total_budget"]),
+                            ProgramId = Convert.ToInt32(rd["program_id"]),
+                            DairaId = Convert.ToInt32(rd["daira_id"]),
+                            CommuneId = Convert.ToInt32(rd["commune_id"]),
+                            DomainId = Convert.ToInt32(rd["domain_id"]),
+                            SectorId = Convert.ToInt32(rd["sector_id"]),
 
-                            RegisteredAmount =
-                                Convert.ToDecimal(rd["registered_amount"]),
 
-                            ConsumedAmount =
-                                Convert.ToDecimal(rd["consumed_amount"]),
+                            HasLots = Convert.ToBoolean(rd["has_lots"]),
 
-                            HasLots =
-                                Convert.ToBoolean(rd["has_lots"]),
+                            Notes = rd["notes"] == DBNull.Value
+         ? null
+         : rd["notes"].ToString(),
 
-                            Notes =
-                                rd["notes"]?.ToString()
+                            CreatedAt = Convert.ToDateTime(rd["created_at"]),
+                            UpdatedAt = Convert.ToDateTime(rd["updated_at"]),
+
+                            UpdatedBy = rd["updated_by"] == DBNull.Value
+         ? (int?)null
+         : Convert.ToInt32(rd["updated_by"])
                         });
                     }
                 }
@@ -107,9 +112,6 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                     cmd.Parameters.AddWithValue("@domain_id", p.DomainId);
                     cmd.Parameters.AddWithValue("@sector_id", p.SectorId);
 
-                    cmd.Parameters.AddWithValue("@total_budget", p.TotalBudget);
-                    cmd.Parameters.AddWithValue("@registered_amount", p.RegisteredAmount);
-                    cmd.Parameters.AddWithValue("@consumed_amount", p.ConsumedAmount);
 
                     cmd.Parameters.AddWithValue("@has_lots", p.HasLots);
 

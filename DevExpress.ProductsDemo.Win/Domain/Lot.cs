@@ -11,6 +11,27 @@ namespace DevExpress.ProductsDemo.Win.Domain
         public int LotNumber { get; set; }
 
         public string LotName { get; set; }
+        public decimal LotBudget { get; set; }
+
+        public decimal RegisteredAmount { get; set; }
+
+        public decimal ConsumedAmount { get; set; }
+
+        public decimal RemainingAmount
+        {
+            get { return LotBudget - RegisteredAmount; }
+        }
+
+        public decimal FinancialProgress
+        {
+            get
+            {
+                if (RegisteredAmount <= 0)
+                    return 0;
+
+                return (ConsumedAmount / RegisteredAmount) * 100;
+            }
+        }
 
         public string Contractor { get; set; }
 

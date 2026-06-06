@@ -23,7 +23,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            IProjectRepository repo = new ProjectRepository();
+            //IProjectRepository repo = new ProjectRepository();
             //var data = repo.GetAll();
 
            // gridControl1.DataSource = data;

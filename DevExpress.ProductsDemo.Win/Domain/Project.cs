@@ -20,12 +20,6 @@ namespace DevExpress.ProductsDemo.Win.Domain
 
         public int SectorId { get; set; }
 
-        public decimal TotalBudget { get; set; }
-
-        public decimal RegisteredAmount { get; set; }
-
-        public decimal ConsumedAmount { get; set; }
-
         public bool HasLots { get; set; }
 
         public string Notes { get; set; }
@@ -36,20 +30,8 @@ namespace DevExpress.ProductsDemo.Win.Domain
 
         public int? UpdatedBy { get; set; }
 
-        public decimal RemainingAmount
-        {
-            get { return RegisteredAmount - ConsumedAmount; }
-        }
+      
 
-        public decimal FinancialProgress
-        {
-            get
-            {
-                if (RegisteredAmount <= 0)
-                    return 0;
-
-                return (ConsumedAmount / RegisteredAmount) * 100;
-            }
-        }
+     
     }
 }

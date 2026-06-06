@@ -491,12 +491,6 @@
   <data name="&gt;&gt;nbgEmployees.Type" xml:space="preserve">
     <value>DevExpress.XtraNavBar.NavBarGroup, DevExpress.XtraNavBar.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
-  <data name="&gt;&gt;adsecTBindingSource.Name" xml:space="preserve">
-    <value>adsecTBindingSource</value>
-  </data>
-  <data name="&gt;&gt;adsecTBindingSource.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;gridView1.Name" xml:space="preserve">
     <value>gridView1</value>
   </data>
@@ -580,6 +574,12 @@
   </data>
   <data name="&gt;&gt;layoutControlItem2.Type" xml:space="preserve">
     <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;adsecTBindingSource.Name" xml:space="preserve">
+    <value>adsecTBindingSource</value>
+  </data>
+  <data name="&gt;&gt;adsecTBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;dBBDataSetBindingSource.Name" xml:space="preserve">
     <value>dBBDataSetBindingSource</value>

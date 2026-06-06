@@ -1,4 +1,6 @@
 ﻿using DevExpress.ProductsDemo.Win.Repositories;
+using DevExpress.ProductsDemo.Win.Service;
+using DevExpress.ProductsDemo.Win.Services;
 using DevExpress.Utils;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -12,13 +14,12 @@ namespace DevExpress.ProductsDemo.Win.Modules
 {
     public partial class AdsecModule : BaseModule
     {
-        private ProjectService _service;
-
-        public override string ModuleName => "AProjects";
-
+        public override string ModuleName => "Projects";
+        private readonly LotService _service;
         public AdsecModule()
         {
             InitializeComponent();
+             _service =new LotService();
         }
 
         internal override void InitModule(DevExpress.Utils.Menu.IDXMenuManager manager, object data)
@@ -26,7 +27,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             base.InitModule(manager, data);
 
             InitGrid();
-            _service = new ProjectService(new ProjectRepository());
             LoadData();
         }
 
@@ -35,6 +35,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
         // =========================
         private void InitGrid()
         {
+            gridView1.OptionsDetail.EnableMasterViewMode = true;
+            gridView1.OptionsDetail.ShowDetailTabs = false;
+            gridView1.OptionsDetail.AllowExpandEmptyDetails = true;
+
             gridView1.Columns.Clear();
 
             gridView1.OptionsBehavior.AutoPopulateColumns = true;
@@ -48,7 +52,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
         // =========================
         private void LoadData()
         {
-            var data = _service.GetAllProjects();
+            var data = _service.GetGridData();
+
 
             gridControl1.DataSource = null;
             gridControl1.DataSource = data;
@@ -74,11 +79,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
      
         private void gridView1_RowCellStyle(object sender, XtraGrid.Views.Grid.RowCellStyleEventArgs e)
         {
-            if (e.RowHandle == gridView1.FocusedRowHandle && gridView1.FocusedColumn != e.Column)
-            {
-                e.Appearance.BackColor = gridView1.PaintAppearance.FocusedRow.BackColor;
-                e.Appearance.ForeColor = gridView1.PaintAppearance.FocusedRow.ForeColor;
-            }
+            
         }
 
         // =========================
@@ -94,6 +95,58 @@ namespace DevExpress.ProductsDemo.Win.Modules
         internal override void ShowControlFirstTime()
         {
             GridHelper.SetFindControlImages(gridControl1);
+        }
+      
+
+
+        private void gridView1_MasterRowEmpty(
+    object sender,
+    DevExpress.XtraGrid.Views.Grid.MasterRowEmptyEventArgs e)
+        {
+            e.IsEmpty = false;
+        }
+
+        private void gridView1_MasterRowGetRelationCount(
+     object sender,
+     DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationCountEventArgs e)
+        {
+            e.RelationCount = 1;
+        }
+
+        private void gridView1_MasterRowGetRelationName(
+     object sender,
+     DevExpress.XtraGrid.Views.Grid.MasterRowGetRelationNameEventArgs e)
+        {
+            e.RelationName = "Details";
+        }
+
+        private void gridView1_MasterRowGetChildList(
+    object sender,
+    DevExpress.XtraGrid.Views.Grid.MasterRowGetChildListEventArgs e)
+        {
+            var row =
+                gridView1.GetRow(e.RowHandle) as LotGridModel;
+
+            if (row == null)
+                return;
+
+            var lot =
+                _service.GetById(row.Id);
+
+            e.ChildList = new List<LotDetailModel>
+    {
+        new LotDetailModel
+        {
+            Contractor = lot.Contractor,
+            ExecutionDuration = lot.ExecutionDuration,
+            StartDate = lot.StartDate,
+            //AdministrativeProcedure = lot.AdministrativeProcedureName,
+            //SpecialStatus1 = lot.SpecialStatus1,
+            //SpecialStatus2 = lot.SpecialStatus1,
+            //SpecialStatus3 = lot.SpecialStatus1,
+            Notes = lot.Notes
+        }
+    };
         }
     }
 }
