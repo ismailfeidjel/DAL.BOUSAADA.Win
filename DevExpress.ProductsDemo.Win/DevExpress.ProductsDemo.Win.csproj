@@ -491,6 +491,7 @@
     <Compile Include="Domain\LookupItem.cs" />
     <Compile Include="Domain\Lot.cs" />
     <Compile Include="Domain\LotDetailModel.cs" />
+    <Compile Include="Domain\LotDetailRow.cs" />
     <Compile Include="Domain\LotGridModel.cs" />
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Domain\ProjectGridModel.cs" />
@@ -563,6 +564,7 @@
     <Compile Include="Modules\Analytics.Designer.cs">
       <DependentUpon>Analytics.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Class1.cs" />
     <Compile Include="Modules\Contacts.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -575,6 +577,9 @@
     </Compile>
     <Compile Include="Modules\Adsec.Designer.cs">
       <DependentUpon>Adsec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\DetailLotControl .cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\OutgoingMail\Models\OutgoingMail.cs" />
     <Compile Include="Modules\OutgoingMail\Repositories\IOutgoingMailRepository.cs" />

@@ -33,6 +33,7 @@ public class LotGridModel
     public decimal RegisteredAmount { get; set; }
 
     public decimal ConsumedAmount { get; set; }
+    public decimal Remaining => RegisteredAmount - ConsumedAmount;
 
     // متابعة
     public string Contractor { get; set; }
@@ -42,6 +43,10 @@ public class LotGridModel
     public DateTime? StartDate { get; set; }
 
     public decimal PhysicalProgress { get; set; }
+    public decimal FinancialProgress =>
+       RegisteredAmount <= 0
+           ? 0
+           : (ConsumedAmount / RegisteredAmount) * 100;
 
     // وضعيات
     public string AdministrativeProcedure { get; set; }
@@ -53,6 +58,7 @@ public class LotGridModel
     public string SpecialStatus3 { get; set; }
 
     public string ProjectStatus { get; set; }
+
 
     // ملاحظات
     public string Notes { get; set; }
