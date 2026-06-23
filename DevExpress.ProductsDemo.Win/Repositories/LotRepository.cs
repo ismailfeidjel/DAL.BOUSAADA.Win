@@ -25,7 +25,6 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
             p.operation_number,
             p.operation_name,
-
             pr.name AS program,
             d.name AS daira,
             c.name AS commune,
@@ -104,8 +103,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                             ProjectId = Convert.ToInt32(rd["project_id"]),
 
                             OperationNumber = rd["operation_number"].ToString(),
-                            OperationName = rd["operation_name"].ToString(),
-
+                            OperationName = $"{rd["operation_name"]}{Environment.NewLine} {rd["lot_name"]}",
                             Program = rd["program"]?.ToString(),
                             Daira = rd["daira"]?.ToString(),
                             Commune = rd["commune"]?.ToString(),

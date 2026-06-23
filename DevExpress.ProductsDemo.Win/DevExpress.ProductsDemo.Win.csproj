@@ -80,6 +80,7 @@
       </HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DevExpress.Diagram.v24.1.Core, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Drawing.v24.1">
       <HintPath>
       </HintPath>
@@ -214,6 +215,7 @@
       </HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraDiagram.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v24.1">
       <HintPath>
       </HintPath>
@@ -437,6 +439,7 @@
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
     <Reference Include="ZstdSharp, Version=0.8.6.0, Culture=neutral, PublicKeyToken=8d151af33a4ad5cf, processorArchitecture=MSIL">
       <HintPath>..\packages\ZstdSharp.Port.0.8.6\lib\net462\ZstdSharp.dll</HintPath>
     </Reference>
@@ -481,6 +484,12 @@
     </Compile>
     <Compile Include="Controls\ucCalendar.Designer.cs">
       <DependentUpon>ucCalendar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LotDetailPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\LotDetailPanel.Designer.cs">
+      <DependentUpon>LotDetailPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="DBBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -710,6 +719,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\HelpControl.resx">
       <DependentUpon>HelpControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\LotDetailPanel.resx">
+      <DependentUpon>LotDetailPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\PrintControl.resx">
       <DependentUpon>PrintControl.cs</DependentUpon>
