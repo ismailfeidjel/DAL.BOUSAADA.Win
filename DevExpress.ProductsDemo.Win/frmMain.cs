@@ -320,7 +320,7 @@ namespace DevExpress.ProductsDemo.Win {
 
         private void bbiNewTask_ItemClick(object sender, ItemClickEventArgs e)
         {
-            using (var form = new frmAddProject())
+            using (var form = new frmaddproject())
             {
                 if (form.ShowDialog(this) == DialogResult.OK)
                 {
