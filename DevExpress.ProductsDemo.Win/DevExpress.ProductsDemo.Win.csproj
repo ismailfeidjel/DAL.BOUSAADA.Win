@@ -485,12 +485,6 @@
     <Compile Include="Controls\ucCalendar.Designer.cs">
       <DependentUpon>ucCalendar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\LotDetailPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\LotDetailPanel.Designer.cs">
-      <DependentUpon>LotDetailPanel.cs</DependentUpon>
-    </Compile>
     <Compile Include="DBBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -521,6 +515,12 @@
     </Compile>
     <Compile Include="Forms\frmEditContact.Designer.cs">
       <DependentUpon>frmEditContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmaddproject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmaddproject.Designer.cs">
+      <DependentUpon>frmaddproject.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmEditTask.cs">
       <SubType>Form</SubType>
@@ -623,11 +623,11 @@
     <Compile Include="Modules\Sales\ucValuePresenter.Designer.cs">
       <DependentUpon>ucValuePresenter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Scheduler.cs">
+    <Compile Include="Modules\AddProject.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Modules\Scheduler.Designer.cs">
-      <DependentUpon>Scheduler.cs</DependentUpon>
+    <Compile Include="Modules\AddProject.Designer.cs">
+      <DependentUpon>AddProject.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Pivot.cs">
       <SubType>UserControl</SubType>
@@ -720,9 +720,6 @@
     <EmbeddedResource Include="Controls\HelpControl.resx">
       <DependentUpon>HelpControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\LotDetailPanel.resx">
-      <DependentUpon>LotDetailPanel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Controls\PrintControl.resx">
       <DependentUpon>PrintControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -743,6 +740,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditContact.resx">
       <DependentUpon>frmEditContact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmaddproject.resx">
+      <DependentUpon>frmaddproject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEditTask.resx">
       <DependentUpon>frmEditTask.cs</DependentUpon>
@@ -803,8 +803,8 @@
     <EmbeddedResource Include="Modules\Sales\ucValuePresenter.resx">
       <DependentUpon>ucValuePresenter.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Scheduler.resx">
-      <DependentUpon>Scheduler.cs</DependentUpon>
+    <EmbeddedResource Include="Modules\AddProject.resx">
+      <DependentUpon>AddProject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Snap.resx">
       <DependentUpon>Snap.cs</DependentUpon>

@@ -46,7 +46,38 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.OptionsSelection.MultiSelect = false;
             gridView1.OptionsSelection.MultiSelectMode =
                 DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
-            AddCol("OperationNumber", "رقم العملية", 110);
+            //------
+            gridView1.OptionsView.EnableAppearanceEvenRow = true;
+            gridView1.OptionsView.EnableAppearanceOddRow = true;
+            //------
+            gridView1.Appearance.HeaderPanel.Font =
+    new Font("Tahoma", 8, FontStyle.Bold);
+
+            gridView1.Appearance.HeaderPanel.TextOptions.HAlignment =
+                DevExpress.Utils.HorzAlignment.Center;
+
+            gridView1.Appearance.HeaderPanel.TextOptions.VAlignment =
+                DevExpress.Utils.VertAlignment.Center;
+            //-----------------------
+            gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+
+            gridView1.Appearance.FocusedRow.BackColor = Color.LightSteelBlue;
+            gridView1.Appearance.HideSelectionRow.BackColor = Color.LightSteelBlue;
+            //----------------------
+            gridView1.BestFitColumns();
+
+            //-----------------------
+            gridView1.PaintStyleName = "Skin";
+            gridView1.OptionsView.EnableAppearanceEvenRow = true;
+            gridView1.OptionsView.EnableAppearanceOddRow = true;
+            gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridView1.OptionsView.RowAutoHeight = true;
+
+            //-------------------------
+
+            gridView1.Appearance.EvenRow.BackColor = Color.White;
+            gridView1.Appearance.OddRow.BackColor = Color.FromArgb(245, 245, 245);
+            AddCol("OperationNumber", "رقم ", 110);
             AddCol("Daira", "الدائرة", 100);
             AddCol("Commune", "البلدية", 100);
             AddCol("OperationName", "اسم العملية", 180);
@@ -56,6 +87,78 @@ namespace DevExpress.ProductsDemo.Win.Modules
             AddCol("PhysicalProgress", "التقدم الفيزيائي", 100, "{0:N2} %");
             AddCol("ProjectStatus", "وضعية العملية", 110);
             AddCol("Notes", "الملاحظة", 150);
+            //----------------------------------------------------------------------------
+            gridView1.OptionsView.ShowFooter = true;
+
+            gridView1.Columns["LotBudget"].Summary.Add(
+                DevExpress.Data.SummaryItemType.Sum, "LotBudget", "{0:N2}");
+
+            gridView1.Columns["ConsumedAmount"].Summary.Add(
+                DevExpress.Data.SummaryItemType.Sum, "ConsumedAmount", "{0:N2}");
+
+            gridView1.Columns["RegisteredAmount"].Summary.Add(
+                DevExpress.Data.SummaryItemType.Sum, "RegisteredAmount", "{0:N2}");
+
+                
+            gridView1.Columns["Daira"].Summary.Add(
+                DevExpress.Data.SummaryItemType.Count,
+                "OperationNumber",
+                "عددها: {0}");
+
+            gridView1.Appearance.FooterPanel.Font =
+    new Font("Tahoma", 8, FontStyle.Bold);
+
+            gridView1.Appearance.FooterPanel.TextOptions.HAlignment =
+                DevExpress.Utils.HorzAlignment.Center;
+
+            //----------
+            gridView1.OptionsView.ShowAutoFilterRow = true;
+            gridView1.Columns["OperationNumber"].Width = 50;
+            gridView1.Columns["OperationNumber"].OptionsColumn.FixedWidth = true;
+
+            gridView1.Columns["Daira"].Width = 80;
+            gridView1.Columns["Daira"].OptionsColumn.FixedWidth = true;
+
+            gridView1.Columns["Commune"].Width = 80;
+            gridView1.Columns["Commune"].OptionsColumn.FixedWidth = true;
+
+            gridView1.Columns["PhysicalProgress"].Width = 70;
+            gridView1.Columns["PhysicalProgress"].OptionsColumn.FixedWidth = true;
+
+            gridView1.Columns["ProjectStatus"].Width = 80;
+            gridView1.Columns["ProjectStatus"].OptionsColumn.FixedWidth = true;
+
+            gridView1.Columns["LotBudget"].Width = 100;
+            gridView1.Columns["LotBudget"].OptionsColumn.FixedWidth = true;
+
+            gridView1.Columns["RegisteredAmount"].Width = 100;
+            gridView1.Columns["RegisteredAmount"].OptionsColumn.FixedWidth = true;
+
+            gridView1.Columns["ConsumedAmount"].Width = 100;
+            gridView1.Columns["ConsumedAmount"].OptionsColumn.FixedWidth = true;
+            gridView1.Columns["OperationName"].BestFit();
+
+
+            //--------
+         
+            //--------
+            gridView1.Columns["OperationNumber"].AppearanceCell.TextOptions.HAlignment =
+    DevExpress.Utils.HorzAlignment.Center;
+            gridView1.Columns["Daira"].AppearanceCell.TextOptions.HAlignment =
+    DevExpress.Utils.HorzAlignment.Center;
+            gridView1.Columns["Commune"].AppearanceCell.TextOptions.HAlignment =
+    DevExpress.Utils.HorzAlignment.Center;
+            gridView1.Columns["PhysicalProgress"].AppearanceCell.TextOptions.HAlignment =
+    DevExpress.Utils.HorzAlignment.Center;
+            gridView1.Columns["ProjectStatus"].AppearanceCell.TextOptions.HAlignment =
+    DevExpress.Utils.HorzAlignment.Center;
+            gridView1.Columns["LotBudget"].AppearanceCell.TextOptions.HAlignment =
+   DevExpress.Utils.HorzAlignment.Center;
+            gridView1.Columns["RegisteredAmount"].AppearanceCell.TextOptions.HAlignment =
+   DevExpress.Utils.HorzAlignment.Center;
+            gridView1.Columns["ConsumedAmount"].AppearanceCell.TextOptions.HAlignment =
+   DevExpress.Utils.HorzAlignment.Center;
+
             gridView1.Columns["OperationName"].ColumnEdit = memo;
             gridView1.OptionsView.RowAutoHeight = true;
 
@@ -122,23 +225,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             LoadLot(_currentLot);
         }
 
-        private void DetailPanel_OnSave(object sender, LotSaveEventArgs e)
-        {
-            if (_currentLot == null) return;
-
-            var lot = _lotRepo.GetById(_currentLot.Id);
-            lot.LotName = e.LotName;
-            lot.Contractor = e.Contractor;
-            lot.ExecutionDuration = e.ExecutionDuration;
-            lot.StartDate = e.StartDate;
-            lot.Notes = e.Notes;
-
-            _lotRepo.Update(lot);
-            LoadData();
-
-            XtraMessageBox.Show("تم الحفظ بنجاح", "حفظ",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+      
 
         // ── Grid Events ──────────────────────────────────────────────
         private void gridView1_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)

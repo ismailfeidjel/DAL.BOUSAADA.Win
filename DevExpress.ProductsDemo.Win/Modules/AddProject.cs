@@ -28,8 +28,6 @@ namespace DevExpress.ProductsDemo.Win.Modules {
         }
         internal override void InitModule(Utils.Menu.IDXMenuManager manager, object data) {
             base.InitModule(manager, data);
-            this.calendarControls.InitDateNavigator(this.schedulerControl1);
-            this.calendarControls.InitResourcesTree(this.schedulerStorage1);
         }
         RibbonPageCategory FindAppointmentPage(RibbonControl ribbonControl) {
             foreach (RibbonPageCategory category in ribbonControl.PageCategories)
@@ -53,7 +51,6 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             this.schedulerStorage1.FilterAppointment += new PersistentObjectCancelEventHandler(this.schedulerStorage1_FilterAppointment);
             this.schedulerStorage1.AppointmentsDeleted += new PersistentObjectsEventHandler(schedulerStorage1_AppointmentsDeleted);
             this.schedulerStorage1.AppointmentDeleting += new PersistentObjectCancelEventHandler(schedulerStorage1_AppointmentDeleting);
-            this.schedulerControl1.SelectionChanged += new EventHandler(schedulerControl1_SelectionChanged);
         }
 
         void schedulerStorage1_AppointmentDeleting(object sender, PersistentObjectCancelEventArgs e) {
@@ -61,9 +58,7 @@ namespace DevExpress.ProductsDemo.Win.Modules {
         }
         private void UnsubscribeSchedulerEvents() {
             this.schedulerStorage1.FilterAppointment -= new PersistentObjectCancelEventHandler(this.schedulerStorage1_FilterAppointment);
-            this.schedulerControl1.SelectionChanged -= new EventHandler(schedulerControl1_SelectionChanged);
             this.schedulerStorage1.AppointmentsDeleted -= new PersistentObjectsEventHandler(schedulerStorage1_AppointmentsDeleted);
-            this.schedulerControl1.SelectionChanged -= new EventHandler(schedulerControl1_SelectionChanged);
         }
         void schedulerControl1_SelectionChanged(object sender, EventArgs e) {
             if (OwnerForm == null)
@@ -71,26 +66,18 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             UpdateAppointmentCategory();
         }
         void UpdateAppointmentCategory() {
-            if (this.schedulerControl1.SelectedAppointments.Count > 0)
-                ShowAppointmentCategory();
-            else
-                HideAppointmentCategory();
+           
         }
         private void schedulerStorage1_FilterAppointment(object sender, PersistentObjectCancelEventArgs e) {
             Appointment apt = (Appointment)e.Object;
             if (EmptyResourceId.Id.Equals(apt.ResourceId))
                 return;
-            List<int> selectedIds = this.calendarControls.GetSelectedResourceIds();
             int resourceId = Convert.ToInt32(apt.ResourceId);
-            e.Cancel = !selectedIds.Contains(resourceId);
         }
         void schedulerStorage1_AppointmentsDeleted(object sender, PersistentObjectsEventArgs e) {
             HideAppointmentCategory();
         }
         private void schedulerControl1_InitNewAppointment(object sender, AppointmentEventArgs e) {
-            List<int> selectedIds = this.calendarControls.GetSelectedResourceIds();
-            if (selectedIds.Count > 0)
-                e.Appointment.ResourceId = selectedIds[0];
         }
         void ShowAppointmentCategory() {
             if (this.appointmentCategory == null)
@@ -116,7 +103,6 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             return null;
         }
         void SetTopRowTime() {
-            this.schedulerControl1.DayView.TopRowTime = TimeSpan.FromHours(8);
         }
     }
 }

@@ -16,6 +16,7 @@ using DevExpress.Utils.Taskbar.Core;
 using DevExpress.Utils.Taskbar;
 using DevExpress.DXperience.Demos;
 using System.Drawing;
+using DevExpress.ProductsDemo.Win.Forms;
 
 namespace DevExpress.ProductsDemo.Win {
     public partial class frmMain : RibbonForm {
@@ -315,6 +316,18 @@ namespace DevExpress.ProductsDemo.Win {
         private void backstageViewControl1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void bbiNewTask_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            using (var form = new frmAddProject())
+            {
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
+                    // form.NewProject and form.NewLot are ready
+                    //LoadProjects(); // refresh your grid
+                }
+            }
         }
     }
 }

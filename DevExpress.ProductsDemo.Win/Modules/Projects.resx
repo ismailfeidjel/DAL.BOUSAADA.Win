@@ -125,6 +125,9 @@
   <data name="textBox9.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 403</value>
   </data>
+  <data name="textBox9.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
   <data name="textBox9.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 96</value>
   </data>
@@ -345,6 +348,9 @@
   <data name="textBox8.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 335</value>
   </data>
+  <data name="textBox8.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
   <data name="textBox8.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 20</value>
   </data>
@@ -368,6 +374,9 @@
   </data>
   <data name="textBox7.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 295</value>
+  </data>
+  <data name="textBox7.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
   <data name="textBox7.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 20</value>
@@ -393,6 +402,9 @@
   <data name="textBox6.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 259</value>
   </data>
+  <data name="textBox6.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
   <data name="textBox6.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 20</value>
   </data>
@@ -416,6 +428,9 @@
   </data>
   <data name="textBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 224</value>
+  </data>
+  <data name="textBox5.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
   <data name="textBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 20</value>
@@ -441,6 +456,9 @@
   <data name="textBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 170</value>
   </data>
+  <data name="textBox4.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
   <data name="textBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 20</value>
   </data>
@@ -464,6 +482,9 @@
   </data>
   <data name="textBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 122</value>
+  </data>
+  <data name="textBox3.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
   <data name="textBox3.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 20</value>
@@ -489,6 +510,9 @@
   <data name="textBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 72</value>
   </data>
+  <data name="textBox2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
+  </data>
   <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 20</value>
   </data>
@@ -512,6 +536,9 @@
   </data>
   <data name="textBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 28</value>
+  </data>
+  <data name="textBox1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
   <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 20</value>
@@ -551,27 +578,6 @@
   </data>
   <data name="&gt;&gt;_detailPanel.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="panelControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 536</value>
-  </data>
-  <data name="panelControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>850, 49</value>
-  </data>
-  <data name="panelControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;panelControl1.Name" xml:space="preserve">
-    <value>panelControl1</value>
-  </data>
-  <data name="&gt;&gt;panelControl1.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.PanelControl, DevExpress.Utils.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="&gt;&gt;panelControl1.Parent" xml:space="preserve">
-    <value>layoutControl1</value>
-  </data>
-  <data name="&gt;&gt;panelControl1.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="gridControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
@@ -672,7 +678,7 @@
     <value>Yes</value>
   </data>
   <data name="gridControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>854, 528</value>
+    <value>854, 581</value>
   </data>
   <data name="gridControl1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -687,7 +693,7 @@
     <value>layoutControl1</value>
   </data>
   <data name="&gt;&gt;gridControl1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="layoutControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -804,12 +810,6 @@
     <value>layoutControlItem1</value>
   </data>
   <data name="&gt;&gt;layoutControlItem1.Type" xml:space="preserve">
-    <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="&gt;&gt;layoutControlItem3.Name" xml:space="preserve">
-    <value>layoutControlItem3</value>
-  </data>
-  <data name="&gt;&gt;layoutControlItem3.Type" xml:space="preserve">
     <value>DevExpress.XtraLayout.LayoutControlItem, DevExpress.XtraLayout.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;layoutControlItem2.Name" xml:space="preserve">
