@@ -548,6 +548,12 @@
     <Compile Include="Forms\ssMain.Designer.cs">
       <DependentUpon>ssMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UCLot.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\UCLot.Designer.cs">
+      <DependentUpon>UCLot.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\wfMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -755,6 +761,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ssMain.resx">
       <DependentUpon>ssMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UCLot.resx">
+      <DependentUpon>UCLot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\wfMain.resx">
       <DependentUpon>wfMain.cs</DependentUpon>

@@ -22,8 +22,6 @@ namespace DevExpress.ProductsDemo.Win.Domain
 
         public bool HasLots { get; set; }
 
-        public string Notes { get; set; }
-
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }

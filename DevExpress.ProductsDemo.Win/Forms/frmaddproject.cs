@@ -11,12 +11,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DevExpress.ProductsDemo.Win.Forms {
+namespace DevExpress.ProductsDemo.Win.Forms
+{
     public partial class frmaddproject : RibbonForm
     {
         public Domain.Project NewProject { get; private set; }
@@ -31,6 +34,9 @@ namespace DevExpress.ProductsDemo.Win.Forms {
         {
             InitializeComponent();
             PopulateLookups();
+#if DEBUG
+            LoadTestData();
+#endif
 
 
         }
@@ -86,6 +92,52 @@ namespace DevExpress.ProductsDemo.Win.Forms {
             }
         }
 
+        private void LoadTestData()
+        {
+            txtOperationNumber.Text = "OP-2026-001";
+            txtOperationName.Text = "إنجاز مدرسة ابتدائية";
+
+            if (cmbProgram.Properties.DataSource is List<LookupItem> programs && programs.Any())
+                cmbProgram.EditValue = programs.First().Id;
+
+            if (cmbDaira.Properties.DataSource is List<LookupItem> dairas && dairas.Any())
+                cmbDaira.EditValue = dairas.First().Id;
+
+            if (cmbCommune.Properties.DataSource is List<LookupItem> communes && communes.Any())
+                cmbCommune.EditValue = communes.First().Id;
+
+            if (cmbDomain.Properties.DataSource is List<LookupItem> domains && domains.Any())
+                cmbDomain.EditValue = domains.First().Id;
+
+            if (cmbSector.Properties.DataSource is List<LookupItem> sectors && sectors.Any())
+                cmbSector.EditValue = sectors.First().Id;
+
+            spnLotNumber.Value = 1;
+            txtLotName.Text = "الحصة رقم 01";
+
+            txtLotBudget.Text = "5000000";
+            txtRegisteredAmount.Text = "5000000";
+            txtConsumedAmount.Text = "1200000";
+
+            txtContractor.Text = "مؤسسة البناء الحديثة";
+
+            spnExecutionDuration.Value = 12;
+            spnPhysicalProgress.Value = 25;
+
+            dtStartDate.DateTime = DateTime.Today.AddMonths(-3);
+
+            if (cmbAdminProcedure.Properties.DataSource is List<LookupItem> admin && admin.Any())
+                cmbAdminProcedure.EditValue = admin.First().Id;
+
+            if (cmbSpecialStatus1.Properties.DataSource is List<LookupItem> s1 && s1.Any())
+                cmbSpecialStatus1.EditValue = s1.First().Id;
+
+            if (cmbProjectStatus.Properties.DataSource is List<LookupItem> status && status.Any())
+                cmbProjectStatus.EditValue = status.First().Id;
+
+            txtLotNotes.Text = "حصة تجريبية";
+        }
+
 
         private void bbiSave_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -103,7 +155,7 @@ namespace DevExpress.ProductsDemo.Win.Forms {
                     DomainId = Convert.ToInt32(cmbDomain.EditValue),
                     SectorId = Convert.ToInt32(cmbSector.EditValue),
                     HasLots = true,
-                    Notes = NullIfBlank(txtProjectNotes.Text)
+                    UpdatedBy=1
                 };
 
                 project.Id = _projectRepo.Insert(project);
@@ -113,9 +165,9 @@ namespace DevExpress.ProductsDemo.Win.Forms {
                     ProjectId = project.Id,
                     LotNumber = Convert.ToInt32(spnLotNumber.Value),
                     LotName = txtLotName.Text.Trim(),
-                    LotBudget = Convert.ToDecimal(txtLotBudget),
-                    RegisteredAmount = Convert.ToDecimal(txtRegisteredAmount),
-                    ConsumedAmount = Convert.ToDecimal(txtConsumedAmount),
+                    RegisteredAmount = string.IsNullOrWhiteSpace(txtRegisteredAmount.Text) ? 0 : Convert.ToDecimal(txtRegisteredAmount.Text),
+                    LotBudget = string.IsNullOrWhiteSpace(txtLotBudget.Text)  ? 0  : Convert.ToDecimal(txtLotBudget.Text),
+                   ConsumedAmount = string.IsNullOrWhiteSpace(txtConsumedAmount.Text) ? 0 : Convert.ToDecimal(txtConsumedAmount.Text),
                     Contractor = NullIfBlank(txtContractor.Text),
                     ExecutionDuration = spnExecutionDuration.Value > 0
                                              ? (int?)Convert.ToInt32(spnExecutionDuration.Value) : null,
@@ -129,81 +181,142 @@ namespace DevExpress.ProductsDemo.Win.Forms {
                     SpecialStatus2Id = NullableId(cmbSpecialStatus2),
                     SpecialStatus3Id = NullableId(cmbSpecialStatus3),
                     ProjectStatusId = NullableId(cmbProjectStatus),
-                    Notes = NullIfBlank(txtLotNotes.Text)
+                    Notes = NullIfBlank(txtLotNotes.Text),
+                    UpdatedBy=1
                 };
 
-                lot.Id = _lotRepo.Insert(lot);
-                NewProject = project;
-                NewLot = lot;
+            lot.Id = _lotRepo.Insert(lot);
+            NewProject = project;
+            NewLot = lot;
 
-                DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK;
+            XtraMessageBox.Show(
+    "Project saved successfully",
+    "Success",
+    MessageBoxButtons.OK,
+    MessageBoxIcon.Information);
                 Close();
-            }
+        }
             catch (Exception ex)
             {
-                XtraMessageBox.Show($"Save failed:\n{ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                XtraMessageBox.Show(
+                    $"{ex.Message}\n\n{ex.InnerException?.Message}",
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
-        private void bbiCancel_ItemClick(object sender, ItemClickEventArgs e)
+private void bbiCancel_ItemClick(object sender, ItemClickEventArgs e)
+{
+    DialogResult = DialogResult.Cancel;
+    Close();
+}
+// ── Validation ────────────────────────────────────────────────────
+private bool ValidateAll()
+{
+    bool ok = true;
+
+    ok &= Require(txtOperationNumber, "Operation Number is required");
+    ok &= Require(txtOperationName, "Operation Name is required");
+    ok &= RequireLookup(cmbProgram, "Program is required");
+    ok &= RequireLookup(cmbDaira, "Daira is required");
+    ok &= RequireLookup(cmbCommune, "Commune is required");
+    ok &= RequireLookup(cmbDomain, "Domain is required");
+    ok &= RequireLookup(cmbSector, "Sector is required");
+    ok &= Require(txtLotName, "Lot Name is required");
+    return ok;
+}
+private bool Require(TextEdit txt, string msg)
+{
+    if (!string.IsNullOrWhiteSpace(txt.Text)) return true;
+    XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    txt.Focus();
+    return false;
+}
+private bool RequireLookup(LookUpEdit cmb, string msg)
+{
+    if (cmb.EditValue != null && cmb.EditValue != DBNull.Value) return true;
+    XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    cmb.Focus();
+    return false;
+}
+private bool Fail(string msg)
+{
+    XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    return false;
+}
+
+// ── Helpers ───────────────────────────────────────────────────────
+private static string NullIfBlank(string s) =>
+    string.IsNullOrWhiteSpace(s) ? null : s.Trim();
+
+private static int? NullableId(LookUpEdit cmb) =>
+    cmb.EditValue == null || cmb.EditValue == DBNull.Value
+        ? (int?)null : Convert.ToInt32(cmb.EditValue);
+
+
+
+// Caller reads this after ShowDialog returns OK
+
+
+
+
+private void ucContactInfo1_Load(object sender, EventArgs e)
+{
+
+}
+
+        private void groupControl5_Paint(object sender, PaintEventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+
         }
-        // ── Validation ────────────────────────────────────────────────────
-        private bool ValidateAll()
-        {
-            bool ok = true;
-            void Req(string v, LookUpEdit c = null) { /* see below */ }
 
-            ok &= Require(txtOperationNumber, "Operation Number is required");
-            ok &= Require(txtOperationName, "Operation Name is required");
-            ok &= RequireLookup(cmbProgram, "Program is required");
-            ok &= RequireLookup(cmbDaira, "Daira is required");
-            ok &= RequireLookup(cmbCommune, "Commune is required");
-            ok &= RequireLookup(cmbDomain, "Domain is required");
-            ok &= RequireLookup(cmbSector, "Sector is required");
-            ok &= Require(txtLotName, "Lot Name is required");
-            return ok;
-        }
-        private bool Require(TextEdit txt, string msg)
+        private void ribbonControl1_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txt.Text)) return true;
-            XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            txt.Focus();
-            return false;
-        }
-        private bool RequireLookup(LookUpEdit cmb, string msg)
-        {
-            if (cmb.EditValue != null && cmb.EditValue != DBNull.Value) return true;
-            XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            cmb.Focus();
-            return false;
-        }
-        private bool Fail(string msg)
-        {
-            XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return false;
+
         }
 
-        // ── Helpers ───────────────────────────────────────────────────────
-        private static string NullIfBlank(string s) =>
-            string.IsNullOrWhiteSpace(s) ? null : s.Trim();
-
-        private static int? NullableId(LookUpEdit cmb) =>
-            cmb.EditValue == null || cmb.EditValue == DBNull.Value
-                ? (int?)null : Convert.ToInt32(cmb.EditValue);
-
-
-
-        // Caller reads this after ShowDialog returns OK
-
-
-
-
-        private void ucContactInfo1_Load(object sender, EventArgs e)
+        private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
         {
 
+
+            if (!tabLot2.PageVisible)
+                {
+                    tabLot2.PageVisible = true;
+                    tabContainer.SelectedTabPage = tabLot2;
+                    btnRemoveLot.Enabled=true;
+                    return;
+                }
+
+                if (!tabLot3.PageVisible && tabLot2.PageVisible)
+                {
+                tabLot3.PageVisible = true;
+                tabContainer.SelectedTabPage = tabLot3;
+                btnRemoveLot.Enabled = true;
+                btnAddLot.Enabled = false;
+                    return;
+                }
+            
+
+        }
+
+        private void btnRemoveLot_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (tabContainer.SelectedTabPage == tabLot3)
+            {
+                tabLot3.PageVisible = false;
+            }
+            else if (tabContainer.SelectedTabPage == tabLot2)
+            {
+
+                tabLot2.PageVisible = false;
+                tabLot3.PageVisible = false;
+                btnRemoveLot.Enabled = false;
+
+
+            }
+
+            btnAddLot.Enabled = true;
         }
     }
 }

@@ -27,16 +27,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmaddproject));
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dtStartDate = new DevExpress.XtraEditors.DateEdit();
+            this.tabContainer = new DevExpress.XtraTab.XtraTabControl();
+            this.tabLot1 = new DevExpress.XtraTab.XtraTabPage();
+            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtOperationName = new DevExpress.XtraEditors.TextEdit();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.cutItem1 = new DevExpress.XtraRichEdit.UI.CutItem();
             this.copyItem1 = new DevExpress.XtraRichEdit.UI.CopyItem();
@@ -194,28 +192,11 @@
             this.redoItem1 = new DevExpress.XtraRichEdit.UI.RedoItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.btnAddLot = new DevExpress.XtraBars.BarButtonItem();
             this.homeRibbonPage1 = new DevExpress.XtraRichEdit.UI.HomeRibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.cmbSpecialStatus3 = new DevExpress.XtraEditors.LookUpEdit();
-            this.spnExecutionDuration = new DevExpress.XtraEditors.SpinEdit();
-            this.cmbSpecialStatus1 = new DevExpress.XtraEditors.LookUpEdit();
-            this.cmbAdminProcedure = new DevExpress.XtraEditors.LookUpEdit();
-            this.txtContractor = new DevExpress.XtraEditors.TextEdit();
-            this.spnPhysicalProgress = new DevExpress.XtraEditors.SpinEdit();
-            this.cmbSpecialStatus2 = new DevExpress.XtraEditors.LookUpEdit();
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtRegisteredAmount = new DevExpress.XtraEditors.TextEdit();
-            this.txtLotBudget = new DevExpress.XtraEditors.TextEdit();
-            this.txtConsumedAmount = new DevExpress.XtraEditors.TextEdit();
-            this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtOperationName = new DevExpress.XtraEditors.TextEdit();
+            this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.cmbProgram = new DevExpress.XtraEditors.LookUpEdit();
             this.label2 = new System.Windows.Forms.Label();
             this.txtLotName = new DevExpress.XtraEditors.TextEdit();
@@ -226,9 +207,33 @@
             this.spnLotNumber = new DevExpress.XtraEditors.SpinEdit();
             this.cmbSector = new DevExpress.XtraEditors.LookUpEdit();
             this.txtOperationNumber = new DevExpress.XtraEditors.TextEdit();
+            this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.txtLotNotes = new DevExpress.XtraEditors.MemoEdit();
+            this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
+            this.cmbSpecialStatus2 = new DevExpress.XtraEditors.LookUpEdit();
+            this.cmbAdminProcedure = new DevExpress.XtraEditors.LookUpEdit();
+            this.cmbSpecialStatus1 = new DevExpress.XtraEditors.LookUpEdit();
+            this.cmbSpecialStatus3 = new DevExpress.XtraEditors.LookUpEdit();
+            this.groupControl3 = new DevExpress.XtraEditors.GroupControl();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.cmbProjectStatus = new DevExpress.XtraEditors.LookUpEdit();
-            this.txtProjectNotes = new DevExpress.XtraEditors.MemoEdit();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dtStartDate = new DevExpress.XtraEditors.DateEdit();
+            this.spnExecutionDuration = new DevExpress.XtraEditors.SpinEdit();
+            this.txtContractor = new DevExpress.XtraEditors.TextEdit();
+            this.spnPhysicalProgress = new DevExpress.XtraEditors.SpinEdit();
+            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtRegisteredAmount = new DevExpress.XtraEditors.TextEdit();
+            this.txtLotBudget = new DevExpress.XtraEditors.TextEdit();
+            this.txtConsumedAmount = new DevExpress.XtraEditors.TextEdit();
+            this.tabLot2 = new DevExpress.XtraTab.XtraTabPage();
+            this.tabLot3 = new DevExpress.XtraTab.XtraTabPage();
             this.icEditorsSVG = new DevExpress.Utils.SvgImageCollection(this.components);
             this.icCategorySVG = new DevExpress.Utils.SvgImageCollection(this.components);
             this.icEditors = new DevExpress.Utils.ImageCollection(this.components);
@@ -239,15 +244,80 @@
             this.showEditStyleFormItem1 = new DevExpress.XtraRichEdit.UI.ShowEditStyleFormItem();
             this.showInsertTableCellsFormItem1 = new DevExpress.XtraRichEdit.UI.ShowInsertTableCellsFormItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.btnRemoveLot = new DevExpress.XtraBars.BarButtonItem();
+            this.groupControl6 = new DevExpress.XtraEditors.GroupControl();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
+            this.spinEdit1 = new DevExpress.XtraEditors.SpinEdit();
+            this.groupControl7 = new DevExpress.XtraEditors.GroupControl();
+            this.memoEdit1 = new DevExpress.XtraEditors.MemoEdit();
+            this.groupControl8 = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpEdit6 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpEdit7 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpEdit8 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpEdit9 = new DevExpress.XtraEditors.LookUpEdit();
+            this.groupControl9 = new DevExpress.XtraEditors.GroupControl();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.lookUpEdit10 = new DevExpress.XtraEditors.LookUpEdit();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
+            this.spinEdit2 = new DevExpress.XtraEditors.SpinEdit();
+            this.textEdit4 = new DevExpress.XtraEditors.TextEdit();
+            this.spinEdit3 = new DevExpress.XtraEditors.SpinEdit();
+            this.groupControl10 = new DevExpress.XtraEditors.GroupControl();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.textEdit5 = new DevExpress.XtraEditors.TextEdit();
+            this.textEdit6 = new DevExpress.XtraEditors.TextEdit();
+            this.textEdit7 = new DevExpress.XtraEditors.TextEdit();
+            this.groupControl11 = new DevExpress.XtraEditors.GroupControl();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.textEdit8 = new DevExpress.XtraEditors.TextEdit();
+            this.textEdit9 = new DevExpress.XtraEditors.TextEdit();
+            this.spinEdit4 = new DevExpress.XtraEditors.SpinEdit();
+            this.groupControl12 = new DevExpress.XtraEditors.GroupControl();
+            this.memoEdit2 = new DevExpress.XtraEditors.MemoEdit();
+            this.groupControl13 = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpEdit16 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpEdit17 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpEdit18 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUpEdit19 = new DevExpress.XtraEditors.LookUpEdit();
+            this.groupControl14 = new DevExpress.XtraEditors.GroupControl();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.lookUpEdit20 = new DevExpress.XtraEditors.LookUpEdit();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.dateEdit2 = new DevExpress.XtraEditors.DateEdit();
+            this.spinEdit5 = new DevExpress.XtraEditors.SpinEdit();
+            this.textEdit11 = new DevExpress.XtraEditors.TextEdit();
+            this.spinEdit6 = new DevExpress.XtraEditors.SpinEdit();
+            this.groupControl15 = new DevExpress.XtraEditors.GroupControl();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.textEdit12 = new DevExpress.XtraEditors.TextEdit();
+            this.textEdit13 = new DevExpress.XtraEditors.TextEdit();
+            this.textEdit14 = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
-            this.groupControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtStartDate.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtStartDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabContainer)).BeginInit();
+            this.tabContainer.SuspendLayout();
+            this.tabLot1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
+            this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOperationName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFontEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichEditFontSizeEdit1)).BeginInit();
@@ -255,21 +325,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBorderLineStyle1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBorderLineWeight1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFloatingObjectOutlineWeight1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus3.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spnExecutionDuration.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbAdminProcedure.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spnPhysicalProgress.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            this.groupControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRegisteredAmount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLotBudget.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtConsumedAmount.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
-            this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOperationName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbProgram.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDaira.Properties)).BeginInit();
@@ -278,15 +333,90 @@
             ((System.ComponentModel.ISupportInitialize)(this.spnLotNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSector.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperationNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
+            this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNotes.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).BeginInit();
+            this.groupControl5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbAdminProcedure.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).BeginInit();
+            this.groupControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbProjectStatus.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProjectNotes.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtStartDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtStartDate.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spnExecutionDuration.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spnPhysicalProgress.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            this.groupControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRegisteredAmount.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLotBudget.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtConsumedAmount.Properties)).BeginInit();
+            this.tabLot2.SuspendLayout();
+            this.tabLot3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.icEditorsSVG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.icCategorySVG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.icEditors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.icCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.richEditBarController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl6)).BeginInit();
+            this.groupControl6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl7)).BeginInit();
+            this.groupControl7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl8)).BeginInit();
+            this.groupControl8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit6.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit7.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit8.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit9.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl9)).BeginInit();
+            this.groupControl9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit10.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit3.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl10)).BeginInit();
+            this.groupControl10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit7.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl11)).BeginInit();
+            this.groupControl11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit8.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit9.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit4.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl12)).BeginInit();
+            this.groupControl12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl13)).BeginInit();
+            this.groupControl13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit16.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit17.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit18.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit19.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl14)).BeginInit();
+            this.groupControl14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit20.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit5.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit11.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit6.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl15)).BeginInit();
+            this.groupControl15.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit12.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit13.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit14.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -298,15 +428,7 @@
             // 
             // splitContainerControl1.Panel1
             // 
-            this.splitContainerControl1.Panel1.Controls.Add(this.label17);
-            this.splitContainerControl1.Panel1.Controls.Add(this.label16);
-            this.splitContainerControl1.Panel1.Controls.Add(this.label13);
-            this.splitContainerControl1.Panel1.Controls.Add(this.groupControl3);
-            this.splitContainerControl1.Panel1.Controls.Add(this.groupControl2);
-            this.splitContainerControl1.Panel1.Controls.Add(this.groupControl1);
-            this.splitContainerControl1.Panel1.Controls.Add(this.txtLotNotes);
-            this.splitContainerControl1.Panel1.Controls.Add(this.cmbProjectStatus);
-            this.splitContainerControl1.Panel1.Controls.Add(this.txtProjectNotes);
+            this.splitContainerControl1.Panel1.Controls.Add(this.tabContainer);
             resources.ApplyResources(this.splitContainerControl1.Panel1, "splitContainerControl1.Panel1");
             // 
             // splitContainerControl1.Panel2
@@ -314,73 +436,72 @@
             resources.ApplyResources(this.splitContainerControl1.Panel2, "splitContainerControl1.Panel2");
             this.splitContainerControl1.SplitterPosition = 0;
             // 
-            // label17
+            // tabContainer
             // 
-            resources.ApplyResources(this.label17, "label17");
-            this.label17.Name = "label17";
+            resources.ApplyResources(this.tabContainer, "tabContainer");
+            this.tabContainer.Name = "tabContainer";
+            this.tabContainer.SelectedTabPage = this.tabLot1;
+            this.tabContainer.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.tabLot1,
+            this.tabLot2,
+            this.tabLot3});
             // 
-            // label16
+            // tabLot1
             // 
-            resources.ApplyResources(this.label16, "label16");
-            this.label16.Name = "label16";
+            this.tabLot1.Controls.Add(this.groupControl1);
+            this.tabLot1.Controls.Add(this.groupControl4);
+            this.tabLot1.Controls.Add(this.groupControl5);
+            this.tabLot1.Controls.Add(this.groupControl3);
+            this.tabLot1.Controls.Add(this.groupControl2);
+            this.tabLot1.Name = "tabLot1";
+            this.tabLot1.ShowCloseButton = DevExpress.Utils.DefaultBoolean.False;
+            resources.ApplyResources(this.tabLot1, "tabLot1");
             // 
-            // label13
+            // groupControl1
             // 
-            resources.ApplyResources(this.label13, "label13");
-            this.label13.Name = "label13";
+            this.groupControl1.Controls.Add(this.label14);
+            this.groupControl1.Controls.Add(this.label9);
+            this.groupControl1.Controls.Add(this.label6);
+            this.groupControl1.Controls.Add(this.label5);
+            this.groupControl1.Controls.Add(this.txtOperationName);
+            this.groupControl1.Controls.Add(this.cmbProgram);
+            this.groupControl1.Controls.Add(this.label2);
+            this.groupControl1.Controls.Add(this.txtLotName);
+            this.groupControl1.Controls.Add(this.label4);
+            this.groupControl1.Controls.Add(this.cmbDaira);
+            this.groupControl1.Controls.Add(this.cmbCommune);
+            this.groupControl1.Controls.Add(this.cmbDomain);
+            this.groupControl1.Controls.Add(this.spnLotNumber);
+            this.groupControl1.Controls.Add(this.cmbSector);
+            this.groupControl1.Controls.Add(this.txtOperationNumber);
+            resources.ApplyResources(this.groupControl1, "groupControl1");
+            this.groupControl1.Name = "groupControl1";
             // 
-            // groupControl3
+            // label14
             // 
-            this.groupControl3.Controls.Add(this.label15);
-            this.groupControl3.Controls.Add(this.label3);
-            this.groupControl3.Controls.Add(this.label12);
-            this.groupControl3.Controls.Add(this.label11);
-            this.groupControl3.Controls.Add(this.label10);
-            this.groupControl3.Controls.Add(this.dtStartDate);
-            this.groupControl3.Controls.Add(this.cmbSpecialStatus3);
-            this.groupControl3.Controls.Add(this.spnExecutionDuration);
-            this.groupControl3.Controls.Add(this.cmbSpecialStatus1);
-            this.groupControl3.Controls.Add(this.cmbAdminProcedure);
-            this.groupControl3.Controls.Add(this.txtContractor);
-            this.groupControl3.Controls.Add(this.spnPhysicalProgress);
-            this.groupControl3.Controls.Add(this.cmbSpecialStatus2);
-            resources.ApplyResources(this.groupControl3, "groupControl3");
-            this.groupControl3.Name = "groupControl3";
+            resources.ApplyResources(this.label14, "label14");
+            this.label14.Name = "label14";
             // 
-            // label15
+            // label9
             // 
-            resources.ApplyResources(this.label15, "label15");
-            this.label15.Name = "label15";
+            resources.ApplyResources(this.label9, "label9");
+            this.label9.Name = "label9";
             // 
-            // label3
+            // label6
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.label6, "label6");
+            this.label6.Name = "label6";
             // 
-            // label12
+            // label5
             // 
-            resources.ApplyResources(this.label12, "label12");
-            this.label12.Name = "label12";
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.Name = "label5";
             // 
-            // label11
+            // txtOperationName
             // 
-            resources.ApplyResources(this.label11, "label11");
-            this.label11.Name = "label11";
-            // 
-            // label10
-            // 
-            resources.ApplyResources(this.label10, "label10");
-            this.label10.Name = "label10";
-            // 
-            // dtStartDate
-            // 
-            resources.ApplyResources(this.dtStartDate, "dtStartDate");
-            this.dtStartDate.MenuManager = this.ribbonControl1;
-            this.dtStartDate.Name = "dtStartDate";
-            this.dtStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("dtStartDate.Properties.Buttons"))))});
-            this.dtStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("dtStartDate.Properties.CalendarTimeProperties.Buttons"))))});
+            resources.ApplyResources(this.txtOperationName, "txtOperationName");
+            this.txtOperationName.MenuManager = this.ribbonControl1;
+            this.txtOperationName.Name = "txtOperationName";
             // 
             // ribbonControl1
             // 
@@ -537,9 +658,12 @@
             this.undoItem1,
             this.redoItem1,
             this.barButtonItem1,
-            this.barButtonItem2});
+            this.barButtonItem2,
+            this.barButtonItem3,
+            this.btnAddLot,
+            this.btnRemoveLot});
             resources.ApplyResources(this.ribbonControl1, "ribbonControl1");
-            this.ribbonControl1.MaxItemId = 152;
+            this.ribbonControl1.MaxItemId = 155;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.homeRibbonPage1});
@@ -552,6 +676,7 @@
             this.repositoryItemFloatingObjectOutlineWeight1});
             this.ribbonControl1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonControlStyle.Office2013;
             this.ribbonControl1.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
+            this.ribbonControl1.Click += new System.EventHandler(this.ribbonControl1_Click);
             // 
             // cutItem1
             // 
@@ -1594,10 +1719,26 @@
             this.barButtonItem2.Id = 151;
             this.barButtonItem2.Name = "barButtonItem2";
             // 
+            // barButtonItem3
+            // 
+            resources.ApplyResources(this.barButtonItem3, "barButtonItem3");
+            this.barButtonItem3.Id = 152;
+            this.barButtonItem3.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem3.ImageOptions.LargeImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            // 
+            // btnAddLot
+            // 
+            resources.ApplyResources(this.btnAddLot, "btnAddLot");
+            this.btnAddLot.Id = 153;
+            this.btnAddLot.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.LargeImage")));
+            this.btnAddLot.Name = "btnAddLot";
+            this.btnAddLot.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem4_ItemClick);
+            // 
             // homeRibbonPage1
             // 
             this.homeRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup1});
+            this.ribbonPageGroup1,
+            this.ribbonPageGroup2});
             this.homeRibbonPage1.Name = "homeRibbonPage1";
             resources.ApplyResources(this.homeRibbonPage1, "homeRibbonPage1");
             // 
@@ -1606,149 +1747,11 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem1);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
-            // cmbSpecialStatus3
+            // ribbonPageGroup2
             // 
-            resources.ApplyResources(this.cmbSpecialStatus3, "cmbSpecialStatus3");
-            this.cmbSpecialStatus3.MenuManager = this.ribbonControl1;
-            this.cmbSpecialStatus3.Name = "cmbSpecialStatus3";
-            this.cmbSpecialStatus3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbSpecialStatus3.Properties.Buttons"))))});
-            // 
-            // spnExecutionDuration
-            // 
-            resources.ApplyResources(this.spnExecutionDuration, "spnExecutionDuration");
-            this.spnExecutionDuration.MenuManager = this.ribbonControl1;
-            this.spnExecutionDuration.Name = "spnExecutionDuration";
-            this.spnExecutionDuration.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("spnExecutionDuration.Properties.Buttons"))))});
-            // 
-            // cmbSpecialStatus1
-            // 
-            resources.ApplyResources(this.cmbSpecialStatus1, "cmbSpecialStatus1");
-            this.cmbSpecialStatus1.MenuManager = this.ribbonControl1;
-            this.cmbSpecialStatus1.Name = "cmbSpecialStatus1";
-            this.cmbSpecialStatus1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbSpecialStatus1.Properties.Buttons"))))});
-            // 
-            // cmbAdminProcedure
-            // 
-            resources.ApplyResources(this.cmbAdminProcedure, "cmbAdminProcedure");
-            this.cmbAdminProcedure.MenuManager = this.ribbonControl1;
-            this.cmbAdminProcedure.Name = "cmbAdminProcedure";
-            this.cmbAdminProcedure.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbAdminProcedure.Properties.Buttons"))))});
-            // 
-            // txtContractor
-            // 
-            resources.ApplyResources(this.txtContractor, "txtContractor");
-            this.txtContractor.MenuManager = this.ribbonControl1;
-            this.txtContractor.Name = "txtContractor";
-            // 
-            // spnPhysicalProgress
-            // 
-            resources.ApplyResources(this.spnPhysicalProgress, "spnPhysicalProgress");
-            this.spnPhysicalProgress.MenuManager = this.ribbonControl1;
-            this.spnPhysicalProgress.Name = "spnPhysicalProgress";
-            this.spnPhysicalProgress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("spnPhysicalProgress.Properties.Buttons"))))});
-            // 
-            // cmbSpecialStatus2
-            // 
-            resources.ApplyResources(this.cmbSpecialStatus2, "cmbSpecialStatus2");
-            this.cmbSpecialStatus2.MenuManager = this.ribbonControl1;
-            this.cmbSpecialStatus2.Name = "cmbSpecialStatus2";
-            this.cmbSpecialStatus2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbSpecialStatus2.Properties.Buttons"))))});
-            // 
-            // groupControl2
-            // 
-            this.groupControl2.Controls.Add(this.label8);
-            this.groupControl2.Controls.Add(this.label7);
-            this.groupControl2.Controls.Add(this.label1);
-            this.groupControl2.Controls.Add(this.txtRegisteredAmount);
-            this.groupControl2.Controls.Add(this.txtLotBudget);
-            this.groupControl2.Controls.Add(this.txtConsumedAmount);
-            resources.ApplyResources(this.groupControl2, "groupControl2");
-            this.groupControl2.Name = "groupControl2";
-            // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // label7
-            // 
-            resources.ApplyResources(this.label7, "label7");
-            this.label7.Name = "label7";
-            // 
-            // label1
-            // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
-            // 
-            // txtRegisteredAmount
-            // 
-            resources.ApplyResources(this.txtRegisteredAmount, "txtRegisteredAmount");
-            this.txtRegisteredAmount.MenuManager = this.ribbonControl1;
-            this.txtRegisteredAmount.Name = "txtRegisteredAmount";
-            // 
-            // txtLotBudget
-            // 
-            resources.ApplyResources(this.txtLotBudget, "txtLotBudget");
-            this.txtLotBudget.MenuManager = this.ribbonControl1;
-            this.txtLotBudget.Name = "txtLotBudget";
-            // 
-            // txtConsumedAmount
-            // 
-            resources.ApplyResources(this.txtConsumedAmount, "txtConsumedAmount");
-            this.txtConsumedAmount.MenuManager = this.ribbonControl1;
-            this.txtConsumedAmount.Name = "txtConsumedAmount";
-            // 
-            // groupControl1
-            // 
-            this.groupControl1.Controls.Add(this.label14);
-            this.groupControl1.Controls.Add(this.label9);
-            this.groupControl1.Controls.Add(this.label6);
-            this.groupControl1.Controls.Add(this.label5);
-            this.groupControl1.Controls.Add(this.txtOperationName);
-            this.groupControl1.Controls.Add(this.cmbProgram);
-            this.groupControl1.Controls.Add(this.label2);
-            this.groupControl1.Controls.Add(this.txtLotName);
-            this.groupControl1.Controls.Add(this.label4);
-            this.groupControl1.Controls.Add(this.cmbDaira);
-            this.groupControl1.Controls.Add(this.cmbCommune);
-            this.groupControl1.Controls.Add(this.cmbDomain);
-            this.groupControl1.Controls.Add(this.spnLotNumber);
-            this.groupControl1.Controls.Add(this.cmbSector);
-            this.groupControl1.Controls.Add(this.txtOperationNumber);
-            resources.ApplyResources(this.groupControl1, "groupControl1");
-            this.groupControl1.Name = "groupControl1";
-            // 
-            // label14
-            // 
-            resources.ApplyResources(this.label14, "label14");
-            this.label14.Name = "label14";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // label6
-            // 
-            resources.ApplyResources(this.label6, "label6");
-            this.label6.Name = "label6";
-            // 
-            // label5
-            // 
-            resources.ApplyResources(this.label5, "label5");
-            this.label5.Name = "label5";
-            // 
-            // txtOperationName
-            // 
-            resources.ApplyResources(this.txtOperationName, "txtOperationName");
-            this.txtOperationName.MenuManager = this.ribbonControl1;
-            this.txtOperationName.Name = "txtOperationName";
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnAddLot);
+            this.ribbonPageGroup2.ItemLinks.Add(this.btnRemoveLot);
+            this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             // 
             // cmbProgram
             // 
@@ -1820,11 +1823,89 @@
             this.txtOperationNumber.MenuManager = this.ribbonControl1;
             this.txtOperationNumber.Name = "txtOperationNumber";
             // 
+            // groupControl4
+            // 
+            this.groupControl4.Controls.Add(this.txtLotNotes);
+            resources.ApplyResources(this.groupControl4, "groupControl4");
+            this.groupControl4.Name = "groupControl4";
+            // 
             // txtLotNotes
             // 
             resources.ApplyResources(this.txtLotNotes, "txtLotNotes");
             this.txtLotNotes.MenuManager = this.ribbonControl1;
             this.txtLotNotes.Name = "txtLotNotes";
+            // 
+            // groupControl5
+            // 
+            this.groupControl5.Controls.Add(this.cmbSpecialStatus2);
+            this.groupControl5.Controls.Add(this.cmbAdminProcedure);
+            this.groupControl5.Controls.Add(this.cmbSpecialStatus1);
+            this.groupControl5.Controls.Add(this.cmbSpecialStatus3);
+            resources.ApplyResources(this.groupControl5, "groupControl5");
+            this.groupControl5.Name = "groupControl5";
+            this.groupControl5.Paint += new System.Windows.Forms.PaintEventHandler(this.groupControl5_Paint);
+            // 
+            // cmbSpecialStatus2
+            // 
+            resources.ApplyResources(this.cmbSpecialStatus2, "cmbSpecialStatus2");
+            this.cmbSpecialStatus2.MenuManager = this.ribbonControl1;
+            this.cmbSpecialStatus2.Name = "cmbSpecialStatus2";
+            this.cmbSpecialStatus2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbSpecialStatus2.Properties.Buttons"))))});
+            // 
+            // cmbAdminProcedure
+            // 
+            resources.ApplyResources(this.cmbAdminProcedure, "cmbAdminProcedure");
+            this.cmbAdminProcedure.MenuManager = this.ribbonControl1;
+            this.cmbAdminProcedure.Name = "cmbAdminProcedure";
+            this.cmbAdminProcedure.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbAdminProcedure.Properties.Buttons"))))});
+            // 
+            // cmbSpecialStatus1
+            // 
+            resources.ApplyResources(this.cmbSpecialStatus1, "cmbSpecialStatus1");
+            this.cmbSpecialStatus1.MenuManager = this.ribbonControl1;
+            this.cmbSpecialStatus1.Name = "cmbSpecialStatus1";
+            this.cmbSpecialStatus1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbSpecialStatus1.Properties.Buttons"))))});
+            // 
+            // cmbSpecialStatus3
+            // 
+            resources.ApplyResources(this.cmbSpecialStatus3, "cmbSpecialStatus3");
+            this.cmbSpecialStatus3.MenuManager = this.ribbonControl1;
+            this.cmbSpecialStatus3.Name = "cmbSpecialStatus3";
+            this.cmbSpecialStatus3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbSpecialStatus3.Properties.Buttons"))))});
+            // 
+            // groupControl3
+            // 
+            this.groupControl3.Controls.Add(this.label3);
+            this.groupControl3.Controls.Add(this.label13);
+            this.groupControl3.Controls.Add(this.label12);
+            this.groupControl3.Controls.Add(this.cmbProjectStatus);
+            this.groupControl3.Controls.Add(this.label11);
+            this.groupControl3.Controls.Add(this.label10);
+            this.groupControl3.Controls.Add(this.dtStartDate);
+            this.groupControl3.Controls.Add(this.spnExecutionDuration);
+            this.groupControl3.Controls.Add(this.txtContractor);
+            this.groupControl3.Controls.Add(this.spnPhysicalProgress);
+            resources.ApplyResources(this.groupControl3, "groupControl3");
+            this.groupControl3.Name = "groupControl3";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label13
+            // 
+            resources.ApplyResources(this.label13, "label13");
+            this.label13.Name = "label13";
+            // 
+            // label12
+            // 
+            resources.ApplyResources(this.label12, "label12");
+            this.label12.Name = "label12";
             // 
             // cmbProjectStatus
             // 
@@ -1834,11 +1915,115 @@
             this.cmbProjectStatus.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbProjectStatus.Properties.Buttons"))))});
             // 
-            // txtProjectNotes
+            // label11
             // 
-            resources.ApplyResources(this.txtProjectNotes, "txtProjectNotes");
-            this.txtProjectNotes.MenuManager = this.ribbonControl1;
-            this.txtProjectNotes.Name = "txtProjectNotes";
+            resources.ApplyResources(this.label11, "label11");
+            this.label11.Name = "label11";
+            // 
+            // label10
+            // 
+            resources.ApplyResources(this.label10, "label10");
+            this.label10.Name = "label10";
+            // 
+            // dtStartDate
+            // 
+            resources.ApplyResources(this.dtStartDate, "dtStartDate");
+            this.dtStartDate.MenuManager = this.ribbonControl1;
+            this.dtStartDate.Name = "dtStartDate";
+            this.dtStartDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("dtStartDate.Properties.Buttons"))))});
+            this.dtStartDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("dtStartDate.Properties.CalendarTimeProperties.Buttons"))))});
+            // 
+            // spnExecutionDuration
+            // 
+            resources.ApplyResources(this.spnExecutionDuration, "spnExecutionDuration");
+            this.spnExecutionDuration.MenuManager = this.ribbonControl1;
+            this.spnExecutionDuration.Name = "spnExecutionDuration";
+            this.spnExecutionDuration.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("spnExecutionDuration.Properties.Buttons"))))});
+            // 
+            // txtContractor
+            // 
+            resources.ApplyResources(this.txtContractor, "txtContractor");
+            this.txtContractor.MenuManager = this.ribbonControl1;
+            this.txtContractor.Name = "txtContractor";
+            // 
+            // spnPhysicalProgress
+            // 
+            resources.ApplyResources(this.spnPhysicalProgress, "spnPhysicalProgress");
+            this.spnPhysicalProgress.MenuManager = this.ribbonControl1;
+            this.spnPhysicalProgress.Name = "spnPhysicalProgress";
+            this.spnPhysicalProgress.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("spnPhysicalProgress.Properties.Buttons"))))});
+            // 
+            // groupControl2
+            // 
+            this.groupControl2.Controls.Add(this.label8);
+            this.groupControl2.Controls.Add(this.label7);
+            this.groupControl2.Controls.Add(this.label1);
+            this.groupControl2.Controls.Add(this.txtRegisteredAmount);
+            this.groupControl2.Controls.Add(this.txtLotBudget);
+            this.groupControl2.Controls.Add(this.txtConsumedAmount);
+            resources.ApplyResources(this.groupControl2, "groupControl2");
+            this.groupControl2.Name = "groupControl2";
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
+            // 
+            // label7
+            // 
+            resources.ApplyResources(this.label7, "label7");
+            this.label7.Name = "label7";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // txtRegisteredAmount
+            // 
+            resources.ApplyResources(this.txtRegisteredAmount, "txtRegisteredAmount");
+            this.txtRegisteredAmount.MenuManager = this.ribbonControl1;
+            this.txtRegisteredAmount.Name = "txtRegisteredAmount";
+            // 
+            // txtLotBudget
+            // 
+            resources.ApplyResources(this.txtLotBudget, "txtLotBudget");
+            this.txtLotBudget.MenuManager = this.ribbonControl1;
+            this.txtLotBudget.Name = "txtLotBudget";
+            // 
+            // txtConsumedAmount
+            // 
+            resources.ApplyResources(this.txtConsumedAmount, "txtConsumedAmount");
+            this.txtConsumedAmount.MenuManager = this.ribbonControl1;
+            this.txtConsumedAmount.Name = "txtConsumedAmount";
+            // 
+            // tabLot2
+            // 
+            this.tabLot2.Controls.Add(this.groupControl6);
+            this.tabLot2.Controls.Add(this.groupControl7);
+            this.tabLot2.Controls.Add(this.groupControl8);
+            this.tabLot2.Controls.Add(this.groupControl9);
+            this.tabLot2.Controls.Add(this.groupControl10);
+            this.tabLot2.Name = "tabLot2";
+            this.tabLot2.PageVisible = false;
+            this.tabLot2.ShowCloseButton = DevExpress.Utils.DefaultBoolean.True;
+            resources.ApplyResources(this.tabLot2, "tabLot2");
+            // 
+            // tabLot3
+            // 
+            this.tabLot3.Controls.Add(this.groupControl11);
+            this.tabLot3.Controls.Add(this.groupControl12);
+            this.tabLot3.Controls.Add(this.groupControl13);
+            this.tabLot3.Controls.Add(this.groupControl14);
+            this.tabLot3.Controls.Add(this.groupControl15);
+            this.tabLot3.Name = "tabLot3";
+            this.tabLot3.PageVisible = false;
+            this.tabLot3.ShowCloseButton = DevExpress.Utils.DefaultBoolean.True;
+            resources.ApplyResources(this.tabLot3, "tabLot3");
             // 
             // icEditorsSVG
             // 
@@ -2033,6 +2218,448 @@
             // 
             this.dxValidationProvider1.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Auto;
             // 
+            // btnRemoveLot
+            // 
+            resources.ApplyResources(this.btnRemoveLot, "btnRemoveLot");
+            this.btnRemoveLot.Id = 154;
+            this.btnRemoveLot.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.LargeImage1")));
+            this.btnRemoveLot.Name = "btnRemoveLot";
+            this.btnRemoveLot.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRemoveLot_ItemClick);
+            // 
+            // groupControl6
+            // 
+            this.groupControl6.Controls.Add(this.label15);
+            this.groupControl6.Controls.Add(this.label16);
+            this.groupControl6.Controls.Add(this.textEdit1);
+            this.groupControl6.Controls.Add(this.textEdit2);
+            this.groupControl6.Controls.Add(this.spinEdit1);
+            resources.ApplyResources(this.groupControl6, "groupControl6");
+            this.groupControl6.Name = "groupControl6";
+            // 
+            // label15
+            // 
+            resources.ApplyResources(this.label15, "label15");
+            this.label15.Name = "label15";
+            // 
+            // label16
+            // 
+            resources.ApplyResources(this.label16, "label16");
+            this.label16.Name = "label16";
+            // 
+            // textEdit1
+            // 
+            resources.ApplyResources(this.textEdit1, "textEdit1");
+            this.textEdit1.MenuManager = this.ribbonControl1;
+            this.textEdit1.Name = "textEdit1";
+            // 
+            // textEdit2
+            // 
+            resources.ApplyResources(this.textEdit2, "textEdit2");
+            this.textEdit2.MenuManager = this.ribbonControl1;
+            this.textEdit2.Name = "textEdit2";
+            // 
+            // spinEdit1
+            // 
+            resources.ApplyResources(this.spinEdit1, "spinEdit1");
+            this.spinEdit1.MenuManager = this.ribbonControl1;
+            this.spinEdit1.Name = "spinEdit1";
+            this.spinEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("spinEdit1.Properties.Buttons"))))});
+            // 
+            // groupControl7
+            // 
+            this.groupControl7.Controls.Add(this.memoEdit1);
+            resources.ApplyResources(this.groupControl7, "groupControl7");
+            this.groupControl7.Name = "groupControl7";
+            // 
+            // memoEdit1
+            // 
+            resources.ApplyResources(this.memoEdit1, "memoEdit1");
+            this.memoEdit1.MenuManager = this.ribbonControl1;
+            this.memoEdit1.Name = "memoEdit1";
+            // 
+            // groupControl8
+            // 
+            this.groupControl8.Controls.Add(this.lookUpEdit6);
+            this.groupControl8.Controls.Add(this.lookUpEdit7);
+            this.groupControl8.Controls.Add(this.lookUpEdit8);
+            this.groupControl8.Controls.Add(this.lookUpEdit9);
+            resources.ApplyResources(this.groupControl8, "groupControl8");
+            this.groupControl8.Name = "groupControl8";
+            // 
+            // lookUpEdit6
+            // 
+            resources.ApplyResources(this.lookUpEdit6, "lookUpEdit6");
+            this.lookUpEdit6.MenuManager = this.ribbonControl1;
+            this.lookUpEdit6.Name = "lookUpEdit6";
+            this.lookUpEdit6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit6.Properties.Buttons"))))});
+            // 
+            // lookUpEdit7
+            // 
+            resources.ApplyResources(this.lookUpEdit7, "lookUpEdit7");
+            this.lookUpEdit7.MenuManager = this.ribbonControl1;
+            this.lookUpEdit7.Name = "lookUpEdit7";
+            this.lookUpEdit7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit7.Properties.Buttons"))))});
+            // 
+            // lookUpEdit8
+            // 
+            resources.ApplyResources(this.lookUpEdit8, "lookUpEdit8");
+            this.lookUpEdit8.MenuManager = this.ribbonControl1;
+            this.lookUpEdit8.Name = "lookUpEdit8";
+            this.lookUpEdit8.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit8.Properties.Buttons"))))});
+            // 
+            // lookUpEdit9
+            // 
+            resources.ApplyResources(this.lookUpEdit9, "lookUpEdit9");
+            this.lookUpEdit9.MenuManager = this.ribbonControl1;
+            this.lookUpEdit9.Name = "lookUpEdit9";
+            this.lookUpEdit9.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit9.Properties.Buttons"))))});
+            // 
+            // groupControl9
+            // 
+            this.groupControl9.Controls.Add(this.label21);
+            this.groupControl9.Controls.Add(this.label22);
+            this.groupControl9.Controls.Add(this.label23);
+            this.groupControl9.Controls.Add(this.lookUpEdit10);
+            this.groupControl9.Controls.Add(this.label24);
+            this.groupControl9.Controls.Add(this.label25);
+            this.groupControl9.Controls.Add(this.dateEdit1);
+            this.groupControl9.Controls.Add(this.spinEdit2);
+            this.groupControl9.Controls.Add(this.textEdit4);
+            this.groupControl9.Controls.Add(this.spinEdit3);
+            resources.ApplyResources(this.groupControl9, "groupControl9");
+            this.groupControl9.Name = "groupControl9";
+            // 
+            // label21
+            // 
+            resources.ApplyResources(this.label21, "label21");
+            this.label21.Name = "label21";
+            // 
+            // label22
+            // 
+            resources.ApplyResources(this.label22, "label22");
+            this.label22.Name = "label22";
+            // 
+            // label23
+            // 
+            resources.ApplyResources(this.label23, "label23");
+            this.label23.Name = "label23";
+            // 
+            // lookUpEdit10
+            // 
+            resources.ApplyResources(this.lookUpEdit10, "lookUpEdit10");
+            this.lookUpEdit10.MenuManager = this.ribbonControl1;
+            this.lookUpEdit10.Name = "lookUpEdit10";
+            this.lookUpEdit10.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit10.Properties.Buttons"))))});
+            // 
+            // label24
+            // 
+            resources.ApplyResources(this.label24, "label24");
+            this.label24.Name = "label24";
+            // 
+            // label25
+            // 
+            resources.ApplyResources(this.label25, "label25");
+            this.label25.Name = "label25";
+            // 
+            // dateEdit1
+            // 
+            resources.ApplyResources(this.dateEdit1, "dateEdit1");
+            this.dateEdit1.MenuManager = this.ribbonControl1;
+            this.dateEdit1.Name = "dateEdit1";
+            this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("dateEdit1.Properties.Buttons"))))});
+            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("dateEdit1.Properties.CalendarTimeProperties.Buttons"))))});
+            // 
+            // spinEdit2
+            // 
+            resources.ApplyResources(this.spinEdit2, "spinEdit2");
+            this.spinEdit2.MenuManager = this.ribbonControl1;
+            this.spinEdit2.Name = "spinEdit2";
+            this.spinEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("spinEdit2.Properties.Buttons"))))});
+            // 
+            // textEdit4
+            // 
+            resources.ApplyResources(this.textEdit4, "textEdit4");
+            this.textEdit4.MenuManager = this.ribbonControl1;
+            this.textEdit4.Name = "textEdit4";
+            // 
+            // spinEdit3
+            // 
+            resources.ApplyResources(this.spinEdit3, "spinEdit3");
+            this.spinEdit3.MenuManager = this.ribbonControl1;
+            this.spinEdit3.Name = "spinEdit3";
+            this.spinEdit3.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("spinEdit3.Properties.Buttons"))))});
+            // 
+            // groupControl10
+            // 
+            this.groupControl10.Controls.Add(this.label26);
+            this.groupControl10.Controls.Add(this.label27);
+            this.groupControl10.Controls.Add(this.label28);
+            this.groupControl10.Controls.Add(this.textEdit5);
+            this.groupControl10.Controls.Add(this.textEdit6);
+            this.groupControl10.Controls.Add(this.textEdit7);
+            resources.ApplyResources(this.groupControl10, "groupControl10");
+            this.groupControl10.Name = "groupControl10";
+            // 
+            // label26
+            // 
+            resources.ApplyResources(this.label26, "label26");
+            this.label26.Name = "label26";
+            // 
+            // label27
+            // 
+            resources.ApplyResources(this.label27, "label27");
+            this.label27.Name = "label27";
+            // 
+            // label28
+            // 
+            resources.ApplyResources(this.label28, "label28");
+            this.label28.Name = "label28";
+            // 
+            // textEdit5
+            // 
+            resources.ApplyResources(this.textEdit5, "textEdit5");
+            this.textEdit5.MenuManager = this.ribbonControl1;
+            this.textEdit5.Name = "textEdit5";
+            // 
+            // textEdit6
+            // 
+            resources.ApplyResources(this.textEdit6, "textEdit6");
+            this.textEdit6.MenuManager = this.ribbonControl1;
+            this.textEdit6.Name = "textEdit6";
+            // 
+            // textEdit7
+            // 
+            resources.ApplyResources(this.textEdit7, "textEdit7");
+            this.textEdit7.MenuManager = this.ribbonControl1;
+            this.textEdit7.Name = "textEdit7";
+            // 
+            // groupControl11
+            // 
+            this.groupControl11.Controls.Add(this.label29);
+            this.groupControl11.Controls.Add(this.label30);
+            this.groupControl11.Controls.Add(this.textEdit8);
+            this.groupControl11.Controls.Add(this.textEdit9);
+            this.groupControl11.Controls.Add(this.spinEdit4);
+            resources.ApplyResources(this.groupControl11, "groupControl11");
+            this.groupControl11.Name = "groupControl11";
+            // 
+            // label29
+            // 
+            resources.ApplyResources(this.label29, "label29");
+            this.label29.Name = "label29";
+            // 
+            // label30
+            // 
+            resources.ApplyResources(this.label30, "label30");
+            this.label30.Name = "label30";
+            // 
+            // textEdit8
+            // 
+            resources.ApplyResources(this.textEdit8, "textEdit8");
+            this.textEdit8.MenuManager = this.ribbonControl1;
+            this.textEdit8.Name = "textEdit8";
+            // 
+            // textEdit9
+            // 
+            resources.ApplyResources(this.textEdit9, "textEdit9");
+            this.textEdit9.MenuManager = this.ribbonControl1;
+            this.textEdit9.Name = "textEdit9";
+            // 
+            // spinEdit4
+            // 
+            resources.ApplyResources(this.spinEdit4, "spinEdit4");
+            this.spinEdit4.MenuManager = this.ribbonControl1;
+            this.spinEdit4.Name = "spinEdit4";
+            this.spinEdit4.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("spinEdit4.Properties.Buttons"))))});
+            // 
+            // groupControl12
+            // 
+            this.groupControl12.Controls.Add(this.memoEdit2);
+            resources.ApplyResources(this.groupControl12, "groupControl12");
+            this.groupControl12.Name = "groupControl12";
+            // 
+            // memoEdit2
+            // 
+            resources.ApplyResources(this.memoEdit2, "memoEdit2");
+            this.memoEdit2.MenuManager = this.ribbonControl1;
+            this.memoEdit2.Name = "memoEdit2";
+            // 
+            // groupControl13
+            // 
+            this.groupControl13.Controls.Add(this.lookUpEdit16);
+            this.groupControl13.Controls.Add(this.lookUpEdit17);
+            this.groupControl13.Controls.Add(this.lookUpEdit18);
+            this.groupControl13.Controls.Add(this.lookUpEdit19);
+            resources.ApplyResources(this.groupControl13, "groupControl13");
+            this.groupControl13.Name = "groupControl13";
+            // 
+            // lookUpEdit16
+            // 
+            resources.ApplyResources(this.lookUpEdit16, "lookUpEdit16");
+            this.lookUpEdit16.MenuManager = this.ribbonControl1;
+            this.lookUpEdit16.Name = "lookUpEdit16";
+            this.lookUpEdit16.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit16.Properties.Buttons"))))});
+            // 
+            // lookUpEdit17
+            // 
+            resources.ApplyResources(this.lookUpEdit17, "lookUpEdit17");
+            this.lookUpEdit17.MenuManager = this.ribbonControl1;
+            this.lookUpEdit17.Name = "lookUpEdit17";
+            this.lookUpEdit17.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit17.Properties.Buttons"))))});
+            // 
+            // lookUpEdit18
+            // 
+            resources.ApplyResources(this.lookUpEdit18, "lookUpEdit18");
+            this.lookUpEdit18.MenuManager = this.ribbonControl1;
+            this.lookUpEdit18.Name = "lookUpEdit18";
+            this.lookUpEdit18.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit18.Properties.Buttons"))))});
+            // 
+            // lookUpEdit19
+            // 
+            resources.ApplyResources(this.lookUpEdit19, "lookUpEdit19");
+            this.lookUpEdit19.MenuManager = this.ribbonControl1;
+            this.lookUpEdit19.Name = "lookUpEdit19";
+            this.lookUpEdit19.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit19.Properties.Buttons"))))});
+            // 
+            // groupControl14
+            // 
+            this.groupControl14.Controls.Add(this.label35);
+            this.groupControl14.Controls.Add(this.label36);
+            this.groupControl14.Controls.Add(this.label37);
+            this.groupControl14.Controls.Add(this.lookUpEdit20);
+            this.groupControl14.Controls.Add(this.label38);
+            this.groupControl14.Controls.Add(this.label39);
+            this.groupControl14.Controls.Add(this.dateEdit2);
+            this.groupControl14.Controls.Add(this.spinEdit5);
+            this.groupControl14.Controls.Add(this.textEdit11);
+            this.groupControl14.Controls.Add(this.spinEdit6);
+            resources.ApplyResources(this.groupControl14, "groupControl14");
+            this.groupControl14.Name = "groupControl14";
+            // 
+            // label35
+            // 
+            resources.ApplyResources(this.label35, "label35");
+            this.label35.Name = "label35";
+            // 
+            // label36
+            // 
+            resources.ApplyResources(this.label36, "label36");
+            this.label36.Name = "label36";
+            // 
+            // label37
+            // 
+            resources.ApplyResources(this.label37, "label37");
+            this.label37.Name = "label37";
+            // 
+            // lookUpEdit20
+            // 
+            resources.ApplyResources(this.lookUpEdit20, "lookUpEdit20");
+            this.lookUpEdit20.MenuManager = this.ribbonControl1;
+            this.lookUpEdit20.Name = "lookUpEdit20";
+            this.lookUpEdit20.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit20.Properties.Buttons"))))});
+            // 
+            // label38
+            // 
+            resources.ApplyResources(this.label38, "label38");
+            this.label38.Name = "label38";
+            // 
+            // label39
+            // 
+            resources.ApplyResources(this.label39, "label39");
+            this.label39.Name = "label39";
+            // 
+            // dateEdit2
+            // 
+            resources.ApplyResources(this.dateEdit2, "dateEdit2");
+            this.dateEdit2.MenuManager = this.ribbonControl1;
+            this.dateEdit2.Name = "dateEdit2";
+            this.dateEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("dateEdit2.Properties.Buttons"))))});
+            this.dateEdit2.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("dateEdit2.Properties.CalendarTimeProperties.Buttons"))))});
+            // 
+            // spinEdit5
+            // 
+            resources.ApplyResources(this.spinEdit5, "spinEdit5");
+            this.spinEdit5.MenuManager = this.ribbonControl1;
+            this.spinEdit5.Name = "spinEdit5";
+            this.spinEdit5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("spinEdit5.Properties.Buttons"))))});
+            // 
+            // textEdit11
+            // 
+            resources.ApplyResources(this.textEdit11, "textEdit11");
+            this.textEdit11.MenuManager = this.ribbonControl1;
+            this.textEdit11.Name = "textEdit11";
+            // 
+            // spinEdit6
+            // 
+            resources.ApplyResources(this.spinEdit6, "spinEdit6");
+            this.spinEdit6.MenuManager = this.ribbonControl1;
+            this.spinEdit6.Name = "spinEdit6";
+            this.spinEdit6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("spinEdit6.Properties.Buttons"))))});
+            // 
+            // groupControl15
+            // 
+            this.groupControl15.Controls.Add(this.label40);
+            this.groupControl15.Controls.Add(this.label41);
+            this.groupControl15.Controls.Add(this.label42);
+            this.groupControl15.Controls.Add(this.textEdit12);
+            this.groupControl15.Controls.Add(this.textEdit13);
+            this.groupControl15.Controls.Add(this.textEdit14);
+            resources.ApplyResources(this.groupControl15, "groupControl15");
+            this.groupControl15.Name = "groupControl15";
+            // 
+            // label40
+            // 
+            resources.ApplyResources(this.label40, "label40");
+            this.label40.Name = "label40";
+            // 
+            // label41
+            // 
+            resources.ApplyResources(this.label41, "label41");
+            this.label41.Name = "label41";
+            // 
+            // label42
+            // 
+            resources.ApplyResources(this.label42, "label42");
+            this.label42.Name = "label42";
+            // 
+            // textEdit12
+            // 
+            resources.ApplyResources(this.textEdit12, "textEdit12");
+            this.textEdit12.MenuManager = this.ribbonControl1;
+            this.textEdit12.Name = "textEdit12";
+            // 
+            // textEdit13
+            // 
+            resources.ApplyResources(this.textEdit13, "textEdit13");
+            this.textEdit13.MenuManager = this.ribbonControl1;
+            this.textEdit13.Name = "textEdit13";
+            // 
+            // textEdit14
+            // 
+            resources.ApplyResources(this.textEdit14, "textEdit14");
+            this.textEdit14.MenuManager = this.ribbonControl1;
+            this.textEdit14.Name = "textEdit14";
+            // 
             // frmaddproject
             // 
             resources.ApplyResources(this, "$this");
@@ -2047,15 +2674,16 @@
             this.ShowInTaskbar = false;
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
             this.splitContainerControl1.Panel1.ResumeLayout(false);
-            this.splitContainerControl1.Panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
-            this.groupControl3.ResumeLayout(false);
-            this.groupControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtStartDate.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtStartDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tabContainer)).EndInit();
+            this.tabContainer.ResumeLayout(false);
+            this.tabLot1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
+            this.groupControl1.ResumeLayout(false);
+            this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOperationName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFontEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichEditFontSizeEdit1)).EndInit();
@@ -2063,23 +2691,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBorderLineStyle1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBorderLineWeight1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFloatingObjectOutlineWeight1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus3.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spnExecutionDuration.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbAdminProcedure.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.spnPhysicalProgress.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            this.groupControl2.ResumeLayout(false);
-            this.groupControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtRegisteredAmount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtLotBudget.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtConsumedAmount.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
-            this.groupControl1.ResumeLayout(false);
-            this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOperationName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbProgram.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDaira.Properties)).EndInit();
@@ -2088,15 +2699,98 @@
             ((System.ComponentModel.ISupportInitialize)(this.spnLotNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSector.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperationNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
+            this.groupControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNotes.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl5)).EndInit();
+            this.groupControl5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbAdminProcedure.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbSpecialStatus3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl3)).EndInit();
+            this.groupControl3.ResumeLayout(false);
+            this.groupControl3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbProjectStatus.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtProjectNotes.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtStartDate.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtStartDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spnExecutionDuration.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContractor.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spnPhysicalProgress.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            this.groupControl2.ResumeLayout(false);
+            this.groupControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtRegisteredAmount.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtLotBudget.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtConsumedAmount.Properties)).EndInit();
+            this.tabLot2.ResumeLayout(false);
+            this.tabLot3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.icEditorsSVG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.icCategorySVG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.icEditors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.icCategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.richEditBarController1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl6)).EndInit();
+            this.groupControl6.ResumeLayout(false);
+            this.groupControl6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl7)).EndInit();
+            this.groupControl7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl8)).EndInit();
+            this.groupControl8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit6.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit7.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit8.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit9.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl9)).EndInit();
+            this.groupControl9.ResumeLayout(false);
+            this.groupControl9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit10.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit4.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit3.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl10)).EndInit();
+            this.groupControl10.ResumeLayout(false);
+            this.groupControl10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit5.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit6.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit7.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl11)).EndInit();
+            this.groupControl11.ResumeLayout(false);
+            this.groupControl11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit8.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit9.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit4.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl12)).EndInit();
+            this.groupControl12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.memoEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl13)).EndInit();
+            this.groupControl13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit16.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit17.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit18.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit19.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl14)).EndInit();
+            this.groupControl14.ResumeLayout(false);
+            this.groupControl14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEdit20.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEdit2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit5.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit11.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spinEdit6.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl15)).EndInit();
+            this.groupControl15.ResumeLayout(false);
+            this.groupControl15.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit12.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit13.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEdit14.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2280,7 +2974,6 @@
         private XtraEditors.TextEdit txtLotBudget;
         private XtraEditors.TextEdit txtLotName;
         private XtraEditors.SpinEdit spnLotNumber;
-        private XtraEditors.MemoEdit txtProjectNotes;
         private XtraEditors.LookUpEdit cmbSector;
         private XtraEditors.LookUpEdit cmbDomain;
         private XtraEditors.LookUpEdit cmbDaira;
@@ -2311,10 +3004,79 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label17;
+        private XtraEditors.GroupControl groupControl4;
+        private XtraEditors.GroupControl groupControl5;
+        private XtraBars.BarButtonItem barButtonItem3;
+        private XtraBars.BarButtonItem btnAddLot;
+        private XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
+        private XtraTab.XtraTabControl tabContainer;
+        private XtraTab.XtraTabPage tabLot1;
+        private XtraTab.XtraTabPage tabLot2;
+        private XtraTab.XtraTabPage tabLot3;
+        private XtraBars.BarButtonItem btnRemoveLot;
+        private XtraEditors.GroupControl groupControl6;
+        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
+        private XtraEditors.TextEdit textEdit1;
+        private XtraEditors.TextEdit textEdit2;
+        private XtraEditors.SpinEdit spinEdit1;
+        private XtraEditors.GroupControl groupControl7;
+        private XtraEditors.MemoEdit memoEdit1;
+        private XtraEditors.GroupControl groupControl8;
+        private XtraEditors.LookUpEdit lookUpEdit6;
+        private XtraEditors.LookUpEdit lookUpEdit7;
+        private XtraEditors.LookUpEdit lookUpEdit8;
+        private XtraEditors.LookUpEdit lookUpEdit9;
+        private XtraEditors.GroupControl groupControl9;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private XtraEditors.LookUpEdit lookUpEdit10;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private XtraEditors.DateEdit dateEdit1;
+        private XtraEditors.SpinEdit spinEdit2;
+        private XtraEditors.TextEdit textEdit4;
+        private XtraEditors.SpinEdit spinEdit3;
+        private XtraEditors.GroupControl groupControl10;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private XtraEditors.TextEdit textEdit5;
+        private XtraEditors.TextEdit textEdit6;
+        private XtraEditors.TextEdit textEdit7;
+        private XtraEditors.GroupControl groupControl11;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private XtraEditors.TextEdit textEdit8;
+        private XtraEditors.TextEdit textEdit9;
+        private XtraEditors.SpinEdit spinEdit4;
+        private XtraEditors.GroupControl groupControl12;
+        private XtraEditors.MemoEdit memoEdit2;
+        private XtraEditors.GroupControl groupControl13;
+        private XtraEditors.LookUpEdit lookUpEdit16;
+        private XtraEditors.LookUpEdit lookUpEdit17;
+        private XtraEditors.LookUpEdit lookUpEdit18;
+        private XtraEditors.LookUpEdit lookUpEdit19;
+        private XtraEditors.GroupControl groupControl14;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label37;
+        private XtraEditors.LookUpEdit lookUpEdit20;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private XtraEditors.DateEdit dateEdit2;
+        private XtraEditors.SpinEdit spinEdit5;
+        private XtraEditors.TextEdit textEdit11;
+        private XtraEditors.SpinEdit spinEdit6;
+        private XtraEditors.GroupControl groupControl15;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private XtraEditors.TextEdit textEdit12;
+        private XtraEditors.TextEdit textEdit13;
+        private XtraEditors.TextEdit textEdit14;
     }
 }

@@ -42,9 +42,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
                             HasLots = Convert.ToBoolean(rd["has_lots"]),
 
-                            Notes = rd["notes"] == DBNull.Value
-         ? null
-         : rd["notes"].ToString(),
+                            
 
                             CreatedAt = Convert.ToDateTime(rd["created_at"]),
                             UpdatedAt = Convert.ToDateTime(rd["updated_at"]),
@@ -76,11 +74,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             commune_id,
             domain_id,
             sector_id,
-            total_budget,
-            registered_amount,
-            consumed_amount,
             has_lots,
-            notes
         )
         VALUES
         (
@@ -91,9 +85,6 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             @commune_id,
             @domain_id,
             @sector_id,
-            @total_budget,
-            @registered_amount,
-            @consumed_amount,
             @has_lots,
             @notes
         );
@@ -115,7 +106,6 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
                     cmd.Parameters.AddWithValue("@has_lots", p.HasLots);
 
-                    cmd.Parameters.AddWithValue("@notes", p.Notes);
 
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
