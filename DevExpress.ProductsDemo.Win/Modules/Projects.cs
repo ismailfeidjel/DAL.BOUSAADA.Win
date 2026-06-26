@@ -23,7 +23,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
     {
         public override string ModuleName { get { return Properties.Resources.TasksName; } }
 
-        private readonly LotService _service;
         private List<LotGridModel> _data;
         private LotGridModel _currentLot;
         private LotRepository _lotRepo = new LotRepository();
@@ -36,32 +35,37 @@ namespace DevExpress.ProductsDemo.Win.Modules
         public ProjectModule()
         {
             InitializeComponent();
-            _service = new LotService();
         }
         RepositoryItemMemoEdit memo = new RepositoryItemMemoEdit();
+
 
 
         // ── Grid Setup ───────────────────────────────────────────────
         private void SetupGrid()
         {
             gridControl1.RepositoryItems.Add(memo);
+            memo.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            memo.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            memo.AppearanceFocused.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            memo.AppearanceFocused.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+
             gridView1.OptionsBehavior.Editable = true;
+            gridView1.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDownFocused;
+
+
 
             gridControl1.MainView = gridView1;
             gridView1.OptionsView.ShowGroupPanel = true;
             gridView1.OptionsBehavior.Editable = true;
             gridView1.OptionsView.ShowIndicator = true;
             gridView1.OptionsSelection.MultiSelect = false;
-            gridView1.OptionsSelection.MultiSelectMode =
-                DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.RowSelect;
             gridView1.ColumnWidthChanged += (s, e) => SaveLayout();
             gridView1.ColumnPositionChanged += (s, e) => SaveLayout();
             //------
-            gridView1.OptionsView.EnableAppearanceEvenRow = true;
-            gridView1.OptionsView.EnableAppearanceOddRow = true;
+            
             //------
             gridView1.Appearance.HeaderPanel.Font =
-    new Font("Tahoma", 8, FontStyle.Bold);
+    new Font("Tahoma", 7, FontStyle.Bold);
 
             gridView1.Appearance.HeaderPanel.TextOptions.HAlignment =
                 DevExpress.Utils.HorzAlignment.Center;
@@ -74,34 +78,36 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Appearance.FocusedRow.BackColor = Color.LightSteelBlue;
             gridView1.Appearance.HideSelectionRow.BackColor = Color.LightSteelBlue;
             //----------------------
-            gridView1.BestFitColumns();
 
             //-----------------------
             gridView1.PaintStyleName = "Skin";
-            gridView1.OptionsView.EnableAppearanceEvenRow = true;
-            gridView1.OptionsView.EnableAppearanceOddRow = true;
+            gridView1.OptionsView.EnableAppearanceEvenRow = false;
+            gridView1.OptionsView.EnableAppearanceOddRow = false;
             gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             gridView1.OptionsView.RowAutoHeight = true;
 
             //-------------------------
 
-            gridView1.Appearance.EvenRow.BackColor = Color.White;
+           // gridView1.Appearance.EvenRow.BackColor = Color.White;
            //gridView1.Appearance.OddRow.BackColor = Color.FromArgb(245, 245, 245);
             AddCol("OperationNumber", "رقم ", 110);
             AddCol("Daira", "الدائرة", 100);
             AddCol("Commune", "البلدية", 100);
             AddCol("OperationName", "اسم العملية", 180);
-            AddCol("Domain", "القطاع", 110, "{0:N2}");
-            AddCol("Sector", "المجال", 110, "{0:N2}");
+            AddCol("Domain", "القطاع", 110);
+            AddCol("Sector", "المجال", 110);
             AddCol("LotBudget", "مبلغ الحصة", 110, "{0:N2}");
             AddCol("RegisteredAmount", "المبلغ المسجل", 110, "{0:N2}");
             AddCol("ConsumedAmount", "المبلغ المستهلك", 110, "{0:N2}");
-            AddCol("Contractor", "المقاول", 110, "{0:N2}");
-            AddCol("StartDate", "تاريخ امر الانطلاق", 110, "{0:N2}");
-            AddCol("ExecutionDuration", "اجال التنفيذ", 110, "{0:N2}");
-            AddCol("PhysicalProgress", "التقدم الفيزيائي", 100, "{0:N2} %");
+            AddCol("Contractor", "المقاول", 110);
+            AddCol("StartDate", "تاريخ امر الانطلاق", 110, "{0:dd/MM/yyyy}", FormatType.DateTime);
+            AddCol("ExecutionDuration", "اجال التنفيذ", 110, "{0:N0}يوم");
+            AddCol("PhysicalProgress", "التقدم الفيزيائي", 100, "{0:N0} %");
             AddCol("ProjectStatus", "وضعية العملية", 110);
             AddCol("Notes", "الملاحظة", 150);
+
+
+
 
             gridView1.Columns["LotBudget"].OptionsColumn.AllowEdit = true;
             gridView1.Columns["RegisteredAmount"].OptionsColumn.AllowEdit = true;
@@ -111,10 +117,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             // Keep these readonly in grid — handled by left panel
             gridView1.Columns["OperationNumber"].OptionsColumn.AllowEdit = false;
-            gridView1.Columns["OperationName"].OptionsColumn.AllowEdit = false;
+            gridView1.Columns["OperationName"].OptionsColumn.AllowEdit = true;
             gridView1.Columns["Daira"].OptionsColumn.AllowEdit = false;
             gridView1.Columns["Commune"].OptionsColumn.AllowEdit = false;
-            gridView1.Columns["Notes"].OptionsColumn.AllowEdit = false;
+            gridView1.Columns["Notes"].OptionsColumn.AllowEdit = true;
 
 
             //----------------------------------------------------------------------------
@@ -141,29 +147,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Appearance.FooterPanel.TextOptions.HAlignment =
                 DevExpress.Utils.HorzAlignment.Center;
 
-            //----------
-            
-
-
-            //--------
+           
          
             //--------
-            gridView1.Columns["OperationNumber"].AppearanceCell.TextOptions.HAlignment =
-    DevExpress.Utils.HorzAlignment.Center;
-            gridView1.Columns["Daira"].AppearanceCell.TextOptions.HAlignment =
-    DevExpress.Utils.HorzAlignment.Center;
-            gridView1.Columns["Commune"].AppearanceCell.TextOptions.HAlignment =
-    DevExpress.Utils.HorzAlignment.Center;
-            gridView1.Columns["PhysicalProgress"].AppearanceCell.TextOptions.HAlignment =
-    DevExpress.Utils.HorzAlignment.Center;
-            gridView1.Columns["ProjectStatus"].AppearanceCell.TextOptions.HAlignment =
-    DevExpress.Utils.HorzAlignment.Center;
-            gridView1.Columns["LotBudget"].AppearanceCell.TextOptions.HAlignment =
-   DevExpress.Utils.HorzAlignment.Center;
-            gridView1.Columns["RegisteredAmount"].AppearanceCell.TextOptions.HAlignment =
-   DevExpress.Utils.HorzAlignment.Center;
-            gridView1.Columns["ConsumedAmount"].AppearanceCell.TextOptions.HAlignment =
-   DevExpress.Utils.HorzAlignment.Center;
+         
 
           //  gridView1.Columns["OperationName"].ColumnEdit = memo;
             gridView1.OptionsView.RowAutoHeight = true;
@@ -172,8 +159,12 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         }
 
+        private bool _layoutReady = false;
+
+
         private void SaveLayout()
         {
+            if (!_layoutReady) return; // ← don't save during setup
             gridView1.SaveLayoutToXml(LayoutPath);
         }
 
@@ -187,15 +178,19 @@ namespace DevExpress.ProductsDemo.Win.Modules
             base.OnVisibleChanged(e);
             if (!Visible) SaveLayout();
         }
-        private void AddCol(string field, string caption, int width, string format = null)
+        private void AddCol(string field, string caption, int width, string format = null, FormatType formatType = FormatType.Numeric)
         {
             GridColumn col = gridView1.Columns.AddVisible(field, caption);
-            gridView1.Columns[field].ColumnEdit = memo;
-           // col.Width = width;
+            col.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            if (format == null)
+                col.ColumnEdit = memo;
+            col.Width = width;
             col.OptionsColumn.AllowEdit = false;
             if (format != null)
             {
-                col.DisplayFormat.FormatType = FormatType.Numeric;
+                col.ColumnEdit = memo;
+
+                col.DisplayFormat.FormatType = formatType;
                 col.DisplayFormat.FormatString = format;
             }
         }
@@ -207,7 +202,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
             BuildDetailPanel();
             SetupGrid();
             LoadData();
+
             LoadLayout(); // ← restore saved layout
+            _layoutReady = true; // ← only NOW allow saving
+
 
 
         }
@@ -273,6 +271,19 @@ namespace DevExpress.ProductsDemo.Win.Modules
             }
         }
 
+        public void ShowPreview()
+        {
+            if (gridView1.FocusedRowHandle < 0) return;
+            var lot = gridView1.GetRow(gridView1.FocusedRowHandle) as LotGridModel;
+            if (lot == null) return;
+
+            using (var form = new frmeditproject(lot, FormMode.Preview))
+            {
+                form.ShowDialog();
+                LoadData();
+            }
+        }
+
         // ── BaseModule overrides ─────────────────────────────────────
         protected override DevExpress.XtraGrid.GridControl Grid { get { return gridControl1; } }
 
@@ -311,6 +322,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         private void gridView1_CustomDrawCell(object sender, RowCellCustomDrawEventArgs e)
         {
+            // FIX: Ensure we are only customizing standard data rows. 
+            // If e.RowHandle is a Footer (-2147483642) or Group row, exit immediately.
             if (e.RowHandle < 0) return;
 
             GridView view = sender as GridView;
@@ -335,7 +348,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             // Draw bottom line
             Color lineColor = sameProject ? Color.White : Color.Black;
-            int thickness = sameProject ? 0 :1;
+            int thickness = sameProject ? 0 : 1;
 
             using (Pen pen = new Pen(lineColor, thickness))
             {
@@ -343,10 +356,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     pen,
                     new Point(e.Bounds.Left, e.Bounds.Bottom - 1),
                     new Point(e.Bounds.Right, e.Bounds.Bottom - 1)
-
                 );
             }
 
+            // Tells the grid we successfully handled this specific data cell's custom painting
             e.Handled = true;
         }
     }

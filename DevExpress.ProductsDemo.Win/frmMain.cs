@@ -17,6 +17,7 @@ using DevExpress.Utils.Taskbar;
 using DevExpress.DXperience.Demos;
 using System.Drawing;
 using DevExpress.ProductsDemo.Win.Forms;
+using DevExpress.ProductsDemo.Win.Modules;
 
 namespace DevExpress.ProductsDemo.Win {
     public partial class frmMain : RibbonForm {
@@ -334,6 +335,11 @@ namespace DevExpress.ProductsDemo.Win {
         {
             modulesNavigator.CurrentModule?.ShowColumnChooser();
 
+        }
+        private void btnPreview_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (modulesNavigator.CurrentModule is ProjectModule pm)
+                pm.ShowPreview();
         }
     }
 }

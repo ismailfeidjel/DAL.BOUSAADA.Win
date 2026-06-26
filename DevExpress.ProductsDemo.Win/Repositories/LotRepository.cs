@@ -26,6 +26,18 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             p.operation_number,
             p.operation_name,
             pr.name AS program,
+            
+            p.program_id,
+            p.daira_id,
+            p.commune_id,
+            p.domain_id,
+            p.sector_id,
+            l.administrative_procedure_id,
+            l.special_status1_id,
+            l.special_status2_id,
+            l.special_status3_id,
+            l.project_status_id,
+
             d.name AS daira,
             c.name AS commune,
             dm.name AS domain_name,
@@ -104,11 +116,27 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
                             OperationNumber = rd["operation_number"].ToString(),
                             OperationName = $"{rd["operation_name"]}{Environment.NewLine} {rd["lot_name"]}",
+
                             Program = rd["program"]?.ToString(),
                             Daira = rd["daira"]?.ToString(),
                             Commune = rd["commune"]?.ToString(),
                             Domain = rd["domain_name"]?.ToString(),
                             Sector = rd["sector"]?.ToString(),
+
+
+                            ProgramId = rd["program_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["program_id"]),
+                            DairaId = rd["daira_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["daira_id"]),
+                            CommuneId = rd["commune_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["commune_id"]),
+                            DomainId = rd["domain_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["domain_id"]),
+                            SectorId = rd["sector_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["sector_id"]),
+                            AdministrativeProcedureId = rd["administrative_procedure_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["administrative_procedure_id"]),
+                            SpecialStatus1Id = rd["special_status1_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["special_status1_id"]),
+                            SpecialStatus2Id = rd["special_status2_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["special_status2_id"]),
+                            SpecialStatus3Id = rd["special_status3_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["special_status3_id"]),
+                            ProjectStatusId = rd["project_status_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["project_status_id"]),
+
+
+
 
                             LotNumber = Convert.ToInt32(rd["lot_number"]),
                             LotName = rd["lot_name"].ToString(),
@@ -158,19 +186,101 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             return list;
         }
 
-        public List<Lot> GetByProjectId(int projectId)
+        public List<LotGridModel> GetByProjectId(int projectId)
         {
-            var list = new List<Lot>();
+            var list = new List<LotGridModel>();
 
             using (var conn = _db.GetConnection())
             {
                 conn.Open();
 
                 string sql = @"
-                SELECT *
-                FROM lots
-                WHERE project_id = @project_id
-                ORDER BY lot_number";
+        SELECT
+            l.id,
+            l.project_id,
+
+            p.operation_number,
+            p.operation_name,
+            pr.name AS program,
+            
+            p.program_id,
+            p.daira_id,
+            p.commune_id,
+            p.domain_id,
+            p.sector_id,
+            l.administrative_procedure_id,
+            l.special_status1_id,
+            l.special_status2_id,
+            l.special_status3_id,
+            l.project_status_id,
+
+            d.name AS daira,
+            c.name AS commune,
+            dm.name AS domain_name,
+            s.name AS sector,
+
+            l.lot_number,
+            l.lot_name,
+
+            l.lot_budget,
+            l.registered_amount,
+            l.consumed_amount,
+
+            l.contractor,
+            l.execution_duration,
+            l.start_date,
+            l.physical_progress,
+
+            ap.name AS administrative_procedure,
+
+            ss1.name AS special_status1,
+            ss2.name AS special_status2,
+            ss3.name AS special_status3,
+
+            ps.name AS project_status,
+
+            l.notes
+
+        FROM lots l
+
+        INNER JOIN projects p
+            ON p.id = l.project_id
+
+        LEFT JOIN programs pr
+            ON pr.id = p.program_id
+
+        LEFT JOIN dairas d
+            ON d.id = p.daira_id
+
+        LEFT JOIN communes c
+            ON c.id = p.commune_id
+
+        LEFT JOIN domains dm
+            ON dm.id = p.domain_id
+
+        LEFT JOIN sectors s
+            ON s.id = p.sector_id
+
+        LEFT JOIN administrative_procedures ap
+            ON ap.id = l.administrative_procedure_id
+
+        LEFT JOIN special_status1 ss1
+            ON ss1.id = l.special_status1_id
+
+        LEFT JOIN special_status2 ss2
+            ON ss2.id = l.special_status2_id
+
+        LEFT JOIN special_status3 ss3
+            ON ss3.id = l.special_status3_id
+
+        LEFT JOIN project_statuses ps
+            ON ps.id = l.project_status_id
+
+        WHERE l.project_id = @project_id
+
+        ORDER BY
+            p.operation_number,
+            l.lot_number";
 
                 using (var cmd = new MySqlCommand(sql, conn))
                 {
@@ -180,7 +290,62 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                     {
                         while (rd.Read())
                         {
-                            list.Add(MapLot(rd));
+                            list.Add(new LotGridModel
+                            {
+                                Id = Convert.ToInt32(rd["id"]),
+                                ProjectId = Convert.ToInt32(rd["project_id"]),
+
+                                OperationNumber = rd["operation_number"].ToString(),
+                                OperationName = $"{rd["operation_name"]}{Environment.NewLine} {rd["lot_name"]}",
+
+                                Program = rd["program"]?.ToString(),
+                                Daira = rd["daira"]?.ToString(),
+                                Commune = rd["commune"]?.ToString(),
+                                Domain = rd["domain_name"]?.ToString(),
+                                Sector = rd["sector"]?.ToString(),
+
+                                ProgramId = rd["program_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["program_id"]),
+                                DairaId = rd["daira_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["daira_id"]),
+                                CommuneId = rd["commune_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["commune_id"]),
+                                DomainId = rd["domain_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["domain_id"]),
+                                SectorId = rd["sector_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["sector_id"]),
+                                AdministrativeProcedureId = rd["administrative_procedure_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["administrative_procedure_id"]),
+                                SpecialStatus1Id = rd["special_status1_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["special_status1_id"]),
+                                SpecialStatus2Id = rd["special_status2_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["special_status2_id"]),
+                                SpecialStatus3Id = rd["special_status3_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["special_status3_id"]),
+                                ProjectStatusId = rd["project_status_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["project_status_id"]),
+
+                                LotNumber = Convert.ToInt32(rd["lot_number"]),
+                                LotName = rd["lot_name"].ToString(),
+
+                                LotBudget = Convert.ToDecimal(rd["lot_budget"]),
+                                RegisteredAmount = Convert.ToDecimal(rd["registered_amount"]),
+                                ConsumedAmount = Convert.ToDecimal(rd["consumed_amount"]),
+
+                                Contractor = rd["contractor"] == DBNull.Value
+                                    ? null
+                                    : rd["contractor"].ToString(),
+
+                                ExecutionDuration = rd["execution_duration"] == DBNull.Value
+                                    ? (int?)null
+                                    : Convert.ToInt32(rd["execution_duration"]),
+
+                                StartDate = rd["start_date"] == DBNull.Value
+                                    ? (DateTime?)null
+                                    : Convert.ToDateTime(rd["start_date"]),
+
+                                PhysicalProgress = Convert.ToDecimal(rd["physical_progress"]),
+
+                                AdministrativeProcedure = rd["administrative_procedure"]?.ToString(),
+                                SpecialStatus1 = rd["special_status1"]?.ToString(),
+                                SpecialStatus2 = rd["special_status2"]?.ToString(),
+                                SpecialStatus3 = rd["special_status3"]?.ToString(),
+                                ProjectStatus = rd["project_status"]?.ToString(),
+
+                                Notes = rd["notes"] == DBNull.Value
+                                        ? null
+                                        : rd["notes"].ToString()
+                            });
                         }
                     }
                 }

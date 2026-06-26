@@ -476,6 +476,7 @@
             this.bbiEditTask.Id = 55;
             this.bbiEditTask.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.EditTask;
             this.bbiEditTask.Name = "bbiEditTask";
+            this.bbiEditTask.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnPreview_ItemClick);
             // 
             // bbiDeleteTask
             // 

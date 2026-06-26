@@ -13,14 +13,22 @@ public class LotGridModel
 
     // البرنامج والموقع
     public string Program { get; set; }
+    public int? ProgramId { get; set; }        // ← add
+
 
     public string Daira { get; set; }
+    public int? DairaId { get; set; }          // ← add
+
 
     public string Commune { get; set; }
+    public int? CommuneId { get; set; }        // ← add
+
 
     public string Domain { get; set; }
+    public int? DomainId { get; set; }         // ← add
 
     public string Sector { get; set; }
+    public int? SectorId { get; set; }         // ← add
 
     // الحصة
     public int LotNumber { get; set; }
@@ -50,14 +58,23 @@ public class LotGridModel
 
     // وضعيات
     public string AdministrativeProcedure { get; set; }
+    public int? AdministrativeProcedureId { get; set; }         // ← add
+
 
     public string SpecialStatus1 { get; set; }
+    public int? SpecialStatus1Id { get; set; }         // ← add
+
 
     public string SpecialStatus2 { get; set; }
+    public int? SpecialStatus2Id { get; set; }         // ← add
 
     public string SpecialStatus3 { get; set; }
+    public int? SpecialStatus3Id { get; set; }         // ← add
+
 
     public string ProjectStatus { get; set; }
+    public int? ProjectStatusId { get; set; }         // ← add
+
 
 
     // ملاحظات

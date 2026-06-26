@@ -504,6 +504,12 @@
     <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmeditproject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmeditproject.Designer.cs">
+      <DependentUpon>frmeditproject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmCustomDate.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -740,6 +746,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmeditproject.resx">
+      <DependentUpon>frmeditproject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmCustomDate.resx">
       <DependentUpon>frmCustomDate.cs</DependentUpon>

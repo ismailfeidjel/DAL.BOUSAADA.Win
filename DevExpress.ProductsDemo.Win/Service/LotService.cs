@@ -19,11 +19,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             return _repository.GetGridData();
         }
 
-        public List<Lot> GetByProjectId(int projectId)
-        {
-            return _repository.GetByProjectId(projectId);
-        }
-
+      
         public Lot GetById(int id)
         {
             return _repository.GetById(id);
