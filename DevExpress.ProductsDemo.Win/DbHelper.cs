@@ -13,20 +13,6 @@ namespace DevExpress.ProductsDemo.Win
             return new MySqlConnection(_connectionString);
         }
 
-        public bool TestConnection()
-        {
-            try
-            {
-                using (var conn = GetConnection())
-                {
-                    conn.Open();
-                    return true;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-        }
+       
     }
 }

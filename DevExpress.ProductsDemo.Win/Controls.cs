@@ -145,6 +145,9 @@ namespace DevExpress.ProductsDemo.Win {
                 
         public BaseModule() { }
 
+        public virtual void ShowColumnChooser() { }
+
+
         internal frmMain OwnerForm { get { return this.FindForm() as frmMain; } }
         protected RibbonControl MainRibbon { get { return OwnerForm.Ribbon; } }
 

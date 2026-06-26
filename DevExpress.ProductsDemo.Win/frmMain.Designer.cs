@@ -81,10 +81,12 @@
             this.bbiReminder = new DevExpress.XtraBars.BarButtonItem();
             this.skinDropDownButtonItem1 = new DevExpress.XtraBars.SkinDropDownButtonItem();
             this.skinPaletteRibbonGalleryBarItem1 = new DevExpress.XtraBars.SkinPaletteRibbonGalleryBarItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.rpTasks = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgTasks = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgFollowUp = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpdCurrentViewTasks = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpContacts = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgContacts = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgCurrentView = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -160,9 +162,10 @@
             this.biPrintPreview,
             this.bbiReminder,
             this.skinDropDownButtonItem1,
-            this.skinPaletteRibbonGalleryBarItem1});
+            this.skinPaletteRibbonGalleryBarItem1,
+            this.barButtonItem1});
             resources.ApplyResources(this.ribbonControl1, "ribbonControl1");
-            this.ribbonControl1.MaxItemId = 107;
+            this.ribbonControl1.MaxItemId = 108;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.rpTasks,
@@ -588,12 +591,21 @@
             this.skinPaletteRibbonGalleryBarItem1.Id = 106;
             this.skinPaletteRibbonGalleryBarItem1.Name = "skinPaletteRibbonGalleryBarItem1";
             // 
+            // barButtonItem1
+            // 
+            resources.ApplyResources(this.barButtonItem1, "barButtonItem1");
+            this.barButtonItem1.Id = 107;
+            this.barButtonItem1.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem1.ImageOptions.LargeImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
+            // 
             // rpTasks
             // 
             this.rpTasks.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.rpgTasks,
             this.rpgFollowUp,
-            this.rpdCurrentViewTasks});
+            this.rpdCurrentViewTasks,
+            this.ribbonPageGroup1});
             this.rpTasks.Name = "rpTasks";
             this.rpTasks.Tag = "Tasks";
             resources.ApplyResources(this.rpTasks, "rpTasks");
@@ -625,6 +637,11 @@
             this.rpdCurrentViewTasks.ItemLinks.Add(this.rgbiCurrentViewTasks);
             this.rpdCurrentViewTasks.Name = "rpdCurrentViewTasks";
             resources.ApplyResources(this.rpdCurrentViewTasks, "rpdCurrentViewTasks");
+            // 
+            // ribbonPageGroup1
+            // 
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // rpContacts
             // 
@@ -940,6 +957,8 @@
         private XtraBars.BarButtonItem bbiReminder;
         private XtraBars.SkinDropDownButtonItem skinDropDownButtonItem1;
         private XtraBars.SkinPaletteRibbonGalleryBarItem skinPaletteRibbonGalleryBarItem1;
+        private XtraBars.BarButtonItem barButtonItem1;
+        private XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
     }
 }
 

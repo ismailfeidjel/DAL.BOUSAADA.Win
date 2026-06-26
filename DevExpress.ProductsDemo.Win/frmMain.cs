@@ -329,5 +329,11 @@ namespace DevExpress.ProductsDemo.Win {
                 }
             }
         }
+
+        private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            modulesNavigator.CurrentModule?.ShowColumnChooser();
+
+        }
     }
 }

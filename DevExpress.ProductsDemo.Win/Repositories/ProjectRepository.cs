@@ -74,7 +74,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             commune_id,
             domain_id,
             sector_id,
-            has_lots,
+            has_lots
         )
         VALUES
         (
@@ -85,8 +85,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             @commune_id,
             @domain_id,
             @sector_id,
-            @has_lots,
-            @notes
+            @has_lots
         );
 
         SELECT LAST_INSERT_ID();";

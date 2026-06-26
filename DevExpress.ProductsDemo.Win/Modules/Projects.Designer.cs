@@ -26,19 +26,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectModule));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this._detailPanel = new System.Windows.Forms.Panel();
-            this.textBox9 = new System.Windows.Forms.RichTextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -83,47 +75,14 @@
             // 
             // _detailPanel
             // 
-            this._detailPanel.Controls.Add(this.textBox9);
-            this._detailPanel.Controls.Add(this.label9);
-            this._detailPanel.Controls.Add(this.label4);
-            this._detailPanel.Controls.Add(this.label3);
-            this._detailPanel.Controls.Add(this.label2);
             this._detailPanel.Controls.Add(this.label1);
             this._detailPanel.Controls.Add(this.textBox8);
             this._detailPanel.Controls.Add(this.textBox7);
             this._detailPanel.Controls.Add(this.textBox6);
             this._detailPanel.Controls.Add(this.textBox5);
-            this._detailPanel.Controls.Add(this.textBox4);
-            this._detailPanel.Controls.Add(this.textBox3);
-            this._detailPanel.Controls.Add(this.textBox2);
             this._detailPanel.Controls.Add(this.textBox1);
             resources.ApplyResources(this._detailPanel, "_detailPanel");
             this._detailPanel.Name = "_detailPanel";
-            // 
-            // textBox9
-            // 
-            resources.ApplyResources(this.textBox9, "textBox9");
-            this.textBox9.Name = "textBox9";
-            // 
-            // label9
-            // 
-            resources.ApplyResources(this.label9, "label9");
-            this.label9.Name = "label9";
-            // 
-            // label4
-            // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
-            // 
-            // label3
-            // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
-            // 
-            // label2
-            // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
             // 
             // label1
             // 
@@ -149,21 +108,6 @@
             // 
             resources.ApplyResources(this.textBox5, "textBox5");
             this.textBox5.Name = "textBox5";
-            // 
-            // textBox4
-            // 
-            resources.ApplyResources(this.textBox4, "textBox4");
-            this.textBox4.Name = "textBox4";
-            // 
-            // textBox3
-            // 
-            resources.ApplyResources(this.textBox3, "textBox3");
-            this.textBox3.Name = "textBox3";
-            // 
-            // textBox2
-            // 
-            resources.ApplyResources(this.textBox2, "textBox2");
-            this.textBox2.Name = "textBox2";
             // 
             // textBox1
             // 
@@ -284,20 +228,21 @@
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
             this.layoutControlItem1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
-            this.layoutControlItem1.Size = new System.Drawing.Size(854, 581);
+            this.layoutControlItem1.Size = new System.Drawing.Size(959, 581);
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this._detailPanel;
-            this.layoutControlItem2.Location = new System.Drawing.Point(854, 0);
+            this.layoutControlItem2.Location = new System.Drawing.Point(959, 0);
             this.layoutControlItem2.Name = "layoutControlItem2";
-            this.layoutControlItem2.Size = new System.Drawing.Size(209, 581);
+            this.layoutControlItem2.Size = new System.Drawing.Size(104, 581);
+            this.layoutControlItem2.StartNewLine = true;
             resources.ApplyResources(this.layoutControlItem2, "layoutControlItem2");
             this.layoutControlItem2.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(80, 13);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(79, 13);
             this.layoutControlItem2.TextToControlDistance = 5;
             // 
             // colComplete
@@ -352,7 +297,6 @@
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private XtraGrid.GridControl gridControl1;
-        private XtraGrid.Views.Grid.GridView gridView1;
         private XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox1;
         private XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox2;
         private XtraEditors.Repository.RepositoryItemImageComboBox repositoryItemImageComboBox3;
@@ -367,17 +311,10 @@
         private XtraLayout.LayoutControlItem layoutControlItem2;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox textBox9;
+        public XtraGrid.Views.Grid.GridView gridView1;
     }
 }
