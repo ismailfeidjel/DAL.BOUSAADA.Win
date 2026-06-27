@@ -7,6 +7,7 @@ using DevExpress.ProductsDemo.Win.Services;
 using DevExpress.Utils;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
@@ -25,7 +26,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         private List<LotGridModel> _data;
         private LotGridModel _currentLot;
-        private LotRepository _lotRepo = new LotRepository();
+        private readonly LotRepository _lotRepo = new LotRepository();
+        private readonly ProjectRepository _projectRepo = new ProjectRepository();
+
         public override void ShowColumnChooser() => gridView1.ShowCustomization();
 
         private string LayoutPath =>
@@ -51,6 +54,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             gridView1.OptionsBehavior.Editable = true;
             gridView1.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDownFocused;
+            gridView1.OptionsView.AllowCellMerge = true;
+
 
 
 
@@ -88,22 +93,72 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             //-------------------------
 
-           // gridView1.Appearance.EvenRow.BackColor = Color.White;
-           //gridView1.Appearance.OddRow.BackColor = Color.FromArgb(245, 245, 245);
+            var dateEdit = new RepositoryItemDateEdit();
+            dateEdit.DisplayFormat.FormatType = FormatType.DateTime;
+            dateEdit.DisplayFormat.FormatString = "dd/MM/yyyy";
+            dateEdit.EditFormat.FormatType = FormatType.DateTime;
+            dateEdit.EditFormat.FormatString = "dd/MM/yyyy";
+            gridControl1.RepositoryItems.Add(dateEdit);
+
+            //
+
+            // gridView1.Appearance.EvenRow.BackColor = Color.White;
+            //gridView1.Appearance.OddRow.BackColor = Color.FromArgb(245, 245, 245);
             AddCol("OperationNumber", "رقم ", 110);
             AddCol("Daira", "الدائرة", 100);
+            gridView1.Columns["Daira"].OptionsColumn.AllowMerge = DefaultBoolean.True;
+
             AddCol("Commune", "البلدية", 100);
             AddCol("OperationName", "اسم العملية", 180);
-            AddCol("Domain", "القطاع", 110);
-            AddCol("Sector", "المجال", 110);
+            AddCol("DomainId", "القطاع", 110);
+            var domainLookup = new RepositoryItemLookUpEdit();
+            domainLookup.DataSource = new LookupRepository().GetAll("domains");
+            domainLookup.DisplayMember = "Name";
+            domainLookup.ValueMember = "Id";
+            domainLookup.ShowHeader = false;
+            domainLookup.NullText = "— اختر —";
+            domainLookup.Columns.Add(new LookUpColumnInfo("Name", 200));
+            gridControl1.RepositoryItems.Add(domainLookup);
+            gridView1.Columns["DomainId"].ColumnEdit = domainLookup;
+            gridView1.Columns["DomainId"].OptionsColumn.AllowEdit = true;
+
+
+
+            AddCol("SectorId", "المجال", 110);
+            var sectorLookup = new RepositoryItemLookUpEdit();
+            sectorLookup.DataSource = new LookupRepository().GetAll("sectors");
+            sectorLookup.DisplayMember = "Name";
+            sectorLookup.ValueMember = "Id";
+            sectorLookup.ShowHeader = false;
+            sectorLookup.NullText = "— اختر —";
+            sectorLookup.Columns.Add(new LookUpColumnInfo("Name", 200));
+            gridControl1.RepositoryItems.Add(sectorLookup);
+            gridView1.Columns["SectorId"].ColumnEdit = sectorLookup;
+            gridView1.Columns["SectorId"].OptionsColumn.AllowEdit = true;
+
+
             AddCol("LotBudget", "مبلغ الحصة", 110, "{0:N2}");
             AddCol("RegisteredAmount", "المبلغ المسجل", 110, "{0:N2}");
             AddCol("ConsumedAmount", "المبلغ المستهلك", 110, "{0:N2}");
             AddCol("Contractor", "المقاول", 110);
             AddCol("StartDate", "تاريخ امر الانطلاق", 110, "{0:dd/MM/yyyy}", FormatType.DateTime);
+            gridView1.Columns["StartDate"].ColumnEdit = dateEdit;
             AddCol("ExecutionDuration", "اجال التنفيذ", 110, "{0:N0}يوم");
             AddCol("PhysicalProgress", "التقدم الفيزيائي", 100, "{0:N0} %");
-            AddCol("ProjectStatus", "وضعية العملية", 110);
+           // AddCol("ProjectStatus", "وضعية العملية", 110);
+            AddCol("ProjectStatusId", "وضعية العملية", 110);
+
+
+            var statusLookup = new RepositoryItemLookUpEdit();
+            statusLookup.DataSource = new LookupRepository().GetAll("project_statuses");
+            statusLookup.DisplayMember = "Name";
+            statusLookup.ValueMember = "Id";
+            statusLookup.ShowHeader = false;
+            statusLookup.NullText = "— اختر —";
+            statusLookup.Columns.Add(new LookUpColumnInfo("Name", 200));
+            gridControl1.RepositoryItems.Add(statusLookup);
+            gridView1.Columns["ProjectStatusId"].ColumnEdit = statusLookup;
+            gridView1.Columns["ProjectStatusId"].OptionsColumn.AllowEdit = true;
             AddCol("Notes", "الملاحظة", 150);
 
 
@@ -113,7 +168,11 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["RegisteredAmount"].OptionsColumn.AllowEdit = true;
             gridView1.Columns["ConsumedAmount"].OptionsColumn.AllowEdit = true;
             gridView1.Columns["PhysicalProgress"].OptionsColumn.AllowEdit = true;
-            gridView1.Columns["ProjectStatus"].OptionsColumn.AllowEdit = true;
+            gridView1.Columns["ProjectStatusId"].OptionsColumn.AllowEdit = true;
+
+            gridView1.Columns["Contractor"].OptionsColumn.AllowEdit = true;
+            gridView1.Columns["StartDate"].OptionsColumn.AllowEdit = true;
+            gridView1.Columns["ExecutionDuration"].OptionsColumn.AllowEdit = true;
 
             // Keep these readonly in grid — handled by left panel
             gridView1.Columns["OperationNumber"].OptionsColumn.AllowEdit = false;
@@ -155,9 +214,16 @@ namespace DevExpress.ProductsDemo.Win.Modules
           //  gridView1.Columns["OperationName"].ColumnEdit = memo;
             gridView1.OptionsView.RowAutoHeight = true;
 
-           // gridView1.Columns["Notes"].ColumnEdit = memo;
+            // gridView1.Columns["Notes"].ColumnEdit = memo;
+            gridView1.RowUpdated += gridView1_RowUpdated;
+            foreach (GridColumn col in gridView1.Columns)
+            {
+                col.AppearanceCell.TextOptions.HAlignment = HorzAlignment.Center;
+                col.AppearanceCell.TextOptions.VAlignment = VertAlignment.Center;
+            }
 
         }
+
 
         private bool _layoutReady = false;
 
@@ -194,7 +260,71 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 col.DisplayFormat.FormatString = format;
             }
         }
+        private void gridView1_RowUpdated(object sender, RowObjectEventArgs e)
+        {
+            var lot = e.Row as LotGridModel;
+            if (lot == null) return;
 
+            using (var conn = new DbHelper().GetConnection())
+            {
+                conn.Open();
+                using (var transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        // Update lot
+                        var updatedLot = new Domain.Lot
+                        {
+                            Id = lot.Id,
+                            ProjectId = lot.ProjectId,
+                            LotNumber = lot.LotNumber,
+                            LotName = lot.LotName,
+                            LotBudget = lot.LotBudget,
+                            RegisteredAmount = lot.RegisteredAmount,
+                            ConsumedAmount = lot.ConsumedAmount,
+                            Contractor = lot.Contractor,
+                            ExecutionDuration = lot.ExecutionDuration,
+                            StartDate = lot.StartDate,
+                            PhysicalProgress = lot.PhysicalProgress,
+                            AdministrativeProcedureId = lot.AdministrativeProcedureId,
+                            SpecialStatus1Id = lot.SpecialStatus1Id,
+                            SpecialStatus2Id = lot.SpecialStatus2Id,
+                            SpecialStatus3Id = lot.SpecialStatus3Id,
+                            ProjectStatusId = lot.ProjectStatusId,
+                            Notes = lot.Notes
+                        };
+                        _lotRepo.Update(updatedLot, conn, transaction);
+
+                        // Update project
+                        var updatedProject = new Domain.Project
+                        {
+                            Id = lot.ProjectId,
+                            OperationNumber = lot.OperationNumber,
+                            OperationName = lot.OperationName,
+                            ProgramId = lot.ProgramId ?? 0,
+                            DairaId = lot.DairaId ?? 0,
+                            CommuneId = lot.CommuneId ?? 0,
+                            DomainId = lot.DomainId ?? 0,
+                            SectorId = lot.SectorId ?? 0,
+                            HasLots = lot.LotNumber > 1,
+                            UpdatedBy = 1
+                        };
+                        _projectRepo.Update(updatedProject, conn, transaction);
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        XtraMessageBox.Show(
+                            $"فشل الحفظ، تم التراجع عن جميع التغييرات.\n\n{ex.Message}",
+                            "خطأ",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
         // ── Init ─────────────────────────────────────────────────────
         internal override void InitModule(DevExpress.Utils.Menu.IDXMenuManager manager, object data)
         {

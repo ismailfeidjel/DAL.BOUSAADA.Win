@@ -2209,7 +2209,7 @@ namespace DevExpress.ProductsDemo.Win.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to None.
+        ///   Looks up a localized string similar to .
         /// </summary>
         internal static string None {
             get {

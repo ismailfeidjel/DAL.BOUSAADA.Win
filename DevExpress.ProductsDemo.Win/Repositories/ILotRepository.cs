@@ -1,4 +1,5 @@
 ﻿using DevExpress.ProductsDemo.Win.Domain;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 
 namespace DevExpress.ProductsDemo.Win.Repositories
@@ -12,7 +13,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
         int Insert(Lot lot);
 
-        bool Update(Lot lot);
+        bool Update(Lot lot, MySqlConnection conn, MySqlTransaction transaction);
 
         bool Delete(int id);
     }

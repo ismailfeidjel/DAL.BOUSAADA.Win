@@ -437,44 +437,34 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             }
         }
 
-        public bool Update(Lot lot)
+        public bool Update(Lot lot, MySqlConnection conn, MySqlTransaction transaction)
         {
-            using (var conn = _db.GetConnection())
+            string sql = @"
+        UPDATE lots SET
+            lot_number = @lot_number,
+            lot_name = @lot_name,
+            lot_budget = @lot_budget,
+            registered_amount = @registered_amount,
+            consumed_amount = @consumed_amount,
+            contractor = @contractor,
+            execution_duration = @execution_duration,
+            start_date = @start_date,
+            physical_progress = @physical_progress,
+            administrative_procedure_id = @administrative_procedure_id,
+            special_status1_id = @special_status1_id,
+            special_status2_id = @special_status2_id,
+            special_status3_id = @special_status3_id,
+            project_status_id = @project_status_id,
+            notes = @notes
+        WHERE id = @id";
+
+            using (var cmd = new MySqlCommand(sql, conn, transaction))
             {
-                conn.Open();
-
-                string sql = @"
-                UPDATE lots SET
-
-                    lot_number=@lot_number,
-                    lot_name=@lot_name,
-                    lot_budget=@lot_budget,
-                    registered_amount=@registered_amount,
-                    consumed_amount=@consumed_amount,
-                    contractor=@contractor,
-                    execution_duration=@execution_duration,
-                    start_date=@start_date,
-                    physical_progress=@physical_progress,
-                    administrative_procedure_id=@administrative_procedure_id,
-                    special_status1_id=@special_status1_id,
-                    special_status2_id=@special_status2_id,
-                    special_status3_id=@special_status3_id,
-                    project_status_id=@project_status_id,
-                    notes=@notes
-
-                WHERE id=@id";
-
-                using (var cmd = new MySqlCommand(sql, conn))
-                {
-                    FillParameters(cmd, lot);
-
-                    cmd.Parameters.AddWithValue("@id", lot.Id);
-
-                    return cmd.ExecuteNonQuery() > 0;
-                }
+                FillParameters(cmd, lot);
+                cmd.Parameters.AddWithValue("@id", lot.Id);
+                return cmd.ExecuteNonQuery() > 0;
             }
         }
-
         public bool Delete(int id)
         {
             using (var conn = _db.GetConnection())

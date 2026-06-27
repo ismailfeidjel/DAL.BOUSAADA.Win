@@ -58,7 +58,39 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             return list;
         }
 
+        public bool Update(Project p, MySqlConnection conn, MySqlTransaction transaction)
+        {
+            string sql = @"
+        UPDATE projects SET
+            operation_number = @operation_number,
+            operation_name = @operation_name,
+            program_id = @program_id,
+            daira_id = @daira_id,
+            commune_id = @commune_id,
+            domain_id = @domain_id,
+            sector_id = @sector_id,
+            has_lots = @has_lots,
+            updated_by = @updated_by
+        WHERE id = @id";
+
+            using (var cmd = new MySqlCommand(sql, conn, transaction))
+            {
+                cmd.Parameters.AddWithValue("@operation_number", p.OperationNumber);
+                cmd.Parameters.AddWithValue("@operation_name", p.OperationName);
+                cmd.Parameters.AddWithValue("@program_id", p.ProgramId);
+                cmd.Parameters.AddWithValue("@daira_id", p.DairaId);
+                cmd.Parameters.AddWithValue("@commune_id", p.CommuneId);
+                cmd.Parameters.AddWithValue("@domain_id", p.DomainId);
+                cmd.Parameters.AddWithValue("@sector_id", p.SectorId);
+                cmd.Parameters.AddWithValue("@has_lots", p.HasLots);
+                cmd.Parameters.AddWithValue("@updated_by", (object)p.UpdatedBy ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@id", p.Id);
+                return cmd.ExecuteNonQuery() > 0;
+            }
+        }
         public int Insert(Project p)
+
+
         {
             using (var conn = _db.GetConnection())
             {

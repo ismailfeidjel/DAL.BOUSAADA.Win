@@ -32,12 +32,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             return _repository.Insert(lot);
         }
 
-        public bool Update(Lot lot)
-        {
-            Validate(lot);
-
-            return _repository.Update(lot);
-        }
+ 
 
         public bool Delete(int id)
         {
