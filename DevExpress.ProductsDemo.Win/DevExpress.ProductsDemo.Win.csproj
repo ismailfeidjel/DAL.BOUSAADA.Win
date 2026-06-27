@@ -851,7 +851,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="DataBase\dal%281%29.sql" />
+    <Content Include="DataBase\dal %281%29.sql" />
     <Content Include="DataBase\DBB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
