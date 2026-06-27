@@ -9,6 +9,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
     {
         private readonly DbHelper _db = new DbHelper();
 
+
         public List<LotGridModel> GetGridData()
         {
             var list = new List<LotGridModel>();
@@ -115,7 +116,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                             ProjectId = Convert.ToInt32(rd["project_id"]),
 
                             OperationNumber = rd["operation_number"].ToString(),
-                            OperationName = $"{rd["operation_name"]}{Environment.NewLine} {rd["lot_name"]}",
+                            OperationName = $"{rd["operation_name"]}{'\u001F'} {rd["lot_name"]}",
 
                             Program = rd["program"]?.ToString(),
                             Daira = rd["daira"]?.ToString(),

@@ -58,7 +58,8 @@ namespace DevExpress.ProductsDemo.Win.Forms
         {
             // ── Project fields from LotGridModel ─────────────────────
             txtOperationNumber.Text = sourceLot.OperationNumber ?? "";
-            txtOperationName.Text = sourceLot.OperationName ?? "";
+            string[] parts = (sourceLot.OperationName ?? "").Split('\u001F');
+            txtOperationName.Text = parts.Length > 0 ? parts[0].Trim() : "";
             cmbDaira.EditValue = sourceLot.DairaId;
             cmbCommune.EditValue = sourceLot.CommuneId;
             cmbDomain.EditValue = sourceLot.DomainId;
@@ -154,6 +155,8 @@ namespace DevExpress.ProductsDemo.Win.Forms
            // bbiEdit.Enabled = !editable;
             btnAddLot.Enabled = editable;
             btnRemoveLot.Enabled = editable;
+            btnsave.Enabled = editable;
+
         }
 
         private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
@@ -235,6 +238,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
 
         private void bbiSave_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if (_mode != FormMode.Edit) return;
             if (!ValidateAll()) return;
 
             using (var conn = new DbHelper().GetConnection())
@@ -246,6 +250,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
                     {
                         var project = new Domain.Project
                         {
+                            Id = _lot.ProjectId,
                             OperationNumber = txtOperationNumber.Text.Trim(),
                             OperationName = txtOperationName.Text.Trim(),
                             ProgramId = Convert.ToInt32(cmbProgram.EditValue),
@@ -257,104 +262,88 @@ namespace DevExpress.ProductsDemo.Win.Forms
                             UpdatedBy = 1
                         };
 
-                        project.Id = _projectRepo.Insert(project);
+                        _projectRepo.Update(project, conn, transaction);
                         NewProject = project;
-                        var lot = new Lot
-                        {
-                            ProjectId = project.Id,
-                            LotNumber = 1,
-                            LotName = txtLotName.Text.Trim(),
-                            RegisteredAmount = string.IsNullOrWhiteSpace(txtRegisteredAmount.Text) ? 0 : Convert.ToDecimal(txtRegisteredAmount.Text),
-                            LotBudget = string.IsNullOrWhiteSpace(txtLotBudget.Text) ? 0 : Convert.ToDecimal(txtLotBudget.Text),
-                            ConsumedAmount = string.IsNullOrWhiteSpace(txtConsumedAmount.Text) ? 0 : Convert.ToDecimal(txtConsumedAmount.Text),
-                            Contractor = NullIfBlank(txtContractor.Text),
-                            ExecutionDuration = spnExecutionDuration.Value > 0
-                                    ? (int?)Convert.ToInt32(spnExecutionDuration.Value) : null,
-                            StartDate = dtStartDate.EditValue == null ||
-                                    dtStartDate.EditValue == DBNull.Value
-                                    ? (DateTime?)null
-                                    : Convert.ToDateTime(dtStartDate.EditValue),
-                            PhysicalProgress = spnPhysicalProgress.Value,
-                            AdministrativeProcedureId = NullableId(cmbAdminProcedure),
-                            SpecialStatus1Id = NullableId(cmbSpecialStatus1),
-                            SpecialStatus2Id = NullableId(cmbSpecialStatus2),
-                            SpecialStatus3Id = NullableId(cmbSpecialStatus3),
-                            ProjectStatusId = NullableId(cmbProjectStatus),
-                            Notes = NullIfBlank(txtLotNotes.Text),
-                            UpdatedBy = 1
-                        };
-                        lot.Id = _lotRepo.Insert(lot);
-                        NewLot = lot;
 
+                        var lots = _lotRepo.GetByProjectId(_lot.ProjectId);
+                        var lot1 = lots.FirstOrDefault(l => l.LotNumber == 1);
+
+                        if (lot1 != null)
+                        {
+                            lot1.LotName = txtLotName.Text.Trim();
+                            lot1.LotBudget = string.IsNullOrWhiteSpace(txtLotBudget.Text) ? 0 : Convert.ToDecimal(txtLotBudget.Text);
+                            lot1.RegisteredAmount = string.IsNullOrWhiteSpace(txtRegisteredAmount.Text) ? 0 : Convert.ToDecimal(txtRegisteredAmount.Text);
+                            lot1.ConsumedAmount = string.IsNullOrWhiteSpace(txtConsumedAmount.Text) ? 0 : Convert.ToDecimal(txtConsumedAmount.Text);
+                            lot1.Contractor = NullIfBlank(txtContractor.Text);
+                            lot1.ExecutionDuration = spnExecutionDuration.Value > 0 ? (int?)Convert.ToInt32(spnExecutionDuration.Value) : null;
+                            lot1.StartDate = dtStartDate.EditValue == null || dtStartDate.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dtStartDate.EditValue);
+                            lot1.PhysicalProgress = spnPhysicalProgress.Value;
+                            lot1.AdministrativeProcedureId = NullableId(cmbAdminProcedure);
+                            lot1.SpecialStatus1Id = NullableId(cmbSpecialStatus1);
+                            lot1.SpecialStatus2Id = NullableId(cmbSpecialStatus2);
+                            lot1.SpecialStatus3Id = NullableId(cmbSpecialStatus3);
+                            lot1.ProjectStatusId = NullableId(cmbProjectStatus);
+                            lot1.Notes = NullIfBlank(txtLotNotes.Text);
+                            _lotRepo.Update(lot1, conn, transaction);
+                        }
+
+                        // ── Update Lot 2 ──────────────────────────────────────
                         if (tabLot2.PageVisible)
                         {
-                            var lot2 = new Lot
+                            var lot2 = lots.FirstOrDefault(l => l.LotNumber == 2);
+                            if (lot2 != null)
                             {
-                                ProjectId = project.Id,
-                                LotNumber = 2,
-                                LotName = textEdit2.Text.Trim(),
-                                RegisteredAmount = string.IsNullOrWhiteSpace(textEdit5.Text) ? 0 : Convert.ToDecimal(textEdit5.Text),
-                                LotBudget = string.IsNullOrWhiteSpace(textEdit6.Text) ? 0 : Convert.ToDecimal(textEdit6.Text),
-                                ConsumedAmount = string.IsNullOrWhiteSpace(textEdit7.Text) ? 0 : Convert.ToDecimal(textEdit7.Text),
-                                Contractor = NullIfBlank(textEdit4.Text),
-                                ExecutionDuration = spinEdit2.Value > 0
-                                   ? (int?)Convert.ToInt32(spinEdit2.Value) : null,
-                                StartDate = dateEdit1.EditValue == null ||
-                                   dateEdit1.EditValue == DBNull.Value
-                                   ? (DateTime?)null
-                                   : Convert.ToDateTime(dateEdit1.EditValue),
-                                PhysicalProgress = spinEdit3.Value,
-                                AdministrativeProcedureId = NullableId(lookUpEdit7),
-                                SpecialStatus1Id = NullableId(lookUpEdit8),
-                                SpecialStatus2Id = NullableId(lookUpEdit6),
-                                SpecialStatus3Id = NullableId(lookUpEdit9),
-                                ProjectStatusId = NullableId(lookUpEdit10),
-                                Notes = NullIfBlank(memoEdit1.Text),
-                                UpdatedBy = 1
-                            };
-                            lot2.Id = _lotRepo.Insert(lot2);
-                            NewLot2 = lot2;
+                                lot2.LotName = textEdit2.Text.Trim();
+                                lot2.LotBudget = string.IsNullOrWhiteSpace(textEdit6.Text) ? 0 : Convert.ToDecimal(textEdit6.Text);
+                                lot2.RegisteredAmount = string.IsNullOrWhiteSpace(textEdit5.Text) ? 0 : Convert.ToDecimal(textEdit5.Text);
+                                lot2.ConsumedAmount = string.IsNullOrWhiteSpace(textEdit7.Text) ? 0 : Convert.ToDecimal(textEdit7.Text);
+                                lot2.Contractor = NullIfBlank(textEdit4.Text);
+                                lot2.ExecutionDuration = spinEdit2.Value > 0 ? (int?)Convert.ToInt32(spinEdit2.Value) : null;
+                                lot2.StartDate = dateEdit1.EditValue == null || dateEdit1.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dateEdit1.EditValue);
+                                lot2.PhysicalProgress = spinEdit3.Value;
+                                lot2.AdministrativeProcedureId = NullableId(lookUpEdit7);
+                                lot2.SpecialStatus1Id = NullableId(lookUpEdit8);
+                                lot2.SpecialStatus2Id = NullableId(lookUpEdit6);
+                                lot2.SpecialStatus3Id = NullableId(lookUpEdit9);
+                                lot2.ProjectStatusId = NullableId(lookUpEdit10);
+                                lot2.Notes = NullIfBlank(memoEdit1.Text);
+                                _lotRepo.Update(lot2, conn, transaction);
+                            }
                         }
                         if (tabLot3.PageVisible)
                         {
-                            var lot3 = new Lot
+                            var lot3 = lots.FirstOrDefault(l => l.LotNumber == 3);
+                            if (lot3 != null)
                             {
-                                ProjectId = project.Id,
-                                LotNumber = 3,
-                                LotName = textEdit9.Text.Trim(),
-                                RegisteredAmount = string.IsNullOrWhiteSpace(textEdit12.Text) ? 0 : Convert.ToDecimal(textEdit12.Text),
-                                LotBudget = string.IsNullOrWhiteSpace(textEdit13.Text) ? 0 : Convert.ToDecimal(textEdit13.Text),
-                                ConsumedAmount = string.IsNullOrWhiteSpace(textEdit14.Text) ? 0 : Convert.ToDecimal(textEdit14.Text),
-                                Contractor = NullIfBlank(textEdit11.Text),
-                                ExecutionDuration = spinEdit5.Value > 0
-                                   ? (int?)Convert.ToInt32(spinEdit5.Value) : null,
-                                StartDate = dateEdit2.EditValue == null ||
-                                   dateEdit2.EditValue == DBNull.Value
-                                   ? (DateTime?)null
-                                   : Convert.ToDateTime(dateEdit2.EditValue),
-                                PhysicalProgress = spinEdit6.Value,
-                                AdministrativeProcedureId = NullableId(lookUpEdit17),
-                                SpecialStatus1Id = NullableId(lookUpEdit18),
-                                SpecialStatus2Id = NullableId(lookUpEdit16),
-                                SpecialStatus3Id = NullableId(lookUpEdit19),
-                                ProjectStatusId = NullableId(lookUpEdit20),
-                                Notes = NullIfBlank(memoEdit2.Text),
-                                UpdatedBy = 1
-                            };
-                            lot3.Id = _lotRepo.Insert(lot3);
-                            NewLot3 = lot3;
-
+                                lot3.LotName = textEdit9.Text.Trim();
+                                lot3.LotBudget = string.IsNullOrWhiteSpace(textEdit13.Text) ? 0 : Convert.ToDecimal(textEdit13.Text);
+                                lot3.RegisteredAmount = string.IsNullOrWhiteSpace(textEdit12.Text) ? 0 : Convert.ToDecimal(textEdit12.Text);
+                                lot3.ConsumedAmount = string.IsNullOrWhiteSpace(textEdit14.Text) ? 0 : Convert.ToDecimal(textEdit14.Text);
+                                lot3.Contractor = NullIfBlank(textEdit11.Text);
+                                lot3.ExecutionDuration = spinEdit5.Value > 0 ? (int?)Convert.ToInt32(spinEdit5.Value) : null;
+                                lot3.StartDate = dateEdit2.EditValue == null || dateEdit2.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dateEdit2.EditValue);
+                                lot3.PhysicalProgress = spinEdit6.Value;
+                                lot3.AdministrativeProcedureId = NullableId(lookUpEdit17);
+                                lot3.SpecialStatus1Id = NullableId(lookUpEdit18);
+                                lot3.SpecialStatus2Id = NullableId(lookUpEdit16);
+                                lot3.SpecialStatus3Id = NullableId(lookUpEdit19);
+                                lot3.ProjectStatusId = NullableId(lookUpEdit20);
+                                lot3.Notes = NullIfBlank(memoEdit2.Text);
+                                _lotRepo.Update(lot3, conn, transaction);
+                            }
                         }
+
+
 
                         transaction.Commit();
                         DialogResult = DialogResult.OK;
-                        XtraMessageBox.Show( "تم حفظ ال مشروع", "Success",    MessageBoxButtons.OK, MessageBoxIcon.Information);     Close();
+                        XtraMessageBox.Show( "تم تعديل بيانات المشروع", "تم",    MessageBoxButtons.OK, MessageBoxIcon.Information);     Close();
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback(); 
                         XtraMessageBox.Show(
-                            $"فشل الحفظ، تم التراجع عن جميع التغييرات.\n\n{ex.Message}\n{ex.InnerException?.Message}",
+                            $"فشل التعديل، تم التراجع عن جميع التغييرات.\n\n{ex.Message}\n{ex.InnerException?.Message}",
                             "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
@@ -481,6 +470,7 @@ private void ucContactInfo1_Load(object sender, EventArgs e)
             }
 
             btnAddLot.Enabled = true;
+
         }
     }
 }

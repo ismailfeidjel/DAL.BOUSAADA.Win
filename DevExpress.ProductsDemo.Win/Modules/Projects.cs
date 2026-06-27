@@ -29,6 +29,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
         private readonly LotRepository _lotRepo = new LotRepository();
         private readonly ProjectRepository _projectRepo = new ProjectRepository();
 
+
         public override void ShowColumnChooser() => gridView1.ShowCustomization();
 
         private string LayoutPath =>
@@ -54,7 +55,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             gridView1.OptionsBehavior.Editable = true;
             gridView1.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDownFocused;
-            gridView1.OptionsView.AllowCellMerge = true;
+            gridView1.ShowingEditor += gridView1_ShowingEditor;
 
 
 
@@ -66,8 +67,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.OptionsSelection.MultiSelect = false;
             gridView1.ColumnWidthChanged += (s, e) => SaveLayout();
             gridView1.ColumnPositionChanged += (s, e) => SaveLayout();
-            //------
+
             
+            //------
+
             //------
             gridView1.Appearance.HeaderPanel.Font =
     new Font("Tahoma", 7, FontStyle.Bold);
@@ -272,7 +275,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 {
                     try
                     {
-                        // Update lot
                         var updatedLot = new Domain.Lot
                         {
                             Id = lot.Id,
@@ -293,14 +295,12 @@ namespace DevExpress.ProductsDemo.Win.Modules
                             ProjectStatusId = lot.ProjectStatusId,
                             Notes = lot.Notes
                         };
-                        _lotRepo.Update(updatedLot, conn, transaction);
 
-                        // Update project
                         var updatedProject = new Domain.Project
                         {
                             Id = lot.ProjectId,
                             OperationNumber = lot.OperationNumber,
-                            OperationName = lot.OperationName,
+                            OperationName = lot.OperationName.Split('\u001F')[0].Trim(),
                             ProgramId = lot.ProgramId ?? 0,
                             DairaId = lot.DairaId ?? 0,
                             CommuneId = lot.CommuneId ?? 0,
@@ -309,8 +309,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
                             HasLots = lot.LotNumber > 1,
                             UpdatedBy = 1
                         };
-                        _projectRepo.Update(updatedProject, conn, transaction);
 
+                        _projectRepo.Update(updatedProject, conn, transaction);
+                        _lotRepo.Update(updatedLot, conn, transaction);
                         transaction.Commit();
                     }
                     catch (Exception ex)
@@ -354,6 +355,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
         }
+
+
         public void LoadLot(LotGridModel lot)
         {
 
@@ -380,16 +383,61 @@ namespace DevExpress.ProductsDemo.Win.Modules
         private void gridView1_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             ShowLotDetails();
+            var lot = gridView1.GetRow(gridView1.FocusedRowHandle) as LotGridModel;
+            
         }
+        private void gridView1_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (gridView1.FocusedColumn?.FieldName != "OperationName") return;
 
+            e.Cancel = true;
+
+            var lot = gridView1.GetFocusedRow() as LotGridModel;
+            if (lot == null) return;
+
+            string[] parts = (lot.OperationName ?? "").Split('\u001F');
+            string projectName = parts.Length > 0 ? parts[0].Trim() : "";
+            string lotName = parts.Length > 1 ? parts[1].Trim() : "";
+
+            using (var dlg = new OperationNameEditDialog(projectName, lotName))
+            {
+                if (dlg.ShowDialog() != DialogResult.OK) return;
+
+                lot.OperationName = $"{dlg.ProjectName}\u001F{dlg.LotName}";
+                lot.LotName = dlg.LotName;
+
+                foreach (var row in _data)
+                {
+                    if (row.ProjectId == lot.ProjectId && row.Id != lot.Id)
+                    {
+                        string[] p = (row.OperationName ?? "").Split('\u001F');
+                        string oldLotName = p.Length > 1 ? p[1].Trim() : "";
+                        row.OperationName = $"{dlg.ProjectName}\u001F{oldLotName}";
+                    }
+                }
+
+                gridView1.RefreshData();
+
+                gridView1_RowUpdated(sender, new RowObjectEventArgs(gridView1.FocusedRowHandle, lot));
+            }
+        }
         private void gridView1_CustomColumnDisplayText(object sender, CustomColumnDisplayTextEventArgs e)
         {
+            if (e.Column.FieldName == "OperationName")
+            {
+                e.DisplayText = (e.Value?.ToString() ?? "")
+                    .Replace('\u001F', '\n');
+                  //  .Replace('|', '\n'); // safety fallback
+                return;
+            }
+
             if (e.Column.ColumnType == typeof(DateTime?))
             {
                 DateTime? value = e.Value as DateTime?;
                 if (value == null || !value.HasValue)
                     e.DisplayText = Properties.Resources.None;
             }
+           
         }
 
         private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
@@ -414,6 +462,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
             }
         }
 
+       
+     
         // ── BaseModule overrides ─────────────────────────────────────
         protected override DevExpress.XtraGrid.GridControl Grid { get { return gridControl1; } }
 
@@ -491,6 +541,136 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             // Tells the grid we successfully handled this specific data cell's custom painting
             e.Handled = true;
+        }
+    }
+
+    public class OperationNameEditDialog : XtraForm
+    {
+        public string ProjectName { get; private set; }
+        public string LotName { get; private set; }
+
+        private MemoEdit txtProject = new MemoEdit();
+        private MemoEdit txtLot = new MemoEdit();
+
+        public OperationNameEditDialog(string projectName, string lotName)
+        {
+            // ── Form settings ─────────────────────────────────────────
+            Text = "تعديل اسم العملية";
+            Width = 450;
+            Height = 380;
+            RightToLeft = RightToLeft.Yes;
+            RightToLeftLayout = true;
+            StartPosition = FormStartPosition.CenterParent;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            Padding = new Padding(15);
+
+            // ── Main layout ───────────────────────────────────────────
+            var layout = new TableLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                ColumnCount = 1,
+                RowCount = 5,
+                Padding = new Padding(10),
+            };
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 25));  // label project
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 50));   // txt project
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 25));  // label lot
+            layout.RowStyles.Add(new RowStyle(SizeType.Percent, 50));   // txt lot
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 45));  // buttons
+
+            // ── Labels ───────────────────────────────────────────────
+            var lblProject = new LabelControl
+            {
+                Text = "اسم العملية",
+                Dock = DockStyle.Fill,
+                Appearance = { Font = new Font("Tahoma", 9, FontStyle.Bold) }
+            };
+
+            var lblLot = new LabelControl
+            {
+                Text = "اسم الحصة",
+                Dock = DockStyle.Fill,
+                Appearance = { Font = new Font("Tahoma", 9, FontStyle.Bold) }
+            };
+
+            // ── Text editors ─────────────────────────────────────────
+            txtProject.Text = projectName;
+            txtProject.Dock = DockStyle.Fill;
+            txtProject.Properties.Appearance.Font = new Font("Tahoma", 9);
+            txtProject.Properties.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
+            txtProject.Properties.ScrollBars = ScrollBars.None;
+
+            txtLot.Text = lotName;
+            txtLot.Dock = DockStyle.Fill;
+            txtLot.Properties.Appearance.Font = new Font("Tahoma", 9);
+            txtLot.Properties.Appearance.TextOptions.HAlignment = HorzAlignment.Center;
+            txtLot.Properties.ScrollBars = ScrollBars.None;
+
+            // ── Buttons panel ─────────────────────────────────────────
+            var btnPanel = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                FlowDirection = FlowDirection.RightToLeft,
+                Padding = new Padding(0, 5, 0, 0)
+            };
+
+            var btnOk = new SimpleButton
+            {
+                Text = "حفظ",
+                Width = 90,
+                Height = 32,
+                Appearance = { Font = new Font("Tahoma", 9, FontStyle.Bold) }
+            };
+
+            var btnCancel = new SimpleButton
+            {
+                Text = "إلغاء",
+                Width = 90,
+                Height = 32,
+                Appearance = { Font = new Font("Tahoma", 9) }
+            };
+
+            btnOk.Click += (s, e) =>
+            {
+                if (string.IsNullOrWhiteSpace(txtProject.Text))
+                {
+                    XtraMessageBox.Show("اسم العملية مطلوب", "تحذير",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtProject.Focus();
+                    return;
+                }
+                ProjectName = txtProject.Text.Trim();
+                LotName = txtLot.Text.Trim();
+                DialogResult = DialogResult.OK;
+                Close();
+            };
+
+            btnCancel.Click += (s, e) =>
+            {
+                DialogResult = DialogResult.Cancel;
+                Close();
+            };
+
+            // ── Accept / Cancel keys ──────────────────────────────────
+            AcceptButton = btnOk;
+            CancelButton = btnCancel;
+
+            btnPanel.Controls.Add(btnOk);
+            btnPanel.Controls.Add(btnCancel);
+
+            // ── Add to layout ─────────────────────────────────────────
+            layout.Controls.Add(lblProject, 0, 0);
+            layout.Controls.Add(txtProject, 0, 1);
+            layout.Controls.Add(lblLot, 0, 2);
+            layout.Controls.Add(txtLot, 0, 3);
+            layout.Controls.Add(btnPanel, 0, 4);
+
+            Controls.Add(layout);
+
+            // ── Focus project on open ─────────────────────────────────
+            Shown += (s, e) => txtProject.Focus();
         }
     }
 }

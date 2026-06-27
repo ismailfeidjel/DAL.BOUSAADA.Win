@@ -305,6 +305,7 @@
             this.showEditStyleFormItem1 = new DevExpress.XtraRichEdit.UI.ShowEditStyleFormItem();
             this.showInsertTableCellsFormItem1 = new DevExpress.XtraRichEdit.UI.ShowInsertTableCellsFormItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.btnsave = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -660,9 +661,10 @@
             this.barButtonItem2,
             this.barButtonItem3,
             this.btnAddLot,
-            this.btnRemoveLot});
+            this.btnRemoveLot,
+            this.btnsave});
             resources.ApplyResources(this.ribbonControl1, "ribbonControl1");
-            this.ribbonControl1.MaxItemId = 155;
+            this.ribbonControl1.MaxItemId = 156;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.homeRibbonPage1});
@@ -1729,6 +1731,7 @@
             // btnAddLot
             // 
             resources.ApplyResources(this.btnAddLot, "btnAddLot");
+            this.btnAddLot.Enabled = false;
             this.btnAddLot.Id = 153;
             this.btnAddLot.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnAddLot.ImageOptions.LargeImage")));
             this.btnAddLot.Name = "btnAddLot";
@@ -1737,6 +1740,7 @@
             // btnRemoveLot
             // 
             resources.ApplyResources(this.btnRemoveLot, "btnRemoveLot");
+            this.btnRemoveLot.Enabled = false;
             this.btnRemoveLot.Id = 154;
             this.btnRemoveLot.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnRemoveLot.ImageOptions.LargeImage")));
             this.btnRemoveLot.Name = "btnRemoveLot";
@@ -1753,6 +1757,7 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup1.ItemLinks.Add(this.btnsave);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // ribbonPageGroup2
@@ -2646,6 +2651,15 @@
             // 
             this.dxValidationProvider1.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Auto;
             // 
+            // btnsave
+            // 
+            resources.ApplyResources(this.btnsave, "btnsave");
+            this.btnsave.Enabled = false;
+            this.btnsave.Id = 155;
+            this.btnsave.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.LargeImage")));
+            this.btnsave.Name = "btnsave";
+            this.btnsave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiSave_ItemClick);
+            // 
             // frmeditproject
             // 
             resources.ApplyResources(this, "$this");
@@ -3060,5 +3074,6 @@
         private XtraEditors.TextEdit textEdit13;
         private XtraEditors.TextEdit textEdit14;
         private XtraEditors.MemoEdit txtOperationName;
+        private XtraBars.BarButtonItem btnsave;
     }
 }
