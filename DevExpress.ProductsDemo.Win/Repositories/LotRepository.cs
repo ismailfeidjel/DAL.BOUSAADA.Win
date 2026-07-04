@@ -102,8 +102,10 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             ON ps.id = l.project_status_id
 
         ORDER BY
-            p.operation_number,
-            l.lot_number";
+    p.daira_id,
+    p.commune_id,
+    p.operation_number DESC,
+    l.lot_number DESC";
 
                 using (var cmd = new MySqlCommand(sql, conn))
                 using (var rd = cmd.ExecuteReader())
@@ -281,7 +283,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
         ORDER BY
             p.operation_number,
-            l.lot_number";
+            l.lot_number DESC";
 
                 using (var cmd = new MySqlCommand(sql, conn))
                 {

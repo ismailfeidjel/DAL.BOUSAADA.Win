@@ -110,6 +110,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             AddCol("OperationNumber", "رقم ", 110);
             AddCol("Daira", "الدائرة", 100);
             gridView1.Columns["Daira"].OptionsColumn.AllowMerge = DefaultBoolean.True;
+            AddCol("LotNumber", "N", 100);
 
             AddCol("Commune", "البلدية", 100);
             AddCol("OperationName", "اسم العملية", 180);

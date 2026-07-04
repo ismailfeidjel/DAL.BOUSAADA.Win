@@ -57,22 +57,24 @@ namespace DevExpress.ProductsDemo.Win.Forms
         private void LoadProjectData( LotGridModel sourceLot)
         {
             // ── Project fields from LotGridModel ─────────────────────
-            txtOperationNumber.Text = sourceLot.OperationNumber ?? "";
             string[] parts = (sourceLot.OperationName ?? "").Split('\u001F');
             txtOperationName.Text = parts.Length > 0 ? parts[0].Trim() : "";
-            cmbDaira.EditValue = sourceLot.DairaId;
-            cmbCommune.EditValue = sourceLot.CommuneId;
-            cmbDomain.EditValue = sourceLot.DomainId;
-            cmbSector.EditValue = sourceLot.SectorId;
+            _lot=sourceLot;
+       
 
             // ── Lots from database ────────────────────────────────────
             var lots = _lotRepo.GetByProjectId(sourceLot.ProjectId);
 
             var lot1 = lots.FirstOrDefault(l => l.LotNumber == 1);
-            if (lot1 != null) LoadLot1(lot1);
+            if (lot1 != null) { LoadLot1(lot1); cmbDaira.EditValue = lot1.DairaId; cmbCommune.EditValue = lot1.CommuneId;
+                cmbDomain.EditValue = lot1.DomainId;
+                cmbSector.EditValue = lot1.SectorId;
+                txtOperationNumber.Text = lot1.OperationNumber;
+                cmbProgram.EditValue = lot1.ProgramId;
+            }
 
             var lot2 = lots.FirstOrDefault(l => l.LotNumber == 2);
-            if (lot2 != null) { tabLot2.PageVisible = true; LoadLot2(lot2); }
+            if (lot2 != null) { tabLot2.PageVisible = true;HasLots=true ; LoadLot2(lot2); }
 
             var lot3 = lots.FirstOrDefault(l => l.LotNumber == 3);
             if (lot3 != null) { tabLot3.PageVisible = true; LoadLot3(lot3); }
@@ -154,7 +156,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
            // bbiSave.Enabled = editable;
            // bbiEdit.Enabled = !editable;
             btnAddLot.Enabled = editable;
-            btnRemoveLot.Enabled = editable;
+            btnRemoveLot.Enabled = false;// editable;
             btnsave.Enabled = editable;
 
         }
@@ -270,21 +272,28 @@ namespace DevExpress.ProductsDemo.Win.Forms
 
                         if (lot1 != null)
                         {
-                            lot1.LotName = txtLotName.Text.Trim();
-                            lot1.LotBudget = string.IsNullOrWhiteSpace(txtLotBudget.Text) ? 0 : Convert.ToDecimal(txtLotBudget.Text);
-                            lot1.RegisteredAmount = string.IsNullOrWhiteSpace(txtRegisteredAmount.Text) ? 0 : Convert.ToDecimal(txtRegisteredAmount.Text);
-                            lot1.ConsumedAmount = string.IsNullOrWhiteSpace(txtConsumedAmount.Text) ? 0 : Convert.ToDecimal(txtConsumedAmount.Text);
-                            lot1.Contractor = NullIfBlank(txtContractor.Text);
-                            lot1.ExecutionDuration = spnExecutionDuration.Value > 0 ? (int?)Convert.ToInt32(spnExecutionDuration.Value) : null;
-                            lot1.StartDate = dtStartDate.EditValue == null || dtStartDate.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dtStartDate.EditValue);
-                            lot1.PhysicalProgress = spnPhysicalProgress.Value;
-                            lot1.AdministrativeProcedureId = NullableId(cmbAdminProcedure);
-                            lot1.SpecialStatus1Id = NullableId(cmbSpecialStatus1);
-                            lot1.SpecialStatus2Id = NullableId(cmbSpecialStatus2);
-                            lot1.SpecialStatus3Id = NullableId(cmbSpecialStatus3);
-                            lot1.ProjectStatusId = NullableId(cmbProjectStatus);
-                            lot1.Notes = NullIfBlank(txtLotNotes.Text);
-                            _lotRepo.Update(lot1, conn, transaction);
+
+                            var updatedLot1 = new Domain.Lot
+                            {
+                            Id = lot1.Id,//
+                            LotNumber = lot1.LotNumber,
+                            LotName = txtLotName.Text.Trim(),
+                            LotBudget = string.IsNullOrWhiteSpace(txtLotBudget.Text) ? 0 : Convert.ToDecimal(txtLotBudget.Text),
+                            RegisteredAmount = string.IsNullOrWhiteSpace(txtRegisteredAmount.Text) ? 0 : Convert.ToDecimal(txtRegisteredAmount.Text),
+                            ConsumedAmount = string.IsNullOrWhiteSpace(txtConsumedAmount.Text) ? 0 : Convert.ToDecimal(txtConsumedAmount.Text),
+                            Contractor = NullIfBlank(txtContractor.Text),
+                            ExecutionDuration = spnExecutionDuration.Value > 0 ? (int?)Convert.ToInt32(spnExecutionDuration.Value) : null,
+                            StartDate = dtStartDate.EditValue == null || dtStartDate.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dtStartDate.EditValue),
+                            PhysicalProgress = spnPhysicalProgress.Value,
+                            AdministrativeProcedureId = NullableId(cmbAdminProcedure),
+                            SpecialStatus1Id = NullableId(cmbSpecialStatus1),
+                            SpecialStatus2Id = NullableId(cmbSpecialStatus2),
+                            SpecialStatus3Id = NullableId(cmbSpecialStatus3),
+                            ProjectStatusId = NullableId(cmbProjectStatus),
+                            Notes = NullIfBlank(txtLotNotes.Text)
+                        };
+
+                            _lotRepo.Update(updatedLot1, conn, transaction);
                         }
 
                         // ── Update Lot 2 ──────────────────────────────────────
@@ -293,21 +302,26 @@ namespace DevExpress.ProductsDemo.Win.Forms
                             var lot2 = lots.FirstOrDefault(l => l.LotNumber == 2);
                             if (lot2 != null)
                             {
-                                lot2.LotName = textEdit2.Text.Trim();
-                                lot2.LotBudget = string.IsNullOrWhiteSpace(textEdit6.Text) ? 0 : Convert.ToDecimal(textEdit6.Text);
-                                lot2.RegisteredAmount = string.IsNullOrWhiteSpace(textEdit5.Text) ? 0 : Convert.ToDecimal(textEdit5.Text);
-                                lot2.ConsumedAmount = string.IsNullOrWhiteSpace(textEdit7.Text) ? 0 : Convert.ToDecimal(textEdit7.Text);
-                                lot2.Contractor = NullIfBlank(textEdit4.Text);
-                                lot2.ExecutionDuration = spinEdit2.Value > 0 ? (int?)Convert.ToInt32(spinEdit2.Value) : null;
-                                lot2.StartDate = dateEdit1.EditValue == null || dateEdit1.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dateEdit1.EditValue);
-                                lot2.PhysicalProgress = spinEdit3.Value;
-                                lot2.AdministrativeProcedureId = NullableId(lookUpEdit7);
-                                lot2.SpecialStatus1Id = NullableId(lookUpEdit8);
-                                lot2.SpecialStatus2Id = NullableId(lookUpEdit6);
-                                lot2.SpecialStatus3Id = NullableId(lookUpEdit9);
-                                lot2.ProjectStatusId = NullableId(lookUpEdit10);
-                                lot2.Notes = NullIfBlank(memoEdit1.Text);
-                                _lotRepo.Update(lot2, conn, transaction);
+                                var updatedLot2 = new Domain.Lot
+                                {
+                                Id = lot2.Id,//
+                                LotNumber = lot2.LotNumber,
+                                LotName = textEdit2.Text.Trim(),
+                                LotBudget = string.IsNullOrWhiteSpace(textEdit6.Text) ? 0 : Convert.ToDecimal(textEdit6.Text),
+                                RegisteredAmount = string.IsNullOrWhiteSpace(textEdit5.Text) ? 0 : Convert.ToDecimal(textEdit5.Text),
+                                ConsumedAmount = string.IsNullOrWhiteSpace(textEdit7.Text) ? 0 : Convert.ToDecimal(textEdit7.Text),
+                                Contractor = NullIfBlank(textEdit4.Text),
+                                ExecutionDuration = spinEdit2.Value > 0 ? (int?)Convert.ToInt32(spinEdit2.Value) : null,
+                                StartDate = dateEdit1.EditValue == null || dateEdit1.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dateEdit1.EditValue),
+                                PhysicalProgress = spinEdit3.Value,
+                                AdministrativeProcedureId = NullableId(lookUpEdit7),
+                                SpecialStatus1Id = NullableId(lookUpEdit8),
+                                SpecialStatus2Id = NullableId(lookUpEdit6),
+                                SpecialStatus3Id = NullableId(lookUpEdit9),
+                                ProjectStatusId = NullableId(lookUpEdit10),
+                                Notes = NullIfBlank(memoEdit1.Text)
+                                 };
+                                _lotRepo.Update(updatedLot2, conn, transaction);
                             }
                         }
                         if (tabLot3.PageVisible)
@@ -315,21 +329,25 @@ namespace DevExpress.ProductsDemo.Win.Forms
                             var lot3 = lots.FirstOrDefault(l => l.LotNumber == 3);
                             if (lot3 != null)
                             {
-                                lot3.LotName = textEdit9.Text.Trim();
-                                lot3.LotBudget = string.IsNullOrWhiteSpace(textEdit13.Text) ? 0 : Convert.ToDecimal(textEdit13.Text);
-                                lot3.RegisteredAmount = string.IsNullOrWhiteSpace(textEdit12.Text) ? 0 : Convert.ToDecimal(textEdit12.Text);
-                                lot3.ConsumedAmount = string.IsNullOrWhiteSpace(textEdit14.Text) ? 0 : Convert.ToDecimal(textEdit14.Text);
-                                lot3.Contractor = NullIfBlank(textEdit11.Text);
-                                lot3.ExecutionDuration = spinEdit5.Value > 0 ? (int?)Convert.ToInt32(spinEdit5.Value) : null;
-                                lot3.StartDate = dateEdit2.EditValue == null || dateEdit2.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dateEdit2.EditValue);
-                                lot3.PhysicalProgress = spinEdit6.Value;
-                                lot3.AdministrativeProcedureId = NullableId(lookUpEdit17);
-                                lot3.SpecialStatus1Id = NullableId(lookUpEdit18);
-                                lot3.SpecialStatus2Id = NullableId(lookUpEdit16);
-                                lot3.SpecialStatus3Id = NullableId(lookUpEdit19);
-                                lot3.ProjectStatusId = NullableId(lookUpEdit20);
-                                lot3.Notes = NullIfBlank(memoEdit2.Text);
-                                _lotRepo.Update(lot3, conn, transaction);
+                                var updatedLot3 = new Domain.Lot
+                                {
+                                Id = lot3.Id,//
+                                LotNumber = lot3.LotNumber,
+                                LotName = textEdit9.Text.Trim(),
+                                LotBudget = string.IsNullOrWhiteSpace(textEdit13.Text) ? 0 : Convert.ToDecimal(textEdit13.Text),
+                                RegisteredAmount = string.IsNullOrWhiteSpace(textEdit12.Text) ? 0 : Convert.ToDecimal(textEdit12.Text),
+                                ConsumedAmount = string.IsNullOrWhiteSpace(textEdit14.Text) ? 0 : Convert.ToDecimal(textEdit14.Text),
+                                Contractor = NullIfBlank(textEdit11.Text),
+                                ExecutionDuration = spinEdit5.Value > 0 ? (int?)Convert.ToInt32(spinEdit5.Value) : null,
+                                StartDate = dateEdit2.EditValue == null || dateEdit2.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dateEdit2.EditValue),
+                                PhysicalProgress = spinEdit6.Value,
+                                AdministrativeProcedureId = NullableId(lookUpEdit17),
+                                SpecialStatus1Id = NullableId(lookUpEdit18),
+                                SpecialStatus2Id = NullableId(lookUpEdit16),
+                                SpecialStatus3Id = NullableId(lookUpEdit19),
+                                ProjectStatusId = NullableId(lookUpEdit20),
+                                Notes = NullIfBlank(memoEdit2.Text)};
+                                _lotRepo.Update(updatedLot3, conn, transaction);
                             }
                         }
 
