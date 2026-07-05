@@ -5,6 +5,7 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraNavBar;
 using DevExpress.XtraSplashScreen;
 using DevExpress.XtraBars;
+using DevExpress.XtraReports.UI;
 using DevExpress.XtraBars.Ribbon.Gallery;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraPrinting;
@@ -18,6 +19,8 @@ using DevExpress.DXperience.Demos;
 using System.Drawing;
 using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.ProductsDemo.Win.Modules;
+using DevExpress.XtraReports.Native;
+using DevExpress.XtraReports.ReportGeneration;
 
 namespace DevExpress.ProductsDemo.Win {
     public partial class frmMain : RibbonForm {
@@ -25,6 +28,9 @@ namespace DevExpress.ProductsDemo.Win {
         ZoomManager _zoomManager;
         List<BarItem> AllowCustomizationMenuList = new List<BarItem>();
         GuideGenerator guideGenerator;
+
+
+
         public frmMain() {
             TaskbarHelper.InitDemoJumpList(TaskbarAssistant.Default, this);
             InitializeComponent();
@@ -336,9 +342,42 @@ namespace DevExpress.ProductsDemo.Win {
             }
         }
 
+        public void SwitchToReportsAndLoad(XtraReport report)
+        {
+            if (report == null) return;
+
+            NavBarItemLink reportsLink = null;
+
+            // Explicitly iterate through the NavBarItemLink objects in the group's ItemLinks collection
+            foreach (NavBarItemLink link in nbgModules.ItemLinks)
+            {
+        if (link.Item == nbiReports)
+                {
+                    reportsLink = link;
+                    break;
+                }
+            }
+
+            if (reportsLink != null)
+            {
+                // 1. Programmatically trigger the navigation shift
+                modulesNavigator.ChangeSelectedItem(reportsLink, null); 
+        
+        // 2. Access the freshly loaded module instance and inject the report
+        if (modulesNavigator.CurrentModule is ReportsModule reportsMod)
+                {
+                    reportsMod.OpenExternalReport(report);
+                }
+            }
+        }
+
         private void barButtonItem1_ItemClick(object sender, ItemClickEventArgs e)
         {
-            modulesNavigator.CurrentModule?.ShowColumnChooser();
+            //modulesNavigator.CurrentModule?.ShowColumnChooser();
+            if (modulesNavigator.CurrentModule is ProjectModule pm)
+            {
+        pm.ExportGridToDesignerReport();
+            }
 
         }
         private void btnPreview_ItemClick(object sender, ItemClickEventArgs e)

@@ -15,6 +15,8 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraNavBar;
 using DevExpress.XtraPrinting;
+using DevExpress.XtraReports.ReportGeneration;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -239,26 +241,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         }
 
-        public void PrintGrid()
-        {
-            // Apply RTL before printing
-            gridControl1.RightToLeft = RightToLeft.Yes;
-
-            var ps = new DevExpress.XtraPrinting.PrintingSystem();
-            var link = new DevExpress.XtraPrinting.PrintableComponentLink(ps);
-            link.Component = gridControl1;
-            link.Landscape = true;
-           // link.PaperKind = System.Drawing.Printing.PaperKind.A3;
-           // link.Margins = new DevExpress.Drawing.Printing.DXMargins(10, 10, 10, 10);
-            link.RtfReportHeader = $@"{{\rtf1\ansi\ansicpg1256\deff0
-{{\fonttbl{{\f0\fnil\fcharset178 Tahoma;}}}}
-\viewkind4\uc1\pard\qc\rtlpar\lang1025\f0\fs26\b 
-ولاية بوسعادة - متابعة البرامج التنموية\b0\par
-\fs20 تاريخ الطباعة: {DateTime.Now:dd/MM/yyyy}\par
-}}";
-            link.CreateDocument();
-            link.ShowRibbonPreviewDialog(this.LookAndFeel);
-        }
+       
 
 
         private bool _layoutReady = false;
@@ -677,6 +660,33 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 GridHelper.GridViewFocusObject(view, obj);
         }
 
+        public void ExportGridToDesignerReport()
+        {
+            if (gridView1.RowCount == 0)
+            {
+                DevExpress.XtraEditors.XtraMessageBox.Show("لا توجد بيانات لتصديرها.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 1. Convert the current functional GridView setup into an XtraReport instance
+            XtraReport dynamicReport = ReportGenerator.GenerateReport(gridView1);
+
+            // ── ADD THESE TWO LINES TO FIX THE COLUMN DIRECTION ───────────────────
+            dynamicReport.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
+            // This flips the columns so that "رقم" starts on the far right
+            dynamicReport.RightToLeftLayout = DevExpress.XtraReports.UI.RightToLeftLayout.Yes; 
+            // ──────────────────────────────────────────────────────────────────────
+
+            // Optional layout refinements for Bou Saâda Development tracking header context
+            dynamicReport.DisplayName = $"تقرير_{DateTime.Now:yyyyMMdd_HHmmss}";
+
+            // 2. Bubble the generated object up to the parent shell form container
+            if (this.FindForm() is frmMain mainForm)
+            {
+                mainForm.SwitchToReportsAndLoad(dynamicReport);
+            }
+        }
+
         private void gridView1_CustomDrawCell(object sender, RowCellCustomDrawEventArgs e)
         {
             // FIX: Ensure we are only customizing standard data rows. 
@@ -738,7 +748,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             Text = "تعديل اسم العملية";
             Width = 450;
             Height = 380;
-            RightToLeft = RightToLeft.Yes;
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterParent;
             FormBorderStyle = FormBorderStyle.FixedDialog;

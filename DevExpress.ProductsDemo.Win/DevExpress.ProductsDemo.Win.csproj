@@ -574,6 +574,12 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
+    <Compile Include="MasterDetailReport\Report - Copy.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MasterDetailReport\Report - Copy.Designer.cs">
+      <DependentUpon>Report - Copy.cs</DependentUpon>
+    </Compile>
     <Compile Include="MasterDetailReport\Report.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -617,6 +623,12 @@
     </Compile>
     <Compile Include="Modules\PdfViewer.Designer.cs">
       <DependentUpon>PdfViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modules\Reports - Copy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Modules\Reports - Copy.Designer.cs">
+      <DependentUpon>Reports - Copy.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Sales\BaseModule.cs">
       <SubType>UserControl</SubType>
@@ -782,6 +794,9 @@
       <DependentUpon>frmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="MasterDetailReport\Report - Copy.resx">
+      <DependentUpon>Report - Copy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MasterDetailReport\Report.resx">
       <DependentUpon>Report.cs</DependentUpon>
     </EmbeddedResource>
@@ -811,6 +826,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Pivot.resx">
       <DependentUpon>Pivot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modules\Reports - Copy.resx">
+      <DependentUpon>Reports - Copy.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Reports.resx">
       <DependentUpon>Reports.cs</DependentUpon>

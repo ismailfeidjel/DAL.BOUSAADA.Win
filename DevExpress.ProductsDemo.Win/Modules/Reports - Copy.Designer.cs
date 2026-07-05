@@ -1,5 +1,5 @@
 ﻿namespace DevExpress.ProductsDemo.Win.Modules {
-    partial class ReportsModule {
+    partial class ReeportsModule {
         /// <summary> 
         /// Required designer variable.
         /// </summary>

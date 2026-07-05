@@ -9,32 +9,23 @@ using System.Windows.Forms;
 using DevExpress.XtraReports.UI;
 using System.IO;
 
-namespace DevExpress.ProductsDemo.Win.Modules
-{
-    public partial class ReportsModule : BaseModule
-    {
-        static ReportsModule()
-        {
+namespace DevExpress.ProductsDemo.Win.Modules {
+    public partial class ReeportsModule : BaseModule {
+        static ReeportsModule() {
             string dbPath = DevExpress.Utils.FilesHelper.FindingFileName(AppDomain.CurrentDomain.BaseDirectory, @"Data\nwind.mdb", false);
             AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetDirectoryName(dbPath));
         }
-        public ReportsModule()
-        {
+        public ReeportsModule() {
             InitializeComponent();
         }
 
-
-
-        internal override void ShowModule(bool firstShow)
-        {
+        internal override void ShowModule(bool firstShow) {
             base.ShowModule(firstShow);
-            if (firstShow)
-            {
+            if(firstShow) {
                 reportDesigner1.ContainerControl = this;
                 XtraReport report = new DevExpress.ProductsDemo.Win.MasterDetailReport.Report();
                 report.ReportPrintOptions.DetailCountAtDesignTime = 0;
-                foreach (XtraReportBase item in report.AllControls<XtraReportBase>())
-                {
+                foreach(XtraReportBase item in report.AllControls<XtraReportBase>()) {
                     item.ReportPrintOptions.DetailCountAtDesignTime = 0;
                 }
                 reportDesigner1.OpenReport(report);
@@ -42,32 +33,14 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByText("VIEW");
                 MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
                 var reportControl = reportDesigner1.ActiveDesignPanel.GetService(typeof(DevExpress.XtraReports.Design.ReportTabControl)) as DevExpress.XtraReports.Design.ReportTabControl;
-                if (reportControl == null || reportControl.PreviewControl == null) return;
+                if(reportControl == null || reportControl.PreviewControl == null) return;
                 DevExpress.XtraBars.Docking.DockPanel documentMapDockPanel = reportControl.PreviewControl.GetDockPanel(XtraPrinting.Preview.PreviewDockPanelKind.DocumentMap);
-                if (documentMapDockPanel != null)
-                {
+                if(documentMapDockPanel != null) {
                     documentMapDockPanel.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Right;
                 }
                 return;
             }
             MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
-        }
-
-        public void OpenExternalReport(XtraReport report)
-        {
-            if (report == null) return;
-
-            // Ensure the designer container is set up
-            reportDesigner1.ContainerControl = this;
-
-            // Open the runtime-generated report inside the workspace designer
-            reportDesigner1.OpenReport(report);
-
-            // Force focus to the designer view page
-            if (MainRibbon != null && ribbonPagePreview != null)
-            {
-                MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
-            }
         }
 
         protected override bool AutoMergeRibbon { get { return true; } }

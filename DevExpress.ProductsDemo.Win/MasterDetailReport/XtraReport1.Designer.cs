@@ -53,12 +53,15 @@
             this.TopMargin,
             this.BottomMargin,
             this.Detail});
-            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
+            this.Font = new DevExpress.Drawing.DXFont("Tahoma", 8F);
             this.Landscape = true;
             this.Margins = new DevExpress.Drawing.DXMargins(50F, 50F, 50F, 50F);
             this.PageHeight = 827;
             this.PageWidth = 1169;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
+            this.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
+            this.RightToLeftLayout = DevExpress.XtraReports.UI.RightToLeftLayout.Yes;
+            this.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             this.Version = "24.1";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
