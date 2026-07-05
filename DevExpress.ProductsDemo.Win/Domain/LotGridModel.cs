@@ -50,6 +50,16 @@ public class LotGridModel
 
     public DateTime? StartDate { get; set; }
 
+    public DateTime? ExpectedEndDate =>
+    StartDate.HasValue && ExecutionDuration.HasValue
+        ? StartDate.Value.AddDays(ExecutionDuration.Value)
+        : (DateTime?)null;
+
+    public int? DaysRemaining =>
+    ExpectedEndDate.HasValue
+        ? (int)(ExpectedEndDate.Value - DateTime.Today).TotalDays
+        : (int?)null;
+
     public decimal PhysicalProgress { get; set; }
     public decimal FinancialProgress =>
        RegisteredAmount <= 0
@@ -79,4 +89,7 @@ public class LotGridModel
 
     // ملاحظات
     public string Notes { get; set; }
+
+    public string UpdatedBy { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 }

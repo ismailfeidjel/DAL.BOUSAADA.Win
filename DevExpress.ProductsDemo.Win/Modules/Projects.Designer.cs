@@ -26,12 +26,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectModule));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this._detailPanel = new System.Windows.Forms.Panel();
+            this.txtexceptedend = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtremaningdays = new System.Windows.Forms.TextBox();
+            this.txtupdateddate = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtupdateby = new System.Windows.Forms.TextBox();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.repositoryItemImageComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox();
@@ -46,6 +47,10 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.colComplete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colOverdue = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.lookUp5 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUp6 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUp7 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUp8 = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             this._detailPanel.SuspendLayout();
@@ -61,6 +66,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp5.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp6.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp7.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp8.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -75,44 +84,54 @@
             // 
             // _detailPanel
             // 
+            this._detailPanel.Controls.Add(this.lookUp8);
+            this._detailPanel.Controls.Add(this.lookUp7);
+            this._detailPanel.Controls.Add(this.lookUp6);
+            this._detailPanel.Controls.Add(this.lookUp5);
+            this._detailPanel.Controls.Add(this.txtexceptedend);
+            this._detailPanel.Controls.Add(this.label3);
+            this._detailPanel.Controls.Add(this.label2);
+            this._detailPanel.Controls.Add(this.txtremaningdays);
+            this._detailPanel.Controls.Add(this.txtupdateddate);
             this._detailPanel.Controls.Add(this.label1);
-            this._detailPanel.Controls.Add(this.textBox8);
-            this._detailPanel.Controls.Add(this.textBox7);
-            this._detailPanel.Controls.Add(this.textBox6);
-            this._detailPanel.Controls.Add(this.textBox5);
-            this._detailPanel.Controls.Add(this.textBox1);
+            this._detailPanel.Controls.Add(this.txtupdateby);
             resources.ApplyResources(this._detailPanel, "_detailPanel");
             this._detailPanel.Name = "_detailPanel";
+            // 
+            // txtexceptedend
+            // 
+            resources.ApplyResources(this.txtexceptedend, "txtexceptedend");
+            this.txtexceptedend.Name = "txtexceptedend";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // txtremaningdays
+            // 
+            resources.ApplyResources(this.txtremaningdays, "txtremaningdays");
+            this.txtremaningdays.Name = "txtremaningdays";
+            // 
+            // txtupdateddate
+            // 
+            resources.ApplyResources(this.txtupdateddate, "txtupdateddate");
+            this.txtupdateddate.Name = "txtupdateddate";
             // 
             // label1
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
             // 
-            // textBox8
+            // txtupdateby
             // 
-            resources.ApplyResources(this.textBox8, "textBox8");
-            this.textBox8.Name = "textBox8";
-            // 
-            // textBox7
-            // 
-            resources.ApplyResources(this.textBox7, "textBox7");
-            this.textBox7.Name = "textBox7";
-            // 
-            // textBox6
-            // 
-            resources.ApplyResources(this.textBox6, "textBox6");
-            this.textBox6.Name = "textBox6";
-            // 
-            // textBox5
-            // 
-            resources.ApplyResources(this.textBox5, "textBox5");
-            this.textBox5.Name = "textBox5";
-            // 
-            // textBox1
-            // 
-            resources.ApplyResources(this.textBox1, "textBox1");
-            this.textBox1.Name = "textBox1";
+            resources.ApplyResources(this.txtupdateby, "txtupdateby");
+            this.txtupdateby.Name = "txtupdateby";
             // 
             // gridControl1
             // 
@@ -266,6 +285,34 @@
             this.colOverdue.Name = "colOverdue";
             this.colOverdue.OptionsColumn.ShowInCustomizationForm = false;
             // 
+            // lookUp5
+            // 
+            resources.ApplyResources(this.lookUp5, "lookUp5");
+            this.lookUp5.Name = "lookUp5";
+            this.lookUp5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit1.Properties.Buttons2"))))});
+            // 
+            // lookUp6
+            // 
+            resources.ApplyResources(this.lookUp6, "lookUp6");
+            this.lookUp6.Name = "lookUp6";
+            this.lookUp6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit1.Properties.Buttons1"))))});
+            // 
+            // lookUp7
+            // 
+            resources.ApplyResources(this.lookUp7, "lookUp7");
+            this.lookUp7.Name = "lookUp7";
+            this.lookUp7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit2.Properties.Buttons"))))});
+            // 
+            // lookUp8
+            // 
+            resources.ApplyResources(this.lookUp8, "lookUp8");
+            this.lookUp8.Name = "lookUp8";
+            this.lookUp8.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit1.Properties.Buttons"))))});
+            // 
             // ProjectModule
             // 
             resources.ApplyResources(this, "$this");
@@ -288,6 +335,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp5.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp6.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp7.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp8.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -309,12 +360,17 @@
         private XtraGrid.Columns.GridColumn colOverdue;
         private System.Windows.Forms.Panel _detailPanel;
         private XtraLayout.LayoutControlItem layoutControlItem2;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox txtupdateby;
         private System.Windows.Forms.Label label1;
         public XtraGrid.Views.Grid.GridView gridView1;
+        private System.Windows.Forms.TextBox txtremaningdays;
+        private System.Windows.Forms.TextBox txtupdateddate;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtexceptedend;
+        private XtraEditors.LookUpEdit lookUp7;
+        private XtraEditors.LookUpEdit lookUp6;
+        private XtraEditors.LookUpEdit lookUp5;
+        private XtraEditors.LookUpEdit lookUp8;
     }
 }

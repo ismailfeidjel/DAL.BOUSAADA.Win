@@ -64,7 +64,9 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
             ps.name AS project_status,
 
-            l.notes
+            l.notes,
+            l.updated_by,
+            l.updated_at
 
         FROM lots l
 
@@ -180,7 +182,9 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                             Notes =
                                 rd["notes"] == DBNull.Value
                                     ? null
-                                    : rd["notes"].ToString()
+                                    : rd["notes"].ToString(),
+                            UpdatedBy = rd["updated_by"] == DBNull.Value ? null : rd["updated_by"].ToString(),
+                            UpdatedAt = rd["updated_at"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(rd["updated_at"])
                         });
                     }
                 }

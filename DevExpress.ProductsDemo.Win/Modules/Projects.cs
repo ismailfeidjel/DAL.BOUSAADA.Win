@@ -1,6 +1,7 @@
 ﻿using DevExpress.MailClient.Win;
 using DevExpress.MailDemo.Win;
 using DevExpress.ProductsDemo.Win.Controls;
+using DevExpress.ProductsDemo.Win.Domain;
 using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.ProductsDemo.Win.Repositories;
 using DevExpress.ProductsDemo.Win.Services;
@@ -28,6 +29,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
         private LotGridModel _currentLot;
         private readonly LotRepository _lotRepo = new LotRepository();
         private readonly ProjectRepository _projectRepo = new ProjectRepository();
+        private bool _loadingLot = false;
+
 
 
         public override void ShowColumnChooser() => gridView1.ShowCustomization();
@@ -330,16 +333,23 @@ namespace DevExpress.ProductsDemo.Win.Modules
         // ── Init ─────────────────────────────────────────────────────
         internal override void InitModule(DevExpress.Utils.Menu.IDXMenuManager manager, object data)
         {
-            base.InitModule(manager, data);
-            BuildDetailPanel();
-            SetupGrid();
-            LoadData();
-
-            LoadLayout(); // ← restore saved layout
-            _layoutReady = true; // ← only NOW allow saving
-
-
-
+            try
+            {
+                base.InitModule(manager, data);
+                BuildDetailPanel();
+                SetupGrid();
+                LoadData();
+                LoadLayout();
+                _layoutReady = true;
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(
+                    $"خطأ في تحميل الوحدة:\n\n{ex.Message}\n\n{ex.InnerException?.Message}\n\n{ex.StackTrace}",
+                    "خطأ",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         // ── Data ─────────────────────────────────────────────────────
@@ -354,19 +364,96 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             _detailPanel.Dock = DockStyle.Fill;
 
+            var lookup = new LookupRepository();
+            BindSidePanel(lookUp5, lookup.GetAll("administrative_procedures"));
+            BindSidePanel(lookUp6, lookup.GetAll("special_status1"));
+            BindSidePanel(lookUp7, lookup.GetAll("special_status2"));
+            BindSidePanel(lookUp8, lookup.GetAll("special_status3"));
 
+            lookUp5.EditValueChanged += SidePanelLookup_Changed;
+            lookUp6.EditValueChanged += SidePanelLookup_Changed;
+            lookUp7.EditValueChanged += SidePanelLookup_Changed;
+            lookUp8.EditValueChanged += SidePanelLookup_Changed;
+        }
+
+        private static void BindSidePanel(LookUpEdit cmb, List<LookupItem> src)
+        {
+            var srcWithNull = new List<LookupItem>();
+            srcWithNull.Add(new LookupItem { Id = -1, Name = "— بدون —" });
+            srcWithNull.AddRange(src);
+
+            cmb.Properties.DataSource = srcWithNull;
+            cmb.Properties.DisplayMember = "Name";
+            cmb.Properties.ValueMember = "Id";
+            cmb.Properties.ShowHeader = false;
+            cmb.Properties.NullText = "—";
+          //  cmb.Properties.ReadOnly = true;
+            cmb.Properties.Columns.Clear();
+            cmb.Properties.Columns.Add(new LookUpColumnInfo("Name", 200));
+            
+        }
+
+        private static int? GetLookupValue(LookUpEdit cmb)
+        {
+            if (cmb.EditValue == null || cmb.EditValue == DBNull.Value) return null;
+            int val = Convert.ToInt32(cmb.EditValue);
+            return val == -1 ? (int?)null : val;
         }
 
 
         public void LoadLot(LotGridModel lot)
         {
+            _loadingLot = true; // ← suppress events
 
 
-            // Edit tab
-            textBox5.Text = lot.AdministrativeProcedure ?? "";
-            textBox6.Text = lot.SpecialStatus1 ?? "";
-            textBox7.Text = lot.SpecialStatus2 ?? "";
-            textBox8.Text = lot.SpecialStatus3 ?? "";
+            // Status
+            lookUp5.EditValue = lot.AdministrativeProcedureId;
+            lookUp6.EditValue = lot.SpecialStatus1Id;
+            lookUp7.EditValue = lot.SpecialStatus2Id;
+            lookUp8.EditValue = lot.SpecialStatus3Id;
+
+            // Update info
+            txtupdateby.Text = lot.UpdatedBy ?? "—";
+                txtupdateddate.Text = lot.UpdatedAt.HasValue
+                    ? lot.UpdatedAt.Value.ToString("dd/MM/yyyy HH:mm")
+                    : "—";
+
+             
+              
+
+                txtexceptedend.Text = lot.ExpectedEndDate.HasValue
+                    ? lot.ExpectedEndDate.Value.ToString("dd/MM/yyyy")
+                    : "—";
+            txtexceptedend.ReadOnly = true;
+
+                if (lot.DaysRemaining.HasValue)
+                {
+                    int days = lot.DaysRemaining.Value;
+                    if (days < 0)
+                    {
+                        txtremaningdays.Text = $"متأخر بـ {Math.Abs(days)} يوم";
+                        txtremaningdays.ForeColor = Color.Red;
+                    }
+                    else if (days <= 30)
+                    {
+                        txtremaningdays.Text = $"متبقي {days} يوم";
+                        txtremaningdays.ForeColor = Color.Orange;
+                    }
+                    else
+                    {
+                        txtremaningdays.Text = $"متبقي {days} يوم";
+                        txtremaningdays.ForeColor = Color.Green;
+                    }
+                }
+                else
+                {
+                    txtremaningdays.Text = "—";
+                    txtremaningdays.ForeColor = Color.Gray;
+                }
+
+            _loadingLot = false; // ← re-enable events
+
+
 
         }
 
@@ -421,6 +508,66 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
                 gridView1_RowUpdated(sender, new RowObjectEventArgs(gridView1.FocusedRowHandle, lot));
             }
+        }
+
+        private void SidePanelLookup_Changed(object sender, EventArgs e)
+
+        {
+            if (_loadingLot) return; // ← ignore programmatic changes
+
+            if (_currentLot == null) return;
+
+            _currentLot.AdministrativeProcedureId = GetLookupValue(lookUp5);
+            _currentLot.SpecialStatus1Id = GetLookupValue(lookUp6);
+            _currentLot.SpecialStatus2Id = GetLookupValue(lookUp7);
+            _currentLot.SpecialStatus3Id = GetLookupValue(lookUp8);
+
+            // Save to database
+            using (var conn = new DbHelper().GetConnection())
+            {
+                conn.Open();
+                using (var transaction = conn.BeginTransaction())
+                {
+                    try
+                    {
+                        var updatedLot = new Domain.Lot
+                        {
+                            Id = _currentLot.Id,
+                            ProjectId = _currentLot.ProjectId,
+                            LotNumber = _currentLot.LotNumber,
+                            LotName = _currentLot.LotName,
+                            LotBudget = _currentLot.LotBudget,
+                            RegisteredAmount = _currentLot.RegisteredAmount,
+                            ConsumedAmount = _currentLot.ConsumedAmount,
+                            Contractor = _currentLot.Contractor,
+                            ExecutionDuration = _currentLot.ExecutionDuration,
+                            StartDate = _currentLot.StartDate,
+                            PhysicalProgress = _currentLot.PhysicalProgress,
+                            AdministrativeProcedureId = _currentLot.AdministrativeProcedureId,
+                            SpecialStatus1Id = _currentLot.SpecialStatus1Id,
+                            SpecialStatus2Id = _currentLot.SpecialStatus2Id,
+                            SpecialStatus3Id = _currentLot.SpecialStatus3Id,
+                            ProjectStatusId = _currentLot.ProjectStatusId,
+                            Notes = _currentLot.Notes
+                        };
+
+                        _lotRepo.Update(updatedLot, conn, transaction);
+                        transaction.Commit();
+                        gridView1.RefreshRow(gridView1.FocusedRowHandle);
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        XtraMessageBox.Show(
+                            $"فشل الحفظ، تم التراجع.\n\n{ex.Message}",
+                            "خطأ",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                }
+            }
+
+
         }
         private void gridView1_CustomColumnDisplayText(object sender, CustomColumnDisplayTextEventArgs e)
         {
@@ -543,6 +690,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
             // Tells the grid we successfully handled this specific data cell's custom painting
             e.Handled = true;
         }
+
+      
+
     }
 
     public class OperationNameEditDialog : XtraForm

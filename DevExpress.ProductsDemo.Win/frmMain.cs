@@ -137,7 +137,7 @@ namespace DevExpress.ProductsDemo.Win {
 #endif
             nbiSnap.Visible = false;
             //nbiCharts.Tag = new NavBarGroupTagObject("Charts", typeof(DevExpress.ProductsDemo.Win.Modules.AnalyticsModule));
-            nbiScheduler.Tag = new NavBarGroupTagObject("Scheduler", typeof(DevExpress.ProductsDemo.Win.Modules.SchedulerModule), RibbonControlColorScheme.Purple);
+           // nbiScheduler.Tag = new NavBarGroupTagObject("Scheduler", typeof(DevExpress.ProductsDemo.Win.Modules.SchedulerModule), RibbonControlColorScheme.Purple);
             nbiPdf.Tag = new NavBarGroupTagObject("PdfViewer", typeof(DevExpress.ProductsDemo.Win.Modules.PdfViewerModule), RibbonControlColorScheme.Orange);
             nbiMaps.Tag = new NavBarGroupTagObject("Maps", typeof(DevExpress.ProductsDemo.Win.Modules.MapsModule), RibbonControlColorScheme.Red);
             nbgModules.SelectedLinkIndex = 0;

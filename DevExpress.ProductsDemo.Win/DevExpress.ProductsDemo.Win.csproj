@@ -635,12 +635,6 @@
     <Compile Include="Modules\Sales\ucValuePresenter.Designer.cs">
       <DependentUpon>ucValuePresenter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\AddProject.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\AddProject.Designer.cs">
-      <DependentUpon>AddProject.cs</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Pivot.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -820,9 +814,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Sales\ucValuePresenter.resx">
       <DependentUpon>ucValuePresenter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\AddProject.resx">
-      <DependentUpon>AddProject.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Snap.resx">
       <DependentUpon>Snap.cs</DependentUpon>
