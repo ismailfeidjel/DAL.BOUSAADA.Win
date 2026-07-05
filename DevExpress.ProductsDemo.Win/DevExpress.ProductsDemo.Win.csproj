@@ -141,6 +141,7 @@
       </HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="DevExpress.RichEdit.v24.1.Export, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Snap.v24.1">
       <netcore3ignore />
       <HintPath>
@@ -579,6 +580,12 @@
     <Compile Include="MasterDetailReport\Report.Designer.cs">
       <DependentUpon>Report.cs</DependentUpon>
     </Compile>
+    <Compile Include="MasterDetailReport\XtraReport1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MasterDetailReport\XtraReport1.Designer.cs">
+      <DependentUpon>XtraReport1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modules\Analytics.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -777,6 +784,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MasterDetailReport\Report.resx">
       <DependentUpon>Report.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MasterDetailReport\XtraReport1.resx">
+      <DependentUpon>XtraReport1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Analytics.resx">
       <DependentUpon>Analytics.cs</DependentUpon>

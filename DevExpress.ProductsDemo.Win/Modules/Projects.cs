@@ -14,6 +14,7 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraNavBar;
+using DevExpress.XtraPrinting;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -30,6 +31,12 @@ namespace DevExpress.ProductsDemo.Win.Modules
         private readonly LotRepository _lotRepo = new LotRepository();
         private readonly ProjectRepository _projectRepo = new ProjectRepository();
         private bool _loadingLot = false;
+
+        public override IPrintable PrintableComponent
+        {
+            get { return gridControl1; }
+        }
+        public override bool AllowRtfTitle { get { return true; } }
 
 
 
@@ -229,6 +236,28 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 col.AppearanceCell.TextOptions.VAlignment = VertAlignment.Center;
             }
 
+
+        }
+
+        public void PrintGrid()
+        {
+            // Apply RTL before printing
+            gridControl1.RightToLeft = RightToLeft.Yes;
+
+            var ps = new DevExpress.XtraPrinting.PrintingSystem();
+            var link = new DevExpress.XtraPrinting.PrintableComponentLink(ps);
+            link.Component = gridControl1;
+            link.Landscape = true;
+           // link.PaperKind = System.Drawing.Printing.PaperKind.A3;
+           // link.Margins = new DevExpress.Drawing.Printing.DXMargins(10, 10, 10, 10);
+            link.RtfReportHeader = $@"{{\rtf1\ansi\ansicpg1256\deff0
+{{\fonttbl{{\f0\fnil\fcharset178 Tahoma;}}}}
+\viewkind4\uc1\pard\qc\rtlpar\lang1025\f0\fs26\b 
+ولاية بوسعادة - متابعة البرامج التنموية\b0\par
+\fs20 تاريخ الطباعة: {DateTime.Now:dd/MM/yyyy}\par
+}}";
+            link.CreateDocument();
+            link.ShowRibbonPreviewDialog(this.LookAndFeel);
         }
 
 

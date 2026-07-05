@@ -96,7 +96,11 @@ namespace DevExpress.ProductsDemo.Win.Controls {
                 link.PaperKind = GetPaperKind();
                 link.Landscape = GetLandscape();
                 link.Margins = GetMargins();
+
+
                 link.CreateDocument();
+
+
             }
         }
         void OnStartPrint(object sender, PrintDocumentEventArgs e) {
@@ -159,7 +163,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             res.Gallery.Groups[0].Items.Add(portraitItem);
             res.Gallery.Groups[0].Items.Add(landscapeItem);
             res.Gallery.ItemCheckedChanged += new GalleryItemEventHandler(OnOrientationGalleryItemCheckedChanged);
-            portraitItem.Checked = true;
+            landscapeItem.Checked = true;
             return res;
         }
         GalleryDropDown CreateMarginsGallery() {
@@ -193,7 +197,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             res.Gallery.Groups[0].Items.Add(moderate);
             res.Gallery.Groups[0].Items.Add(wide);
             res.Gallery.ItemCheckedChanged += new GalleryItemEventHandler(OnMarginsGalleryItemCheckedChanged);
-            normal.Checked = true;
+            narrow.Checked = true;
             return res;
         }
         GalleryDropDown CreatePageSizeGallery() {

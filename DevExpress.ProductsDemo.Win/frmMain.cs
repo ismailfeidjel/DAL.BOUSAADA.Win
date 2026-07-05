@@ -231,8 +231,11 @@ namespace DevExpress.ProductsDemo.Win {
         }
 
         private void bvtiPrint_SelectedChanged(object sender, BackstageViewItemEventArgs e) {
-            if(backstageViewControl1.SelectedTab == bvtiPrint)
-                this.printControl1.InitPrintingSystem();
+            //if (modulesNavigator.CurrentModule is ProjectModule pm)
+             //   pm.PrintGrid();
+           if (backstageViewControl1.SelectedTab == bvtiPrint)
+               this.printControl1.InitPrintingSystem();///here
+
         }
         private void ribbonControl1_BeforeApplicationButtonContentControlShow(object sender, EventArgs e) {
             if(backstageViewControl1.SelectedTab == bvtiPrint) backstageViewControl1.SelectedTab = bvtiInfo;
@@ -275,6 +278,8 @@ namespace DevExpress.ProductsDemo.Win {
 }";
             } 
             link.Component = CurrentPrintableComponent;
+            link.Landscape = true;
+            link.Margins = new System.Drawing.Printing.Margins(20, 20, 20, 20); // ← add this
             link.CreateDocument();
             link.ShowRibbonPreviewDialog(this.LookAndFeel);
         }

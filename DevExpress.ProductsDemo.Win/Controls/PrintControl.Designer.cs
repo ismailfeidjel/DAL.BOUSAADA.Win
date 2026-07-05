@@ -103,6 +103,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.layoutControl1);
+            resources.ApplyResources(this.splitContainer1.Panel1, "splitContainer1.Panel1");
             // 
             // splitContainer1.Panel2
             // 
@@ -127,6 +128,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             resources.ApplyResources(this.layoutControl1, "layoutControl1");
             this.layoutControl1.Name = "layoutControl1";
             this.layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(532, 478, 648, 350);
+            this.layoutControl1.OptionsView.RightToLeftMirroringApplied = true;
             this.layoutControl1.Root = this.layoutControlGroup1;
             // 
             // ddbPrintStyle
@@ -286,7 +288,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             // 
             this.lciPrintButton.Control = this.printButton;
             resources.ApplyResources(this.lciPrintButton, "lciPrintButton");
-            this.lciPrintButton.Location = new System.Drawing.Point(0, 0);
+            this.lciPrintButton.Location = new System.Drawing.Point(416, 0);
             this.lciPrintButton.MaxSize = new System.Drawing.Size(84, 80);
             this.lciPrintButton.MinSize = new System.Drawing.Size(84, 80);
             this.lciPrintButton.Name = "lciPrintButton";
@@ -338,7 +340,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             // 
             this.lciPrintLabel.Control = this.backstageViewLabel1;
             resources.ApplyResources(this.lciPrintLabel, "lciPrintLabel");
-            this.lciPrintLabel.Location = new System.Drawing.Point(84, 0);
+            this.lciPrintLabel.Location = new System.Drawing.Point(0, 0);
             this.lciPrintLabel.MaxSize = new System.Drawing.Size(0, 36);
             this.lciPrintLabel.MinSize = new System.Drawing.Size(14, 36);
             this.lciPrintLabel.Name = "lciPrintLabel";
@@ -351,7 +353,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             // 
             this.lciCopiesSpinEdit.Control = this.copySpinEdit;
             resources.ApplyResources(this.lciCopiesSpinEdit, "lciCopiesSpinEdit");
-            this.lciCopiesSpinEdit.Location = new System.Drawing.Point(84, 36);
+            this.lciCopiesSpinEdit.Location = new System.Drawing.Point(236, 36);
             this.lciCopiesSpinEdit.MaxSize = new System.Drawing.Size(180, 24);
             this.lciCopiesSpinEdit.MinSize = new System.Drawing.Size(180, 24);
             this.lciCopiesSpinEdit.Name = "lciCopiesSpinEdit";
@@ -364,7 +366,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             resources.ApplyResources(this.emptySpaceItem1, "emptySpaceItem1");
-            this.emptySpaceItem1.Location = new System.Drawing.Point(264, 36);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 36);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
             this.emptySpaceItem1.Size = new System.Drawing.Size(236, 44);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);

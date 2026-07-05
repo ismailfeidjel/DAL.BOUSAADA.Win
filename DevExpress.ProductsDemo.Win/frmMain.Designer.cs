@@ -194,8 +194,8 @@
             resources.ApplyResources(this.backstageViewControl1, "backstageViewControl1");
             this.backstageViewControl1.Name = "backstageViewControl1";
             this.backstageViewControl1.OwnerControl = this.ribbonControl1;
-            this.backstageViewControl1.SelectedTab = this.bvtiExport;
-            this.backstageViewControl1.SelectedTabIndex = 4;
+            this.backstageViewControl1.SelectedTab = this.bvtiPrint;
+            this.backstageViewControl1.SelectedTabIndex = 3;
             this.backstageViewControl1.VisibleInDesignTime = true;
             this.backstageViewControl1.ItemClick += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.backstageViewControl1_ItemClick);
             this.backstageViewControl1.Click += new System.EventHandler(this.backstageViewControl1_Click);
@@ -259,6 +259,7 @@
             resources.ApplyResources(this.bvtiPrint, "bvtiPrint");
             this.bvtiPrint.ContentControl = this.backstageViewClientControl3;
             this.bvtiPrint.Name = "bvtiPrint";
+            this.bvtiPrint.Selected = true;
             this.bvtiPrint.SelectedChanged += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.bvtiPrint_SelectedChanged);
             // 
             // bvtiExport
@@ -266,7 +267,6 @@
             resources.ApplyResources(this.bvtiExport, "bvtiExport");
             this.bvtiExport.ContentControl = this.backstageViewClientControl4;
             this.bvtiExport.Name = "bvtiExport";
-            this.bvtiExport.Selected = true;
             // 
             // bvbiExit
             // 
