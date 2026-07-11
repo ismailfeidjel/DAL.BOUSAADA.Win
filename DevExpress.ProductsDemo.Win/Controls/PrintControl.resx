@@ -136,7 +136,7 @@
     <value>12, 500</value>
   </data>
   <data name="ddbPrintStyle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>496, 52</value>
+    <value>376, 52</value>
   </data>
   <data name="ddbPrintStyle.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -160,7 +160,7 @@
     <value>12, 220</value>
   </data>
   <data name="ddbDuplex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>496, 52</value>
+    <value>376, 52</value>
   </data>
   <data name="ddbDuplex.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -191,13 +191,13 @@
     <value>12, 92</value>
   </data>
   <data name="printerLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>496, 32</value>
+    <value>376, 32</value>
   </data>
   <data name="printerLabel.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="printerLabel.Text" xml:space="preserve">
-    <value>Printer</value>
+    <value>طباعة</value>
   </data>
   <data name="&gt;&gt;printerLabel.Name" xml:space="preserve">
     <value>printerLabel</value>
@@ -215,7 +215,7 @@
     <value>12, 128</value>
   </data>
   <data name="ddbPrinter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>496, 52</value>
+    <value>376, 52</value>
   </data>
   <data name="ddbPrinter.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -239,13 +239,13 @@
     <value>1</value>
   </data>
   <data name="copySpinEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 48</value>
+    <value>146, 48</value>
   </data>
   <data name="copySpinEdit.Properties.Mask.EditMask" xml:space="preserve">
     <value>N00</value>
   </data>
   <data name="copySpinEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
+    <value>104, 20</value>
   </data>
   <data name="copySpinEdit.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -263,7 +263,7 @@
     <value>8</value>
   </data>
   <data name="printButton.Location" type="System.Drawing.Point, System.Drawing">
-    <value>428, 12</value>
+    <value>308, 12</value>
   </data>
   <data name="printButton.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 76</value>
@@ -299,13 +299,13 @@
     <value>20, 20, 20, 20</value>
   </data>
   <data name="backstageViewLabel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>412, 32</value>
+    <value>292, 32</value>
   </data>
   <data name="backstageViewLabel1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="backstageViewLabel1.Text" xml:space="preserve">
-    <value>Print</value>
+    <value>طباعة</value>
   </data>
   <data name="&gt;&gt;backstageViewLabel1.Name" xml:space="preserve">
     <value>backstageViewLabel1</value>
@@ -329,13 +329,13 @@
     <value>12, 184</value>
   </data>
   <data name="backstageViewLabel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>496, 32</value>
+    <value>376, 32</value>
   </data>
   <data name="backstageViewLabel2.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="backstageViewLabel2.Text" xml:space="preserve">
-    <value>Settings</value>
+    <value>اعداد</value>
   </data>
   <data name="&gt;&gt;backstageViewLabel2.Name" xml:space="preserve">
     <value>backstageViewLabel2</value>
@@ -353,7 +353,7 @@
     <value>12, 332</value>
   </data>
   <data name="ddbOrientation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>496, 52</value>
+    <value>376, 52</value>
   </data>
   <data name="ddbOrientation.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -377,7 +377,7 @@
     <value>12, 444</value>
   </data>
   <data name="ddbPaperSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>496, 52</value>
+    <value>376, 52</value>
   </data>
   <data name="ddbPaperSize.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -401,7 +401,7 @@
     <value>12, 388</value>
   </data>
   <data name="ddbMargins.Size" type="System.Drawing.Size, System.Drawing">
-    <value>496, 52</value>
+    <value>376, 52</value>
   </data>
   <data name="ddbMargins.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -425,7 +425,7 @@
     <value>12, 276</value>
   </data>
   <data name="ddbCollate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>496, 52</value>
+    <value>376, 52</value>
   </data>
   <data name="ddbCollate.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -473,7 +473,7 @@
     <value>Copies:</value>
   </data>
   <data name="lciCopiesSpinEdit.Text" xml:space="preserve">
-    <value>Copies:</value>
+    <value>نسخ:</value>
   </data>
   <data name="emptySpaceItem1.CustomizationFormText" xml:space="preserve">
     <value>emptySpaceItem1</value>
@@ -500,7 +500,7 @@
     <value>layoutControlItem1</value>
   </data>
   <data name="layoutControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>520, 679</value>
+    <value>400, 679</value>
   </data>
   <data name="layoutControl1.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -520,8 +520,11 @@
   <data name="&gt;&gt;layoutControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="splitContainer1.Panel1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 8.25pt</value>
+  </data>
   <data name="splitContainer1.Panel1.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
+    <value>Yes</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.Name" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -548,7 +551,7 @@
     <value>0, 0</value>
   </data>
   <data name="printControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>942, 647</value>
+    <value>1062, 647</value>
   </data>
   <data name="printControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -575,7 +578,7 @@
     <value>100</value>
   </data>
   <data name="zoomTextEdit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>645, 3</value>
+    <value>765, 3</value>
   </data>
   <data name="zoomTextEdit.Properties.Mask.EditMask" xml:space="preserve">
     <value>N00</value>
@@ -666,7 +669,7 @@
     <value>Right</value>
   </data>
   <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>718, 3</value>
+    <value>838, 3</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>10, 20</value>
@@ -693,7 +696,7 @@
     <value>40</value>
   </data>
   <data name="zoomTrackBarControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>728, 3</value>
+    <value>848, 3</value>
   </data>
   <data name="zoomTrackBarControl1.Size" type="System.Drawing.Size, System.Drawing">
     <value>214, 20</value>
@@ -723,7 +726,7 @@
     <value>0, 3, 0, 3</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>942, 26</value>
+    <value>1062, 26</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -747,7 +750,7 @@
     <value>7, 3</value>
   </data>
   <data name="pnlControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>942, 673</value>
+    <value>1062, 673</value>
   </data>
   <data name="pnlControl.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -794,9 +797,6 @@
   <data name="splitContainer1.Panel2.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="splitContainer1.Panel2.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
-    <value>No</value>
-  </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
   </data>
@@ -813,7 +813,7 @@
     <value>1476, 679</value>
   </data>
   <data name="splitContainer1.SplitterDistance" type="System.Int32, mscorlib">
-    <value>520</value>
+    <value>400</value>
   </data>
   <data name="splitContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

@@ -6,6 +6,7 @@ public class LotGridModel
 
     public int ProjectId { get; set; }
 
+
     // العملية
     public string OperationNumber { get; set; }
 

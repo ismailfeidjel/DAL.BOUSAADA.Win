@@ -30,12 +30,7 @@ namespace DevExpress.ProductsDemo.Win {
         GuideGenerator guideGenerator;
         public XtraReport CurrentReport
         {
-            get
-            {
-                if (modulesNavigator.CurrentModule is DevExpress.ProductsDemo.Win.Modules.ReportsModule rm)
-                    return rm.CurrentOpenReport;
-                return null;
-            }
+            get { return modulesNavigator.CurrentModule?.GetPrintReport(); }
         }
 
 

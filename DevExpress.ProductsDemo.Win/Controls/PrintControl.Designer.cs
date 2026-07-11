@@ -97,6 +97,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             // 
             // splitContainer1
             // 
+            this.splitContainer1.BackColor = System.Drawing.SystemColors.ButtonFace;
             resources.ApplyResources(this.splitContainer1, "splitContainer1");
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -280,15 +281,15 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciDuplex,
             this.lciCollated,
             this.lciPrintStyle});
-            this.layoutControlGroup1.Name = "layoutControlGroup1";
-            this.layoutControlGroup1.Size = new System.Drawing.Size(520, 679);
-            this.layoutControlGroup1.TextVisible = false;
+            this.layoutControlGroup1.Name = "Root";
+            this.layoutControlGroup1.Size = new System.Drawing.Size(400, 679);
+            this.layoutControlGroup1.TextLocation = DevExpress.Utils.Locations.Default;
             // 
             // lciPrintButton
             // 
             this.lciPrintButton.Control = this.printButton;
             resources.ApplyResources(this.lciPrintButton, "lciPrintButton");
-            this.lciPrintButton.Location = new System.Drawing.Point(416, 0);
+            this.lciPrintButton.Location = new System.Drawing.Point(296, 0);
             this.lciPrintButton.MaxSize = new System.Drawing.Size(84, 80);
             this.lciPrintButton.MinSize = new System.Drawing.Size(84, 80);
             this.lciPrintButton.Name = "lciPrintButton";
@@ -305,7 +306,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciOrientation.MaxSize = new System.Drawing.Size(0, 56);
             this.lciOrientation.MinSize = new System.Drawing.Size(100, 56);
             this.lciOrientation.Name = "lciOrientation";
-            this.lciOrientation.Size = new System.Drawing.Size(500, 56);
+            this.lciOrientation.Size = new System.Drawing.Size(380, 56);
             this.lciOrientation.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciOrientation.TextSize = new System.Drawing.Size(0, 0);
             this.lciOrientation.TextVisible = false;
@@ -318,7 +319,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciMargins.MaxSize = new System.Drawing.Size(0, 56);
             this.lciMargins.MinSize = new System.Drawing.Size(100, 56);
             this.lciMargins.Name = "lciMargins";
-            this.lciMargins.Size = new System.Drawing.Size(500, 56);
+            this.lciMargins.Size = new System.Drawing.Size(380, 56);
             this.lciMargins.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciMargins.TextSize = new System.Drawing.Size(0, 0);
             this.lciMargins.TextVisible = false;
@@ -331,7 +332,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciPaperSize.MaxSize = new System.Drawing.Size(0, 56);
             this.lciPaperSize.MinSize = new System.Drawing.Size(100, 56);
             this.lciPaperSize.Name = "lciPaperSize";
-            this.lciPaperSize.Size = new System.Drawing.Size(500, 56);
+            this.lciPaperSize.Size = new System.Drawing.Size(380, 56);
             this.lciPaperSize.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciPaperSize.TextSize = new System.Drawing.Size(0, 0);
             this.lciPaperSize.TextVisible = false;
@@ -344,7 +345,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciPrintLabel.MaxSize = new System.Drawing.Size(0, 36);
             this.lciPrintLabel.MinSize = new System.Drawing.Size(14, 36);
             this.lciPrintLabel.Name = "lciPrintLabel";
-            this.lciPrintLabel.Size = new System.Drawing.Size(416, 36);
+            this.lciPrintLabel.Size = new System.Drawing.Size(296, 36);
             this.lciPrintLabel.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciPrintLabel.TextSize = new System.Drawing.Size(0, 0);
             this.lciPrintLabel.TextVisible = false;
@@ -353,14 +354,14 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             // 
             this.lciCopiesSpinEdit.Control = this.copySpinEdit;
             resources.ApplyResources(this.lciCopiesSpinEdit, "lciCopiesSpinEdit");
-            this.lciCopiesSpinEdit.Location = new System.Drawing.Point(236, 36);
+            this.lciCopiesSpinEdit.Location = new System.Drawing.Point(116, 36);
             this.lciCopiesSpinEdit.MaxSize = new System.Drawing.Size(180, 24);
             this.lciCopiesSpinEdit.MinSize = new System.Drawing.Size(180, 24);
             this.lciCopiesSpinEdit.Name = "lciCopiesSpinEdit";
             this.lciCopiesSpinEdit.Padding = new DevExpress.XtraLayout.Utils.Padding(20, 20, 2, 2);
             this.lciCopiesSpinEdit.Size = new System.Drawing.Size(180, 44);
             this.lciCopiesSpinEdit.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.lciCopiesSpinEdit.TextSize = new System.Drawing.Size(35, 13);
+            this.lciCopiesSpinEdit.TextSize = new System.Drawing.Size(24, 13);
             // 
             // emptySpaceItem1
             // 
@@ -368,7 +369,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             resources.ApplyResources(this.emptySpaceItem1, "emptySpaceItem1");
             this.emptySpaceItem1.Location = new System.Drawing.Point(0, 36);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(236, 44);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(116, 44);
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
             // 
             // lciSettingsLabel
@@ -379,7 +380,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciSettingsLabel.MaxSize = new System.Drawing.Size(0, 36);
             this.lciSettingsLabel.MinSize = new System.Drawing.Size(14, 36);
             this.lciSettingsLabel.Name = "lciSettingsLabel";
-            this.lciSettingsLabel.Size = new System.Drawing.Size(500, 36);
+            this.lciSettingsLabel.Size = new System.Drawing.Size(380, 36);
             this.lciSettingsLabel.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciSettingsLabel.TextSize = new System.Drawing.Size(0, 0);
             this.lciSettingsLabel.TextVisible = false;
@@ -392,7 +393,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciPrinterLabel.MaxSize = new System.Drawing.Size(0, 36);
             this.lciPrinterLabel.MinSize = new System.Drawing.Size(14, 36);
             this.lciPrinterLabel.Name = "lciPrinterLabel";
-            this.lciPrinterLabel.Size = new System.Drawing.Size(500, 36);
+            this.lciPrinterLabel.Size = new System.Drawing.Size(380, 36);
             this.lciPrinterLabel.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciPrinterLabel.TextSize = new System.Drawing.Size(0, 0);
             this.lciPrinterLabel.TextVisible = false;
@@ -405,7 +406,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciPrinter.MaxSize = new System.Drawing.Size(0, 56);
             this.lciPrinter.MinSize = new System.Drawing.Size(100, 56);
             this.lciPrinter.Name = "lciPrinter";
-            this.lciPrinter.Size = new System.Drawing.Size(500, 56);
+            this.lciPrinter.Size = new System.Drawing.Size(380, 56);
             this.lciPrinter.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciPrinter.TextSize = new System.Drawing.Size(0, 0);
             this.lciPrinter.TextVisible = false;
@@ -418,7 +419,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciDuplex.MaxSize = new System.Drawing.Size(0, 56);
             this.lciDuplex.MinSize = new System.Drawing.Size(68, 56);
             this.lciDuplex.Name = "lciDuplex";
-            this.lciDuplex.Size = new System.Drawing.Size(500, 56);
+            this.lciDuplex.Size = new System.Drawing.Size(380, 56);
             this.lciDuplex.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciDuplex.TextSize = new System.Drawing.Size(0, 0);
             this.lciDuplex.TextVisible = false;
@@ -431,7 +432,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciCollated.MaxSize = new System.Drawing.Size(0, 56);
             this.lciCollated.MinSize = new System.Drawing.Size(100, 56);
             this.lciCollated.Name = "lciCollated";
-            this.lciCollated.Size = new System.Drawing.Size(500, 56);
+            this.lciCollated.Size = new System.Drawing.Size(380, 56);
             this.lciCollated.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciCollated.TextSize = new System.Drawing.Size(0, 0);
             this.lciCollated.TextVisible = false;
@@ -444,7 +445,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciPrintStyle.MaxSize = new System.Drawing.Size(0, 56);
             this.lciPrintStyle.MinSize = new System.Drawing.Size(79, 26);
             this.lciPrintStyle.Name = "lciPrintStyle";
-            this.lciPrintStyle.Size = new System.Drawing.Size(500, 171);
+            this.lciPrintStyle.Size = new System.Drawing.Size(380, 171);
             this.lciPrintStyle.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.lciPrintStyle.TextSize = new System.Drawing.Size(0, 0);
             this.lciPrintStyle.TextVisible = false;
@@ -535,6 +536,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.splitContainer1);
             this.Name = "PrintControl";
             this.splitContainer1.Panel1.ResumeLayout(false);

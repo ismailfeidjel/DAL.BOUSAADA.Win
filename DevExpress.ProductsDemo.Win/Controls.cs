@@ -19,6 +19,7 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraNavBar;
 using DevExpress.XtraPivotGrid;
 using DevExpress.XtraPrinting;
+using DevExpress.XtraReports.UI;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraSplashScreen;
 
@@ -179,6 +180,11 @@ namespace DevExpress.ProductsDemo.Win {
         protected virtual void ShowReminder() {
             if(OwnerForm != null)
                 OwnerForm.ShowReminder(null);
+        }
+
+        public virtual XtraReport GetPrintReport()
+        {
+            return null; // default: no report representation, fall back to link-based printing
         }
         internal void ShowInfo() {
             if (OwnerForm == null)

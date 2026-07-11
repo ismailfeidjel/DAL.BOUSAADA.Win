@@ -10,6 +10,7 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -17,11 +18,14 @@ using DevExpress.XtraNavBar;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.ReportGeneration;
 using DevExpress.XtraReports.UI;
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace DevExpress.ProductsDemo.Win.Modules
 {
@@ -34,12 +38,156 @@ namespace DevExpress.ProductsDemo.Win.Modules
         private readonly LotRepository _lotRepo = new LotRepository();
         private readonly ProjectRepository _projectRepo = new ProjectRepository();
         private bool _loadingLot = false;
+        private const string ProjectsTemplateKey = "قالب_تقرير_المشاريع";
+        //-------------------------------------------------------------------------------------------------------------------
+        private static readonly string[] GrowableFields = { "OperationName", "Notes" };
 
+
+        private XtraReport BuildReportFromTemplateOrDefault()
+        {
+            List<LotGridModel> visibleData = GetVisibleGridData();
+
+            string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", ProjectsTemplateKey + ".repx");
+
+            XtraReport report;
+            if (System.IO.File.Exists(templatePath))
+            {
+                report = XtraReport.FromFile(templatePath, true);
+            }
+            else
+            {
+                report = ReportGenerator.GenerateReport(gridView1);
+                report.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
+                report.RightToLeftLayout = DevExpress.XtraReports.UI.RightToLeftLayout.Yes;
+            }
+
+            report.DataSource = visibleData;
+            ApplyGridColumnVisibility(report);   // ← new
+            return report;
+        }
+
+        private void ApplyGridColumnVisibility(XtraReport report)
+        {
+            var hiddenFields = new HashSet<string>();
+            var captionToField = new Dictionary<string, string>();
+            var fieldToGridWidth = new Dictionary<string, int>();
+
+            foreach (DevExpress.XtraGrid.Columns.GridColumn col in gridView1.Columns)
+            {
+                if (!string.IsNullOrEmpty(col.Caption))
+                    captionToField[col.Caption.Trim()] = col.FieldName;
+
+                if (col.Visible)
+                    fieldToGridWidth[col.FieldName] = col.Width;
+                else
+                    hiddenFields.Add(col.FieldName);
+            }
+
+            var allRows = report.AllControls<XRTableRow>().ToList();
+            if (allRows.Count == 0) return;
+
+            XRTableRow referenceRow = allRows[0];
+            var keysInOrder = referenceRow.Cells.Cast<XRTableCell>()
+                .Select(c => ResolveColumnKey(c, captionToField))
+                .ToList();
+
+            var hiddenIndices = new HashSet<int>();
+            for (int i = 0; i < keysInOrder.Count; i++)
+            {
+                string key = keysInOrder[i];
+                if (key != null && hiddenFields.Contains(key))
+                    hiddenIndices.Add(i);
+            }
+
+            // Total width of only the columns that will remain visible
+            int totalVisibleGridWidth = keysInOrder
+                .Where((key, i) => key != null && !hiddenIndices.Contains(i) && fieldToGridWidth.ContainsKey(key))
+                .Sum(key => fieldToGridWidth[key]);
+
+            if (totalVisibleGridWidth <= 0) return;
+
+            // Printable area of the report page (A4 landscape minus margins), in report units
+            float printableWidth = report.PageWidth - report.Margins.Left - report.Margins.Right;
+
+            foreach (XRTableRow row in allRows)
+            {
+                var cells = row.Cells.Cast<XRTableCell>().ToList();
+                if (cells.Count != keysInOrder.Count) continue;
+
+                for (int i = 0; i < cells.Count; i++)
+                {
+                    if (hiddenIndices.Contains(i))
+                    {
+                        row.Cells.Remove(cells[i]);
+                    }
+                    else
+                    {
+                        string key = keysInOrder[i];
+                        if (key != null && fieldToGridWidth.TryGetValue(key, out int gridWidth))
+                        {
+                            float proportion = (float)gridWidth / totalVisibleGridWidth;
+                            cells[i].WidthF = printableWidth * proportion;
+                        }
+                    }
+                }
+            }
+        }
+        private string ResolveColumnKey(XRTableCell cell, Dictionary<string, string> captionToField)
+        {
+            string field = GetCellFieldName(cell);
+            if (field != null) return field;
+
+            string text = (cell.Text ?? "").Trim();
+            return captionToField.TryGetValue(text, out string mapped) ? mapped : null;
+        }
+
+        private string GetCellFieldName(XRTableCell cell)
+        {
+            string expr = null;
+
+            foreach (ExpressionBinding binding in cell.ExpressionBindings)
+            {
+                if (binding.PropertyName == "Text" && !string.IsNullOrEmpty(binding.Expression))
+                {
+                    expr = binding.Expression;
+                    break;
+                }
+            }
+
+            if (expr == null && cell.DataBindings.Count > 0 && cell.DataBindings["Text"] != null)
+                return cell.DataBindings["Text"].DataMember;
+
+            if (expr == null) return null;
+
+            var match = Regex.Match(expr, @"\[([^\]]+)\]");
+            return match.Success ? match.Groups[1].Value : null;
+        }
+
+
+
+
+
+
+        //-------------------------------------------------------------------------------------------------------------------
         public override IPrintable PrintableComponent
         {
             get { return gridControl1; }
         }
         public override bool AllowRtfTitle { get { return true; } }
+
+        
+        private XRTableCell FindCellByField(XtraReport report, string fieldName)
+        {
+            foreach (var cell in report.AllControls<XRTableCell>())
+            {
+                foreach (DevExpress.XtraReports.UI.XRBinding binding in cell.DataBindings)
+                {
+                    if (string.Equals(binding.DataMember, fieldName, StringComparison.OrdinalIgnoreCase))
+                        return cell;
+                }
+            }
+            return null;
+        }
 
 
 
@@ -126,6 +274,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             AddCol("LotNumber", "N", 100);
 
             AddCol("Commune", "البلدية", 100);
+            AddCol("Program", "البرنامج", 100);
             AddCol("OperationName", "اسم العملية", 180);
             AddCol("DomainId", "القطاع", 110);
             var domainLookup = new RepositoryItemLookUpEdit();
@@ -154,15 +303,15 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["SectorId"].OptionsColumn.AllowEdit = true;
 
 
-            AddCol("LotBudget", "مبلغ الحصة", 110, "{0:N2}");
+            AddCol("LotBudget", "الغلاف المالي", 110, "{0:N2}");
             AddCol("RegisteredAmount", "المبلغ المسجل", 110, "{0:N2}");
             AddCol("ConsumedAmount", "المبلغ المستهلك", 110, "{0:N2}");
+            AddCol("Remaining", "الباقي", 110, "{0:N2}");
             AddCol("Contractor", "المقاول", 110);
             AddCol("StartDate", "تاريخ امر الانطلاق", 110, "{0:dd/MM/yyyy}", FormatType.DateTime);
             gridView1.Columns["StartDate"].ColumnEdit = dateEdit;
             AddCol("ExecutionDuration", "اجال التنفيذ", 110, "{0:N0}يوم");
             AddCol("PhysicalProgress", "التقدم الفيزيائي", 100, "{0:N0} %");
-           // AddCol("ProjectStatus", "وضعية العملية", 110);
             AddCol("ProjectStatusId", "وضعية العملية", 110);
 
 
@@ -665,35 +814,38 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             if (gridView1.RowCount == 0)
             {
-                XtraMessageBox.Show("لا توجد بيانات لتصديرها.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DevExpress.XtraEditors.XtraMessageBox.Show("لا توجد بيانات لتصديرها.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (!(this.FindForm() is frmMain mainForm)) return;
 
-            const string templateKey = "قالب_تقرير_المشاريع";
-            string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", templateKey + ".repx");
-
-            XtraReport report;
-            if (File.Exists(templatePath))
-            {
-                // Reuse the customized layout, just rebind fresh data
-                report = XtraReport.FromFile(templatePath, true);
-                report.DataSource = _data;
-            }
-            else
-            {
-                // First time only — generate the default layout
-                report = ReportGenerator.GenerateReport(gridView1);
-                report.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
-                report.RightToLeftLayout = DevExpress.XtraReports.UI.RightToLeftLayout.Yes;
-            }
-
+            XtraReport report = BuildReportFromTemplateOrDefault();
             report.DisplayName = $"تقرير_{DateTime.Now:yyyyMMdd_HHmmss}";
+
             mainForm.SwitchToReportsAndLoad(report);
 
             if (mainForm.GetReportsModule() is ReportsModule reportsMod)
-                reportsMod.SaveReportToPanel(report, report.DisplayName); // keeps your history list working as before
+                reportsMod.SaveReportToPanel(report, report.DisplayName);
+        }
+
+        public override XtraReport GetPrintReport()
+        {
+            if (gridView1.RowCount == 0) return null;
+            return BuildReportFromTemplateOrDefault();
+        }
+        private List<LotGridModel> GetVisibleGridData()
+        {
+            var visibleRows = new List<LotGridModel>();
+            for (int i = 0; i < gridView1.RowCount; i++)
+            {
+                int handle = gridView1.GetRowHandle(i);
+                if (handle < 0) continue; // skip group rows
+
+                if (gridView1.GetRow(handle) is LotGridModel row)
+                    visibleRows.Add(row);
+            }
+            return visibleRows;
         }
 
         private void gridView1_CustomDrawCell(object sender, RowCellCustomDrawEventArgs e)
