@@ -487,6 +487,7 @@
             this.xrDesignRibbonPageGroup8 = new DevExpress.XtraReports.UserDesigner.XRDesignRibbonPageGroup();
             this.ribbonStatusBar1 = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.reportDesigner1 = new DevExpress.XtraReports.UserDesigner.XRDesignMdiController(this.components);
+            this.dockManager1 = new DevExpress.XtraBars.Docking.DockManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrDesignRibbonController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applicationMenu1)).BeginInit();
@@ -501,6 +502,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemZoomTrackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportDesigner1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // xrDesignRibbonController1
@@ -2927,6 +2929,23 @@
             xrDesignPanelListener7});
             this.reportDesigner1.Form = null;
             // 
+            // dockManager1
+            // 
+            this.dockManager1.Form = this;
+            this.dockManager1.TopZIndexControls.AddRange(new string[] {
+            "DevExpress.XtraBars.BarDockControl",
+            "DevExpress.XtraBars.StandaloneBarDockControl",
+            "System.Windows.Forms.MenuStrip",
+            "System.Windows.Forms.StatusStrip",
+            "System.Windows.Forms.StatusBar",
+            "DevExpress.XtraBars.Ribbon.RibbonStatusBar",
+            "DevExpress.XtraBars.Ribbon.RibbonControl",
+            "DevExpress.XtraBars.Navigation.OfficeNavigationBar",
+            "DevExpress.XtraBars.Navigation.TileNavPane",
+            "DevExpress.XtraBars.TabFormControl",
+            "DevExpress.XtraBars.FluentDesignSystem.FluentDesignFormControl",
+            "DevExpress.XtraBars.ToolbarForm.ToolbarFormControl"});
+            // 
             // ReportsModule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2949,14 +2968,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemZoomTrackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reportDesigner1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dockManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private XtraReports.UserDesigner.XRDesignMdiController reportDesigner1;
         private XtraReports.UserDesigner.XRDesignRibbonController xrDesignRibbonController1;
         private XtraBars.Ribbon.RibbonControl ribbonControl1;
         private XtraBars.Ribbon.ApplicationMenu applicationMenu1;
@@ -3114,18 +3132,7 @@
         private XtraReports.UserDesigner.DesignControlContainer fieldListDockPanel1_Container;
         private XtraReports.UserDesigner.PropertyGridDockPanel propertyGridDockPanel1;
         private XtraReports.UserDesigner.DesignControlContainer propertyGridDockPanel1_Container;
-
-
-
-
-
-
-
-
-
-
-
-
-
+        private XtraBars.Docking.DockManager dockManager1;
+        public XtraReports.UserDesigner.XRDesignMdiController reportDesigner1;
     }
 }

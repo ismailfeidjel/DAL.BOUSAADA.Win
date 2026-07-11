@@ -28,6 +28,15 @@ namespace DevExpress.ProductsDemo.Win {
         ZoomManager _zoomManager;
         List<BarItem> AllowCustomizationMenuList = new List<BarItem>();
         GuideGenerator guideGenerator;
+        public XtraReport CurrentReport
+        {
+            get
+            {
+                if (modulesNavigator.CurrentModule is DevExpress.ProductsDemo.Win.Modules.ReportsModule rm)
+                    return rm.CurrentOpenReport;
+                return null;
+            }
+        }
 
 
 
@@ -385,5 +394,13 @@ namespace DevExpress.ProductsDemo.Win {
             if (modulesNavigator.CurrentModule is ProjectModule pm)
                 pm.ShowPreview();
         }
+
+        public ReportsModule GetReportsModule()
+        {
+            return modulesNavigator.CurrentModule as ReportsModule;
+        }
+
+
     }
+
 }

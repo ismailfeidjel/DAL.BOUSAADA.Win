@@ -1,0 +1,17 @@
+﻿using DevExpress.XtraReports.UI;
+using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Drawing;
+
+namespace DevExpress.ProductsDemo.Win.MasterDetailReport
+{
+    public partial class LotSummaryReport : DevExpress.XtraReports.UI.XtraReport
+    {
+        public LotSummaryReport()
+        {
+            InitializeComponent();
+        }
+
+    }
+}

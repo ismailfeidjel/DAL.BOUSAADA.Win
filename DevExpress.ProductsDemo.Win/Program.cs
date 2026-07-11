@@ -22,6 +22,8 @@ namespace DevExpress.ProductsDemo.Win {
             else
                 DevExpress.XtraEditors.WindowsFormsSettings.SetDPIAware();
             AppHelper.WarmUp();
+            DevExpress.Utils.DeserializationSettings.RegisterTrustedAssembly(typeof(LotGridModel).Assembly);
+
             AppDomain.CurrentDomain.AssemblyResolve += OnCurrentDomainAssemblyResolve;
             WindowsFormsSettings.ApplyDemoSettings();
             DataHelper.ApplicationArguments = arguments;

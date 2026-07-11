@@ -574,6 +574,12 @@
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
+    <Compile Include="MasterDetailReport\LotSummaryReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MasterDetailReport\LotSummaryReport.Designer.cs">
+      <DependentUpon>LotSummaryReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="MasterDetailReport\Report - Copy.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -793,6 +799,9 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MasterDetailReport\LotSummaryReport.resx">
+      <DependentUpon>LotSummaryReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MasterDetailReport\Report - Copy.resx">
       <DependentUpon>Report - Copy.cs</DependentUpon>

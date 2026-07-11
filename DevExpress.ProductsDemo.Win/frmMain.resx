@@ -172,7 +172,7 @@
     <value>0, 0</value>
   </data>
   <data name="printControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 397</value>
+    <value>0, 399</value>
   </data>
   <data name="printControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -190,10 +190,10 @@
     <value>0</value>
   </data>
   <data name="backstageViewClientControl3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 63</value>
+    <value>171, 62</value>
   </data>
   <data name="backstageViewClientControl3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 397</value>
+    <value>0, 399</value>
   </data>
   <data name="backstageViewClientControl3.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

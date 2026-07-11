@@ -20,6 +20,7 @@ using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Modules
@@ -664,27 +665,35 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             if (gridView1.RowCount == 0)
             {
-                DevExpress.XtraEditors.XtraMessageBox.Show("لا توجد بيانات لتصديرها.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("لا توجد بيانات لتصديرها.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 1. Convert the current functional GridView setup into an XtraReport instance
-            XtraReport dynamicReport = ReportGenerator.GenerateReport(gridView1);
+            if (!(this.FindForm() is frmMain mainForm)) return;
 
-            // ── ADD THESE TWO LINES TO FIX THE COLUMN DIRECTION ───────────────────
-            dynamicReport.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
-            // This flips the columns so that "رقم" starts on the far right
-            dynamicReport.RightToLeftLayout = DevExpress.XtraReports.UI.RightToLeftLayout.Yes; 
-            // ──────────────────────────────────────────────────────────────────────
+            const string templateKey = "قالب_تقرير_المشاريع";
+            string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", templateKey + ".repx");
 
-            // Optional layout refinements for Bou Saâda Development tracking header context
-            dynamicReport.DisplayName = $"تقرير_{DateTime.Now:yyyyMMdd_HHmmss}";
-
-            // 2. Bubble the generated object up to the parent shell form container
-            if (this.FindForm() is frmMain mainForm)
+            XtraReport report;
+            if (File.Exists(templatePath))
             {
-                mainForm.SwitchToReportsAndLoad(dynamicReport);
+                // Reuse the customized layout, just rebind fresh data
+                report = XtraReport.FromFile(templatePath, true);
+                report.DataSource = _data;
             }
+            else
+            {
+                // First time only — generate the default layout
+                report = ReportGenerator.GenerateReport(gridView1);
+                report.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
+                report.RightToLeftLayout = DevExpress.XtraReports.UI.RightToLeftLayout.Yes;
+            }
+
+            report.DisplayName = $"تقرير_{DateTime.Now:yyyyMMdd_HHmmss}";
+            mainForm.SwitchToReportsAndLoad(report);
+
+            if (mainForm.GetReportsModule() is ReportsModule reportsMod)
+                reportsMod.SaveReportToPanel(report, report.DisplayName); // keeps your history list working as before
         }
 
         private void gridView1_CustomDrawCell(object sender, RowCellCustomDrawEventArgs e)

@@ -69,14 +69,34 @@ namespace DevExpress.ProductsDemo.Win.Controls {
                 DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             CreateDocument();
         }
-        void CreateDocument() {
-            PrintingSystem ps = new PrintingSystem();
-            if(true.Equals(printControl1.Tag))
-                ps.StartPrint -= new PrintDocumentEventHandler(OnStartPrint);
-            printControl1.PrintingSystem = ps;
-            ps.StartPrint += new PrintDocumentEventHandler(OnStartPrint);
-            printControl1.Tag = true;
-            CreateLink(ps);
+        void CreateDocument()
+        {
+            frmMain frm = BackstageView.Ribbon.FindForm() as frmMain;
+            DevExpress.XtraReports.UI.XtraReport currentReport = frm?.CurrentReport;
+
+            if (currentReport != null)
+            {
+                // Preview way: let the report build its own document/PrintingSystem
+                if (true.Equals(printControl1.Tag))
+                    currentReport.PrintingSystem.StartPrint -= new PrintDocumentEventHandler(OnStartPrint);
+
+                currentReport.CreateDocument();
+                printControl1.PrintingSystem = currentReport.PrintingSystem;
+                currentReport.PrintingSystem.StartPrint += new PrintDocumentEventHandler(OnStartPrint);
+                printControl1.Tag = true;
+            }
+            else
+            {
+                // Link way: existing behavior for grid / rich edit
+                PrintingSystem ps = new PrintingSystem();
+                if (true.Equals(printControl1.Tag))
+                    ps.StartPrint -= new PrintDocumentEventHandler(OnStartPrint);
+                printControl1.PrintingSystem = ps;
+                ps.StartPrint += new PrintDocumentEventHandler(OnStartPrint);
+                printControl1.Tag = true;
+                CreateLink(ps);
+            }
+
             this.pageButtonEdit.EditValue = 1;
             UpdatePagesInfo();
         }
