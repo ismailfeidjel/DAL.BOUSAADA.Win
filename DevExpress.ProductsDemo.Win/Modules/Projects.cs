@@ -42,6 +42,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
         //-------------------------------------------------------------------------------------------------------------------
         private static readonly string[] GrowableFields = { "OperationName", "Notes" };
 
+        private static readonly HashSet<string> SumFields = new HashSet<string> { "LotBudget", "ConsumedAmount", "RegisteredAmount" };
+        private const string CountField = "Daira";
+
+
 
         private XtraReport BuildReportFromTemplateOrDefault()
         {
@@ -62,12 +66,78 @@ namespace DevExpress.ProductsDemo.Win.Modules
             }
 
             report.DataSource = visibleData;
-            ApplyGridColumnVisibility(report);   // ← new
+            ApplyGridColumnVisibility(report, out List<string> visibleKeys, out Dictionary<string, float> keyWidths);
+            GenerateFooter(report, visibleKeys, keyWidths);
+
+
             return report;
         }
-
-        private void ApplyGridColumnVisibility(XtraReport report)
+        private void GenerateFooter(XtraReport report, List<string> visibleKeys, Dictionary<string, float> keyWidths)
         {
+            if (visibleKeys.Count == 0) return;
+
+            var footerBand = new DevExpress.XtraReports.UI.ReportFooterBand();
+
+            var table = new DevExpress.XtraReports.UI.XRTable();
+            table.WidthF = keyWidths.Values.Sum();
+
+            var row = new XRTableRow();
+            row.WidthF = table.WidthF;
+            row.Font = new Font("Tahoma", 10, FontStyle.Bold);   // ← bigger, bolder footer font
+            row.ForeColor = Color.Black;
+            row.BackColor = Color.FromArgb(230, 230, 230);       // light gray shading
+
+            foreach (string key in visibleKeys)
+            {
+                var cell = new XRTableCell();
+                cell.WidthF = keyWidths[key];
+                cell.WordWrap = false;
+                cell.CanGrow = false;
+                cell.CanShrink = true;
+                cell.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+                cell.Borders = DevExpress.XtraPrinting.BorderSide.All;
+                cell.BorderWidth = 1f;
+                cell.BorderColor = Color.Black;
+                cell.Padding = new DevExpress.XtraPrinting.PaddingInfo(4, 4, 2, 2, 100);
+
+                if (SumFields.Contains(key))
+                {
+                    cell.Summary = new DevExpress.XtraReports.UI.XRSummary
+                    {
+                        Running = DevExpress.XtraReports.UI.SummaryRunning.Report,
+                        Func = DevExpress.XtraReports.UI.SummaryFunc.Sum
+                    };
+                    cell.ExpressionBindings.Add(new ExpressionBinding("BeforePrint", "Text", $"Sum([{key}])"));
+                    cell.TextFormatString = "{0:N0}";
+                }
+                else if (key == CountField)
+                {
+                    cell.Summary = new DevExpress.XtraReports.UI.XRSummary
+                    {
+                        Running = DevExpress.XtraReports.UI.SummaryRunning.Report,
+                        Func = DevExpress.XtraReports.UI.SummaryFunc.Count
+                    };
+                    cell.ExpressionBindings.Add(new ExpressionBinding("BeforePrint", "Text", "Count()"));
+                }
+                else
+                {
+                    cell.Text = string.Empty;
+                }
+
+                row.Cells.Add(cell);
+            }
+
+            table.Rows.Add(row);
+            footerBand.Controls.Add(table);
+            footerBand.HeightF = 35f;   // slightly taller to match the bigger font
+
+            report.Bands.Add(footerBand);
+        }
+        private void ApplyGridColumnVisibility(XtraReport report, out List<string> finalKeys, out Dictionary<string, float> finalWidths)
+        {
+            finalKeys = new List<string>();
+            finalWidths = new Dictionary<string, float>();
+
             var hiddenFields = new HashSet<string>();
             var captionToField = new Dictionary<string, string>();
             var fieldToGridWidth = new Dictionary<string, int>();
@@ -99,20 +169,22 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     hiddenIndices.Add(i);
             }
 
-            // Total width of only the columns that will remain visible
             int totalVisibleGridWidth = keysInOrder
                 .Where((key, i) => key != null && !hiddenIndices.Contains(i) && fieldToGridWidth.ContainsKey(key))
                 .Sum(key => fieldToGridWidth[key]);
 
             if (totalVisibleGridWidth <= 0) return;
 
-            // Printable area of the report page (A4 landscape minus margins), in report units
-            float printableWidth = report.PageWidth - report.Margins.Left - report.Margins.Right;
+            float printableWidth = (report.PageWidth - report.Margins.Left - report.Margins.Right) * 0.99f;
+
+            var touchedTables = new HashSet<DevExpress.XtraReports.UI.XRTable>();
 
             foreach (XRTableRow row in allRows)
             {
                 var cells = row.Cells.Cast<XRTableCell>().ToList();
                 if (cells.Count != keysInOrder.Count) continue;
+
+                float rowTotal = 0f;
 
                 for (int i = 0; i < cells.Count; i++)
                 {
@@ -126,11 +198,27 @@ namespace DevExpress.ProductsDemo.Win.Modules
                         if (key != null && fieldToGridWidth.TryGetValue(key, out int gridWidth))
                         {
                             float proportion = (float)gridWidth / totalVisibleGridWidth;
-                            cells[i].WidthF = printableWidth * proportion;
+                            float w = printableWidth * proportion;
+                            cells[i].WidthF = w;
+                            rowTotal += w;
+
+                            if (!finalWidths.ContainsKey(key))
+                            {
+                                finalWidths[key] = w;
+                                finalKeys.Add(key);
+                            }
                         }
                     }
                 }
+
+                row.WidthF = rowTotal;
+
+                if (row.Parent is DevExpress.XtraReports.UI.XRTable table)
+                    touchedTables.Add(table);
             }
+
+            foreach (var table in touchedTables)
+                table.WidthF = printableWidth;
         }
         private string ResolveColumnKey(XRTableCell cell, Dictionary<string, string> captionToField)
         {
@@ -176,19 +264,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
         public override bool AllowRtfTitle { get { return true; } }
 
         
-        private XRTableCell FindCellByField(XtraReport report, string fieldName)
-        {
-            foreach (var cell in report.AllControls<XRTableCell>())
-            {
-                foreach (DevExpress.XtraReports.UI.XRBinding binding in cell.DataBindings)
-                {
-                    if (string.Equals(binding.DataMember, fieldName, StringComparison.OrdinalIgnoreCase))
-                        return cell;
-                }
-            }
-            return null;
-        }
-
 
 
         public override void ShowColumnChooser() => gridView1.ShowCustomization();
