@@ -83,7 +83,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             var row = new XRTableRow();
             row.WidthF = table.WidthF;
-            row.Font = new Font("Tahoma", 10, FontStyle.Bold);   // ← bigger, bolder footer font
+            row.Font = new Font("Segoe UI", 8, FontStyle.Bold);   // ← bigger, bolder footer font
             row.ForeColor = Color.Black;
             row.BackColor = Color.FromArgb(230, 230, 230);       // light gray shading
 
@@ -305,9 +305,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.ColumnPositionChanged += (s, e) => SaveLayout();
 
             
-            //------
-
-            //------
             gridView1.Appearance.HeaderPanel.Font =
     new Font("Tahoma", 7, FontStyle.Bold);
 
@@ -350,6 +347,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             AddCol("Commune", "البلدية", 100);
             AddCol("Program", "البرنامج", 100);
+            AddCol("FinancialProgress", "التقدم المالي", 100, "{0:N0} %");
             AddCol("OperationName", "اسم العملية", 180);
             AddCol("DomainId", "القطاع", 110);
             var domainLookup = new RepositoryItemLookUpEdit();
