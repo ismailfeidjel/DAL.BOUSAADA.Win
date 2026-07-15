@@ -79,18 +79,30 @@ namespace DevExpress.ProductsDemo.Win.Modules
             var footerBand = new DevExpress.XtraReports.UI.ReportFooterBand();
 
             var table = new DevExpress.XtraReports.UI.XRTable();
-            table.WidthF = keyWidths.Values.Sum();
+            table.BeginInit();
+
+            // Ensure the table spans the exact calculated printable width and is aligned correctly
+            float totalWidth = keyWidths.Values.Sum();
+            table.WidthF = totalWidth;
+            table.LocationF = new PointF(0, 0);
+
+            // Explicitly mirror the RTL setting from the report
+            table.RightToLeft = report.RightToLeft;
 
             var row = new XRTableRow();
-            row.WidthF = table.WidthF;
-            row.Font = new Font("Segoe UI", 8, FontStyle.Bold);   // ← bigger, bolder footer font
+            row.Font = new Font("Segoe UI", 8, FontStyle.Bold);
             row.ForeColor = Color.Black;
-            row.BackColor = Color.FromArgb(230, 230, 230);       // light gray shading
+            row.BackColor = Color.FromArgb(230, 230, 230);
 
+            // 1. CRITICAL: Add the row to the table before configuring cells
+            table.Rows.Add(row);
+
+            var cellsList = new List<XRTableCell>();
+
+            // 2. First Pass: Create cells, configure styles, and ADD them to the row first
             foreach (string key in visibleKeys)
             {
                 var cell = new XRTableCell();
-                cell.WidthF = keyWidths[key];
                 cell.WordWrap = false;
                 cell.CanGrow = false;
                 cell.CanShrink = true;
@@ -124,14 +136,28 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     cell.Text = string.Empty;
                 }
 
-                row.Cells.Add(cell);
+                row.Cells.Add(cell); // Appended to the row collection first
+                cellsList.Add(cell);
             }
 
-            table.Rows.Add(row);
-            footerBand.Controls.Add(table);
-            footerBand.HeightF = 35f;   // slightly taller to match the bigger font
+            // 3. Second Pass: Apply proportional weights and widths now that they are in the collection
+            for (int i = 0; i < visibleKeys.Count; i++)
+            {
+                string key = visibleKeys[i];
+                float cellWidth = keyWidths[key];
 
-            report.Bands.Add(footerBand);
+                // Calculate the fractional weight (strictly relative to 1.0 total row weight)
+                cellsList[i].Weight = (double)cellWidth / totalWidth;
+                cellsList[i].WidthF = cellWidth;
+            }
+
+            row.WidthF = totalWidth;
+            table.EndInit();
+
+            footerBand.Controls.Add(table);
+            footerBand.HeightF = 35f;
+
+            //report.Bands.Add(footerBand);
         }
         private void ApplyGridColumnVisibility(XtraReport report, out List<string> finalKeys, out Dictionary<string, float> finalWidths)
         {
