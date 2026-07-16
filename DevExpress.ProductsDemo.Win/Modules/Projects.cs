@@ -69,6 +69,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
             report.DataSource = visibleData;
+            ApplyFilterDisplayText(report);
             ApplyProjectNumbering(report, visibleData);   
 
             ApplyGridColumnVisibility(report, out List<string> visibleKeys, out Dictionary<string, float> keyWidths);
@@ -77,6 +78,114 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             return report;
         }
+
+
+        private void ApplyFilterDisplayText(XtraReport report)
+        {
+            // Locate the cell in your template
+            var filterCell = report.FindControl("cellFilterText", true) as XRTableCell
+                          ?? report.FindControl("tbFilter", true) as XRTableCell;
+
+            if (filterCell == null) return;
+
+            var filterValues = new List<string>();
+
+            foreach (DevExpress.XtraGrid.Views.Base.ViewColumnFilterInfo info in gridView1.ActiveFilter)
+            {
+                if (info.Filter == null) continue;
+
+                // Get the actual grid column associated with this filter
+                var column = info.Column;
+
+                // 1. Handle single-value filters (including LookUpEdit/ComboBox columns)
+                if (info.Filter.Value != null)
+                {
+                    string displayVal = GetFilterValueDisplayText(column, info.Filter.Value);
+                    filterValues.Add(displayVal);
+                }
+                // 2. Handle multi-value/Excel-checked filters (where raw value might be null)
+                else
+                {
+                    string filterText = info.Filter.DisplayText ?? info.Filter.FilterString;
+
+                    if (!string.IsNullOrEmpty(filterText))
+                    {
+                        // Regex to find raw filter criteria wrapped in single quotes (e.g. '1', '2' or 'Alger')
+                        var matches = Regex.Matches(filterText, @"'([^']*)'");
+                        if (matches.Count > 0)
+                        {
+                            foreach (Match match in matches)
+                            {
+                                string rawVal = match.Groups[1].Value.Trim();
+
+                                // Resolve the matched ID/value using the column's RepositoryItem LookUp/ComboBox
+                                string resolvedVal = GetFilterValueDisplayText(column, rawVal);
+
+                                if (!string.IsNullOrEmpty(resolvedVal) && !filterValues.Contains(resolvedVal))
+                                {
+                                    filterValues.Add(resolvedVal);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Fallback for raw numbers without quotes (e.g. [DomainId] = 3)
+                            var numMatch = Regex.Match(filterText, @"[=<>!]+\s*([0-9]+(?:\.[0-9]+)?)");
+                            if (numMatch.Success && numMatch.Groups.Count > 1)
+                            {
+                                string resolvedVal = GetFilterValueDisplayText(column, numMatch.Groups[1].Value);
+                                filterValues.Add(resolvedVal);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (filterValues.Count == 0)
+            {
+                filterCell.Text = "الكل"; // Arabic for "All"
+            }
+            else
+            {
+                // Join the actual text names cleanly separated by commas
+                filterCell.Text = string.Join(", ", filterValues);
+            }
+        }
+
+        // Helper method to convert raw ID value to friendly text using column's repository editor
+        // Helper method to convert raw ID value to friendly text using column's repository editor
+private string GetFilterValueDisplayText(DevExpress.XtraGrid.Columns.GridColumn col, object val)
+{
+    if (col == null || val == null) return val?.ToString() ?? "";
+
+    // 1. Check if the column uses a LookUpEdit (e.g., DomainId, SectorId, Status)
+    if (col.RealColumnEdit is DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookup)
+    {
+        // Try looking up with the raw object first
+        object lookupText = lookup.GetDisplayValueByKeyValue(val);
+
+        // Fallback: If 'val' is a string containing an ID (e.g., "3"), convert it to an integer 
+        // to ensure DevExpress matches it with integer-based ValueMember IDs.
+        if ((lookupText == null || lookupText == DBNull.Value) && int.TryParse(val.ToString(), out int intVal))
+        {
+            lookupText = lookup.GetDisplayValueByKeyValue(intVal);
+        }
+
+        if (lookupText != null && lookupText != DBNull.Value)
+            return lookupText.ToString();
+    }
+    // 2. Check if the column uses an ImageComboBox
+    else if (col.RealColumnEdit is DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox imgCombo)
+    {
+        var item = imgCombo.Items.Cast<DevExpress.XtraEditors.Controls.ImageComboBoxItem>()
+                                 .FirstOrDefault(i => i.Value != null && i.Value.ToString() == val.ToString());
+        if (item != null)
+            return item.Description;
+    }
+
+    // Clean up surrounding quotes from normal strings
+    return val.ToString().Replace("'", "").Replace("\"", "").Trim();
+}
 
         private void ApplyProjectNumbering(XtraReport report, List<LotGridModel> visibleData)
         {
@@ -1006,14 +1115,17 @@ namespace DevExpress.ProductsDemo.Win.Modules
         private List<LotGridModel> GetVisibleGridData()
         {
             var visibleRows = new List<LotGridModel>();
-            for (int i = 0; i < gridView1.RowCount; i++)
-            {
-                int handle = gridView1.GetRowHandle(i);
-                if (handle < 0) continue; // skip group rows
 
-                if (gridView1.GetRow(handle) is LotGridModel row)
+            // view.DataRowCount holds the exact count of filtered data rows
+            for (int i = 0; i < gridView1.DataRowCount; i++)
+            {
+                // 'i' is already the correct row handle for the filtered list
+                if (gridView1.GetRow(i) is LotGridModel row)
+                {
                     visibleRows.Add(row);
+                }
             }
+
             return visibleRows;
         }
 
