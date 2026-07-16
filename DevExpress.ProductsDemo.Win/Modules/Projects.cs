@@ -65,12 +65,82 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 report.RightToLeftLayout = DevExpress.XtraReports.UI.RightToLeftLayout.Yes;
             }
 
+            EnsureSafeMargins(report);   
+
+
             report.DataSource = visibleData;
+            ApplyProjectNumbering(report, visibleData);   
+
             ApplyGridColumnVisibility(report, out List<string> visibleKeys, out Dictionary<string, float> keyWidths);
-            GenerateFooter(report, visibleKeys, keyWidths);
+            //GenerateFooter(report, visibleKeys, keyWidths);
 
 
             return report;
+        }
+
+        private void ApplyProjectNumbering(XtraReport report, List<LotGridModel> visibleData)
+        {
+            var cell = report.FindControl("cellProjectNumber", true) as XRTableCell;
+            if (cell == null) return;
+
+            var projectNumbers = new Dictionary<int, int>();
+            int nextNumber = 1;
+
+            foreach (var row in visibleData)
+            {
+                if (!projectNumbers.ContainsKey(row.ProjectId))
+                {
+                    projectNumbers[row.ProjectId] = nextNumber;
+                    nextNumber++;
+                }
+            }
+            var cell1 = report.FindControl("cellProjectCounter", true) as XRTableCell;
+            var cell2 = report.FindControl("tb27", true) as XRTableCell;
+            int totalProjectsCount = nextNumber - 1; // Since nextNumber starts at 1 and increments
+            if (cell1 != null)
+            {
+                cell1.BeforePrint += (s, e) =>
+                {
+                    ((XRTableCell)s).Text = totalProjectsCount.ToString();
+                };
+            }
+            if (cell2 != null)
+            {
+                cell2.BeforePrint += (s, e) =>
+                {
+                    ((XRTableCell)s).Text = totalProjectsCount.ToString();
+                };
+            }
+
+
+
+
+            cell.BeforePrint += (s, e) =>
+            {
+                var currentCell = (XRTableCell)s;
+                object projectIdObj = currentCell.Report.GetCurrentColumnValue("ProjectId"); // ← via .Report
+
+                if (projectIdObj == null || projectIdObj == DBNull.Value)
+                {
+                    currentCell.Text = "";
+                    return;
+                }
+
+                int projectId = Convert.ToInt32(projectIdObj);
+                currentCell.Text = projectNumbers.TryGetValue(projectId, out int num) ? num.ToString() : "";
+            };
+        }
+        private void EnsureSafeMargins(XtraReport report)
+        {
+            const int minMargin = 20; // report units (hundredths of an inch) ≈ 5mm — safe for most printers
+
+            var m = report.Margins;
+            report.Margins = new System.Drawing.Printing.Margins(
+                Math.Max((int)m.Left, minMargin),
+                Math.Max((int)m.Right, minMargin),
+                Math.Max((int)m.Top, minMargin),
+                Math.Max((int)m.Bottom, minMargin)
+            );
         }
         private void GenerateFooter(XtraReport report, List<string> visibleKeys, Dictionary<string, float> keyWidths)
         {
