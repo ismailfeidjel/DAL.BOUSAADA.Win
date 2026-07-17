@@ -18,6 +18,8 @@ using DevExpress.XtraNavBar;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.ReportGeneration;
 using DevExpress.XtraReports.UI;
+using DevExpress.Data.Filtering; 
+
 
 using System;
 using System.Collections.Generic;
@@ -82,79 +84,75 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         private void ApplyFilterDisplayText(XtraReport report)
         {
-            // Locate the cell in your template
             var filterCell = report.FindControl("cellFilterText", true) as XRTableCell
                           ?? report.FindControl("tbFilter", true) as XRTableCell;
 
             if (filterCell == null) return;
 
-            var filterValues = new List<string>();
+            var parts = new List<string>();
 
-            foreach (DevExpress.XtraGrid.Views.Base.ViewColumnFilterInfo info in gridView1.ActiveFilter)
+            foreach (DevExpress.XtraGrid.Columns.GridColumn col in gridView1.Columns)
             {
-                if (info.Filter == null) continue;
+                CriteriaOperator criteria = col.FilterInfo?.FilterCriteria;
+                if (criteria == null) continue;
 
-                // Get the actual grid column associated with this filter
-                var column = info.Column;
+                var values = new List<string>();
+                CollectOperandValues(criteria, col, values);
 
-                // 1. Handle single-value filters (including LookUpEdit/ComboBox columns)
-                if (info.Filter.Value != null)
-                {
-                    string displayVal = GetFilterValueDisplayText(column, info.Filter.Value);
-                    filterValues.Add(displayVal);
-                }
-                // 2. Handle multi-value/Excel-checked filters (where raw value might be null)
-                else
-                {
-                    string filterText = info.Filter.DisplayText ?? info.Filter.FilterString;
-
-                    if (!string.IsNullOrEmpty(filterText))
-                    {
-                        // Regex to find raw filter criteria wrapped in single quotes (e.g. '1', '2' or 'Alger')
-                        var matches = Regex.Matches(filterText, @"'([^']*)'");
-                        if (matches.Count > 0)
-                        {
-                            foreach (Match match in matches)
-                            {
-                                string rawVal = match.Groups[1].Value.Trim();
-
-                                // Resolve the matched ID/value using the column's RepositoryItem LookUp/ComboBox
-                                string resolvedVal = GetFilterValueDisplayText(column, rawVal);
-
-                                if (!string.IsNullOrEmpty(resolvedVal) && !filterValues.Contains(resolvedVal))
-                                {
-                                    filterValues.Add(resolvedVal);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // Fallback for raw numbers without quotes (e.g. [DomainId] = 3)
-                            var numMatch = Regex.Match(filterText, @"[=<>!]+\s*([0-9]+(?:\.[0-9]+)?)");
-                            if (numMatch.Success && numMatch.Groups.Count > 1)
-                            {
-                                string resolvedVal = GetFilterValueDisplayText(column, numMatch.Groups[1].Value);
-                                filterValues.Add(resolvedVal);
-                            }
-                        }
-                    }
-                }
+                var distinctValues = values.Distinct().ToList();
+                if (distinctValues.Count > 0)
+                    parts.Add($"{col.Caption}: {string.Join(", ", distinctValues)}");
             }
 
-            if (filterValues.Count == 0)
+            filterCell.Text = parts.Count == 0 ? "الكل" : string.Join("  |  ", parts);
+        }
+
+        private void CollectOperandValues(CriteriaOperator criteria, DevExpress.XtraGrid.Columns.GridColumn col, List<string> values)
+        {
+            switch (criteria)
             {
-                filterCell.Text = "الكل"; // Arabic for "All"
-            }
-            else
-            {
-                // Join the actual text names cleanly separated by commas
-                filterCell.Text = string.Join(", ", filterValues);
+                case BinaryOperator bo:
+                    CollectOperandValues(bo.LeftOperand, col, values);
+                    CollectOperandValues(bo.RightOperand, col, values);
+                    break;
+
+                case GroupOperator go:
+                    foreach (var op in go.Operands)
+                        CollectOperandValues(op, col, values);
+                    break;
+
+                case UnaryOperator uo:
+                    CollectOperandValues(uo.Operand, col, values);
+                    break;
+
+                case InOperator io:
+                    foreach (var op in io.Operands)
+                        CollectOperandValues(op, col, values);
+                    break;
+
+                case BetweenOperator bwo:
+                    CollectOperandValues(bwo.BeginExpression, col, values);
+                    CollectOperandValues(bwo.EndExpression, col, values);
+                    break;
+
+                case FunctionOperator fo: // e.g. Contains(), StartsWith() for text filters
+                    foreach (var op in fo.Operands)
+                        CollectOperandValues(op, col, values);
+                    break;
+
+                case OperandValue ov:
+                    if (ov.Value != null)
+                        values.Add(GetFilterValueDisplayText(col, ov.Value));
+                    break;
+
+                    // OperandProperty (the field name itself) and anything else — nothing to collect
             }
         }
 
+
         // Helper method to convert raw ID value to friendly text using column's repository editor
         // Helper method to convert raw ID value to friendly text using column's repository editor
-private string GetFilterValueDisplayText(DevExpress.XtraGrid.Columns.GridColumn col, object val)
+        private string GetFilterValueDisplayText(DevExpress.XtraGrid.Columns.GridColumn col, object val)
 {
     if (col == null || val == null) return val?.ToString() ?? "";
 
@@ -205,7 +203,7 @@ private string GetFilterValueDisplayText(DevExpress.XtraGrid.Columns.GridColumn 
             }
             var cell1 = report.FindControl("cellProjectCounter", true) as XRTableCell;
             var cell2 = report.FindControl("tb27", true) as XRTableCell;
-            int totalProjectsCount = nextNumber - 1; // Since nextNumber starts at 1 and increments
+            int totalProjectsCount = nextNumber - 1; 
             if (cell1 != null)
             {
                 cell1.BeforePrint += (s, e) =>
@@ -547,7 +545,7 @@ private string GetFilterValueDisplayText(DevExpress.XtraGrid.Columns.GridColumn 
             //gridView1.Appearance.OddRow.BackColor = Color.FromArgb(245, 245, 245);
             AddCol("OperationNumber", "رقم ", 110);
             AddCol("Daira", "الدائرة", 100);
-            gridView1.Columns["Daira"].OptionsColumn.AllowMerge = DefaultBoolean.True;
+           // gridView1.Columns["Daira"].OptionsColumn.AllowMerge = DefaultBoolean.True;
             AddCol("LotNumber", "N", 100);
 
             AddCol("Commune", "البلدية", 100);
@@ -590,9 +588,8 @@ private string GetFilterValueDisplayText(DevExpress.XtraGrid.Columns.GridColumn 
             gridView1.Columns["StartDate"].ColumnEdit = dateEdit;
             AddCol("ExecutionDuration", "اجال التنفيذ", 110, "{0:N0}يوم");
             AddCol("PhysicalProgress", "التقدم الفيزيائي", 100, "{0:N0} %");
+
             AddCol("ProjectStatusId", "وضعية العملية", 110);
-
-
             var statusLookup = new RepositoryItemLookUpEdit();
             statusLookup.DataSource = new LookupRepository().GetAll("project_statuses");
             statusLookup.DisplayMember = "Name";
@@ -603,6 +600,56 @@ private string GetFilterValueDisplayText(DevExpress.XtraGrid.Columns.GridColumn 
             gridControl1.RepositoryItems.Add(statusLookup);
             gridView1.Columns["ProjectStatusId"].ColumnEdit = statusLookup;
             gridView1.Columns["ProjectStatusId"].OptionsColumn.AllowEdit = true;
+
+
+            AddCol("AdministrativeProcedureId", "الإجراء الإداري", 130);
+            var adminProcedureLookup = new RepositoryItemLookUpEdit();
+            adminProcedureLookup.DataSource = new LookupRepository().GetAll("administrative_procedures");
+            adminProcedureLookup.DisplayMember = "Name";
+            adminProcedureLookup.ValueMember = "Id";
+            adminProcedureLookup.ShowHeader = false;
+            adminProcedureLookup.NullText = "— اختر —";
+            adminProcedureLookup.Columns.Add(new LookUpColumnInfo("Name", 200));
+            gridControl1.RepositoryItems.Add(adminProcedureLookup);
+            gridView1.Columns["AdministrativeProcedureId"].ColumnEdit = adminProcedureLookup;
+            gridView1.Columns["AdministrativeProcedureId"].OptionsColumn.AllowEdit = true;
+
+            AddCol("SpecialStatus1Id", "الوضعية1", 130);
+            var specialStatus1Lookup = new RepositoryItemLookUpEdit();
+            specialStatus1Lookup.DataSource = new LookupRepository().GetAll("special_status1");
+            specialStatus1Lookup.DisplayMember = "Name";
+            specialStatus1Lookup.ValueMember = "Id";
+            specialStatus1Lookup.ShowHeader = false;
+            specialStatus1Lookup.NullText = "——";
+            specialStatus1Lookup.Columns.Add(new LookUpColumnInfo("Name", 200));
+            gridControl1.RepositoryItems.Add(specialStatus1Lookup);
+            gridView1.Columns["SpecialStatus1Id"].ColumnEdit = specialStatus1Lookup;
+            gridView1.Columns["SpecialStatus1Id"].OptionsColumn.AllowEdit = true;
+
+            AddCol("SpecialStatus2Id", "الوضعية2", 130);
+            var specialStatus2Lookup = new RepositoryItemLookUpEdit();
+            specialStatus2Lookup.DataSource = new LookupRepository().GetAll("special_status2");
+            specialStatus2Lookup.DisplayMember = "Name";
+            specialStatus2Lookup.ValueMember = "Id";
+            specialStatus2Lookup.ShowHeader = false;
+            specialStatus2Lookup.NullText = "——";
+            specialStatus2Lookup.Columns.Add(new LookUpColumnInfo("Name", 200));
+            gridControl1.RepositoryItems.Add(specialStatus2Lookup);
+            gridView1.Columns["SpecialStatus2Id"].ColumnEdit = specialStatus2Lookup;
+            gridView1.Columns["SpecialStatus2Id"].OptionsColumn.AllowEdit = true;
+
+            AddCol("SpecialStatus3Id", "الوضعية3", 130);
+            var specialStatus3Lookup = new RepositoryItemLookUpEdit();
+            specialStatus3Lookup.DataSource = new LookupRepository().GetAll("special_status3");
+            specialStatus3Lookup.DisplayMember = "Name";
+            specialStatus3Lookup.ValueMember = "Id";
+            specialStatus3Lookup.ShowHeader = false;
+            specialStatus3Lookup.NullText = "——";
+            specialStatus3Lookup.Columns.Add(new LookUpColumnInfo("Name", 200));
+            gridControl1.RepositoryItems.Add(specialStatus3Lookup);
+            gridView1.Columns["SpecialStatus3Id"].ColumnEdit = specialStatus3Lookup;
+            gridView1.Columns["SpecialStatus3Id"].OptionsColumn.AllowEdit = true;
+
             AddCol("Notes", "الملاحظة", 150);
 
 
