@@ -902,6 +902,10 @@
     <None Include="DBBDataSet.xss">
       <DependentUpon>DBBDataSet.xsd</DependentUpon>
     </None>
+    <None Include="NewFolder1\Reports\Saved\f.pdf" />
+    <None Include="NewFolder1\Reports\Saved\تقرير_20260710_173046.prnx" />
+    <None Include="NewFolder1\Reports\Saved\تقرير_20260710_173046.repx" />
+    <None Include="NewFolder1\Reports\Templates\قالب_تقرير_المشاريع.repx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

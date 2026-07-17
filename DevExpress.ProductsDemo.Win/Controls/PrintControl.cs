@@ -428,6 +428,12 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             return false;
         }
         private void printButton_Click(object sender, EventArgs e) {
+            frmMain frm = BackstageView.Ribbon.FindForm() as frmMain;
+            // If you have the report instance (frm.CurrentReport), use ReportPrintTool:
+            if(frm.CurrentReport != null) {
+                new DevExpress.XtraReports.UI.ReportPrintTool(frm.CurrentReport).Print(this.ddbPrinter.Text);
+                return;
+            }
             ((PrintingSystem)this.printControl1.PrintingSystem).Print(this.ddbPrinter.Text);
         }
 
