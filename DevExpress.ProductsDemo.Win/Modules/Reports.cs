@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using DevExpress.XtraReports.UI;
+using DevExpress.XtraReports.UI; 
 using System.IO;
 using DevExpress.XtraBars.Docking;
 using DevExpress.XtraEditors;
