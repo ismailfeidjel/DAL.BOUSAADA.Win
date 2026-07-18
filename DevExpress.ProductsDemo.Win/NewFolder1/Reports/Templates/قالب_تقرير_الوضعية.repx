@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.7.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="XtraReport" Margins="14, 19.791666, 16.3288441, 87.52823" PaperKind="A4" PageWidth="827" PageHeight="1169" Version="24.1" RightToLeft="Yes" RightToLeftLayout="Yes">
+  <Bands>
+    <Item1 Ref="1" ControlType="DetailBand" Name="Detail" HeightF="777.0833">
+      <Controls>
+        <Item1 Ref="2" ControlType="XRTable" Name="table1" AnchorVertical="Both" AnchorHorizontal="Both" TextAlignment="TopLeft" SizeF="791.737732,525.7642" LocationFloat="1.47067642,10.0000067" Font="Segoe UI, 11pt, style=Bold" Padding="2,2,0,0,96" Borders="All">
+          <Rows>
+            <Item1 Ref="3" ControlType="XRTableRow" Name="tableRow2" Weight="1">
+              <Cells>
+                <Item1 Ref="4" ControlType="XRTableCell" Name="tableCell8" Weight="1.6257458172239789" CanGrow="false" Multiline="true" Text="عددالعمليات المقبولة المبلغة" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="5" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="6" ControlType="XRTableCell" Name="tableCell9" Weight="1.2926782598287918" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="7" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="8" ControlType="XRTableCell" Name="tableCell10" Weight="1.2398419091657593" CanGrow="false" Multiline="true" Text="بمبلغ :" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="9" UseFont="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="10" ControlType="XRTableCell" Name="tableCell11" Weight="1.5325201689945511" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="11" UseFont="false" UseTextAlignment="false" />
+                </Item4>
+              </Cells>
+            </Item1>
+            <Item2 Ref="12" ControlType="XRTableRow" Name="tableRow3" Weight="1">
+              <Cells>
+                <Item1 Ref="13" ControlType="XRTableCell" Name="tableCell12" Weight="1.6257459347393957" CanGrow="false" Multiline="true" Text="عدد العمليات الاضافية المقبولة" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="14" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="15" ControlType="XRTableCell" Name="tableCell21" Weight="1.2926786994938682" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="16" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="17" ControlType="XRTableCell" Name="tableCell13" Weight="1.239841469500683" CanGrow="false" Multiline="true" Text="بمبلغ :" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="18" UseFont="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="19" ControlType="XRTableCell" Name="tableCell14" Weight="1.5325201689945511" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="20" UseFont="false" UseTextAlignment="false" />
+                </Item4>
+              </Cells>
+            </Item2>
+            <Item3 Ref="21" ControlType="XRTableRow" Name="tableRow4" Weight="1">
+              <Cells>
+                <Item1 Ref="22" ControlType="XRTableCell" Name="tableCell15" Weight="1.6257459347393957" CanGrow="false" Multiline="true" Text="مجموع العمليات المبلغة" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="23" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="24" ControlType="XRTableCell" Name="tableCell22" Weight="1.2926786994938682" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="25" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="26" ControlType="XRTableCell" Name="tableCell16" Weight="1.239841469500683" CanGrow="false" TextFormatString="{0:#.00}" Multiline="true" Text="بمبلغ:" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="27" UseFont="false" />
+                </Item3>
+                <Item4 Ref="28" ControlType="XRTableCell" Name="tableCell17" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="29" UseFont="false" />
+                </Item4>
+              </Cells>
+            </Item3>
+            <Item4 Ref="30" ControlType="XRTableRow" Name="tableRow5" Weight="1">
+              <Cells>
+                <Item1 Ref="31" ControlType="XRTableCell" Name="tableCell18" Weight="1.6257459347393957" CanGrow="false" Multiline="true" Text="عدد العمليات الخاصة بصيانة الطرقات" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="32" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="33" ControlType="XRTableCell" Name="tableCell23" Weight="1.2926786994938682" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="34" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="35" ControlType="XRTableCell" Name="tableCell19" Weight="1.239841469500683" CanGrow="false" Multiline="true" Text="بمبلغ :" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="36" UseFont="false" />
+                </Item3>
+                <Item4 Ref="37" ControlType="XRTableCell" Name="tableCell20" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="38" UseFont="false" />
+                </Item4>
+              </Cells>
+            </Item4>
+            <Item5 Ref="39" ControlType="XRTableRow" Name="tableRow6" Weight="1">
+              <Cells>
+                <Item1 Ref="40" ControlType="XRTableCell" Name="tableCell24" Weight="1.6257459347393957" CanGrow="false" Multiline="true" Text="العمليات بدون صيانة الطرق" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="41" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="42" ControlType="XRTableCell" Name="tableCell25" Weight="1.2926786994938682" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="43" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="44" ControlType="XRTableCell" Name="tableCell26" Weight="1.239841469500683" CanGrow="false" Multiline="true" Text="بمبلغ :" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="45" UseFont="false" />
+                </Item3>
+                <Item4 Ref="46" ControlType="XRTableCell" Name="tableCell27" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="47" UseFont="false" />
+                </Item4>
+              </Cells>
+            </Item5>
+            <Item6 Ref="48" ControlType="XRTableRow" Name="tableRow7" Weight="1">
+              <Cells>
+                <Item1 Ref="49" ControlType="XRTableCell" Name="tableCell28" Weight="1.6257459347393957" CanGrow="false" Multiline="true" Text="عدد الملفات للتسجيل" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="50" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="51" ControlType="XRTableCell" Name="tableCell29" Weight="0.64633934974693408" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="52" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="53" ControlType="XRTableCell" Name="tableCell32" Weight="0.32316967487346704" CanGrow="false" Multiline="true" Text="بنسبة:" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="54" UseFont="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="55" ControlType="XRTableCell" Name="tableCell33" Weight="0.32316967487346704" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="56" UseFont="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="57" ControlType="XRTableCell" Name="tableCell30" Weight="1.239841469500683" CanGrow="false" Multiline="true" Text="بمبلغ :" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="58" UseFont="false" />
+                </Item5>
+                <Item6 Ref="59" ControlType="XRTableCell" Name="tableCell31" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="60" UseFont="false" />
+                </Item6>
+              </Cells>
+            </Item6>
+            <Item7 Ref="61" ControlType="XRTableRow" Name="tableRow8" Weight="1">
+              <Cells>
+                <Item1 Ref="62" ControlType="XRTableCell" Name="tableCell34" Weight="1.6257459347393957" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="63" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="64" ControlType="XRTableCell" Name="tableCell35" Weight="1.2926786994938682" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="65" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="66" ControlType="XRTableCell" Name="tableCell38" Weight="1.239841469500683" CanGrow="false" Multiline="true" Text="المبلغ المقترح للتسجيل :" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="67" UseFont="false" />
+                </Item3>
+                <Item4 Ref="68" ControlType="XRTableCell" Name="tableCell39" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="69" UseFont="false" />
+                </Item4>
+              </Cells>
+            </Item7>
+            <Item8 Ref="70" ControlType="XRTableRow" Name="tableRow9" Weight="1">
+              <Cells>
+                <Item1 Ref="71" ControlType="XRTableCell" Name="tableCell36" Weight="1.6257459347393957" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="72" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="73" ControlType="XRTableCell" Name="tableCell37" Weight="1.2926786994938682" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="74" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="75" ControlType="XRTableCell" Name="tableCell40" Weight="1.239841469500683" CanGrow="false" Multiline="true" Text="المبلغ المتبقي بعد التسجيل :" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="76" UseFont="false" />
+                </Item3>
+                <Item4 Ref="77" ControlType="XRTableCell" Name="tableCell41" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="78" UseFont="false" />
+                </Item4>
+              </Cells>
+            </Item8>
+            <Item9 Ref="79" ControlType="XRTableRow" Name="tableRow10" Weight="1">
+              <Cells>
+                <Item1 Ref="80" ControlType="XRTableCell" Name="tableCell42" Weight="1.6257459347393957" CanGrow="false" Multiline="true" Text="عدد الملفات للتسجيل(عمليات اضافية)" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="81" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="82" ControlType="XRTableCell" Name="tableCell43" Weight="0.64633934974693408" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="83" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="84" ControlType="XRTableCell" Name="tableCell46" Weight="0.32316967487346704" CanGrow="false" Multiline="true" Text="بنسبة:" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="85" UseFont="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="86" ControlType="XRTableCell" Name="tableCell47" Weight="0.32316967487346704" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="87" UseFont="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="88" ControlType="XRTableCell" Name="tableCell44" Weight="1.239841469500683" CanGrow="false" Multiline="true" Text="بمبلغ :" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="89" UseFont="false" />
+                </Item5>
+                <Item6 Ref="90" ControlType="XRTableCell" Name="tableCell45" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="91" UseFont="false" />
+                </Item6>
+              </Cells>
+            </Item9>
+            <Item10 Ref="92" ControlType="XRTableRow" Name="tableRow11" Weight="1">
+              <Cells>
+                <Item1 Ref="93" ControlType="XRTableCell" Name="tableCell48" Weight="1.6257459347393957" CanGrow="false" Multiline="true" Text="عدد ملفات لا تزال على مستوى الاجراءات الادارية" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="94" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="95" ControlType="XRTableCell" Name="tableCell49" Weight="0.64633934974693408" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="96" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="97" ControlType="XRTableCell" Name="tableCell50" Weight="0.32316967487346704" CanGrow="false" Multiline="true" Text="بنسبة:" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="98" UseFont="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="99" ControlType="XRTableCell" Name="tableCell51" Weight="0.32316967487346704" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="100" UseFont="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="101" ControlType="XRTableCell" Name="tableCell52" Weight="1.239841469500683" CanGrow="false" Multiline="true" Text="بمبلغ :" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="102" UseFont="false" />
+                </Item5>
+                <Item6 Ref="103" ControlType="XRTableCell" Name="tableCell53" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="104" UseFont="false" />
+                </Item6>
+              </Cells>
+            </Item10>
+            <Item11 Ref="105" ControlType="XRTableRow" Name="tableRow12" Weight="1">
+              <Cells>
+                <Item1 Ref="106" ControlType="XRTableCell" Name="tableCell54" Weight="1.6257459347393957" CanGrow="false" Multiline="true" Text="عدد العملياتالمسجلة ( المؤشرة من طرف المراقب الميزانياتي)" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="107" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="108" ControlType="XRTableCell" Name="tableCell55" Weight="0.64633934974693408" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="109" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="110" ControlType="XRTableCell" Name="tableCell56" Weight="0.32316967487346704" CanGrow="false" Multiline="true" Text="بنسبة:" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="111" UseFont="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="112" ControlType="XRTableCell" Name="tableCell57" Weight="0.32316967487346704" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="113" UseFont="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="114" ControlType="XRTableCell" Name="tableCell58" Weight="1.239841469500683" CanGrow="false" Multiline="true" Text="بمبلغ :" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="115" UseFont="false" />
+                </Item5>
+                <Item6 Ref="116" ControlType="XRTableCell" Name="tableCell59" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="117" UseFont="false" />
+                </Item6>
+              </Cells>
+            </Item11>
+            <Item12 Ref="118" ControlType="XRTableRow" Name="tableRow13" Weight="1">
+              <Cells>
+                <Item1 Ref="119" ControlType="XRTableCell" Name="tableCell60" Weight="2.9184246342332636" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="120" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="121" ControlType="XRTableCell" Name="tableCell64" Weight="1.239841469500683" CanGrow="false" Multiline="true" Text="مجموع :" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="122" UseFont="false" />
+                </Item2>
+                <Item3 Ref="123" ControlType="XRTableCell" Name="tableCell65" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="124" UseFont="false" />
+                </Item3>
+              </Cells>
+            </Item12>
+            <Item13 Ref="125" ControlType="XRTableRow" Name="tableRow14" Weight="1">
+              <Cells>
+                <Item1 Ref="126" ControlType="XRTableCell" Name="tableCell66" Weight="1.6257459347393957" CanGrow="false" Multiline="true" Text="عدد العمليات قيد التسجيل (على مستوى الادارة المحلية)" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="127" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="128" ControlType="XRTableCell" Name="tableCell67" Weight="4.0650403379891022" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="129" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item13>
+          </Rows>
+          <StylePriority Ref="130" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="131" ControlType="XRTable" Name="xrTable1" AnchorVertical="Both" AnchorHorizontal="Both" TextAlignment="TopLeft" SizeF="791.737732,177.638977" LocationFloat="1.47064459,599.444336" Font="Segoe UI, 11pt, style=Bold" Padding="2,2,0,0,96" Borders="All">
+          <Rows>
+            <Item1 Ref="132" ControlType="XRTableRow" Name="xrTableRow1" Weight="1">
+              <Cells>
+                <Item1 Ref="133" ControlType="XRTableCell" Name="xrTableCell1" Weight="0.94925360410116166" CanGrow="false" Multiline="true" Text="تفاصيل العمليات في طور الاجراءات الادارية :" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="134" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="135" ControlType="XRTableCell" Name="tableCell7" Weight="0.67649221312281727" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="136" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="137" ControlType="XRTableCell" Name="xrTableCell2" Weight="0.9067743517705722" CanGrow="false" Multiline="true" Text="العمليات في طور اعداد دفتر الشروط:" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="138" UseFont="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="139" ControlType="XRTableCell" Name="tableCell3" Weight="1.5325201689945511" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="140" UseFont="false" UseTextAlignment="false" />
+                </Item4>
+              </Cells>
+            </Item1>
+            <Item2 Ref="141" ControlType="XRTableRow" Name="xrTableRow2" Weight="1">
+              <Cells>
+                <Item1 Ref="142" ControlType="XRTableCell" Name="xrTableCell4" Weight="1.6257459347393957" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="143" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="144" ControlType="XRTableCell" Name="cellFilterText" Weight="0.90677423425515546" CanGrow="false" Multiline="true" Text="العمليات في مرحلة الاعلان:" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="145" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="146" ControlType="XRTableCell" Name="tableCell4" Weight="1.5325201689945511" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="147" UseFont="false" UseTextAlignment="false" />
+                </Item3>
+              </Cells>
+            </Item2>
+            <Item3 Ref="148" ControlType="XRTableRow" Name="xrTableRow3" Weight="1">
+              <Cells>
+                <Item1 Ref="149" ControlType="XRTableCell" Name="xrTableCell3" Weight="1.6257459347393957" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="150" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="151" ControlType="XRTableCell" Name="xrTableCell6" Weight="0.90677423425515546" CanGrow="false" TextFormatString="{0:MM/dd/yyyy}" Multiline="true" Text="العمليات في مرحلة الفتح والتقييم:" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="152" UseFont="false" />
+                </Item2>
+                <Item3 Ref="153" ControlType="XRTableCell" Name="tableCell5" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="154" UseFont="false" />
+                </Item3>
+              </Cells>
+            </Item3>
+            <Item4 Ref="155" ControlType="XRTableRow" Name="tableRow1" Weight="1">
+              <Cells>
+                <Item1 Ref="156" ControlType="XRTableCell" Name="tableCell1" Weight="1.6257459347393957" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="157" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="158" ControlType="XRTableCell" Name="tableCell2" Weight="0.90677423425515546" CanGrow="false" Multiline="true" Text="العمليات في مرحلة المنح المؤقت :" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="159" UseFont="false" />
+                </Item2>
+                <Item3 Ref="160" ControlType="XRTableCell" Name="tableCell6" Weight="1.5325201689945511" CanGrow="false" Multiline="true" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="161" UseFont="false" />
+                </Item3>
+              </Cells>
+            </Item4>
+          </Rows>
+          <StylePriority Ref="162" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+      </Controls>
+    </Item1>
+    <Item2 Ref="163" ControlType="TopMarginBand" Name="TopMargin" HeightF="16.3288441" />
+    <Item3 Ref="164" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="87.52823" />
+    <Item4 Ref="165" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="161.76796">
+      <Controls>
+        <Item1 Ref="166" ControlType="XRLabel" Name="label3" RightToLeft="Yes" Multiline="true" CanGrow="false" Text="حصيلة دورية لوضعية المشاريع" TextAlignment="TopCenter" SizeF="359.720337,32.91667" LocationFloat="227.6546,59.375" Font="Segoe UI, 16pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="167" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="168" ControlType="XRLabel" Name="label2" TextFormatString="{0:yyyy-MM-dd}" RightToLeft="Yes" Multiline="true" CanGrow="false" TextAlignment="TopLeft" SizeF="179.874878,32.91667" LocationFloat="407.52948,118.851288" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+          <ExpressionBindings>
+            <Item1 Ref="169" EventName="BeforePrint" PropertyName="Text" Expression="Today()" />
+          </ExpressionBindings>
+          <StylePriority Ref="170" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="171" ControlType="XRLabel" Name="label1" RightToLeft="Yes" Multiline="true" CanGrow="false" Text="محينة الى غاية :" TextAlignment="TopRight" SizeF="179.874878,32.91667" LocationFloat="227.6546,118.851288" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="172" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="173" ControlType="XRLabel" Name="cellProgramName" RightToLeft="Yes" Multiline="true" Text="ADSEC 2026" TextAlignment="TopRight" SizeF="141.958267,26.45833" LocationFloat="624.250061,0" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="174" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="175" ControlType="XRLabel" Name="xrLabel5" RightToLeft="Yes" Multiline="true" CanGrow="false" Text="مصلحة التخطيط ومتابعة البرامج التنموية" TextAlignment="TopLeft" SizeF="346.124878,32.91667" LocationFloat="0,26.4583263" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="176" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item5>
+        <Item6 Ref="177" ControlType="XRLabel" Name="xrLabel4" RightToLeft="Yes" Multiline="true" Text="مديرية الادارة المحلية" TextAlignment="TopLeft" SizeF="252.374878,26.45833" LocationFloat="0,0" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="178" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item6>
+      </Controls>
+    </Item4>
+  </Bands>
+</XtraReportsLayoutSerializer>
