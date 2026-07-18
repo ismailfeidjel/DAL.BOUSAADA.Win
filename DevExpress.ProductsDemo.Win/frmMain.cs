@@ -21,6 +21,9 @@ using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.ProductsDemo.Win.Modules;
 using DevExpress.XtraReports.Native;
 using DevExpress.XtraReports.ReportGeneration;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraEditors.Controls;
+using System.Linq;
 
 namespace DevExpress.ProductsDemo.Win {
     public partial class frmMain : RibbonForm {
@@ -28,6 +31,10 @@ namespace DevExpress.ProductsDemo.Win {
         ZoomManager _zoomManager;
         List<BarItem> AllowCustomizationMenuList = new List<BarItem>();
         GuideGenerator guideGenerator;
+
+        private DevExpress.XtraBars.BarEditItem beiProgramSelector;
+        private RepositoryItemLookUpEdit repoProgramLookup;
+
         public XtraReport CurrentReport
         {
             get { return modulesNavigator.CurrentModule?.GetPrintReport(); }
@@ -39,6 +46,7 @@ namespace DevExpress.ProductsDemo.Win {
             TaskbarHelper.InitDemoJumpList(TaskbarAssistant.Default, this);
             InitializeComponent();
             RibbonButtonsInitialize();
+            SetupProgramSelectorRibbon();
             modulesNavigator = new ModulesNavigator(ribbonControl1, pcMain);
             _zoomManager = new ZoomManager(ribbonControl1, modulesNavigator, beiZoom);
             InitNavBarItemLinks();
@@ -59,6 +67,41 @@ namespace DevExpress.ProductsDemo.Win {
                 MainFormHelper.TakeAllScreens(TakeModule, links.Length, this, pcMain, null, demoName: "DevExpress.ProductsDemo.Win");
             }
         }
+
+
+        private void SetupProgramSelectorRibbon()
+        {
+            repoProgramLookup = new RepositoryItemLookUpEdit();
+            repoProgramLookup.DisplayMember = "Name";
+            repoProgramLookup.ValueMember = "Id";
+            repoProgramLookup.ShowHeader = false;
+            repoProgramLookup.NullText = "اختر البرنامج";
+            repoProgramLookup.Columns.Add(new LookUpColumnInfo("Name", 200));
+            repoProgramLookup.EditValueChanged += RepoProgramLookup_EditValueChanged;
+            ribbonControl1.RepositoryItems.Add(repoProgramLookup);
+
+            beiProgramSelector = new DevExpress.XtraBars.BarEditItem(ribbonControl1.Manager, repoProgramLookup);
+            beiProgramSelector.Caption = "البرنامج";
+            beiProgramSelector.EditWidth = 160;
+            beiProgramSelector.Visibility = DevExpress.XtraBars.BarItemVisibility.Never; // hidden until a module opts in
+
+            ribbonControl1.Toolbar.ItemLinks.Add(beiProgramSelector);
+        }
+
+        private void RepoProgramLookup_EditValueChanged(object sender, EventArgs e)
+        {
+            if (modulesNavigator.CurrentModule == null) return;
+
+            object rawValue = (sender as DevExpress.XtraEditors.BaseEdit)?.EditValue;
+
+            int? programId = null;
+            if (rawValue != null && rawValue != DBNull.Value)
+                programId = Convert.ToInt32(rawValue);
+
+            modulesNavigator.CurrentModule.OnProgramChanged(programId);
+        }
+
+
         NavBarItem[] links;
         string TakeModule(int num) {
             string info = ((NavBarGroupTagObject)links[num].Tag).Name;
@@ -294,8 +337,28 @@ namespace DevExpress.ProductsDemo.Win {
             link.ShowRibbonPreviewDialog(this.LookAndFeel);
         }
 
-        internal void OnModuleShown(BaseModule baseModule) {
-            //rpgPrint.Visible = CurrentPrintableComponent != null;
+        internal void OnModuleShown(BaseModule baseModule)
+        {
+            if (baseModule != null && baseModule.HasProgramSelector)
+            {
+                System.Diagnostics.Debug.WriteLine($"OnModuleShown called for {baseModule?.GetType().Name} at {DateTime.Now:HH:mm:ss.fff}");
+
+                // Force a clean rebind — clear everything first to avoid stale internal caching
+                beiProgramSelector.EditValue = null;
+                repoProgramLookup.DataSource = null;
+
+                var freshList = baseModule.GetPrograms().ToList();
+                foreach (var p in freshList)
+                    System.Diagnostics.Debug.WriteLine($"Bound program: Id={p.Id}, Name={p.Name}");
+                repoProgramLookup.DataSource = freshList;
+
+                beiProgramSelector.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
+                beiProgramSelector.EditValue = baseModule.SelectedProgramId;
+            }
+            else
+            {
+                beiProgramSelector.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            }
         }
 
         private void bbiReminder_ItemClick(object sender, ItemClickEventArgs e) {
@@ -380,7 +443,8 @@ namespace DevExpress.ProductsDemo.Win {
             //modulesNavigator.CurrentModule?.ShowColumnChooser();
             if (modulesNavigator.CurrentModule is ProjectModule pm)
             {
-        pm.ExportGridToDesignerReport();
+               ///  pm.ExportGridToDesignerReport();
+                pm.PrintStatusSummaryReport();
             }
 
         }

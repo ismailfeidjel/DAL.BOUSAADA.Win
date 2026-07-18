@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Windows.Forms;
 using DevExpress.DXperience.Demos;
 using DevExpress.MailClient.Win;
+using DevExpress.ProductsDemo.Win.Domain;
 using DevExpress.Utils;
 using DevExpress.Utils.Design;
 using DevExpress.Utils.Menu;
@@ -143,7 +144,11 @@ namespace DevExpress.ProductsDemo.Win {
     }
     public class BaseModule : BaseControl {
         protected string _partName = string.Empty;
-                
+        public virtual bool HasProgramSelector => false;
+        public virtual List<LookupItem> GetPrograms() => new List<LookupItem>();
+        public virtual int? SelectedProgramId { get; set; }
+        public virtual void OnProgramChanged(int? programId) { }
+
         public BaseModule() { }
 
         public virtual void ShowColumnChooser() { }

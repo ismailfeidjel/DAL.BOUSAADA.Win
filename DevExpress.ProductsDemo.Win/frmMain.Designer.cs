@@ -220,6 +220,7 @@
             // 
             // printControl1
             // 
+            this.printControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
             resources.ApplyResources(this.printControl1, "printControl1");
             this.printControl1.ForeColor = System.Drawing.Color.Transparent;
             this.printControl1.Name = "printControl1";

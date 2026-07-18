@@ -738,8 +738,10 @@
     <Compile Include="Sales.Model\OleDataProvider.cs" />
     <Compile Include="Sales.Model\SalesForecastMaker.cs" />
     <Compile Include="Sales.Model\Utils.cs" />
+    <Compile Include="Service\GridReportBuilder.cs" />
     <Compile Include="Service\LotService.cs" />
     <Compile Include="Service\ProjectService.cs" />
+    <Compile Include="Service\StatusSummaryReportBuilder.cs" />
     <Compile Include="XRDesignRibbonControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

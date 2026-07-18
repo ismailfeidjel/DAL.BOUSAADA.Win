@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DevExpress.ProductsDemo.Win.Repositories
 {
@@ -193,6 +194,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             return list;
         }
 
+    
         public List<LotGridModel> GetByProjectId(int projectId)
         {
             var list = new List<LotGridModel>();
@@ -586,5 +588,13 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                     : rd["notes"].ToString()
             };
         }
+    }
+    public class ProjectDashboardStats
+    {
+        public int TotalLots { get; set; }
+        public Dictionary<string, int> StatusCounts { get; set; } = new Dictionary<string, int>();
+        public decimal TotalBudget { get; set; }
+        public decimal TotalRegistered { get; set; }
+        public decimal TotalConsumed { get; set; }
     }
 }

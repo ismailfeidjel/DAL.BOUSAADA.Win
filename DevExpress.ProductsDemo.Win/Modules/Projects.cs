@@ -41,71 +41,44 @@ namespace DevExpress.ProductsDemo.Win.Modules
         private readonly ProjectRepository _projectRepo = new ProjectRepository();
         private bool _loadingLot = false;
         private const string ProjectsTemplateKey = "قالب_تقرير_المشاريع";
-        //-------------------------------------------------------------------------------------------------------------------
-        private static readonly string[] GrowableFields = { "OperationName", "Notes" };
-
         private static readonly HashSet<string> SumFields = new HashSet<string> { "LotBudget", "ConsumedAmount", "RegisteredAmount" };
         private const string CountField = "Daira";
-
+        public override bool HasProgramSelector => true;
+        public override List<LookupItem> GetPrograms() => new LookupRepository().GetAll("programs");
+        private int? _selectedProgramId;
+        public override int? SelectedProgramId
+        {
+            get => _selectedProgramId;
+            set => _selectedProgramId = value;
+        }
+        public override void OnProgramChanged(int? programId)
+        {
+            _selectedProgramId = programId;
+            LoadData();
+        }
 
 
         private XtraReport BuildReportFromTemplateOrDefault()
         {
-            List<LotGridModel> visibleData = GetVisibleGridData();
+            var visibleData = GetVisibleGridData();
+            string programName = GetPrograms()
+        .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
 
-            string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", ProjectsTemplateKey + ".repx");
-
-            XtraReport report;
-            if (System.IO.File.Exists(templatePath))
+            return GridReportBuilder.Build(gridView1, visibleData, new GridReportOptions
             {
-                report = XtraReport.FromFile(templatePath, true);
-            }
-            else
-            {
-                report = ReportGenerator.GenerateReport(gridView1);
-                report.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
-                report.RightToLeftLayout = DevExpress.XtraReports.UI.RightToLeftLayout.Yes;
-            }
+                TemplateKey = ProjectsTemplateKey,
+                SumFields = SumFields,
+                CountField = CountField,
+                GroupIdField = "ProjectId",
+                GenerateFooterRow = false ,
+                 ProgramDisplayText = programName   // ← new
 
-            EnsureSafeMargins(report);   
+            });
 
 
-            report.DataSource = visibleData;
-            ApplyFilterDisplayText(report);
-            ApplyProjectNumbering(report, visibleData);   
-
-            ApplyGridColumnVisibility(report, out List<string> visibleKeys, out Dictionary<string, float> keyWidths);
-            //GenerateFooter(report, visibleKeys, keyWidths);
-
-
-            return report;
         }
 
 
-        private void ApplyFilterDisplayText(XtraReport report)
-        {
-            var filterCell = report.FindControl("cellFilterText", true) as XRTableCell
-                          ?? report.FindControl("tbFilter", true) as XRTableCell;
-
-            if (filterCell == null) return;
-
-            var parts = new List<string>();
-
-            foreach (DevExpress.XtraGrid.Columns.GridColumn col in gridView1.Columns)
-            {
-                CriteriaOperator criteria = col.FilterInfo?.FilterCriteria;
-                if (criteria == null) continue;
-
-                var values = new List<string>();
-                CollectOperandValues(criteria, col, values);
-
-                var distinctValues = values.Distinct().ToList();
-                if (distinctValues.Count > 0)
-                    parts.Add($"{col.Caption}: {string.Join(", ", distinctValues)}");
-            }
-
-            filterCell.Text = parts.Count == 0 ? "الكل" : string.Join("  |  ", parts);
-        }
 
         private void CollectOperandValues(CriteriaOperator criteria, DevExpress.XtraGrid.Columns.GridColumn col, List<string> values)
         {
@@ -185,278 +158,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
     return val.ToString().Replace("'", "").Replace("\"", "").Trim();
 }
 
-        private void ApplyProjectNumbering(XtraReport report, List<LotGridModel> visibleData)
-        {
-            var cell = report.FindControl("cellProjectNumber", true) as XRTableCell;
-            if (cell == null) return;
-
-            var projectNumbers = new Dictionary<int, int>();
-            int nextNumber = 1;
-
-            foreach (var row in visibleData)
-            {
-                if (!projectNumbers.ContainsKey(row.ProjectId))
-                {
-                    projectNumbers[row.ProjectId] = nextNumber;
-                    nextNumber++;
-                }
-            }
-            var cell1 = report.FindControl("cellProjectCounter", true) as XRTableCell;
-            var cell2 = report.FindControl("tb27", true) as XRTableCell;
-            int totalProjectsCount = nextNumber - 1; 
-            if (cell1 != null)
-            {
-                cell1.BeforePrint += (s, e) =>
-                {
-                    ((XRTableCell)s).Text = totalProjectsCount.ToString();
-                };
-            }
-            if (cell2 != null)
-            {
-                cell2.BeforePrint += (s, e) =>
-                {
-                    ((XRTableCell)s).Text = totalProjectsCount.ToString();
-                };
-            }
-
-
-
-
-            cell.BeforePrint += (s, e) =>
-            {
-                var currentCell = (XRTableCell)s;
-                object projectIdObj = currentCell.Report.GetCurrentColumnValue("ProjectId"); // ← via .Report
-
-                if (projectIdObj == null || projectIdObj == DBNull.Value)
-                {
-                    currentCell.Text = "";
-                    return;
-                }
-
-                int projectId = Convert.ToInt32(projectIdObj);
-                currentCell.Text = projectNumbers.TryGetValue(projectId, out int num) ? num.ToString() : "";
-            };
-        }
-        private void EnsureSafeMargins(XtraReport report)
-        {
-            const int minMargin = 20; // report units (hundredths of an inch) ≈ 5mm — safe for most printers
-
-            var m = report.Margins;
-            report.Margins = new System.Drawing.Printing.Margins(
-                Math.Max((int)m.Left, minMargin),
-                Math.Max((int)m.Right, minMargin),
-                Math.Max((int)m.Top, minMargin),
-                Math.Max((int)m.Bottom, minMargin)
-            );
-        }
-        private void GenerateFooter(XtraReport report, List<string> visibleKeys, Dictionary<string, float> keyWidths)
-        {
-            if (visibleKeys.Count == 0) return;
-
-            var footerBand = new DevExpress.XtraReports.UI.ReportFooterBand();
-
-            var table = new DevExpress.XtraReports.UI.XRTable();
-            table.BeginInit();
-
-            // Ensure the table spans the exact calculated printable width and is aligned correctly
-            float totalWidth = keyWidths.Values.Sum();
-            table.WidthF = totalWidth;
-            table.LocationF = new PointF(0, 0);
-
-            // Explicitly mirror the RTL setting from the report
-            table.RightToLeft = report.RightToLeft;
-
-            var row = new XRTableRow();
-            row.Font = new Font("Segoe UI", 8, FontStyle.Bold);
-            row.ForeColor = Color.Black;
-            row.BackColor = Color.FromArgb(230, 230, 230);
-
-            // 1. CRITICAL: Add the row to the table before configuring cells
-            table.Rows.Add(row);
-
-            var cellsList = new List<XRTableCell>();
-
-            // 2. First Pass: Create cells, configure styles, and ADD them to the row first
-            foreach (string key in visibleKeys)
-            {
-                var cell = new XRTableCell();
-                cell.WordWrap = false;
-                cell.CanGrow = false;
-                cell.CanShrink = true;
-                cell.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-                cell.Borders = DevExpress.XtraPrinting.BorderSide.All;
-                cell.BorderWidth = 1f;
-                cell.BorderColor = Color.Black;
-                cell.Padding = new DevExpress.XtraPrinting.PaddingInfo(4, 4, 2, 2, 100);
-
-                if (SumFields.Contains(key))
-                {
-                    cell.Summary = new DevExpress.XtraReports.UI.XRSummary
-                    {
-                        Running = DevExpress.XtraReports.UI.SummaryRunning.Report,
-                        Func = DevExpress.XtraReports.UI.SummaryFunc.Sum
-                    };
-                    cell.ExpressionBindings.Add(new ExpressionBinding("BeforePrint", "Text", $"Sum([{key}])"));
-                    cell.TextFormatString = "{0:N0}";
-                }
-                else if (key == CountField)
-                {
-                    cell.Summary = new DevExpress.XtraReports.UI.XRSummary
-                    {
-                        Running = DevExpress.XtraReports.UI.SummaryRunning.Report,
-                        Func = DevExpress.XtraReports.UI.SummaryFunc.Count
-                    };
-                    cell.ExpressionBindings.Add(new ExpressionBinding("BeforePrint", "Text", "Count()"));
-                }
-                else
-                {
-                    cell.Text = string.Empty;
-                }
-
-                row.Cells.Add(cell); // Appended to the row collection first
-                cellsList.Add(cell);
-            }
-
-            // 3. Second Pass: Apply proportional weights and widths now that they are in the collection
-            for (int i = 0; i < visibleKeys.Count; i++)
-            {
-                string key = visibleKeys[i];
-                float cellWidth = keyWidths[key];
-
-                // Calculate the fractional weight (strictly relative to 1.0 total row weight)
-                cellsList[i].Weight = (double)cellWidth / totalWidth;
-                cellsList[i].WidthF = cellWidth;
-            }
-
-            row.WidthF = totalWidth;
-            table.EndInit();
-
-            footerBand.Controls.Add(table);
-            footerBand.HeightF = 35f;
-
-            //report.Bands.Add(footerBand);
-        }
-        private void ApplyGridColumnVisibility(XtraReport report, out List<string> finalKeys, out Dictionary<string, float> finalWidths)
-        {
-            finalKeys = new List<string>();
-            finalWidths = new Dictionary<string, float>();
-
-            var hiddenFields = new HashSet<string>();
-            var captionToField = new Dictionary<string, string>();
-            var fieldToGridWidth = new Dictionary<string, int>();
-
-            foreach (DevExpress.XtraGrid.Columns.GridColumn col in gridView1.Columns)
-            {
-                if (!string.IsNullOrEmpty(col.Caption))
-                    captionToField[col.Caption.Trim()] = col.FieldName;
-
-                if (col.Visible)
-                    fieldToGridWidth[col.FieldName] = col.Width;
-                else
-                    hiddenFields.Add(col.FieldName);
-            }
-
-            var allRows = report.AllControls<XRTableRow>().ToList();
-            if (allRows.Count == 0) return;
-
-            XRTableRow referenceRow = allRows[0];
-            var keysInOrder = referenceRow.Cells.Cast<XRTableCell>()
-                .Select(c => ResolveColumnKey(c, captionToField))
-                .ToList();
-
-            var hiddenIndices = new HashSet<int>();
-            for (int i = 0; i < keysInOrder.Count; i++)
-            {
-                string key = keysInOrder[i];
-                if (key != null && hiddenFields.Contains(key))
-                    hiddenIndices.Add(i);
-            }
-
-            int totalVisibleGridWidth = keysInOrder
-                .Where((key, i) => key != null && !hiddenIndices.Contains(i) && fieldToGridWidth.ContainsKey(key))
-                .Sum(key => fieldToGridWidth[key]);
-
-            if (totalVisibleGridWidth <= 0) return;
-
-            float printableWidth = (report.PageWidth - report.Margins.Left - report.Margins.Right) * 0.99f;
-
-            var touchedTables = new HashSet<DevExpress.XtraReports.UI.XRTable>();
-
-            foreach (XRTableRow row in allRows)
-            {
-                var cells = row.Cells.Cast<XRTableCell>().ToList();
-                if (cells.Count != keysInOrder.Count) continue;
-
-                float rowTotal = 0f;
-
-                for (int i = 0; i < cells.Count; i++)
-                {
-                    if (hiddenIndices.Contains(i))
-                    {
-                        row.Cells.Remove(cells[i]);
-                    }
-                    else
-                    {
-                        string key = keysInOrder[i];
-                        if (key != null && fieldToGridWidth.TryGetValue(key, out int gridWidth))
-                        {
-                            float proportion = (float)gridWidth / totalVisibleGridWidth;
-                            float w = printableWidth * proportion;
-                            cells[i].WidthF = w;
-                            rowTotal += w;
-
-                            if (!finalWidths.ContainsKey(key))
-                            {
-                                finalWidths[key] = w;
-                                finalKeys.Add(key);
-                            }
-                        }
-                    }
-                }
-
-                row.WidthF = rowTotal;
-
-                if (row.Parent is DevExpress.XtraReports.UI.XRTable table)
-                    touchedTables.Add(table);
-            }
-
-            foreach (var table in touchedTables)
-                table.WidthF = printableWidth;
-        }
-        private string ResolveColumnKey(XRTableCell cell, Dictionary<string, string> captionToField)
-        {
-            string field = GetCellFieldName(cell);
-            if (field != null) return field;
-
-            string text = (cell.Text ?? "").Trim();
-            return captionToField.TryGetValue(text, out string mapped) ? mapped : null;
-        }
-
-        private string GetCellFieldName(XRTableCell cell)
-        {
-            string expr = null;
-
-            foreach (ExpressionBinding binding in cell.ExpressionBindings)
-            {
-                if (binding.PropertyName == "Text" && !string.IsNullOrEmpty(binding.Expression))
-                {
-                    expr = binding.Expression;
-                    break;
-                }
-            }
-
-            if (expr == null && cell.DataBindings.Count > 0 && cell.DataBindings["Text"] != null)
-                return cell.DataBindings["Text"].DataMember;
-
-            if (expr == null) return null;
-
-            var match = Regex.Match(expr, @"\[([^\]]+)\]");
-            return match.Success ? match.Groups[1].Value : null;
-        }
-
-
-
-
 
 
         //-------------------------------------------------------------------------------------------------------------------
@@ -465,9 +166,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             get { return gridControl1; }
         }
         public override bool AllowRtfTitle { get { return true; } }
-
-        
-
 
         public override void ShowColumnChooser() => gridView1.ShowCustomization();
 
@@ -549,7 +247,18 @@ namespace DevExpress.ProductsDemo.Win.Modules
             AddCol("LotNumber", "N", 100);
 
             AddCol("Commune", "البلدية", 100);
-            AddCol("Program", "البرنامج", 100);
+            AddCol("ProgramId", "البرنامج", 110);
+            var programLookup = new RepositoryItemLookUpEdit();
+            programLookup.DataSource = new LookupRepository().GetAll("programs");
+            programLookup.DisplayMember = "Name";
+            programLookup.ValueMember = "Id";
+            programLookup.ShowHeader = false;
+            programLookup.NullText = "— اختر —";
+            programLookup.Columns.Add(new LookUpColumnInfo("Name", 200));
+            gridControl1.RepositoryItems.Add(programLookup);
+            gridView1.Columns["ProgramId"].ColumnEdit = programLookup;
+            gridView1.Columns["ProgramId"].OptionsColumn.AllowEdit = true;
+
             AddCol("FinancialProgress", "التقدم المالي", 100, "{0:N0} %");
             AddCol("OperationName", "اسم العملية", 180);
             AddCol("DomainId", "القطاع", 110);
@@ -715,13 +424,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
         }
-
-       
-
-
         private bool _layoutReady = false;
-
-
         private void SaveLayout()
         {
             if (!_layoutReady) return; // ← don't save during setup
@@ -825,6 +528,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 base.InitModule(manager, data);
                 BuildDetailPanel();
                 SetupGrid();
+                var programs = GetPrograms();
+                _selectedProgramId = programs.OrderByDescending(p => p.Id).FirstOrDefault()?.Id;
                 LoadData();
                 LoadLayout();
                 _layoutReady = true;
@@ -840,9 +545,15 @@ namespace DevExpress.ProductsDemo.Win.Modules
         }
 
         // ── Data ─────────────────────────────────────────────────────
+
+        
+       
         private void LoadData()
         {
-            _data = _lotRepo.GetGridData();
+            var all = _lotRepo.GetGridData();
+            _data = _selectedProgramId.HasValue
+                ? all.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
+                : all;
             gridControl1.DataSource = _data;
         }
 
@@ -1153,6 +864,21 @@ namespace DevExpress.ProductsDemo.Win.Modules
             if (mainForm.GetReportsModule() is ReportsModule reportsMod)
                 reportsMod.SaveReportToPanel(report, report.DisplayName);
         }
+        public void PrintStatusSummaryReport()
+        {
+            try
+            {
+                var allData = _lotRepo.GetGridData(); // full dataset — this is a global status report, not filtered
+                var report = StatusSummaryReportBuilder.Build(allData);
+                report.CreateDocument();
+                report.ShowPreviewDialog(); // opens DevExpress's own preview/print dialog directly
+            }
+            catch (InvalidOperationException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
 
         public override XtraReport GetPrintReport()
         {

@@ -11,6 +11,7 @@ using System.IO;
 using DevExpress.XtraBars.Docking;
 using DevExpress.XtraEditors;
 using DevExpress.ProductsDemo.Win.Repositories;
+using System.IO;
 
 namespace DevExpress.ProductsDemo.Win.Modules
 {
@@ -42,6 +43,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             InitializeComponent();
             SetupSavedReportsPanel();
+            SetupTemplatesPanel();
         }
         private void SetupTemplateSaveButton()
         {
@@ -57,14 +59,109 @@ namespace DevExpress.ProductsDemo.Win.Modules
             };
             ribbonPagePreview.Groups[0].ItemLinks.Add(btn);
         }
+
+        private DockPanel _templatesPanel;
+        private ListBoxControl _templatesList;
+
+        // Add near your existing SetupTemplatesPanel() in ReportsModule
+
+        private void SetupTemplatesPanel()
+        {
+            Directory.CreateDirectory(TemplatesFolder);
+
+            DockManager dockManager = this.dockManager1;
+            if (dockManager == null) return;
+
+            _templatesPanel = dockManager.AddPanel(DockingStyle.Right);
+            _templatesPanel.Text = "القوالب";
+            _templatesPanel.Width = 220;
+            _templatesPanel.Options.ShowCloseButton = false;
+
+            var container = new Panel { Dock = DockStyle.Fill };
+
+            var btnNew = new SimpleButton { Text = "+ قالب جديد", Dock = DockStyle.Top, Height = 30 };
+            btnNew.Click += BtnNewTemplate_Click;
+
+            _templatesList = new ListBoxControl { Dock = DockStyle.Fill };
+            _templatesList.DoubleClick += TemplatesList_DoubleClick;
+
+            container.Controls.Add(_templatesList);
+            container.Controls.Add(btnNew);
+            _templatesPanel.ControlContainer.Controls.Add(container);
+
+            RefreshTemplatesList();
+        }
+
+        private void BtnNewTemplate_Click(object sender, EventArgs e)
+        {
+            using (var dlg = new SimpleInputDialog("قالب جديد", "اسم القالب الجديد:"))
+            {
+                if (dlg.ShowDialog() != DialogResult.OK || string.IsNullOrWhiteSpace(dlg.InputText)) return;
+
+                string name = dlg.InputText;
+                string path = Path.Combine(TemplatesFolder, name + ".repx");
+                if (File.Exists(path))
+                {
+                    XtraMessageBox.Show("يوجد قالب بهذا الاسم مسبقاً.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var blank = new XtraReport
+                {
+                    PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4,
+                    RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes,
+                    RightToLeftLayout = DevExpress.XtraReports.UI.RightToLeftLayout.Yes
+                };
+                blank.Bands.Add(new DetailBand { HeightF = 700f });
+                blank.SaveLayoutToXml(path);
+
+                RefreshTemplatesList();
+
+                reportDesigner1.ContainerControl = this;
+                reportDesigner1.OpenReport(path);
+                if (MainRibbon != null && ribbonPagePreview != null)
+                    MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
+            }
+        }
+        private void RefreshTemplatesList()
+        {
+            if (_templatesList == null) return;
+
+            _templatesList.Items.Clear();
+            if (!Directory.Exists(TemplatesFolder)) return;
+
+            foreach (string file in Directory.GetFiles(TemplatesFolder, "*.repx").OrderBy(f => f))
+                _templatesList.Items.Add(Path.GetFileNameWithoutExtension(file));
+        }
+
+        private void TemplatesList_DoubleClick(object sender, EventArgs e)
+        {
+            string name = _templatesList.SelectedItem as string;
+            if (string.IsNullOrEmpty(name)) return;
+
+            string path = Path.Combine(TemplatesFolder, name + ".repx");
+            if (!File.Exists(path))
+            {
+                XtraMessageBox.Show($"لم يتم العثور على القالب:\n{path}", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            reportDesigner1.ContainerControl = this;
+
+            // Open BY PATH (not as a report object) — this is what makes the
+            // designer's native Save button write directly back to this file.
+            reportDesigner1.OpenReport(path);
+
+            if (MainRibbon != null && ribbonPagePreview != null)
+                MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
+        }
         public void SaveReportAsTemplate(XtraReport report, string templateKey)
         {
             Directory.CreateDirectory(TemplatesFolder);
             string path = Path.Combine(TemplatesFolder, templateKey + ".repx");
             report.SaveLayoutToXml(path); // layout only — by design
         }
-        public string GetTemplatePath(string templateKey) =>
-    Path.Combine(TemplatesFolder, templateKey + ".repx");
+       
 
         private void SetupSavedReportsPanel()
         {
@@ -196,6 +293,41 @@ namespace DevExpress.ProductsDemo.Win.Modules
         protected override bool AutoMergeRibbon { get { return true; } }
         private void printPreviewBarItem1_ItemClick(object sender, XtraBars.ItemClickEventArgs e)
         {
+        }
+    }
+    internal class SimpleInputDialog : XtraForm
+    {
+        public string InputText { get; private set; }
+
+        public SimpleInputDialog(string title, string prompt, string defaultValue = "")
+        {
+            Text = title;
+            Width = 400;
+            Height = 160;
+            StartPosition = FormStartPosition.CenterParent;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            RightToLeftLayout = true;
+
+            var lbl = new LabelControl { Text = prompt, Left = 15, Top = 15, Width = 350 };
+
+            var txt = new TextEdit { Left = 15, Top = 40, Width = 350, Text = defaultValue };
+
+            var btnOk = new SimpleButton { Text = "موافق", Left = 195, Top = 75, Width = 80, DialogResult = DialogResult.OK };
+            var btnCancel = new SimpleButton { Text = "إلغاء", Left = 285, Top = 75, Width = 80, DialogResult = DialogResult.Cancel };
+
+            btnOk.Click += (s, e) => { InputText = txt.Text.Trim(); };
+
+            AcceptButton = btnOk;
+            CancelButton = btnCancel;
+
+            Controls.Add(lbl);
+            Controls.Add(txt);
+            Controls.Add(btnOk);
+            Controls.Add(btnCancel);
+
+            Shown += (s, e) => txt.Focus();
         }
     }
 }
