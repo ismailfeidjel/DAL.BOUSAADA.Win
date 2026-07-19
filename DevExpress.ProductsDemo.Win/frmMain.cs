@@ -459,6 +459,18 @@ namespace DevExpress.ProductsDemo.Win {
             return modulesNavigator.CurrentModule as ReportsModule;
         }
 
+        private void barButtonItem2_ItemClick(object sender, ItemClickEventArgs e)
+        {
+          
+            using (var frm = new DevExpress.ProductsDemo.Win.Forms.frmManagePrograms())
+            {
+                frm.ShowDialog(this);
+            }
+
+            // Refresh whichever module is showing, so newly added/edited programs appear immediately
+            if (modulesNavigator.CurrentModule != null)
+                OnModuleShown(modulesNavigator.CurrentModule);
+        }
 
     }
 

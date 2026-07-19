@@ -13,4 +13,12 @@
 
         public override string ToString() => Name;
     }
+
+    public class ProgramLookupItem : LookupItem
+    {
+        public string Type { get; set; }
+        public int Year { get; set; }
+        public bool IsClosed { get; set; }
+    }
+
 }

@@ -13,7 +13,7 @@ namespace DevExpress.ProductsDemo.Win.Services
     {
         public const string TemplateKey = "قالب_تقرير_الوضعية";
 
-        public static XtraReport Build(List<LotGridModel> allData)
+        public static XtraReport Build(List<LotGridModel> data)
         {
             string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", TemplateKey + ".repx");
 
@@ -23,7 +23,9 @@ namespace DevExpress.ProductsDemo.Win.Services
             XtraReport report = XtraReport.FromFile(templatePath, true);
             GridReportBuilder.EnsureSafeMargins(report);
 
-            var stats = ComputeStats(allData);
+            report.DataSource = data;   // ← new: template can now also bind fields/summaries directly
+
+            var stats = ComputeStats(data);
             FillNamedControls(report, stats);
 
             return report;

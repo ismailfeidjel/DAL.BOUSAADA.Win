@@ -537,6 +537,12 @@
     </Compile>
     <Compile Include="Data.cs">
     </Compile>
+    <Compile Include="Forms\frmManagePrograms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmManagePrograms.Designer.cs">
+      <DependentUpon>frmManagePrograms.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmReminders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -731,6 +737,7 @@
     <Compile Include="Repositories\ILotRepository.cs" />
     <Compile Include="Repositories\LookupRepository.cs" />
     <Compile Include="Repositories\LotRepository.cs" />
+    <Compile Include="Repositories\ProgramsRepository.cs" />
     <Compile Include="Repositories\ProjectRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Sales.Model\BusinessObjects.cs" />

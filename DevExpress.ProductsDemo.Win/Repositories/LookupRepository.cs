@@ -43,5 +43,39 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
             return list;
         }
-    }
-}
+    
+    public List<ProgramLookupItem> GetPrograms(string type)
+        {
+            var result = new List<ProgramLookupItem>();
+
+            using (var conn = new DbHelper().GetConnection())
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT Id, Type, Year, Name, IsClosed FROM Programs WHERE Type = @type ORDER BY Year DESC";
+                    var param = cmd.CreateParameter();
+                    param.ParameterName = "@type";
+                    param.Value = type;
+                    cmd.Parameters.Add(param);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(new ProgramLookupItem
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Type = reader.GetString(reader.GetOrdinal("Type")),
+                                Year = reader.GetInt32(reader.GetOrdinal("Year")),
+                                Name = reader.GetString(reader.GetOrdinal("Name")),
+                                IsClosed = reader.GetBoolean(reader.GetOrdinal("IsClosed"))
+                            });
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+    } }

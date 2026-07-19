@@ -108,6 +108,7 @@
             this.nbiPdf = new DevExpress.XtraNavBar.NavBarItem();
             this.pcMain = new DevExpress.XtraEditors.PanelControl();
             this.pmFlagStatus = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             this.backstageViewControl1.SuspendLayout();
@@ -163,9 +164,10 @@
             this.bbiReminder,
             this.skinDropDownButtonItem1,
             this.skinPaletteRibbonGalleryBarItem1,
-            this.barButtonItem1});
+            this.barButtonItem1,
+            this.barButtonItem2});
             resources.ApplyResources(this.ribbonControl1, "ribbonControl1");
-            this.ribbonControl1.MaxItemId = 108;
+            this.ribbonControl1.MaxItemId = 109;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.rpTasks,
@@ -643,6 +645,7 @@
             // ribbonPageGroup1
             // 
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem2);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             // 
             // rpContacts
@@ -857,6 +860,14 @@
             this.pmFlagStatus.Name = "pmFlagStatus";
             this.pmFlagStatus.Ribbon = this.ribbonControl1;
             // 
+            // barButtonItem2
+            // 
+            resources.ApplyResources(this.barButtonItem2, "barButtonItem2");
+            this.barButtonItem2.Id = 108;
+            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            // 
             // frmMain
             // 
             resources.ApplyResources(this, "$this");
@@ -961,6 +972,7 @@
         private XtraBars.SkinPaletteRibbonGalleryBarItem skinPaletteRibbonGalleryBarItem1;
         private XtraBars.BarButtonItem barButtonItem1;
         private XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
+        private XtraBars.BarButtonItem barButtonItem2;
     }
 }
 

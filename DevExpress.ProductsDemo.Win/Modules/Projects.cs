@@ -44,7 +44,12 @@ namespace DevExpress.ProductsDemo.Win.Modules
         private static readonly HashSet<string> SumFields = new HashSet<string> { "LotBudget", "ConsumedAmount", "RegisteredAmount" };
         private const string CountField = "Daira";
         public override bool HasProgramSelector => true;
-        public override List<LookupItem> GetPrograms() => new LookupRepository().GetAll("programs");
+
+        public override List<LookupItem> GetPrograms() =>
+     new LookupRepository().GetPrograms("ADSEC").Cast<LookupItem>().ToList();
+
+
+
         private int? _selectedProgramId;
         public override int? SelectedProgramId
         {
@@ -528,8 +533,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 base.InitModule(manager, data);
                 BuildDetailPanel();
                 SetupGrid();
+                // In InitModule, replace the old OrderByDescending(p => p.Id) line with:
                 var programs = GetPrograms();
-                _selectedProgramId = programs.OrderByDescending(p => p.Id).FirstOrDefault()?.Id;
+                _selectedProgramId = programs.FirstOrDefault()?.Id; // already sorted by Year DESC from the repository
                 LoadData();
                 LoadLayout();
                 _layoutReady = true;
@@ -868,17 +874,20 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             try
             {
-                var allData = _lotRepo.GetGridData(); // full dataset — this is a global status report, not filtered
-                var report = StatusSummaryReportBuilder.Build(allData);
+                var allData = _lotRepo.GetGridData();
+                var data = _selectedProgramId.HasValue
+                    ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
+                    : allData;
+
+                var report = StatusSummaryReportBuilder.Build(data);
                 report.CreateDocument();
-                report.ShowPreviewDialog(); // opens DevExpress's own preview/print dialog directly
+                report.ShowPreviewDialog();
             }
             catch (InvalidOperationException ex)
             {
                 XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
 
         public override XtraReport GetPrintReport()
         {
