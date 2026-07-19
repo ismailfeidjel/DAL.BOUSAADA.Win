@@ -33,7 +33,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 {
     public partial class ProjectModule : BaseModule
     {
-        public override string ModuleName { get { return Properties.Resources.TasksName; } }
+        public override string ModuleName => $"{_programType} - {Properties.Resources.TasksName}";
 
         private List<LotGridModel> _data;
         private LotGridModel _currentLot;
@@ -46,7 +46,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
         public override bool HasProgramSelector => true;
 
         public override List<LookupItem> GetPrograms() =>
-     new LookupRepository().GetPrograms("ADSEC").Cast<LookupItem>().ToList();
+    new LookupRepository().GetPrograms(_programType).Cast<LookupItem>().ToList();
+
+        private string _programType = "ADSEC"; // sensible default if no data passed (keeps old static tab working)
+
 
 
 
@@ -528,14 +531,13 @@ namespace DevExpress.ProductsDemo.Win.Modules
         // ── Init ─────────────────────────────────────────────────────
         internal override void InitModule(DevExpress.Utils.Menu.IDXMenuManager manager, object data)
         {
+            if (data is string typeStr && !string.IsNullOrWhiteSpace(typeStr))
+                _programType = typeStr;
             try
             {
                 base.InitModule(manager, data);
                 BuildDetailPanel();
                 SetupGrid();
-                // In InitModule, replace the old OrderByDescending(p => p.Id) line with:
-                var programs = GetPrograms();
-                _selectedProgramId = programs.FirstOrDefault()?.Id; // already sorted by Year DESC from the repository
                 LoadData();
                 LoadLayout();
                 _layoutReady = true;

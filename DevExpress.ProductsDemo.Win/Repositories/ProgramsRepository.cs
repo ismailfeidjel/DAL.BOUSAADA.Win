@@ -51,7 +51,24 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                 }
             }
         }
-
+        public List<string> GetDistinctTypes()
+        {
+            var result = new List<string>();
+            using (var conn = new DbHelper().GetConnection())
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT DISTINCT Type FROM Programs ORDER BY Type";
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            result.Add(reader.GetString(0));
+                    }
+                }
+            }
+            return result;
+        }
         public void Update(ProgramLookupItem program)
         {
             using (var conn = new DbHelper().GetConnection())

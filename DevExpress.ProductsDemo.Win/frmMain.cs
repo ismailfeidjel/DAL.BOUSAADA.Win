@@ -49,6 +49,7 @@ namespace DevExpress.ProductsDemo.Win {
             SetupProgramSelectorRibbon();
             modulesNavigator = new ModulesNavigator(ribbonControl1, pcMain);
             _zoomManager = new ZoomManager(ribbonControl1, modulesNavigator, beiZoom);
+            BuildProgramTypeTabs();
             InitNavBarItemLinks();
             NavigationInitialize();
             SetPageLayoutStyle();
@@ -176,8 +177,33 @@ namespace DevExpress.ProductsDemo.Win {
             buttonItem.Hint = description;
             buttonItem.Tag = tag;
         }
+        private void BuildProgramTypeTabs()
+        {
+            var types = new Repositories.ProgramsRepository().GetDistinctTypes();
+            bool first = true;
+
+            foreach (string type in types)
+            {
+                if (first)
+                {
+                    // Reuse the existing designer-defined nav item (keeps its icon/position)
+                    nbiGrid.Caption = type;
+                    nbiGrid.Tag = new NavBarGroupTagObject(type, typeof(Modules.ProjectModule), RibbonControlColorScheme.Default, type);
+                    first = false;
+                }
+                else
+                {
+                    var item = navBarControl1.Items.Add();
+                    item.Caption = type;
+                    item.Tag = new NavBarGroupTagObject(type, typeof(Modules.ProjectModule), RibbonControlColorScheme.Default, type);
+                    item.LargeImage = nbiGrid.LargeImage; // reuse the same icon, or set a per-type one if you have them
+                    nbgModules.ItemLinks.Add(item);
+                }
+            }
+        }
+
         void InitNavBarItemLinks() {
-            nbiGrid.Tag = new NavBarGroupTagObject("Tasks", typeof(DevExpress.ProductsDemo.Win.Modules.ProjectModule));
+            //nbiGrid.Tag = new NavBarGroupTagObject("Tasks", typeof(DevExpress.ProductsDemo.Win.Modules.ProjectModule));
             nbiGridCardView.Tag = new NavBarGroupTagObject("Contacts", typeof(DevExpress.ProductsDemo.Win.Modules.Contacts));
             nbiSpreadsheet.Tag = new NavBarGroupTagObject("Spreadsheet", typeof(DevExpress.ProductsDemo.Win.Modules.SpreadsheetModule), RibbonControlColorScheme.Green);
             nbiWord.Tag = new NavBarGroupTagObject("Word", typeof(DevExpress.ProductsDemo.Win.Modules.WordModule), RibbonControlColorScheme.DarkBlue);

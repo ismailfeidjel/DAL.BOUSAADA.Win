@@ -33,47 +33,61 @@ namespace DevExpress.ProductsDemo.Win {
             this.ribbon = ribbon;
             this.panel = panel;
         }
-        public void ChangeSelectedItem(NavBarItemLink link, object moduleData, bool showSplashScreen = true) {
+        public void ChangeSelectedItem(NavBarItemLink link, object moduleData, bool showSplashScreen = true)
+        {
             bool allowSetVisiblePage = true;
             NavBarGroupTagObject groupObject = link.Item.Tag as NavBarGroupTagObject;
             if (groupObject == null)
                 return;
+
+            object dataToUse = moduleData ?? groupObject.ModuleData; // ← new
+
             List<RibbonPage> deferredPagesToShow = new List<RibbonPage>();
-            foreach (RibbonPage page in ribbon.Pages) {
-                if (!string.IsNullOrEmpty(string.Format("{0}", page.Tag))) {
+            foreach (RibbonPage page in ribbon.Pages)
+            {
+                if (!string.IsNullOrEmpty(string.Format("{0}", page.Tag)))
+                {
                     bool isPageVisible = groupObject.Name.Equals(page.Tag);
                     if (isPageVisible != page.Visible && isPageVisible)
                         deferredPagesToShow.Add(page);
                     else
                         page.Visible = isPageVisible;
                 }
-                if (page.Visible && allowSetVisiblePage) {
+                if (page.Visible && allowSetVisiblePage)
+                {
                     //page.Text = "Home";
                     ribbon.SelectedPage = page;
                     allowSetVisiblePage = false;
                 }
             }
             bool firstShow = groupObject.Module == null;
-            if (firstShow) {
+            if (firstShow)
+            {
                 if (SplashScreenManager.Default == null && showSplashScreen)
                     SplashScreenManager.ShowForm(ribbon.FindForm(), typeof(DevExpress.ProductsDemo.Win.Forms.wfMain), false, true);
                 ConstructorInfo constructorInfoObj = groupObject.ModuleType.GetConstructor(Type.EmptyTypes);
-                if (constructorInfoObj != null) {
-                    try {
+                if (constructorInfoObj != null)
+                {
+                    try
+                    {
                         groupObject.Module = constructorInfoObj.Invoke(null) as BaseModule;
                         MainFormHelper.UpdateTakeScreenSettings(groupObject.Module);
-                        groupObject.Module.InitModule(ribbon, moduleData);
+                        groupObject.Module.InitModule(ribbon, dataToUse); // ← changed from moduleData
                         _currentModuleName = link.Caption;
-                    } catch(Exception e) {
+                    }
+                    catch (Exception e)
+                    {
                         var entryAsm = Assembly.GetEntryAssembly();
-                        string msg = string.Format("Error on Showing Module: {0}\r\nPrevModule: {1}\r\nStartUp: {2}", 
+                        string msg = string.Format("Error on Showing Module: {0}\r\nPrevModule: {1}\r\nStartUp: {2}",
                             link.Caption, _currentModuleName, (entryAsm != null ? entryAsm.Location : string.Empty));
                         throw new ApplicationException(msg, e);
                     }
                 }
-                if (SplashScreenManager.Default != null) {
+                if (SplashScreenManager.Default != null)
+                {
                     Form frm = moduleData as Form;
-                    if (frm != null) {
+                    if (frm != null)
+                    {
                         if (SplashScreenManager.FormInPendingState)
                             SplashScreenManager.CloseForm();
                         else
@@ -84,18 +98,23 @@ namespace DevExpress.ProductsDemo.Win {
                 }
             }
             ribbon.ColorScheme = groupObject.RibbonScheme;
-            foreach (RibbonPage page in deferredPagesToShow) {
+            foreach (RibbonPage page in deferredPagesToShow)
+            {
                 page.Visible = true;
             }
-            foreach (RibbonPage page in ribbon.Pages) {
-                if (page.Visible) {
+            foreach (RibbonPage page in ribbon.Pages)
+            {
+                if (page.Visible)
+                {
                     ribbon.SelectedPage = page;
                     break;
                 }
             }
 
-            if (groupObject.Module != null) {
-                if (panel.Controls.Count > 0) {
+            if (groupObject.Module != null)
+            {
+                if (panel.Controls.Count > 0)
+                {
                     BaseModule currentModule = panel.Controls[0] as BaseModule;
                     if (currentModule != null)
                         currentModule.HideModule();
@@ -310,23 +329,34 @@ namespace DevExpress.ProductsDemo.Win {
             }
         }
     }
-    public class NavBarGroupTagObject {
+    public class NavBarGroupTagObject
+    {
         string _name;
         Type _moduleType;
         BaseModule _module;
         RibbonControlColorScheme _ribbonScheme = RibbonControlColorScheme.Default;
-        public NavBarGroupTagObject(string name, Type moduleType) : this(name, moduleType, RibbonControlColorScheme.Default ) {
+        object _moduleData;
+
+        public NavBarGroupTagObject(string name, Type moduleType) : this(name, moduleType, RibbonControlColorScheme.Default)
+        {
         }
-        public NavBarGroupTagObject(string name, Type moduleType, RibbonControlColorScheme ribbonScheme) {
+        public NavBarGroupTagObject(string name, Type moduleType, RibbonControlColorScheme ribbonScheme) : this(name, moduleType, ribbonScheme, null)
+        {
+        }
+        public NavBarGroupTagObject(string name, Type moduleType, RibbonControlColorScheme ribbonScheme, object moduleData)
+        {
             this._name = name;
             this._moduleType = moduleType;
             this._ribbonScheme = ribbonScheme;
+            this._moduleData = moduleData;
             _module = null;
         }
         public string Name { get { return _name; } }
         public Type ModuleType { get { return _moduleType; } }
         public RibbonControlColorScheme RibbonScheme { get { return _ribbonScheme; } }
-        public BaseModule Module {
+        public object ModuleData { get { return _moduleData; } }
+        public BaseModule Module
+        {
             get { return _module; }
             set { _module = value; }
         }
