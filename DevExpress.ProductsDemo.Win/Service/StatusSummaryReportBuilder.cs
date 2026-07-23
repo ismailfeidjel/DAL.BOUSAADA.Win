@@ -31,78 +31,130 @@ namespace DevExpress.ProductsDemo.Win.Services
             return report;
         }
 
-        // First-run only: a minimal report with a few placeholder labels,
-        // just so there's something to open in the designer and build the real layout against.
-
         private static Dictionary<string, string> ComputeStats(List<LotGridModel> data)
         {
-            var lookupRepo = new LookupRepository();
-            var adminProcedures = lookupRepo.GetAll("administrative_procedures").ToDictionary(x => x.Id, x => x.Name);
-            var status1 = lookupRepo.GetAll("special_status1").ToDictionary(x => x.Id, x => x.Name);
-            var status2 = lookupRepo.GetAll("special_status2").ToDictionary(x => x.Id, x => x.Name);
-            var status3 = lookupRepo.GetAll("special_status3").ToDictionary(x => x.Id, x => x.Name);
-
-            string NameOf(Dictionary<int, string> dict, int? id) =>
-                id.HasValue && dict.TryGetValue(id.Value, out var n) ? n : "";
-
-            // ⚠ ASSUMPTION — verify these substrings actually match your real lookup Name values.
-            bool IsRegistration(LotGridModel r) => NameOf(adminProcedures, r.AdministrativeProcedureId).Contains("تسجيل");
-            bool IsDafatirShrout(LotGridModel r) => NameOf(adminProcedures, r.AdministrativeProcedureId).Contains("دفاتر الشروط");
-            bool IsAnnouncements(LotGridModel r) => NameOf(adminProcedures, r.AdministrativeProcedureId).Contains("إعلان");
-            bool IsOpeningEval(LotGridModel r) => NameOf(adminProcedures, r.AdministrativeProcedureId).Contains("فتح")
-                                                || NameOf(adminProcedures, r.AdministrativeProcedureId).Contains("تقييم");
-            bool IsProvisionalGrant(LotGridModel r) => NameOf(adminProcedures, r.AdministrativeProcedureId).Contains("منح");
-
-            bool IsRoadMaintenance(LotGridModel r) =>
-                NameOf(status1, r.SpecialStatus1Id).Contains("طرق") ||
-                NameOf(status2, r.SpecialStatus2Id).Contains("طرق") ||
-                NameOf(status3, r.SpecialStatus3Id).Contains("طرق");
-
-            // Count by PROJECT, not by lot row — one project can have multiple lots
             var byProject = data.GroupBy(r => r.ProjectId).Select(g => g.First()).ToList();
+            int Count(Func<LotGridModel, bool> predicate) => byProject.Count(predicate);
 
-            int total = byProject.Count;
-            decimal totalBudget = data.Sum(r => r.LotBudget);
+            int totalProjects = byProject.Count;
+            int specialStatus2Count = Count(r => r.SpecialStatus2Id == 1);
+            int remainingCount = totalProjects - specialStatus2Count;
 
-            var registration = byProject.Where(IsRegistration).ToList();
-            var adminProc = byProject.Where(r => !IsRegistration(r)).ToList();
+            string percentText = totalProjects == 0
+                ? ""
+                : Math.Round(100.0 * remainingCount / totalProjects).ToString() + "%";
+            string percentText1 = totalProjects == 0
+              ? ""
+              : Math.Round(100.0 * specialStatus2Count / totalProjects).ToString() + "%";
+            string percentText3 = totalProjects == 0
+              ? ""
+              : Math.Round(100.0 * Count(r =>
+                    r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
+                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7) / totalProjects).ToString()+"%";
 
-            var dafatir = adminProc.Where(IsDafatirShrout).ToList();
-            var announcements = adminProc.Where(IsAnnouncements).ToList();
-            var openingEval = adminProc.Where(IsOpeningEval).ToList();
-            var provisionalGrant = adminProc.Where(IsProvisionalGrant).ToList();
-
-            var roadMaintenance = byProject.Where(IsRoadMaintenance).ToList();
-            var nonRoad = byProject.Where(r => !IsRoadMaintenance(r)).ToList();
-
-            decimal SumBudget(List<LotGridModel> list) => list.Sum(r => r.LotBudget);
-            string Pct(int part, int whole) => whole == 0 ? "0" : Math.Round(100.0 * part / whole).ToString();
 
             return new Dictionary<string, string>
             {
-                ["lblTotalOperations"] = total.ToString(),
-                ["lblTotalBudget"] = totalBudget.ToString("N2"),
+                ["tableCell11"] = Count(r => r.AdministrativeProcedureId == 1).ToString(),
+                ["tableCell14"] = Count(r => r.AdministrativeProcedureId == 2).ToString(),
+                ["tableCell17"] = Count(r => r.AdministrativeProcedureId == 9).ToString(),
+                ["tableCell20"] = Count(r => r.AdministrativeProcedureId == 3).ToString(),
+                ["tableCell12"] = Count(r =>
+                    r.AdministrativeProcedureId == 1 || r.AdministrativeProcedureId == 2 ||
+                    r.AdministrativeProcedureId == 3 || r.AdministrativeProcedureId == 9).ToString(),
 
-                ["lblRegistrationCount"] = registration.Count.ToString(),
-                ["lblRegistrationPercent"] = Pct(registration.Count, total),
-                ["lblRegistrationAmount"] = SumBudget(registration).ToString("N2"),
+                ["tableCell36"] = Count(r => r.ProjectStatusId == 2).ToString(),
+                ["cell_Ongoing"] = Count(r => r.ProjectStatusId == 3).ToString(),
+                ["tableCell42"] = Count(r => r.ProjectStatusId == 4).ToString(),
+                ["tableCell45"] = Count(r => r.ProjectStatusId == 5).ToString(),
+                ["tableCell28"] = Count(r => r.ProjectStatusId == 6).ToString(),
+                ["tableCell31"] = Count(r => r.ProjectStatusId == 7).ToString(),
+                ["tableCell37"] = Count(r =>
+                    r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
+                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7).ToString(),
 
-                ["lblAdminProcCount"] = adminProc.Count.ToString(),
-                ["lblAdminProcPercent"] = Pct(adminProc.Count, total),
-                ["lblAdminProcAmount"] = SumBudget(adminProc).ToString("N2"),
+                ["tableCell62"] = totalProjects.ToString(),
+                ["tableCell70"] = specialStatus2Count.ToString(),
+                ["tableCell78"] = remainingCount.ToString(),
+                ["tableCell4"] = percentText,   
+                ["tableCell2"] = percentText1,  
+                ["tableCell6"] = percentText3,
 
-                ["lblDafatirShroutCount"] = dafatir.Count.ToString(),
-                ["lblAnnouncementsCount"] = announcements.Count.ToString(),
-                ["lblOpeningEvalCount"] = openingEval.Count.ToString(),
-                ["lblProvisionalGrantCount"] = provisionalGrant.Count.ToString(),
+                //
+             //   ["tableCell74"] = "",//عدد الملفات الواردة من البلديات للعمليات الاضافية
+                ["tableCell96"] =( Count(r => r.AdministrativeProcedureId == 4)+ Count(r => r.AdministrativeProcedureId == 10).ToString()).ToString(),//عدد العمليات قيد التسجيل(على مستوى الادارة المحلية)
+                ["tableCell100"] = Count(r => r.AdministrativeProcedureId == 5).ToString(),//عدد العمليات على مستوى الرقابة الميزانياتية للولاية
+                ["tableCell106"] = Count(r => r.AdministrativeProcedureId == 10).ToString(),//عدد العمليات والحصص بدون تغطية مالية والمؤجلة
+                ["tableCell112"] = Count(r => r.AdministrativeProcedureId == 6).ToString(),//عدد العمليات بصدد ارسالها لامين الخزينة الولائية للتسديد
+                ["tableCell121"] = Count(r => r.AdministrativeProcedureId == 7).ToString(),//عدد العمليات على مستوى  الخزينة الولائية للتسديد
+                 ["tableCell22"] = Count(r => r.AdministrativeProcedureId == 8).ToString(),//عدد العمليات التي تم صب مبالغها لدى امناء خزائن البلديات
 
-                ["lblRoadMaintenanceCount"] = roadMaintenance.Count.ToString(),
-                ["lblRoadMaintenanceAmount"] = SumBudget(roadMaintenance).ToString("N2"),
-                ["lblNonRoadCount"] = nonRoad.Count.ToString(),
-                ["lblNonRoadAmount"] = SumBudget(nonRoad).ToString("N2"),
+
+                ["tableCell25"] = "",//البلديات التي اكملت ايداع ملفات التسجيل :
+                ["tableCell7"] = "",//عدد :
+                ["tableCell27"] = "",//البلديات التي لم تكمل ايداع ملفات التسجيل :
+                ["tableCell32"] = "",//عدد :
+
+
+                ["tableCell90"] = "",//الرصيد :
+                ["tableCell94"] = "",//الباقي :
+
+
+                ["tableCell84"] = "",//مبلغ العمليات المسجلة (المؤشرة من طرف المراقب الميزانياتي) :
+
+
+
+                ["tableCell82"] = Count(r =>
+                    r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
+                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7).ToString(),
             };
         }
 
+        // First-run only: a minimal report with a few placeholder labels,
+        // just so there's something to open in the designer and build the real layout against.
+
+        //private static Dictionary<string, string> ComputeStats(List<LotGridModel> data)
+        //{
+        //    // One row per project (first lot found) — every stat below counts PROJECTS, not lots
+        //    var byProject = data.GroupBy(r => r.ProjectId).Select(g => g.First()).ToList();
+
+        //    int Count(Func<LotGridModel, bool> predicate) => byProject.Count(predicate);
+
+        //    return new Dictionary<string, string>
+        //    {
+        //        // Admin-procedure stages — replace IDs with your real values
+        //        ["tableCell11"] = Count(r => r.AdministrativeProcedureId == 1).ToString(),
+        //        ["tableCell14"] = Count(r => r.AdministrativeProcedureId == 2).ToString(),
+        //        ["tableCell17"] = Count(r => r.AdministrativeProcedureId == 9).ToString(),
+        //        ["tableCell20"] = Count(r => r.AdministrativeProcedureId == 3).ToString(),
+        //        ["tableCell12"] = Count(r =>
+        //            r.AdministrativeProcedureId == 1 || r.AdministrativeProcedureId == 2 ||
+        //            r.AdministrativeProcedureId == 3 || r.AdministrativeProcedureId == 9).ToString(),
+
+        //        // Project status breakdown — replace IDs with your real values
+        //        ["tableCell36"] = Count(r => r.ProjectStatusId == 2).ToString(),
+        //        ["cell_Ongoing"] = Count(r => r.ProjectStatusId == 3).ToString(),
+        //        ["tableCell42"] = Count(r => r.ProjectStatusId == 4).ToString(),
+        //        ["tableCell45"] = Count(r => r.ProjectStatusId == 5).ToString(),
+        //        ["tableCell28"] = Count(r => r.ProjectStatusId == 6).ToString(),
+        //        ["tableCell31"] = Count(r => r.ProjectStatusId == 7).ToString(),
+        //        ["tableCell37"] = Count(r =>
+        //            r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 || r.ProjectStatusId == 5 || r.ProjectStatusId == 6 ||
+        //            r.ProjectStatusId == 7 ).ToString(),
+        //        // 
+        //        ["tableCell62"] = byProject.Count.ToString(),//totoal project 
+        //        ["tableCell70"] = Count(r => r.SpecialStatus2Id == 1).ToString(),//العمليات الواردة
+
+        //        ["tableCell78"] = (byProject.Count - Count(r => r.SpecialStatus2Id == 1)).ToString(),
+
+
+        //        //[ReportItems.tableCell62].[Text] =persent  [ReportItems.tableCell62].[Text] / [ReportItems.tableCell78].[Text]
+
+        //        ["tableCell82"] = Count(r =>
+        //            r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 || r.ProjectStatusId == 5 || r.ProjectStatusId == 6 ||
+        //            r.ProjectStatusId == 7).ToString(),
+        //    };
+        //}
         // Fills ANY control on the report whose Name matches a computed stat key —
         // meaning you can freely redesign the layout later (add/remove/rename fields)
         // without touching this code, as long as the Name matches.

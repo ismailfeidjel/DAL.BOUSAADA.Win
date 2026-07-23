@@ -177,9 +177,13 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         public override void ShowColumnChooser() => gridView1.ShowCustomization();
 
+    //    private string LayoutPath =>
+    //System.IO.Path.Combine(
+    //    Application.StartupPath, "grid_layout_projects.xml");
+
         private string LayoutPath =>
     System.IO.Path.Combine(
-        Application.StartupPath, "grid_layout_projects.xml");
+        Application.StartupPath, $"grid_layout_projects_{_programType}.xml");
 
         public ProjectModule()
         {

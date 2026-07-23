@@ -1,29 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraNavBar;
-using DevExpress.XtraSplashScreen;
-using DevExpress.XtraBars;
-using DevExpress.XtraReports.UI;
-using DevExpress.XtraBars.Ribbon.Gallery;
-using DevExpress.XtraRichEdit;
-using DevExpress.XtraPrinting;
-using DevExpress.MailDemo.Win;
+﻿using DevExpress.Description.Controls;
+using DevExpress.DXperience.Demos;
 using DevExpress.MailClient.Win;
 using DevExpress.MailClient.Win.Forms;
-using DevExpress.Description.Controls;
-using DevExpress.Utils.Taskbar.Core;
-using DevExpress.Utils.Taskbar;
-using DevExpress.DXperience.Demos;
-using System.Drawing;
+using DevExpress.MailDemo.Win;
 using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.ProductsDemo.Win.Modules;
+using DevExpress.Utils.Taskbar;
+using DevExpress.Utils.Taskbar.Core;
+using DevExpress.XtraBars;
+using DevExpress.XtraBars.Ribbon;
+using DevExpress.XtraBars.Ribbon.Gallery;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraNavBar;
+using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.Native;
 using DevExpress.XtraReports.ReportGeneration;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraReports.UI;
+using DevExpress.XtraRichEdit;
+using DevExpress.XtraSplashScreen;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Windows.Forms;
+using DevExpress.Utils.Svg;
 
 namespace DevExpress.ProductsDemo.Win {
     public partial class frmMain : RibbonForm {
@@ -64,7 +66,7 @@ namespace DevExpress.ProductsDemo.Win {
                 this.StartPosition = FormStartPosition.Manual;
                 this.Location = new Point(0, 0);
                 this.Height = 700;
-                links = new NavBarItem[] { nbiGrid, nbiGridCardView, nbiScheduler, nbiSpreadsheet, nbiWord, nbiPdf };
+                links = new NavBarItem[] { nbiGrid, nbiScheduler, nbiSpreadsheet, nbiWord, nbiPdf };
                 MainFormHelper.TakeAllScreens(TakeModule, links.Length, this, pcMain, null, demoName: "DevExpress.ProductsDemo.Win");
             }
         }
@@ -181,30 +183,63 @@ namespace DevExpress.ProductsDemo.Win {
         {
             var types = new Repositories.ProgramsRepository().GetDistinctTypes();
             bool first = true;
+            int insertIndex = 0;
 
             foreach (string type in types)
             {
+                DevExpress.Utils.Svg.SvgImage icon = LoadProgramSvgIcon(type) ?? nbiGrid.ImageOptions.SvgImage;
+
                 if (first)
                 {
-                    // Reuse the existing designer-defined nav item (keeps its icon/position)
                     nbiGrid.Caption = type;
-                    nbiGrid.Tag = new NavBarGroupTagObject(type, typeof(Modules.ProjectModule), RibbonControlColorScheme.Default, type);
+                    nbiGrid.ImageOptions.SvgImage = icon;
+                    nbiGrid.Tag = new NavBarGroupTagObject("Tasks", typeof(Modules.ProjectModule), RibbonControlColorScheme.Default, type);
                     first = false;
+
+                    // Find where nbiGrid's link currently sits, so we insert subsequent tabs right after it
+                    insertIndex = FindLinkIndex(nbgModules, nbiGrid) + 1;
                 }
                 else
                 {
                     var item = navBarControl1.Items.Add();
                     item.Caption = type;
-                    item.Tag = new NavBarGroupTagObject(type, typeof(Modules.ProjectModule), RibbonControlColorScheme.Default, type);
-                    item.LargeImage = nbiGrid.LargeImage; // reuse the same icon, or set a per-type one if you have them
-                    nbgModules.ItemLinks.Add(item);
+                    item.ImageOptions.SvgImage = icon;
+                    item.Tag = new NavBarGroupTagObject("Tasks", typeof(Modules.ProjectModule), RibbonControlColorScheme.Default, type);
+
+                    nbgModules.ItemLinks.Insert(insertIndex, item);
+                    insertIndex++; // keep inserting subsequent types in order, right after each other
                 }
             }
         }
 
+        private int FindLinkIndex(NavBarGroup group, NavBarItem targetItem)
+        {
+            for (int i = 0; i < group.ItemLinks.Count; i++)
+            {
+                if (group.ItemLinks[i].Item == targetItem)
+                    return i;
+            }
+            return group.ItemLinks.Count - 1; // fallback: end of list
+        }
+        private DevExpress.Utils.Svg.SvgImage LoadProgramSvgIcon(string type)
+        {
+            string path = Path.Combine(Application.StartupPath, "Resources", "ProgramIcons", type + ".svg");
+            if (!File.Exists(path)) return null;
+
+            try
+            {
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                {
+                    return DevExpress.Utils.Svg.SvgImage.FromStream(fs);
+                }
+            }
+            catch
+            {
+                return null; // missing/corrupt file — fall back to default icon rather than crash startup
+            }
+        }
+
         void InitNavBarItemLinks() {
-            //nbiGrid.Tag = new NavBarGroupTagObject("Tasks", typeof(DevExpress.ProductsDemo.Win.Modules.ProjectModule));
-            nbiGridCardView.Tag = new NavBarGroupTagObject("Contacts", typeof(DevExpress.ProductsDemo.Win.Modules.Contacts));
             nbiSpreadsheet.Tag = new NavBarGroupTagObject("Spreadsheet", typeof(DevExpress.ProductsDemo.Win.Modules.SpreadsheetModule), RibbonControlColorScheme.Green);
             nbiWord.Tag = new NavBarGroupTagObject("Word", typeof(DevExpress.ProductsDemo.Win.Modules.WordModule), RibbonControlColorScheme.DarkBlue);
             nbiReports.Tag = new NavBarGroupTagObject("Reports", typeof(DevExpress.ProductsDemo.Win.Modules.ReportsModule), RibbonControlColorScheme.Teal);
@@ -367,19 +402,15 @@ namespace DevExpress.ProductsDemo.Win {
         {
             if (baseModule != null && baseModule.HasProgramSelector)
             {
-                System.Diagnostics.Debug.WriteLine($"OnModuleShown called for {baseModule?.GetType().Name} at {DateTime.Now:HH:mm:ss.fff}");
-
-                // Force a clean rebind — clear everything first to avoid stale internal caching
-                beiProgramSelector.EditValue = null;
-                repoProgramLookup.DataSource = null;
-
-                var freshList = baseModule.GetPrograms().ToList();
-                foreach (var p in freshList)
-                    System.Diagnostics.Debug.WriteLine($"Bound program: Id={p.Id}, Name={p.Name}");
-                repoProgramLookup.DataSource = freshList;
-
+                var programs = baseModule.GetPrograms();
+                repoProgramLookup.DataSource = programs;
                 beiProgramSelector.Visibility = DevExpress.XtraBars.BarItemVisibility.Always;
-                beiProgramSelector.EditValue = baseModule.SelectedProgramId;
+
+                // Always default to the first program in this tab's list on every switch
+                int? firstProgramId = programs.FirstOrDefault()?.Id;
+                beiProgramSelector.EditValue = firstProgramId;
+                baseModule.SelectedProgramId = firstProgramId;
+                baseModule.OnProgramChanged(firstProgramId);
             }
             else
             {

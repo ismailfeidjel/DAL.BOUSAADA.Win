@@ -890,6 +890,7 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="DataBase\dal %281%29.sql" />
+    <Content Include="DataBase\dal%282%29.sql" />
     <Content Include="DataBase\DBB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -900,6 +901,7 @@
       <LastGenOutput>nwindDataSet1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="DataBase\المصنف1.xlsx" />
     <None Include="DBBDataSet.xsc">
       <DependentUpon>DBBDataSet.xsd</DependentUpon>
     </None>

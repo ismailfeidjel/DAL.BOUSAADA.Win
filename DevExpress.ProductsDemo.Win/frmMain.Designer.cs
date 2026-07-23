@@ -82,6 +82,7 @@
             this.skinDropDownButtonItem1 = new DevExpress.XtraBars.SkinDropDownButtonItem();
             this.skinPaletteRibbonGalleryBarItem1 = new DevExpress.XtraBars.SkinPaletteRibbonGalleryBarItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.rpTasks = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.rpgTasks = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.rpgFollowUp = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -97,7 +98,6 @@
             this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
             this.nbgModules = new DevExpress.XtraNavBar.NavBarGroup();
             this.nbiGrid = new DevExpress.XtraNavBar.NavBarItem();
-            this.nbiGridCardView = new DevExpress.XtraNavBar.NavBarItem();
             this.nbiSpreadsheet = new DevExpress.XtraNavBar.NavBarItem();
             this.nbiWord = new DevExpress.XtraNavBar.NavBarItem();
             this.nbiSnap = new DevExpress.XtraNavBar.NavBarItem();
@@ -108,7 +108,6 @@
             this.nbiPdf = new DevExpress.XtraNavBar.NavBarItem();
             this.pcMain = new DevExpress.XtraEditors.PanelControl();
             this.pmFlagStatus = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             this.backstageViewControl1.SuspendLayout();
@@ -603,6 +602,14 @@
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem1_ItemClick);
             // 
+            // barButtonItem2
+            // 
+            resources.ApplyResources(this.barButtonItem2, "barButtonItem2");
+            this.barButtonItem2.Id = 108;
+            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
+            // 
             // rpTasks
             // 
             this.rpTasks.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -737,7 +744,6 @@
             this.nbiPivot,
             this.nbiMaps,
             this.nbiScheduler,
-            this.nbiGridCardView,
             this.nbiPdf});
             this.navBarControl1.LinkSelectionMode = DevExpress.XtraNavBar.LinkSelectionModeType.OneInControl;
             this.navBarControl1.MenuManager = this.ribbonControl1;
@@ -761,7 +767,6 @@
             this.nbgModules.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
             this.nbgModules.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbiGrid),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.nbiGridCardView),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbiSpreadsheet),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbiWord),
             new DevExpress.XtraNavBar.NavBarItemLink(this.nbiSnap),
@@ -779,14 +784,6 @@
             resources.ApplyResources(this.nbiGrid, "nbiGrid");
             this.nbiGrid.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.adsec;
             this.nbiGrid.Name = "nbiGrid";
-            // 
-            // nbiGridCardView
-            // 
-            resources.ApplyResources(this.nbiGridCardView, "nbiGridCardView");
-            this.nbiGridCardView.Enabled = false;
-            this.nbiGridCardView.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.csgcl;
-            this.nbiGridCardView.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.CommonPalette;
-            this.nbiGridCardView.Name = "nbiGridCardView";
             // 
             // nbiSpreadsheet
             // 
@@ -859,14 +856,6 @@
             this.pmFlagStatus.ItemLinks.Add(this.bbiCustomFlag, true);
             this.pmFlagStatus.Name = "pmFlagStatus";
             this.pmFlagStatus.Ribbon = this.ribbonControl1;
-            // 
-            // barButtonItem2
-            // 
-            resources.ApplyResources(this.barButtonItem2, "barButtonItem2");
-            this.barButtonItem2.Id = 108;
-            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
-            this.barButtonItem2.Name = "barButtonItem2";
-            this.barButtonItem2.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem2_ItemClick);
             // 
             // frmMain
             // 
@@ -955,7 +944,6 @@
         private XtraNavBar.NavBarItem nbiPivot;
         private XtraNavBar.NavBarItem nbiMaps;
         private XtraNavBar.NavBarItem nbiScheduler;
-        private XtraNavBar.NavBarItem nbiGridCardView;
         private XtraBars.Ribbon.RibbonPage rpContacts;
         private XtraBars.BarButtonItem bbiNewContact;
         private XtraBars.BarButtonItem bbiEditContact;
