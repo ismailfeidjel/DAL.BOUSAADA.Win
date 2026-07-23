@@ -901,6 +901,11 @@
       <LastGenOutput>nwindDataSet1.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <None Include="DataBase\Reports\Saved\f.pdf" />
+    <None Include="DataBase\Reports\Saved\تقرير_20260710_173046.prnx" />
+    <None Include="DataBase\Reports\Saved\تقرير_20260710_173046.repx" />
+    <None Include="DataBase\Reports\Templates\قالب_تقرير_المشاريع.repx" />
+    <None Include="DataBase\Reports\Templates\قالب_تقرير_الوضعية.repx" />
     <None Include="DataBase\المصنف1.xlsx" />
     <None Include="DBBDataSet.xsc">
       <DependentUpon>DBBDataSet.xsd</DependentUpon>
