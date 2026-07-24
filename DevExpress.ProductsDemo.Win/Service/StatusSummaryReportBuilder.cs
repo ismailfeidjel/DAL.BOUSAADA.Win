@@ -3,6 +3,7 @@ using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -38,11 +39,21 @@ namespace DevExpress.ProductsDemo.Win.Services
 
             int totalProjects = byProject.Count;
             int specialStatus2Count = Count(r => r.SpecialStatus2Id == 1);
-            int remainingCount = totalProjects - specialStatus2Count;
+
+            decimal totalBudget = data.Sum(r => r.LotBudget);
+            decimal totalreg = data.Sum(r => r.RegisteredAmount);
+
+
+            decimal var70 = Count(r =>
+                    r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
+                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7 || r.AdministrativeProcedureId == 4);
+            decimal var37 = Count(r =>
+                    r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
+                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7);
 
             string percentText = totalProjects == 0
                 ? ""
-                : Math.Round(100.0 * remainingCount / totalProjects).ToString() + "%";
+                : Math.Round(100.0 * Convert.ToDouble((totalProjects - var70)) / totalProjects).ToString() + "%";
             string percentText1 = totalProjects == 0
               ? ""
               : Math.Round(100.0 * specialStatus2Count / totalProjects).ToString() + "%";
@@ -51,6 +62,35 @@ namespace DevExpress.ProductsDemo.Win.Services
               : Math.Round(100.0 * Count(r =>
                     r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
                     r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7) / totalProjects).ToString()+"%";
+
+            var communesAllStatus2 = byProject
+    .GroupBy(r => r.Commune)
+    .Where(g => g.All(r => r.SpecialStatus2Id == 1))
+    .Select(g => g.Key)
+    .ToList();
+            var communesAnyStatus2Value2 = byProject
+     .GroupBy(r => r.Commune)
+     .Where(g => g.Any(r => r.SpecialStatus2Id == 2))
+     .Select(g => g.Key)
+     .ToList();
+
+            
+
+            decimal specialStatus2Budget = data.Where(r => r.SpecialStatus2Id == 1).Sum(r => r.LotBudget);
+
+            decimal registeredOperationsAmount2 = data
+    .Where(r => r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
+                r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7)
+    .Sum(r => r.RegisteredAmount);
+            decimal registeredOperationsAmount1 =
+    data.Where(r => r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
+                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7)
+        .Sum(r => r.RegisteredAmount)
+    + data.Where(r => r.AdministrativeProcedureId == 4)
+          .Sum(r => r.LotBudget);
+
+            
+
 
 
             return new Dictionary<string, string>
@@ -69,20 +109,21 @@ namespace DevExpress.ProductsDemo.Win.Services
                 ["tableCell45"] = Count(r => r.ProjectStatusId == 5).ToString(),
                 ["tableCell28"] = Count(r => r.ProjectStatusId == 6).ToString(),
                 ["tableCell31"] = Count(r => r.ProjectStatusId == 7).ToString(),
-                ["tableCell37"] = Count(r =>
-                    r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
-                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7).ToString(),
+                ["tableCell37"] = var37.ToString(),//
 
-                ["tableCell62"] = totalProjects.ToString(),
-                ["tableCell70"] = specialStatus2Count.ToString(),
-                ["tableCell78"] = remainingCount.ToString(),
+                ["tableCell62"] = totalProjects.ToString(),//العدد الكلي
+                ["tableCell70"] = var70.ToString(),// الواردة من البلديات
+
+                ["tableCell78"] = (totalProjects-var70).ToString(),//على مستوى البلديات
                 ["tableCell4"] = percentText,   
-                ["tableCell2"] = percentText1,  
-                ["tableCell6"] = percentText3,
+                //نسبة اولى
+                ["tableCell2"] = (totalProjects == 0 ? "" : Math.Round(100.0 * Convert.ToDouble(var70 / totalProjects)).ToString()) + " %",
+                //نسبة المؤشرة
+                ["tableCell6"] = (totalProjects == 0 ? "" : Math.Round(100.0 * Convert.ToDouble(var37 / totalProjects)).ToString()) + " %",
 
                 //
-             //   ["tableCell74"] = "",//عدد الملفات الواردة من البلديات للعمليات الاضافية
-                ["tableCell96"] =( Count(r => r.AdministrativeProcedureId == 4)+ Count(r => r.AdministrativeProcedureId == 10).ToString()).ToString(),//عدد العمليات قيد التسجيل(على مستوى الادارة المحلية)
+                //   ["tableCell74"] = "",//عدد الملفات الواردة من البلديات للعمليات الاضافية
+                ["tableCell33"] =( Count(r => r.AdministrativeProcedureId == 4) + Count(r => r.AdministrativeProcedureId == 10)).ToString(),//عدد العمليات قيد التسجيل(على مستوى الادارة المحلية)
                 ["tableCell100"] = Count(r => r.AdministrativeProcedureId == 5).ToString(),//عدد العمليات على مستوى الرقابة الميزانياتية للولاية
                 ["tableCell106"] = Count(r => r.AdministrativeProcedureId == 10).ToString(),//عدد العمليات والحصص بدون تغطية مالية والمؤجلة
                 ["tableCell112"] = Count(r => r.AdministrativeProcedureId == 6).ToString(),//عدد العمليات بصدد ارسالها لامين الخزينة الولائية للتسديد
@@ -90,74 +131,24 @@ namespace DevExpress.ProductsDemo.Win.Services
                  ["tableCell22"] = Count(r => r.AdministrativeProcedureId == 8).ToString(),//عدد العمليات التي تم صب مبالغها لدى امناء خزائن البلديات
 
 
-                ["tableCell25"] = "",//البلديات التي اكملت ايداع ملفات التسجيل :
-                ["tableCell7"] = "",//عدد :
-                ["tableCell27"] = "",//البلديات التي لم تكمل ايداع ملفات التسجيل :
-                ["tableCell32"] = "",//عدد :
+                ["tableCell25"] = communesAllStatus2.Count == 0 ? "لا يوجد" : string.Join("، ", communesAllStatus2),//البلديات التي اكملت ايداع ملفات التسجيل :
+                ["tableCell7"] = communesAllStatus2.Count.ToString(),//عدد :
+
+                ["tableCell27"] =  communesAnyStatus2Value2.Count == 0 ? "لا يوجد" : string.Join("، ", communesAnyStatus2Value2),//البلديات التي لم تكمل ايداع ملفات التسجيل :
+                ["tableCell32"] = communesAnyStatus2Value2.Count.ToString(),//عدد :
+
+                ["tableCell68"] = totalBudget.ToString("N2", CultureInfo.InvariantCulture) + "دج",//الغلاف المالي :
+                ["tableCell72"] = registeredOperationsAmount1.ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ تسجيل مبدئي :
+                ["tableCell80"] = (totalBudget - registeredOperationsAmount1).ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ غير مسجل :
+                ["tableCell84"] = registeredOperationsAmount2.ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ تسجيل نهائي :
+                ["tableCell90"] = totalreg.ToString("N2", CultureInfo.InvariantCulture) + "دج",//الرصيد :
+                ["tableCell94"] =(totalBudget-totalreg).ToString("N2", CultureInfo.InvariantCulture) + "دج",//الباقي :
 
 
-                ["tableCell90"] = "",//الرصيد :
-                ["tableCell94"] = "",//الباقي :
-
-
-                ["tableCell84"] = "",//مبلغ العمليات المسجلة (المؤشرة من طرف المراقب الميزانياتي) :
-
-
-
-                ["tableCell82"] = Count(r =>
-                    r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
-                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7).ToString(),
+              //  //عدد العمليات المسجلة (المؤشرة من طرف المراقب الميزانياتي) :
+                ["tableCell82"] = var37.ToString(),
             };
         }
-
-        // First-run only: a minimal report with a few placeholder labels,
-        // just so there's something to open in the designer and build the real layout against.
-
-        //private static Dictionary<string, string> ComputeStats(List<LotGridModel> data)
-        //{
-        //    // One row per project (first lot found) — every stat below counts PROJECTS, not lots
-        //    var byProject = data.GroupBy(r => r.ProjectId).Select(g => g.First()).ToList();
-
-        //    int Count(Func<LotGridModel, bool> predicate) => byProject.Count(predicate);
-
-        //    return new Dictionary<string, string>
-        //    {
-        //        // Admin-procedure stages — replace IDs with your real values
-        //        ["tableCell11"] = Count(r => r.AdministrativeProcedureId == 1).ToString(),
-        //        ["tableCell14"] = Count(r => r.AdministrativeProcedureId == 2).ToString(),
-        //        ["tableCell17"] = Count(r => r.AdministrativeProcedureId == 9).ToString(),
-        //        ["tableCell20"] = Count(r => r.AdministrativeProcedureId == 3).ToString(),
-        //        ["tableCell12"] = Count(r =>
-        //            r.AdministrativeProcedureId == 1 || r.AdministrativeProcedureId == 2 ||
-        //            r.AdministrativeProcedureId == 3 || r.AdministrativeProcedureId == 9).ToString(),
-
-        //        // Project status breakdown — replace IDs with your real values
-        //        ["tableCell36"] = Count(r => r.ProjectStatusId == 2).ToString(),
-        //        ["cell_Ongoing"] = Count(r => r.ProjectStatusId == 3).ToString(),
-        //        ["tableCell42"] = Count(r => r.ProjectStatusId == 4).ToString(),
-        //        ["tableCell45"] = Count(r => r.ProjectStatusId == 5).ToString(),
-        //        ["tableCell28"] = Count(r => r.ProjectStatusId == 6).ToString(),
-        //        ["tableCell31"] = Count(r => r.ProjectStatusId == 7).ToString(),
-        //        ["tableCell37"] = Count(r =>
-        //            r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 || r.ProjectStatusId == 5 || r.ProjectStatusId == 6 ||
-        //            r.ProjectStatusId == 7 ).ToString(),
-        //        // 
-        //        ["tableCell62"] = byProject.Count.ToString(),//totoal project 
-        //        ["tableCell70"] = Count(r => r.SpecialStatus2Id == 1).ToString(),//العمليات الواردة
-
-        //        ["tableCell78"] = (byProject.Count - Count(r => r.SpecialStatus2Id == 1)).ToString(),
-
-
-        //        //[ReportItems.tableCell62].[Text] =persent  [ReportItems.tableCell62].[Text] / [ReportItems.tableCell78].[Text]
-
-        //        ["tableCell82"] = Count(r =>
-        //            r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 || r.ProjectStatusId == 5 || r.ProjectStatusId == 6 ||
-        //            r.ProjectStatusId == 7).ToString(),
-        //    };
-        //}
-        // Fills ANY control on the report whose Name matches a computed stat key —
-        // meaning you can freely redesign the layout later (add/remove/rename fields)
-        // without touching this code, as long as the Name matches.
         private static void FillNamedControls(XtraReport report, Dictionary<string, string> stats)
         {
             foreach (var control in report.AllControls<XRControl>())
