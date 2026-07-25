@@ -205,6 +205,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.OptionsBehavior.Editable = true;
             gridView1.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDownFocused;
             gridView1.ShowingEditor += gridView1_ShowingEditor;
+            gridView1.CalcRowHeight += gridView1_CalcRowHeight;
 
 
 
@@ -219,7 +220,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             
             gridView1.Appearance.HeaderPanel.Font =
-    new Font("Tahoma", 7, FontStyle.Bold);
+    new Font("Segoe UI", 8, FontStyle.Bold);
+            gridView1.Appearance.Row.Font = new Font("Segoe UI", 9);
+            gridView1.Appearance.FocusedRow.Font = new Font("Segoe UI", 9);
+            gridView1.Appearance.SelectedRow.Font = new Font("Segoe UI", 9);
 
             gridView1.Appearance.HeaderPanel.TextOptions.HAlignment =
                 DevExpress.Utils.HorzAlignment.Center;
@@ -346,6 +350,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridControl1.RepositoryItems.Add(specialStatus1Lookup);
             gridView1.Columns["SpecialStatus1Id"].ColumnEdit = specialStatus1Lookup;
             gridView1.Columns["SpecialStatus1Id"].OptionsColumn.AllowEdit = true;
+            gridView1.OptionsBehavior.AllowIncrementalSearch = false;
 
             AddCol("SpecialStatus2Id", "الوضعية2", 130);
             var specialStatus2Lookup = new RepositoryItemLookUpEdit();
@@ -407,23 +412,25 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 DevExpress.Data.SummaryItemType.Sum, "RegisteredAmount", "{0:N2}");
 
                 
-            gridView1.Columns["Daira"].Summary.Add(
-                DevExpress.Data.SummaryItemType.Count,
-                "OperationNumber",
-                "عددها: {0}");
+            //gridView1.Columns["OperationName"].Summary.Add(
+            //    DevExpress.Data.SummaryItemType.Count,
+            //    "Daira",
+            //    "عددها: {0}");
 
             gridView1.Appearance.FooterPanel.Font =
     new Font("Tahoma", 8, FontStyle.Bold);
 
             gridView1.Appearance.FooterPanel.TextOptions.HAlignment =
                 DevExpress.Utils.HorzAlignment.Center;
+            gridView1.Appearance.FooterPanel.TextOptions.WordWrap =
+    DevExpress.Utils.WordWrap.Wrap;  // ← add this
 
-           
-         
+
+
             //--------
-         
 
-          //  gridView1.Columns["OperationName"].ColumnEdit = memo;
+
+            //  gridView1.Columns["OperationName"].ColumnEdit = memo;
             gridView1.OptionsView.RowAutoHeight = true;
 
             // gridView1.Columns["Notes"].ColumnEdit = memo;
@@ -436,6 +443,18 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
         }
+        private const int MinRowHeight = 70;
+
+        private void gridView1_CalcRowHeight(object sender, DevExpress.XtraGrid.Views.Grid.RowHeightEventArgs e)
+        {
+            if (e.RowHandle == DevExpress.XtraGrid.GridControl.AutoFilterRowHandle)
+                return; // leave the auto filter row at its default height
+            if (e.RowHandle == -2147483642) // footer row
+                e.RowHeight = Math.Max(e.RowHeight, 40);
+            if (e.RowHeight < MinRowHeight)
+                e.RowHeight = MinRowHeight;
+        }
+
         private bool _layoutReady = false;
         private void SaveLayout()
         {
@@ -804,7 +823,21 @@ namespace DevExpress.ProductsDemo.Win.Modules
             {
                 e.Appearance.BackColor = gridView1.PaintAppearance.FocusedRow.BackColor;
                 e.Appearance.ForeColor = gridView1.PaintAppearance.FocusedRow.ForeColor;
+                return;
             }
+
+            if (e.RowHandle < 0) return;
+
+            // Highlight ProjectStatusId and Notes in yellow when the project is closed
+          //  if ((e.Column.FieldName == "ProjectStatusId" || e.Column.FieldName == "Notes"))
+            //{
+                object statusVal = gridView1.GetRowCellValue(e.RowHandle, "ProjectStatusId");
+                if (statusVal != null && Convert.ToInt32(statusVal) == 7) // 7 = Closed, matches StatusFilterClosed
+                {
+                    e.Appearance.BackColor = Color.FromArgb(255, 245, 150); // soft yellow
+                    return;
+                }
+            //}
         }
 
         public void ShowPreview()
@@ -1165,5 +1198,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
             // ── Focus project on open ─────────────────────────────────
             Shown += (s, e) => txtProject.Focus();
         }
+
+
     }
+
+   
 }
