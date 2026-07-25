@@ -102,16 +102,24 @@ namespace DevExpress.ProductsDemo.Win.Services
 
             foreach (var g in byCommune.OrderBy(x => x.Key.DairaId).ThenBy(x => x.Key.Commune))
             {
-                var rows = g.ToList();
+                var rows = g.ToList();                                    // all LOT rows — used for money sums
+                var projects = rows.GroupBy(r => r.ProjectId)
+                                    .Select(pg => pg.First())
+                                    .ToList();                              // one row per PROJECT — used for all counts
 
-                int announced = rows.Count;
-                int received = rows.Count(r => r.AdministrativeProcedureId == 4 || r.ProjectStatusId == 2 || r.ProjectStatusId == 6 || r.ProjectStatusId ==4 || r.ProjectStatusId == 3 || r.ProjectStatusId ==7 || r.ProjectStatusId == 5);
+                int Count(Func<LotGridModel, bool> predicate) => projects.Count(predicate);
+
+                int announced = projects.Count;
+                int received = Count(r => r.AdministrativeProcedureId == 4 || r.ProjectStatusId == 2 || r.ProjectStatusId == 6
+                                        || r.ProjectStatusId == 4 || r.ProjectStatusId == 3 || r.ProjectStatusId == 7 || r.ProjectStatusId == 5);
                 int remaining = announced - received;
 
                 var row = new CommuneSummaryRow
                 {
                     Daira = g.Key.Daira,
                     Commune = g.Key.Commune,
+
+                    // Money still sums across ALL lots (a project can have multiple budget lines)
                     LotBudget = rows.Sum(r => r.LotBudget),
                     RegisteredAmount = rows.Sum(r => r.RegisteredAmount),
                     RemainingAmount = rows.Sum(r => r.LotBudget) - rows.Sum(r => r.RegisteredAmount),
@@ -120,24 +128,24 @@ namespace DevExpress.ProductsDemo.Win.Services
                     ReceivedCount = received,
                     RemainingCount = remaining,
 
-                    DaftarCount = rows.Count(r => r.AdministrativeProcedureId == 1),
-                    AnnouncementCount = rows.Count(r => r.AdministrativeProcedureId == 2),
-                    GrantCount = rows.Count(r => r.AdministrativeProcedureId == 3),
-                    StudyCount = rows.Count(r => r.AdministrativeProcedureId == 4),
-                    CfmCount = rows.Count(r => r.AdministrativeProcedureId == 5),
-                    TsCount = rows.Count(r => r.AdministrativeProcedureId == 6),
-                    Ts1Count = rows.Count(r => r.AdministrativeProcedureId == 7),
-                    SubsidyCount = rows.Count(r => r.AdministrativeProcedureId == 8),
-                    OpeningCount = rows.Count(r => r.AdministrativeProcedureId == 9),
-                    DeferredCount = rows.Count(r => r.AdministrativeProcedureId == 10),
-                    RejectedCount = rows.Count(r => r.AdministrativeProcedureId == 11),
+                    DaftarCount = Count(r => r.AdministrativeProcedureId == 1),
+                    AnnouncementCount = Count(r => r.AdministrativeProcedureId == 2),
+                    GrantCount = Count(r => r.AdministrativeProcedureId == 3),
+                    StudyCount = Count(r => r.AdministrativeProcedureId == 4),
+                    CfmCount = Count(r => r.AdministrativeProcedureId == 5),
+                    TsCount = Count(r => r.AdministrativeProcedureId == 6),
+                    Ts1Count = Count(r => r.AdministrativeProcedureId == 7),
+                    SubsidyCount = Count(r => r.AdministrativeProcedureId == 8),
+                    OpeningCount = Count(r => r.AdministrativeProcedureId == 9),
+                    DeferredCount = Count(r => r.AdministrativeProcedureId == 10),
+                    RejectedCount = Count(r => r.AdministrativeProcedureId == 11),
 
-                    RegisteredCount = rows.Count(r => r.ProjectStatusId == 2),
-                    OngoingCount = rows.Count(r => r.ProjectStatusId == 3),
-                    StoppedCount = rows.Count(r => r.ProjectStatusId == 4),
-                    FinishedCount = rows.Count(r => r.ProjectStatusId == 5),
-                    ReceivedFundsCount = rows.Count(r => r.ProjectStatusId == 6),
-                    ClosedCount = rows.Count(r => r.ProjectStatusId == 7),
+                    RegisteredCount = Count(r => r.ProjectStatusId == 2),
+                    OngoingCount = Count(r => r.ProjectStatusId == 3),
+                    StoppedCount = Count(r => r.ProjectStatusId == 4),
+                    FinishedCount = Count(r => r.ProjectStatusId == 5),
+                    ReceivedFundsCount = Count(r => r.ProjectStatusId == 6),
+                    ClosedCount = Count(r => r.ProjectStatusId == 7),
                 };
 
                 row.TotalRegisteredGroupCount = row.RegisteredCount + row.OngoingCount + row.StoppedCount

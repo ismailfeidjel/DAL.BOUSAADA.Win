@@ -38,15 +38,17 @@ namespace DevExpress.ProductsDemo.Win.Services
             int Count(Func<LotGridModel, bool> predicate) => byProject.Count(predicate);
 
             int totalProjects = byProject.Count;
+            bool IsReceived(LotGridModel r) =>
+        r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
+        r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7 ||
+        r.AdministrativeProcedureId == 4;
             int specialStatus2Count = Count(r => r.SpecialStatus2Id == 1);
 
             decimal totalBudget = data.Sum(r => r.LotBudget);
             decimal totalreg = data.Sum(r => r.RegisteredAmount);
 
 
-            decimal var70 = Count(r =>
-                    r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
-                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7 || r.AdministrativeProcedureId == 4);
+            decimal var70 = Count(IsReceived);
             decimal var37 = Count(r =>
                     r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
                     r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7);
@@ -64,17 +66,18 @@ namespace DevExpress.ProductsDemo.Win.Services
                     r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7) / totalProjects).ToString()+"%";
 
             var communesAllStatus2 = byProject
-    .GroupBy(r => r.Commune)
-    .Where(g => g.All(r => r.SpecialStatus2Id == 1))
-    .Select(g => g.Key)
-    .ToList();
-            var communesAnyStatus2Value2 = byProject
-     .GroupBy(r => r.Commune)
-     .Where(g => g.Any(r => r.SpecialStatus2Id == 2))
-     .Select(g => g.Key)
-     .ToList();
+        .GroupBy(r => r.Commune)
+        .Where(g => g.All(IsReceived))          // ← every project in this commune is "received"
+        .Select(g => g.Key)
+        .ToList();
 
-            
+            var communesAnyStatus2Value2 = byProject
+                .GroupBy(r => r.Commune)
+                .Where(g => g.Any(r => !IsReceived(r)))  // ← at least one project in this commune is NOT received
+                .Select(g => g.Key)
+                .ToList();
+
+
 
             decimal specialStatus2Budget = data.Where(r => r.SpecialStatus2Id == 1).Sum(r => r.LotBudget);
 
@@ -139,7 +142,7 @@ namespace DevExpress.ProductsDemo.Win.Services
 
                 ["tableCell68"] = totalBudget.ToString("N2", CultureInfo.InvariantCulture) + "دج",//الغلاف المالي :
                 ["tableCell72"] = registeredOperationsAmount1.ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ تسجيل مبدئي :
-                ["tableCell80"] = (totalBudget - registeredOperationsAmount1).ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ غير مسجل :
+                ["tableCell80"] = (totalBudget - registeredOperationsAmount1- (totalBudget - totalreg)).ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ غير مسجل :
                 ["tableCell84"] = registeredOperationsAmount2.ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ تسجيل نهائي :
                 ["tableCell90"] = totalreg.ToString("N2", CultureInfo.InvariantCulture) + "دج",//الرصيد :
                 ["tableCell94"] =(totalBudget-totalreg).ToString("N2", CultureInfo.InvariantCulture) + "دج",//الباقي :
