@@ -819,15 +819,68 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 LoadData();
             }
         }
+        public void ShowAdd()
+        {
+            using (var form = new frmaddproject())
+            {
+                if (form.ShowDialog(this) == DialogResult.OK)
+                {
 
-       
-     
+                }
+                LoadData();
+            }
+        }
+
+
         // ── BaseModule overrides ─────────────────────────────────────
         protected override DevExpress.XtraGrid.GridControl Grid { get { return gridControl1; } }
 
         protected override void ShowReminder() { }
 
-        protected internal override void ButtonClick(string tag) { }
+        public void PrintCurrentGridReport()
+        {
+            if (gridView1.RowCount == 0)
+            {
+                XtraMessageBox.Show("لا توجد بيانات لتصديرها.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var report = BuildReportFromTemplateOrDefault();
+            report.CreateDocument();
+            report.ShowPreviewDialog();
+        }
+
+
+        protected internal override void ButtonClick(string tag)
+        {
+            switch (tag)
+            {
+                case "PrintGrid":
+                    PrintCurrentGridReport();
+                    break;
+                case "PrintStatusSummary":
+                    PrintStatusSummaryReport();
+                    break;
+
+                case "PrintCommuneSummary":
+                    PrintCommuneSummaryReport();
+                    break;
+
+                // existing status-filter tags, if not already handled elsewhere:
+                case "StatusFilterClosed":
+                    gridView1.ActiveFilterString = "[ProjectStatusId] = 7";
+                    break;
+                case "StatusFilterOngoing":
+                    gridView1.ActiveFilterString = "[ProjectStatusId] = 3";
+                    break;
+                case "StatusFilterUnregistered":
+                    gridView1.ActiveFilterString = "[ProjectStatusId] = 1";
+                    break;
+                case "StatusFilterRegistered":
+                    gridView1.ActiveFilterString = "[ProjectStatusId] = 2";
+                    break;
+            }
+        }
 
         internal override void ShowModule(bool firstShow)
         {
@@ -888,6 +941,27 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 var report = StatusSummaryReportBuilder.Build(data);
                 report.CreateDocument();
                 report.ShowPreviewDialog();
+            }
+            catch (InvalidOperationException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void PrintCommuneSummaryReport()
+        {
+            try
+            {
+                var allData = _lotRepo.GetGridData();
+                var data = _selectedProgramId.HasValue
+                    ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
+                    : allData;
+
+                string programName = GetPrograms()
+                    .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
+
+                var report = CommuneSummaryReportBuilder.Build(data, programName);
+                report.ShowPreviewDialog();   // ← no CreateDocument() here — Build() already produced the merged document
             }
             catch (InvalidOperationException ex)
             {

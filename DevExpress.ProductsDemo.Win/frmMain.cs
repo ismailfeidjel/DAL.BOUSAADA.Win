@@ -344,6 +344,12 @@ namespace DevExpress.ProductsDemo.Win {
             modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Tag));
         }
 
+        private void galleryReportPrinting_GalleryItemClick(object sender, GalleryItemClickEventArgs e)
+        {
+            modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Tag));
+        }
+
+
         private void bvtiPrint_SelectedChanged(object sender, BackstageViewItemEventArgs e) {
             //if (modulesNavigator.CurrentModule is ProjectModule pm)
              //   pm.PrintGrid();
@@ -456,14 +462,10 @@ namespace DevExpress.ProductsDemo.Win {
 
         private void bbiNewTask_ItemClick(object sender, ItemClickEventArgs e)
         {
-            using (var form = new frmaddproject())
-            {
-                if (form.ShowDialog(this) == DialogResult.OK)
-                {
-                    // form.NewProject and form.NewLot are ready
-                    //LoadProjects(); // refresh your grid
-                }
-            }
+
+            if (modulesNavigator.CurrentModule is ProjectModule pm)
+                pm.ShowAdd();
+          
         }
 
         public void SwitchToReportsAndLoad(XtraReport report)
@@ -502,6 +504,7 @@ namespace DevExpress.ProductsDemo.Win {
             {
                ///  pm.ExportGridToDesignerReport();
                 pm.PrintStatusSummaryReport();
+                pm.PrintCommuneSummaryReport();
             }
 
         }
@@ -529,6 +532,20 @@ namespace DevExpress.ProductsDemo.Win {
                 OnModuleShown(modulesNavigator.CurrentModule);
         }
 
+        private void barButtonItem3_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (modulesNavigator.CurrentModule is ProjectModule pm)
+            {
+                
+                pm.PrintCommuneSummaryReport();
+            }
+
+        }
+
+        private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
     }
 
 }

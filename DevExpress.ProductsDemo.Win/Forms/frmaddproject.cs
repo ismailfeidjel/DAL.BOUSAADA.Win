@@ -42,7 +42,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
             InitializeComponent();
             PopulateLookups();
 #if DEBUG
-            LoadTestData();
+           // LoadTestData();
 #endif
 
 
@@ -112,57 +112,6 @@ namespace DevExpress.ProductsDemo.Win.Forms
                 foreach (var cc in GetAllControls(c)) yield return cc;
             }
         }
-
-        private void LoadTestData()
-        {
-            txtOperationNumber.Text = "OP-2026-001";
-            txtOperationName.Text = "إنجاز مدرسة ابتدائية";
-
-            if (cmbProgram.Properties.DataSource is List<LookupItem> programs && programs.Any())
-                cmbProgram.EditValue = programs.First().Id;
-
-            if (cmbDaira.Properties.DataSource is List<LookupItem> dairas && dairas.Any())
-                cmbDaira.EditValue = dairas.First().Id;
-
-            if (cmbCommune.Properties.DataSource is List<LookupItem> communes && communes.Any())
-                cmbCommune.EditValue = communes.First().Id;
-
-            if (cmbDomain.Properties.DataSource is List<LookupItem> domains && domains.Any())
-                cmbDomain.EditValue = domains.First().Id;
-
-            if (cmbSector.Properties.DataSource is List<LookupItem> sectors && sectors.Any())
-                cmbSector.EditValue = sectors.First().Id;
-
-            spnLotNumber.Value = 1;
-            txtLotName.Text = "الحصة رقم 01";
-
-            txtLotBudget.Text = "5000000";
-            txtRegisteredAmount.Text = "5000000";
-            txtConsumedAmount.Text = "1200000";
-
-            txtContractor.Text = "مؤسسة البناء الحديثة";
-
-            spnExecutionDuration.Value = 12;
-            spnPhysicalProgress.Value = 25;
-
-            dtStartDate.DateTime = DateTime.Today.AddMonths(-3);
-
-            if (cmbAdminProcedure.Properties.DataSource is List<LookupItem> admin && admin.Any())
-                cmbAdminProcedure.EditValue = admin.First().Id;
-
-            if (cmbSpecialStatus1.Properties.DataSource is List<LookupItem> s1 && s1.Any())
-                cmbSpecialStatus1.EditValue = s1.First().Id;
-
-            if (cmbProjectStatus.Properties.DataSource is List<LookupItem> status && status.Any())
-                cmbProjectStatus.EditValue = status.First().Id;
-
-            txtLotNotes.Text = "حصة تجريبية";
-        }
-
-
-
-
-
 
 
         private void bbiSave_ItemClick(object sender, ItemClickEventArgs e)
@@ -315,7 +264,7 @@ private void bbiCancel_ItemClick(object sender, ItemClickEventArgs e)
     ok &= RequireLookup(cmbCommune, "Commune is required");
     ok &= RequireLookup(cmbDomain, "Domain is required");
     ok &= RequireLookup(cmbSector, "Sector is required");
-    ok &= Require(txtLotName, "Lot Name is required");
+   // ok &= Require(txtLotName, "Lot Name is required");
     return ok;
 }
 private bool Require(TextEdit txt, string msg)
