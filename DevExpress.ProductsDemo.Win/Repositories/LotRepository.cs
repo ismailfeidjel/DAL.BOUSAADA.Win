@@ -65,7 +65,9 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
             ps.name AS project_status,
 
-            l.notes,
+            l.Notes, l.FlagsId, 
+
+
             l.updated_by,
             l.updated_at
 
@@ -184,6 +186,8 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                                 rd["notes"] == DBNull.Value
                                     ? null
                                     : rd["notes"].ToString(),
+                            FlagsId = rd["FlagsId"] != DBNull.Value ? (int?)rd["FlagsId"] : null,
+
                             UpdatedBy = rd["updated_by"] == DBNull.Value ? null : rd["updated_by"].ToString(),
                             UpdatedAt = rd["updated_at"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(rd["updated_at"])
                         });
@@ -464,13 +468,15 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             special_status2_id = @special_status2_id,
             special_status3_id = @special_status3_id,
             project_status_id = @project_status_id,
-            notes = @notes
+            notes = @notes,
+            FlagsId = @FlagsId
         WHERE id = @id";
 
             using (var cmd = new MySqlCommand(sql, conn, transaction))
             {
                 FillParameters(cmd, lot);
                 cmd.Parameters.AddWithValue("@id", lot.Id);
+                cmd.Parameters.AddWithValue("@FlagsId", lot.FlagsId ?? (object)DBNull.Value);
                 return cmd.ExecuteNonQuery() > 0;
             }
         }

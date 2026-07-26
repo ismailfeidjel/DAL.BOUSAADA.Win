@@ -33,11 +33,17 @@ namespace DevExpress.ProductsDemo.Win.Domain
             }
         }
 
+        public int? FlagsId { get; set; }
+
         public string Contractor { get; set; }
 
         public int? ExecutionDuration { get; set; }
 
         public DateTime? StartDate { get; set; }
+        public DateTime? ExpectedEndDate =>
+  StartDate.HasValue && ExecutionDuration.HasValue
+      ? StartDate.Value.AddDays(ExecutionDuration.Value)
+      : (DateTime?)null;
 
         public decimal PhysicalProgress { get; set; }
 

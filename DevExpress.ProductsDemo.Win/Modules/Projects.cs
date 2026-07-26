@@ -196,6 +196,39 @@ namespace DevExpress.ProductsDemo.Win.Modules
         // ── Grid Setup ───────────────────────────────────────────────
         private void SetupGrid()
         {
+            var imageList = new ImageList();
+            imageList.ImageSize = new Size(16, 16);
+
+            // Empty/blank
+            var bmp0 = new Bitmap(16, 16);
+            imageList.Images.Add(bmp0);
+
+            // Red flag
+            var bmp1 = new Bitmap(16, 16);
+            using (Graphics g = Graphics.FromImage(bmp1))
+                g.FillRectangle(Brushes.Red, 0, 0, 16, 16);
+            imageList.Images.Add(bmp1);
+
+            // Yellow flag
+            var bmp2 = new Bitmap(16, 16);
+            using (Graphics g = Graphics.FromImage(bmp2))
+                g.FillRectangle(Brushes.Gold, 0, 0, 16, 16);
+            imageList.Images.Add(bmp2);
+
+            // Green flag
+            var bmp3 = new Bitmap(16, 16);
+            using (Graphics g = Graphics.FromImage(bmp3))
+                g.FillRectangle(Brushes.Green, 0, 0, 16, 16);
+            imageList.Images.Add(bmp3);
+
+            // Blue flag
+            var bmp4 = new Bitmap(16, 16);
+            using (Graphics g = Graphics.FromImage(bmp4))
+                g.FillRectangle(Brushes.Blue, 0, 0, 16, 16);
+            imageList.Images.Add(bmp4);
+
+
+
             gridControl1.RepositoryItems.Add(memo);
             memo.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             memo.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -258,12 +291,34 @@ namespace DevExpress.ProductsDemo.Win.Modules
             // gridView1.Appearance.EvenRow.BackColor = Color.White;
             //gridView1.Appearance.OddRow.BackColor = Color.FromArgb(245, 245, 245);
             AddCol("OperationNumber", "رقم ", 110);
+            AddCol("FlagsId", "الرايات", 80);
+            // Create ImageComboBox tied to the imagelist
+            var flagsCombo = new RepositoryItemImageComboBox();
+            flagsCombo.SmallImages = imageList;  //
+            flagsCombo.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[]
+            {
+        new DevExpress.XtraEditors.Controls.ImageComboBoxItem("", 0, 0),
+        new DevExpress.XtraEditors.Controls.ImageComboBoxItem("", 1, 1),
+        new DevExpress.XtraEditors.Controls.ImageComboBoxItem("", 2, 2),
+        new DevExpress.XtraEditors.Controls.ImageComboBoxItem("", 3, 3),
+        new DevExpress.XtraEditors.Controls.ImageComboBoxItem("", 4, 4),
+            });
+            flagsCombo.GlyphAlignment = HorzAlignment.Center;
+            gridControl1.RepositoryItems.Add(flagsCombo);
+            gridView1.Columns["FlagsId"].ColumnEdit = flagsCombo;
+            gridView1.Columns["FlagsId"].OptionsColumn.AllowEdit = true;
+            gridView1.Columns["FlagsId"].Width = 60;
+
             AddCol("Daira", "الدائرة", 100);
            // gridView1.Columns["Daira"].OptionsColumn.AllowMerge = DefaultBoolean.True;
             AddCol("LotNumber", "N", 100);
 
             AddCol("Commune", "البلدية", 100);
             AddCol("ProgramId", "البرنامج", 110);
+            AddCol("ExpectedEndDate", " الاجال", 120, "{0:dd/MM/yyyy}", FormatType.DateTime);
+            gridView1.Columns["ExpectedEndDate"].ColumnEdit = dateEdit;
+            gridView1.Columns["ExpectedEndDate"].OptionsColumn.AllowEdit = false;
+
             var programLookup = new RepositoryItemLookUpEdit();
             programLookup.DataSource = new LookupRepository().GetAll("programs");
             programLookup.DisplayMember = "Name";
@@ -518,7 +573,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
                             SpecialStatus2Id = lot.SpecialStatus2Id,
                             SpecialStatus3Id = lot.SpecialStatus3Id,
                             ProjectStatusId = lot.ProjectStatusId,
-                            Notes = lot.Notes
+                            Notes = lot.Notes,
+                            FlagsId = lot.FlagsId  // ← add this
+
                         };
 
                         var updatedProject = new Domain.Project
@@ -827,11 +884,46 @@ namespace DevExpress.ProductsDemo.Win.Modules
             }
 
             if (e.RowHandle < 0) return;
+            //
+            if (e.Column.FieldName == "StartDate")
+            {
+                object dateVal = gridView1.GetRowCellValue(e.RowHandle, "ExpectedEndDate");
+                if (dateVal != null && dateVal != DBNull.Value && DateTime.TryParse(dateVal.ToString(), out DateTime endDate))
+                {
+                    int daysRemaining = (int)(endDate - DateTime.Now).TotalDays;
+
+                    if (daysRemaining < 0)
+                    {
+                        // أحمر: انتهت المدة
+                        e.Appearance.ForeColor = Color.Red;
+                        //e.Appearance.FontStyleDelta = FontStyle.Bold;
+                    }
+                    else if (daysRemaining <= 30)
+                    {
+                        // برتقالي: قريبة الانتهاء
+                        e.Appearance.ForeColor = Color.FromArgb(255, 140, 0);  // orange
+                        e.Appearance.FontStyleDelta = FontStyle.Bold;
+                    }
+                    else
+                    {
+                        // أخضر: مدة كافية
+                        e.Appearance.ForeColor = Color.Green;
+                    }
+                    return;
+                }
+            }
+
+
+            //
+
+
+
+
 
             // Highlight ProjectStatusId and Notes in yellow when the project is closed
-          //  if ((e.Column.FieldName == "ProjectStatusId" || e.Column.FieldName == "Notes"))
+            //  if ((e.Column.FieldName == "ProjectStatusId" || e.Column.FieldName == "Notes"))
             //{
-                object statusVal = gridView1.GetRowCellValue(e.RowHandle, "ProjectStatusId");
+            object statusVal = gridView1.GetRowCellValue(e.RowHandle, "ProjectStatusId");
                 if (statusVal != null && Convert.ToInt32(statusVal) == 7) // 7 = Closed, matches StatusFilterClosed
                 {
                     e.Appearance.BackColor = Color.FromArgb(255, 245, 150); // soft yellow

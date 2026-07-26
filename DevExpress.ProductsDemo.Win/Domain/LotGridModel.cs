@@ -51,6 +51,7 @@ public class LotGridModel
 
     public DateTime? StartDate { get; set; }
 
+
     public DateTime? ExpectedEndDate =>
     StartDate.HasValue && ExecutionDuration.HasValue
         ? StartDate.Value.AddDays(ExecutionDuration.Value)
@@ -90,6 +91,8 @@ public class LotGridModel
 
     // ملاحظات
     public string Notes { get; set; }
+    public int? FlagsId { get; set; }
+
 
     public string UpdatedBy { get; set; }
     public DateTime? UpdatedAt { get; set; }
