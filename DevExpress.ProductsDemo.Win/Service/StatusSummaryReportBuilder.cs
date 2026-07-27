@@ -34,7 +34,11 @@ namespace DevExpress.ProductsDemo.Win.Services
 
         private static Dictionary<string, string> ComputeStats(List<LotGridModel> data)
         {
-            var byProject = data.GroupBy(r => r.ProjectId).Select(g => g.First()).ToList();
+            var byProject = data
+       .GroupBy(r => r.ProjectId)
+       .Select(g => g.First())
+       .Where(r => r.ProjectStatusId != 8)   // ملغاة — excluded from all stats
+       .ToList(); 
             int Count(Func<LotGridModel, bool> predicate) => byProject.Count(predicate);
 
             int totalProjects = byProject.Count;

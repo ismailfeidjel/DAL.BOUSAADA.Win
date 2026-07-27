@@ -665,7 +665,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
         private static void BindSidePanel(LookUpEdit cmb, List<LookupItem> src)
         {
             var srcWithNull = new List<LookupItem>();
-            srcWithNull.Add(new LookupItem { Id = -1, Name = "— بدون —" });
+            srcWithNull.Add(new LookupItem { Id = -1, Name = "—  —" });
             srcWithNull.AddRange(src);
 
             cmb.Properties.DataSource = srcWithNull;
@@ -896,20 +896,19 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     {
                         // أحمر: انتهت المدة
                         e.Appearance.ForeColor = Color.Red;
-                        //e.Appearance.FontStyleDelta = FontStyle.Bold;
                     }
                     else if (daysRemaining <= 30)
                     {
                         // برتقالي: قريبة الانتهاء
                         e.Appearance.ForeColor = Color.FromArgb(255, 140, 0);  // orange
-                        e.Appearance.FontStyleDelta = FontStyle.Bold;
+                       
                     }
                     else
                     {
                         // أخضر: مدة كافية
                         e.Appearance.ForeColor = Color.Green;
                     }
-                    return;
+                  //  return;
                 }
             }
 
