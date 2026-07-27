@@ -33,6 +33,7 @@ namespace DevExpress.ProductsDemo.Win.Services
         public string FilterCellName { get; set; } = "cellFilterText";
         public string FilterCellNameAlt { get; set; } = "tbFilter";
         public string ProgramCellName { get; set; } = "cellProgramName";
+        public string CustomFilterText { get; set; }
         public string ProgramDisplayText { get; set; } // set by the caller, e.g. "ADSEC2025"
 
         public bool GenerateFooterRow { get; set; } = false;
@@ -111,6 +112,12 @@ namespace DevExpress.ProductsDemo.Win.Services
             {
                 CriteriaOperator criteria = col.FilterInfo?.FilterCriteria;
                 if (criteria == null) continue;
+
+                if (!string.IsNullOrEmpty(options.CustomFilterText))
+                {
+                    filterCell.Text = options.CustomFilterText;
+                    return;
+                }
 
                 var values = new List<string>();
                 CollectOperandValues(criteria, col, values);

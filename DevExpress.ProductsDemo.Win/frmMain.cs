@@ -151,6 +151,7 @@ namespace DevExpress.ProductsDemo.Win {
             InitGalleryItem(rgbiCurrentView.Gallery.Groups[0].Items[1], TagResources.ContactAlphabetical, Properties.Resources.ContactAlphabeticalDescription);
             InitGalleryItem(rgbiCurrentView.Gallery.Groups[0].Items[2], TagResources.ContactByState, Properties.Resources.ContactByStateDescription);
             InitGalleryItem(rgbiCurrentView.Gallery.Groups[0].Items[3], TagResources.ContactCard, Properties.Resources.ContactCardDescription);
+            rgbiCurrentViewTasks.Gallery.ItemCheckMode = DevExpress.XtraBars.Ribbon.Gallery.ItemCheckMode.SingleCheck;
             bvbiSaveAs.Tag = TagResources.MenuSaveAs;
             bvbiSaveAttachment.Tag = TagResources.MenuSaveAttachment;
             bsiNavigation.Hint = Properties.Resources.NavigationDescription;
@@ -284,14 +285,7 @@ namespace DevExpress.ProductsDemo.Win {
                 bsiInfo.Caption = string.Format(Properties.Resources.InfoText, count.Value);
             HtmlText = "ولاية بوسعادة تطبيق متابعة البرامج التنموية"; // string.Format("{0}{1}", GetModuleName(), GetModulePartName());
         }
-        string GetModuleName() {
-            if(string.IsNullOrEmpty(modulesNavigator.CurrentModule.PartName)) return CurrentModuleName;
-            return string.Format("<b>{0}</b>", CurrentModuleName);
-        }
-        string GetModulePartName() {
-            if(string.IsNullOrEmpty(modulesNavigator.CurrentModule.PartName)) return null;
-            return string.Format(" - {0}", modulesNavigator.CurrentModule.PartName);
-        }
+     
         private void navBarControl1_SelectedLinkChanged(object sender, XtraNavBar.ViewInfo.NavBarSelectedLinkChangedEventArgs e) {
             if(e.Link != null)
                 modulesNavigator.ChangeSelectedItem(e.Link, null);
@@ -340,8 +334,21 @@ namespace DevExpress.ProductsDemo.Win {
             e.PopupGallery.SynchWithInRibbonGallery = true;
         }
 
-        private void rgbiCurrentViewTasks_GalleryItemClick(object sender, GalleryItemClickEventArgs e) {
-            modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Tag));
+        private void rgbiCurrentViewTasks_GalleryItemClick(object sender, GalleryItemClickEventArgs e)
+        {
+            // modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Tag));
+            if (modulesNavigator.CurrentModule == null) return;
+
+            if (e.Item.Checked)
+            {
+                // First press: Item becomes checked -> Apply the specific filter
+                modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Value));
+            }
+            else
+            {
+                // Second press: Item becomes unchecked -> Send a command to clear the filter
+                modulesNavigator.CurrentModule.ButtonClick("ClearFilter");
+            }
         }
 
         private void galleryReportPrinting_GalleryItemClick(object sender, GalleryItemClickEventArgs e)

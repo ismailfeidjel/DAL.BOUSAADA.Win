@@ -391,7 +391,6 @@
             // rgbiCurrentViewTasks
             // 
             resources.ApplyResources(this.rgbiCurrentViewTasks, "rgbiCurrentViewTasks");
-            this.rgbiCurrentViewTasks.Enabled = false;
             // 
             // 
             // 
@@ -415,17 +414,20 @@
             galleryItem2.Tag = "TaskToday";
             resources.ApplyResources(galleryItem3, "galleryItem3");
             galleryItem3.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ToDoList;
-            galleryItem3.Tag = "TaskToDoList";
+            galleryItem3.Tag = "StatusFilterOngoing";
+            galleryItem3.Value = "StatusFilterOngoing";
             resources.ApplyResources(galleryItem4, "galleryItem4");
             galleryItem4.Checked = true;
             galleryItem4.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Completed__2_;
-            galleryItem4.Tag = "Completed";
+            galleryItem4.Tag = "StatusFilterClosed";
+            galleryItem4.Value = "StatusFilterClosed";
             resources.ApplyResources(galleryItem5, "galleryItem5");
             galleryItem5.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.important;
             galleryItem5.Tag = "TaskPrioritized";
             resources.ApplyResources(galleryItem6, "galleryItem6");
             galleryItem6.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Overdue;
-            galleryItem6.Tag = "TaskOverdue";
+            galleryItem6.Tag = "StatusFilterOverdueActive";
+            galleryItem6.Value = "StatusFilterOverdueActive";
             resources.ApplyResources(galleryItem7, "galleryItem7");
             galleryItem7.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.List;
             galleryItem7.Tag = "TaskSimpleList";

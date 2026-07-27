@@ -78,8 +78,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 SumFields = SumFields,
                 CountField = CountField,
                 GroupIdField = "ProjectId",
-                GenerateFooterRow = false ,
-                 ProgramDisplayText = programName   // ← new
+                GenerateFooterRow = false,
+                CustomFilterText = gridView1.FilterPanelText,
+                
+                 ProgramDisplayText = programName   
 
             });
 
@@ -994,6 +996,14 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 case "StatusFilterClosed":
                     gridView1.ActiveFilterString = "[ProjectStatusId] = 7";
                     break;
+                case "StatusFilterOverdueActive":
+                    string filterCriteria = "[ProjectStatusId] <> 7 And [ExpectedEndDate] < Today() And Not IsNull([StartDate])";
+
+                    // Clear previous filters and apply the complex filter string directly
+                    gridView1.ActiveFilter.Clear();
+                    gridView1.ActiveFilterString = filterCriteria;
+                    break;
+
                 case "StatusFilterOngoing":
                     gridView1.ActiveFilterString = "[ProjectStatusId] = 3";
                     break;
@@ -1002,6 +1012,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     break;
                 case "StatusFilterRegistered":
                     gridView1.ActiveFilterString = "[ProjectStatusId] = 2";
+                    break;
+                case "ClearFilter":
+                    gridView1.ActiveFilterString = "";
                     break;
             }
         }
@@ -1035,24 +1048,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 GridHelper.GridViewFocusObject(view, obj);
         }
 
-        public void ExportGridToDesignerReport()
-        {
-            if (gridView1.RowCount == 0)
-            {
-                DevExpress.XtraEditors.XtraMessageBox.Show("لا توجد بيانات لتصديرها.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!(this.FindForm() is frmMain mainForm)) return;
-
-            XtraReport report = BuildReportFromTemplateOrDefault();
-            report.DisplayName = $"تقرير_{DateTime.Now:yyyyMMdd_HHmmss}";
-
-            mainForm.SwitchToReportsAndLoad(report);
-
-            if (mainForm.GetReportsModule() is ReportsModule reportsMod)
-                reportsMod.SaveReportToPanel(report, report.DisplayName);
-        }
+   
         public void PrintStatusSummaryReport()
         {
             try
