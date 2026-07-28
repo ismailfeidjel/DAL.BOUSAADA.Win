@@ -408,20 +408,22 @@
             resources.ApplyResources(galleryItemGroup1, "galleryItemGroup1");
             resources.ApplyResources(galleryItem1, "galleryItem1");
             galleryItem1.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ListByDate;
-            galleryItem1.Tag = "TaskList";
+            galleryItem1.Tag = "StatusFilterRegistered";
+            galleryItem1.Value = "StatusFilterRegistered";
             resources.ApplyResources(galleryItem2, "galleryItem2");
             galleryItem2.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Today1;
-            galleryItem2.Tag = "TaskToday";
+            galleryItem2.Tag = "StatusFilterUnregistered";
+            galleryItem2.Value = "StatusFilterUnregistered";
             resources.ApplyResources(galleryItem3, "galleryItem3");
             galleryItem3.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ToDoList;
             galleryItem3.Tag = "StatusFilterOngoing";
             galleryItem3.Value = "StatusFilterOngoing";
             resources.ApplyResources(galleryItem4, "galleryItem4");
-            galleryItem4.Checked = true;
             galleryItem4.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Completed__2_;
             galleryItem4.Tag = "StatusFilterClosed";
             galleryItem4.Value = "StatusFilterClosed";
             resources.ApplyResources(galleryItem5, "galleryItem5");
+            galleryItem5.Enabled = false;
             galleryItem5.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.important;
             galleryItem5.Tag = "TaskPrioritized";
             resources.ApplyResources(galleryItem6, "galleryItem6");
@@ -429,9 +431,12 @@
             galleryItem6.Tag = "StatusFilterOverdueActive";
             galleryItem6.Value = "StatusFilterOverdueActive";
             resources.ApplyResources(galleryItem7, "galleryItem7");
+            galleryItem7.Enabled = false;
             galleryItem7.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.List;
             galleryItem7.Tag = "TaskSimpleList";
             resources.ApplyResources(galleryItem8, "galleryItem8");
+            galleryItem8.Checked = true;
+            galleryItem8.Enabled = false;
             galleryItem8.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Deferred;
             galleryItem8.Tag = "TaskDeferred";
             galleryItemGroup1.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {

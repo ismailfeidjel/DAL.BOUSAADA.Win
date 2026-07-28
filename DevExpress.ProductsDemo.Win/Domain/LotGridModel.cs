@@ -42,7 +42,7 @@ public class LotGridModel
     public decimal RegisteredAmount { get; set; }
 
     public decimal ConsumedAmount { get; set; }
-    public decimal Remaining => RegisteredAmount - ConsumedAmount;
+    public decimal Remaining => LotBudget - RegisteredAmount;
 
     // متابعة
     public string Contractor { get; set; }

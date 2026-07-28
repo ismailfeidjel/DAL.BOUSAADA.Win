@@ -41,10 +41,12 @@ namespace DevExpress.ProductsDemo.Win.Services
 
     public static class GridReportBuilder
     {
+       
         // ── Entry point ──────────────────────────────────────────────
         public static XtraReport Build<T>(GridView gridView, List<T> visibleData, GridReportOptions options)
         {
             string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", options.TemplateKey + ".repx");
+
 
             XtraReport report;
             if (File.Exists(templatePath))
@@ -102,9 +104,15 @@ namespace DevExpress.ProductsDemo.Win.Services
         private static void ApplyFilterDisplayText(XtraReport report, GridView gridView, GridReportOptions options)
         {
             var filterCell = report.FindControl(options.FilterCellName, true) as XRTableCell
-                          ?? report.FindControl(options.FilterCellNameAlt, true) as XRTableCell;
+                  ?? report.FindControl(options.FilterCellNameAlt, true) as XRTableCell;
 
             if (filterCell == null) return;
+
+            if (!string.IsNullOrEmpty(options.CustomFilterText))
+            {
+                filterCell.Text = options.CustomFilterText;
+                return;
+            }
 
             var parts = new List<string>();
 

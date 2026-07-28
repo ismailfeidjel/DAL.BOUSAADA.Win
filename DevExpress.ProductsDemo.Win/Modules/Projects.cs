@@ -79,9 +79,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 CountField = CountField,
                 GroupIdField = "ProjectId",
                 GenerateFooterRow = false,
-                CustomFilterText = gridView1.FilterPanelText,
-                
-                 ProgramDisplayText = programName   
+                CustomFilterText = _currentFilterLabel,   
+
+                ProgramDisplayText = programName   
 
             });
 
@@ -415,7 +415,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             specialStatus2Lookup.DisplayMember = "Name";
             specialStatus2Lookup.ValueMember = "Id";
             specialStatus2Lookup.ShowHeader = false;
-            specialStatus2Lookup.NullText = "——";
+            specialStatus2Lookup.NullText = "—";
             specialStatus2Lookup.Columns.Add(new LookUpColumnInfo("Name", 200));
             gridControl1.RepositoryItems.Add(specialStatus2Lookup);
             gridView1.Columns["SpecialStatus2Id"].ColumnEdit = specialStatus2Lookup;
@@ -455,7 +455,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["Commune"].OptionsColumn.AllowEdit = false;
             gridView1.Columns["Notes"].OptionsColumn.AllowEdit = true;
 
-
             //----------------------------------------------------------------------------
             gridView1.OptionsView.ShowFooter = true;
 
@@ -468,7 +467,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["RegisteredAmount"].Summary.Add(
                 DevExpress.Data.SummaryItemType.Sum, "RegisteredAmount", "{0:N2}");
 
-                
+            gridView1.Columns["Remaining"].Summary.Add(
+               DevExpress.Data.SummaryItemType.Sum, "Remaining", "{0:N2}");
+
+
             //gridView1.Columns["OperationName"].Summary.Add(
             //    DevExpress.Data.SummaryItemType.Count,
             //    "Daira",
@@ -975,6 +977,18 @@ namespace DevExpress.ProductsDemo.Win.Modules
             report.CreateDocument();
             report.ShowPreviewDialog();
         }
+        private string _currentFilterLabel = "";
+
+        private static readonly Dictionary<string, string> FilterTagLabels = new Dictionary<string, string>
+        {
+            ["StatusFilterClosed"] = "الحالة: مغلقة",
+            ["StatusFilterOverdueActive"] = "الحالة: آجال الانجاز منتهية",
+            ["StatusFilterOngoing"] = "الحالة: جارية",
+            ["StatusFilterUnregistered"] = "الحالة: غير مسجلة",
+            ["StatusFilterRegistered"] = "الحالة: غير منطلقة",
+            ["ClearFilter"] = "",
+        };
+
 
 
         protected internal override void ButtonClick(string tag)
@@ -1017,6 +1031,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     gridView1.ActiveFilterString = "";
                     break;
             }
+            _currentFilterLabel = FilterTagLabels.TryGetValue(tag, out string label) ? label : "";
+
         }
 
         internal override void ShowModule(bool firstShow)
@@ -1098,11 +1114,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             var visibleRows = new List<LotGridModel>();
 
-            // view.DataRowCount holds the exact count of filtered data rows
             for (int i = 0; i < gridView1.DataRowCount; i++)
             {
-                // 'i' is already the correct row handle for the filtered list
-                if (gridView1.GetRow(i) is LotGridModel row)
+                if (gridView1.GetRow(i) is LotGridModel row && row.FlagsId != 4) // exclude Blue-flagged rows from printing
                 {
                     visibleRows.Add(row);
                 }
