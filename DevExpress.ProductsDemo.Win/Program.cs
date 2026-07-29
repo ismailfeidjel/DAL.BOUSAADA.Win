@@ -23,6 +23,7 @@ namespace DevExpress.ProductsDemo.Win {
                 DevExpress.XtraEditors.WindowsFormsSettings.SetDPIAware();
             AppHelper.WarmUp();
             DevExpress.Utils.DeserializationSettings.RegisterTrustedAssembly(typeof(LotGridModel).Assembly);
+            DevExpress.Data.Filtering.EnumProcessingHelper.RegisterEnum(typeof(DevExpress.XtraPrinting.BorderSide));
 
             AppDomain.CurrentDomain.AssemblyResolve += OnCurrentDomainAssemblyResolve;
             WindowsFormsSettings.ApplyDemoSettings();
