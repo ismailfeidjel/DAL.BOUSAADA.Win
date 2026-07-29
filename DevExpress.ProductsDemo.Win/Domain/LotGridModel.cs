@@ -92,6 +92,7 @@ public class LotGridModel
     // ملاحظات
     public string Notes { get; set; }
     public int? FlagsId { get; set; }
+    public bool HideTopBorder { get; set; }
 
 
     public string UpdatedBy { get; set; }

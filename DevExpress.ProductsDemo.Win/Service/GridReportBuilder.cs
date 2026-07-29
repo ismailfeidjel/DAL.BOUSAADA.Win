@@ -1,11 +1,12 @@
-﻿using DevExpress.XtraEditors.Repository;
+﻿using DevExpress.Data.Filtering;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.ReportGeneration;
 using DevExpress.XtraReports.UI;
-using DevExpress.Data.Filtering;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -17,15 +18,20 @@ namespace DevExpress.ProductsDemo.Win.Services
     /// Per-report configuration — tells GridReportBuilder what to do
     /// without hardcoding any module-specific field names.
     /// </summary>
+    /// 
+  
     public class GridReportOptions
     {
         public string TemplateKey { get; set; }
         public HashSet<string> SumFields { get; set; } = new HashSet<string>();
         public string CountField { get; set; }
 
+        public bool HideTopBorder { get; set; }
+
         /// <summary>Field used to group rows for sequential numbering (e.g. "ProjectId").
         /// Leave null to number every row individually instead of by group.</summary>
         public string GroupIdField { get; set; }
+        public string HideBorderField { get; set; }
 
         public string NumberingCellName { get; set; } = "cellProjectNumber";
         public string CounterCellName { get; set; } = "cellProjectCounter";
@@ -43,7 +49,7 @@ namespace DevExpress.ProductsDemo.Win.Services
     {
        
         // ── Entry point ──────────────────────────────────────────────
-        public static XtraReport Build<T>(GridView gridView, List<T> visibleData, GridReportOptions options)
+        public static XtraReport Build<T>(GridView gridView, List<T> visibleData, GridReportOptions options) 
         {
             string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", options.TemplateKey + ".repx");
 
@@ -61,6 +67,29 @@ namespace DevExpress.ProductsDemo.Win.Services
             }
 
             EnsureSafeMargins(report);
+
+            var groupProp = typeof(T).GetProperty(options.GroupIdField);
+            var hideProp = typeof(T).GetProperty(options.HideBorderField);
+
+            if (groupProp != null && hideProp != null)
+            {
+                object previousKey = null;
+
+                foreach (var row in visibleData)
+                {
+                    object currentKey = groupProp.GetValue(row);
+
+                    bool sameGroup =
+                        previousKey != null &&
+                        Equals(previousKey, currentKey);
+
+                    hideProp.SetValue(row, sameGroup);
+
+                    previousKey = currentKey;
+                }
+            }
+
+
 
             report.DataSource = visibleData;
             ApplyFilterDisplayText(report, gridView, options);
@@ -85,6 +114,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             if (cell is XRLabel lbl) lbl.Text = options.ProgramDisplayText;
             else if (cell is XRTableCell tcell) tcell.Text = options.ProgramDisplayText;
         }
+       
 
         // ── Margins ──────────────────────────────────────────────────
         public static void EnsureSafeMargins(XtraReport report)

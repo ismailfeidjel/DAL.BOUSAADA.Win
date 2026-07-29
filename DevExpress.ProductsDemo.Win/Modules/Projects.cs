@@ -78,6 +78,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 SumFields = SumFields,
                 CountField = CountField,
                 GroupIdField = "ProjectId",
+                HideBorderField = "HideTopBorder",
                 GenerateFooterRow = false,
                 CustomFilterText = _currentFilterLabel,   
 
