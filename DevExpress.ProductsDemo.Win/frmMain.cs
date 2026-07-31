@@ -528,13 +528,19 @@ namespace DevExpress.ProductsDemo.Win {
 
         private void barButtonItem2_ItemClick(object sender, ItemClickEventArgs e)
         {
-          
-            using (var frm = new DevExpress.ProductsDemo.Win.Forms.frmManagePrograms())
+            using (var frm = new DevExpress.ProductsDemo.Win.Forms.frmPrograms())
             {
                 frm.ShowDialog(this);
             }
+            using (var frm = new DevExpress.ProductsDemo.Win.Forms.frmDomains())
+            {
+                frm.ShowDialog(this);
+            }
+            if (modulesNavigator.CurrentModule is ProjectModule pm)
+                pm.RefreshLookups();
 
-            // Refresh whichever module is showing, so newly added/edited programs appear immediately
+            // Refresh whichever module is showing, so newly added/edited programs
+            // (and their nav tabs / ribbon selector) reflect the changes immediately
             if (modulesNavigator.CurrentModule != null)
                 OnModuleShown(modulesNavigator.CurrentModule);
         }

@@ -49,7 +49,14 @@ namespace DevExpress.ProductsDemo.Win.Modules
     new LookupRepository().GetPrograms(_programType).Cast<LookupItem>().ToList();
 
         private string _programType = "ADSEC"; // sensible default if no data passed (keeps old static tab working)
-
+        private RepositoryItemLookUpEdit domainLookup;
+        private RepositoryItemLookUpEdit sectorLookup;
+        private RepositoryItemLookUpEdit programLookup;
+        private RepositoryItemLookUpEdit statusLookup;
+        private RepositoryItemLookUpEdit adminProcedureLookup;
+        private RepositoryItemLookUpEdit specialStatus1Lookup;
+        private RepositoryItemLookUpEdit specialStatus2Lookup;
+        private RepositoryItemLookUpEdit specialStatus3Lookup;
 
 
 
@@ -322,7 +329,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["ExpectedEndDate"].ColumnEdit = dateEdit;
             gridView1.Columns["ExpectedEndDate"].OptionsColumn.AllowEdit = false;
 
-            var programLookup = new RepositoryItemLookUpEdit();
+            programLookup = new RepositoryItemLookUpEdit();
             programLookup.DataSource = new LookupRepository().GetAll("programs");
             programLookup.DisplayMember = "Name";
             programLookup.ValueMember = "Id";
@@ -336,7 +343,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             AddCol("FinancialProgress", "التقدم المالي", 100, "{0:N0} %");
             AddCol("OperationName", "اسم العملية", 180);
             AddCol("DomainId", "القطاع", 110);
-            var domainLookup = new RepositoryItemLookUpEdit();
+             domainLookup = new RepositoryItemLookUpEdit();
             domainLookup.DataSource = new LookupRepository().GetAll("domains");
             domainLookup.DisplayMember = "Name";
             domainLookup.ValueMember = "Id";
@@ -350,7 +357,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
             AddCol("SectorId", "المجال", 110);
-            var sectorLookup = new RepositoryItemLookUpEdit();
+             sectorLookup = new RepositoryItemLookUpEdit();
             sectorLookup.DataSource = new LookupRepository().GetAll("sectors");
             sectorLookup.DisplayMember = "Name";
             sectorLookup.ValueMember = "Id";
@@ -373,7 +380,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             AddCol("PhysicalProgress", "التقدم الفيزيائي", 100, "{0:N0} %");
 
             AddCol("ProjectStatusId", "وضعية العملية", 110);
-            var statusLookup = new RepositoryItemLookUpEdit();
+             statusLookup = new RepositoryItemLookUpEdit();
             statusLookup.DataSource = new LookupRepository().GetAll("project_statuses");
             statusLookup.DisplayMember = "Name";
             statusLookup.ValueMember = "Id";
@@ -386,7 +393,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
             AddCol("AdministrativeProcedureId", "الإجراء الإداري", 130);
-            var adminProcedureLookup = new RepositoryItemLookUpEdit();
+             adminProcedureLookup = new RepositoryItemLookUpEdit();
             adminProcedureLookup.DataSource = new LookupRepository().GetAll("administrative_procedures");
             adminProcedureLookup.DisplayMember = "Name";
             adminProcedureLookup.ValueMember = "Id";
@@ -398,7 +405,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["AdministrativeProcedureId"].OptionsColumn.AllowEdit = true;
 
             AddCol("SpecialStatus1Id", "الوضعية1", 130);
-            var specialStatus1Lookup = new RepositoryItemLookUpEdit();
+             specialStatus1Lookup = new RepositoryItemLookUpEdit();
             specialStatus1Lookup.DataSource = new LookupRepository().GetAll("special_status1");
             specialStatus1Lookup.DisplayMember = "Name";
             specialStatus1Lookup.ValueMember = "Id";
@@ -411,7 +418,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.OptionsBehavior.AllowIncrementalSearch = false;
 
             AddCol("SpecialStatus2Id", "الوضعية2", 130);
-            var specialStatus2Lookup = new RepositoryItemLookUpEdit();
+             specialStatus2Lookup = new RepositoryItemLookUpEdit();
             specialStatus2Lookup.DataSource = new LookupRepository().GetAll("special_status2");
             specialStatus2Lookup.DisplayMember = "Name";
             specialStatus2Lookup.ValueMember = "Id";
@@ -423,7 +430,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["SpecialStatus2Id"].OptionsColumn.AllowEdit = true;
 
             AddCol("SpecialStatus3Id", "الوضعية3", 130);
-            var specialStatus3Lookup = new RepositoryItemLookUpEdit();
+             specialStatus3Lookup = new RepositoryItemLookUpEdit();
             specialStatus3Lookup.DataSource = new LookupRepository().GetAll("special_status3");
             specialStatus3Lookup.DisplayMember = "Name";
             specialStatus3Lookup.ValueMember = "Id";
@@ -502,6 +509,30 @@ namespace DevExpress.ProductsDemo.Win.Modules
             }
 
 
+        }
+        public void RefreshLookups()
+        {
+            var lookupRepo = new LookupRepository();
+
+            programLookup.DataSource = lookupRepo.GetAll("programs");
+            domainLookup.DataSource = lookupRepo.GetAll("domains");
+            sectorLookup.DataSource = lookupRepo.GetAll("sectors");
+            statusLookup.DataSource = lookupRepo.GetAll("project_statuses");
+            adminProcedureLookup.DataSource = lookupRepo.GetAll("administrative_procedures");
+            specialStatus1Lookup.DataSource = lookupRepo.GetAll("special_status1");
+            specialStatus2Lookup.DataSource = lookupRepo.GetAll("special_status2");
+            specialStatus3Lookup.DataSource = lookupRepo.GetAll("special_status3");
+
+            // Side-panel lookups (lookUp5–lookUp8) also need refreshing —
+            // BindSidePanel wraps the source list with a "— —" null row, so reuse it.
+            BindSidePanel(lookUp5, lookupRepo.GetAll("administrative_procedures"));
+            BindSidePanel(lookUp6, lookupRepo.GetAll("special_status1"));
+            BindSidePanel(lookUp7, lookupRepo.GetAll("special_status2"));
+            BindSidePanel(lookUp8, lookupRepo.GetAll("special_status3"));
+
+            // Names shown in the grid (e.g. domain_name via SQL join) also need
+            // a fresh pull, since they're baked into LotGridModel per row.
+            LoadData();
         }
         private const int MinRowHeight = 70;
 

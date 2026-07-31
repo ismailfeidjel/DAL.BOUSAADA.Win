@@ -486,11 +486,20 @@
     <Compile Include="Controls\ucCalendar.Designer.cs">
       <DependentUpon>ucCalendar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\BaseForms\frmDomains .cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Core\BaseForms\frmLookupBase.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Core\BaseForms\frmLookupBase.Designer.cs">
       <DependentUpon>frmLookupBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Core\BaseForms\frmLookupBaseDesignerSurrogate.cs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\BaseForms\frmPrograms .cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Core\Helpers\DialogHelper.cs" />
     <Compile Include="Core\Helpers\GridHelper.cs" />
@@ -785,6 +794,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Core\BaseForms\frmLookupBase.resx">
       <DependentUpon>frmLookupBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\BaseForms\frmLookupBaseDesignerSurrogate.cs.resx">
+      <DependentUpon>frmLookupBaseDesignerSurrogate.cs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

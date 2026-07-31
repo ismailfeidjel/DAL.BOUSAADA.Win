@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Core.BaseForms
 {
-    public partial class frmLookupBase<T> : XtraForm
+    public abstract partial class frmLookupBase<T> : frmLookupBaseDesignerSurrogate
     where T : class, new()
     {
         protected BindingList<T> DataSource;
@@ -30,22 +30,26 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
 
         protected abstract void Validate(T entity);
 
-        protected virtual string EntityName => "Record";
+        protected virtual string EntityName => "سجل";
         protected frmLookupBase()
         {
-            InitializeComponent();
 
             Load += BaseLookupForm_Load;
-
+            gridView.OptionsView.ColumnAutoWidth = true;   // was false — stretches columns to fill the grid's full width
             FormClosing += BaseLookupForm_FormClosing;
+            // In frmLookupBase constructor, alongside the other event wiring:
+            gridView.CellValueChanged += (s, e) =>
+            {
+                IsDirty = true;
+                UpdateStatus();
+            };
 
             btnNew.Click += btnNew_Click;
             btnSave.Click += btnSave_Click;
             btnDelete.Click += btnDelete_Click;
             btnRefresh.Click += btnRefresh_Click;
             btnClose.Click += btnClose_Click;
-
-            searchControl.Client = gridControl;
+            //searchControl.Client = gridControl;
         }
 
         private void BaseLookupForm_Load(object sender, EventArgs e)
@@ -56,7 +60,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
         }
         protected virtual void ConfigureGrid()
         {
-            GridHelper.Configure(gridView);
+            DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.Configure(gridView);
         }
         protected virtual void LoadData()
         {
@@ -72,7 +76,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
 
             ConfigureColumns();
 
-            GridHelper.BestFit(gridView);
+            DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.BestFit(gridView);
 
             IsDirty = false;
 
@@ -94,21 +98,31 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (!IsDirty)
+                return;
             gridView.CloseEditor();
             gridView.UpdateCurrentRow();
 
-            foreach (var item in DataSource)
+            bool ok = DialogHelper.TryExecute(() =>
             {
-                Validate(item);
+                foreach (var item in DataSource)
+                {
+                    Validate(item);// still throws OperationCanceledException after showing its own Validation() message
+                        Save(item);
+                }
+            });
 
-                Save(item);
+            if (!ok) {
+
+                IsDirty = false;
+                LoadData();
+                return;
             }
 
             IsDirty = false;
-
             DialogHelper.Saved();
-
             LoadData();
+
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -161,6 +175,13 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             {
                 btnSave.PerformClick();
             }
+
+            // result == DialogResult.No → falls through, form closes.
+            // Nothing is persisted, so edits are effectively discarded —
+            // but IsDirty/DataSource are left dirty in memory until the form
+            // is disposed. Harmless since the form's going away, but let's
+            // be explicit for clarity and in case anything else reads IsDirty
+            // between here and Dispose.
         }
     }
 }

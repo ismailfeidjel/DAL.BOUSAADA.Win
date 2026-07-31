@@ -78,4 +78,50 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
             return result;
         }
+
+        // 
+
+        public void Insert(string tableName, string name)
+        {
+            using (var conn = _db.GetConnection())
+            {
+                conn.Open();
+                string sql = $"INSERT INTO `{tableName}` (name) VALUES (@name)";
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Update(string tableName, int id, string name)
+        {
+            using (var conn = _db.GetConnection())
+            {
+                conn.Open();
+                string sql = $"UPDATE `{tableName}` SET name=@name WHERE id=@id";
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Delete(string tableName, int id)
+        {
+            using (var conn = _db.GetConnection())
+            {
+                conn.Open();
+                string sql = $"DELETE FROM `{tableName}` WHERE id=@id";
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     } }
