@@ -486,6 +486,15 @@
     <Compile Include="Controls\ucCalendar.Designer.cs">
       <DependentUpon>ucCalendar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\BaseForms\frmAdministrativeProcedures .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\BaseForms\frmDairasCommunes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\BaseForms\frmDairasCommunes.Designer.cs">
+      <DependentUpon>frmDairasCommunes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\BaseForms\frmDomains .cs">
       <SubType>Form</SubType>
     </Compile>
@@ -501,6 +510,9 @@
     <Compile Include="Core\BaseForms\frmPrograms .cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Core\BaseForms\frmSectors.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Core\Helpers\DialogHelper.cs" />
     <Compile Include="Core\Helpers\GridHelper.cs" />
     <Compile Include="Core\Helpers\ValidationHelper.cs" />
@@ -510,6 +522,7 @@
       <DependentUpon>DBBDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="DbHelper.cs" />
+    <Compile Include="Domain\CommuneItem.cs" />
     <Compile Include="Domain\LookupItem.cs" />
     <Compile Include="Domain\Lot.cs" />
     <Compile Include="Domain\LotDetailModel.cs" />
@@ -752,6 +765,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\CommuneRepository.cs" />
     <Compile Include="Repositories\ILotRepository.cs" />
     <Compile Include="Repositories\LookupRepository.cs" />
     <Compile Include="Repositories\LotRepository.cs" />
@@ -791,6 +805,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ucCalendar.resx">
       <DependentUpon>ucCalendar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\BaseForms\frmDairasCommunes.resx">
+      <DependentUpon>frmDairasCommunes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\BaseForms\frmLookupBase.resx">
       <DependentUpon>frmLookupBase.cs</DependentUpon>

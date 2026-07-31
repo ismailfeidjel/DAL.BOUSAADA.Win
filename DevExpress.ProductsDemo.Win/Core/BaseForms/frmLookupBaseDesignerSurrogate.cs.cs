@@ -93,7 +93,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             this.gridView.OptionsView.EnableAppearanceEvenRow = true;
             this.gridView.OptionsView.EnableAppearanceOddRow = true;
             this.gridView.OptionsView.ShowAutoFilterRow = true;
-            this.gridView.OptionsView.ShowFooter = true;
+            this.gridView.OptionsView.ShowFooter = false;
             this.gridView.OptionsView.ShowGroupPanel = false;
             // 
             // sidePanel1

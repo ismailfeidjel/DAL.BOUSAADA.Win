@@ -532,10 +532,12 @@ namespace DevExpress.ProductsDemo.Win {
             {
                 frm.ShowDialog(this);
             }
-            using (var frm = new DevExpress.ProductsDemo.Win.Forms.frmDomains())
+            using (var frm = new DevExpress.ProductsDemo.Win.Forms.frmDairasCommunes())
             {
                 frm.ShowDialog(this);
             }
+            
+
             if (modulesNavigator.CurrentModule is ProjectModule pm)
                 pm.RefreshLookups();
 

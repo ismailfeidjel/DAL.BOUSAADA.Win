@@ -1,5 +1,6 @@
 ﻿using DevExpress.ProductsDemo.Win.Domain;
 using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 
 namespace DevExpress.ProductsDemo.Win.Repositories
@@ -119,7 +120,15 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                 using (var cmd = new MySqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
+                    try
+                    {mbox:
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (MySqlException ex) when (ex.Number == 1451) // FK constraint violation
+                    {
+                        throw new InvalidOperationException(
+                            "لا يمكن الحذف لوجود بيانات مرتبطة بهذا العنصر.", ex);
+                    }
                 }
             }
         }
