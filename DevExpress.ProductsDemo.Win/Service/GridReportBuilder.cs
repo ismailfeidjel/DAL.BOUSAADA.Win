@@ -1,6 +1,8 @@
 ﻿using DevExpress.Data.Filtering;
+using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraReports.ReportGeneration;
 using DevExpress.XtraReports.UI;
 using System;
@@ -23,6 +25,9 @@ namespace DevExpress.ProductsDemo.Win.Services
     public class GridReportOptions
     {
         public string TemplateKey { get; set; }
+        public Dictionary<string, float> FixedColumnWidths { get; set; } = new Dictionary<string, float>();
+        public Dictionary<string, string> FieldAliases { get; set; } = new Dictionary<string, string>();
+
         public HashSet<string> SumFields { get; set; } = new HashSet<string>();
         public string CountField { get; set; }
 
@@ -47,14 +52,12 @@ namespace DevExpress.ProductsDemo.Win.Services
 
     public static class GridReportBuilder
     {
-       
         // ── Entry point ──────────────────────────────────────────────
         public static XtraReport Build<T>(GridView gridView, List<T> visibleData, GridReportOptions options) 
         {
             string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", options.TemplateKey + ".repx");
 
-
-            XtraReport report;
+        XtraReport report;
             if (File.Exists(templatePath))
             {
                 report = XtraReport.FromFile(templatePath, true);
@@ -99,8 +102,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             if (!string.IsNullOrEmpty(options.GroupIdField))
                 ApplyGroupNumbering(report, visibleData, options);
 
-            ApplyGridColumnVisibility(report, gridView, out List<string> visibleKeys, out Dictionary<string, float> keyWidths);
-
+            ApplyGridColumnVisibility(report, gridView, options, out List<string> visibleKeys, out Dictionary<string, float> keyWidths);
             if (options.GenerateFooterRow)
                 GenerateFooter(report, visibleKeys, keyWidths, options);
 
@@ -287,14 +289,13 @@ namespace DevExpress.ProductsDemo.Win.Services
         }
 
         // ── Column visibility + proportional widths ──────────────────
-        private static void ApplyGridColumnVisibility(XtraReport report, GridView gridView, out List<string> finalKeys, out Dictionary<string, float> finalWidths)
+        private static void ApplyGridColumnVisibility(XtraReport report, GridView gridView, GridReportOptions options, out List<string> finalKeys, out Dictionary<string, float> finalWidths)
         {
             finalKeys = new List<string>();
             finalWidths = new Dictionary<string, float>();
 
-            var hiddenFields = new HashSet<string>();
             var captionToField = new Dictionary<string, string>();
-            var fieldToGridWidth = new Dictionary<string, int>();
+            var visibleFields = new HashSet<string>();
 
             foreach (DevExpress.XtraGrid.Columns.GridColumn col in gridView.Columns)
             {
@@ -302,9 +303,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                     captionToField[col.Caption.Trim()] = col.FieldName;
 
                 if (col.Visible)
-                    fieldToGridWidth[col.FieldName] = col.Width;
-                else
-                    hiddenFields.Add(col.FieldName);
+                    visibleFields.Add(col.FieldName);
             }
 
             var allRows = report.AllControls<XRTableRow>().ToList();
@@ -315,21 +314,49 @@ namespace DevExpress.ProductsDemo.Win.Services
                 .Select(c => ResolveColumnKey(c, captionToField))
                 .ToList();
 
+            System.Diagnostics.Debug.WriteLine("keysInOrder: " + string.Join(" | ", keysInOrder.Select(k => k ?? "NULL")));
+            System.Diagnostics.Debug.WriteLine("visibleFields: " + string.Join(" | ", visibleFields));
+            System.Diagnostics.Debug.WriteLine("FieldAliases count: " + options.FieldAliases.Count);
+
+
+            // Hide any template column whose field isn't currently visible in the live grid
+            // (covers both explicitly-hidden grid columns and fields the grid doesn't have at all)
             var hiddenIndices = new HashSet<int>();
             for (int i = 0; i < keysInOrder.Count; i++)
             {
                 string key = keysInOrder[i];
-                if (key != null && hiddenFields.Contains(key))
+                string gridFieldName = key != null && options.FieldAliases.TryGetValue(key, out string alias)
+                    ? alias
+                    : key;
+
+                if (key == null || !visibleFields.Contains(gridFieldName))
                     hiddenIndices.Add(i);
             }
 
-            int totalVisibleGridWidth = keysInOrder
-                .Where((key, i) => key != null && !hiddenIndices.Contains(i) && fieldToGridWidth.ContainsKey(key))
-                .Sum(key => fieldToGridWidth[key]);
-
-            if (totalVisibleGridWidth <= 0) return;
+            var visibleKeysInOrder = keysInOrder
+                .Where((key, i) => !hiddenIndices.Contains(i))
+                .ToList();
 
             float printableWidth = (report.PageWidth - report.Margins.Left - report.Margins.Right) * 0.99f;
+
+            var fixedKeys = visibleKeysInOrder.Where(k => options.FixedColumnWidths.ContainsKey(k)).ToList();
+            var flexibleKeys = visibleKeysInOrder.Where(k => !options.FixedColumnWidths.ContainsKey(k)).ToList();
+
+            float totalFixedWidth = fixedKeys.Sum(k => options.FixedColumnWidths[k]);
+            float remainingWidth = Math.Max(0, printableWidth - totalFixedWidth);
+            float flexibleWidthEach = flexibleKeys.Count > 0 ? remainingWidth / flexibleKeys.Count : 0;
+
+            var resolvedWidths = new Dictionary<string, float>();
+            foreach (var k in fixedKeys)
+                resolvedWidths[k] = options.FixedColumnWidths[k];
+            foreach (var k in flexibleKeys)
+                resolvedWidths[k] = flexibleWidthEach;
+
+            resolvedWidths.TryGetValue("OperationName", out float opNameWidth);
+            resolvedWidths.TryGetValue("Notes", out float notesWidth);
+
+            System.Diagnostics.Debug.WriteLine($"OperationName width: {opNameWidth}");
+            System.Diagnostics.Debug.WriteLine($"Notes width: {notesWidth}");
 
             var touchedTables = new HashSet<XRTable>();
 
@@ -349,18 +376,16 @@ namespace DevExpress.ProductsDemo.Win.Services
                     else
                     {
                         string key = keysInOrder[i];
-                        if (key != null && fieldToGridWidth.TryGetValue(key, out int gridWidth))
-                        {
-                            float proportion = (float)gridWidth / totalVisibleGridWidth;
-                            float w = printableWidth * proportion;
-                            cells[i].WidthF = w;
-                            rowTotal += w;
+                        float w = resolvedWidths.TryGetValue(key, out float rw) ? rw : 0f;
+                        cells[i].WidthF = w;
+                        cells[i].Weight = w;   // ← THE FIX: Weight drives actual layout, WidthF alone doesn't stick
 
-                            if (!finalWidths.ContainsKey(key))
-                            {
-                                finalWidths[key] = w;
-                                finalKeys.Add(key);
-                            }
+                        rowTotal += w;
+
+                        if (!finalWidths.ContainsKey(key))
+                        {
+                            finalWidths[key] = w;
+                            finalKeys.Add(key);
                         }
                     }
                 }
@@ -374,7 +399,6 @@ namespace DevExpress.ProductsDemo.Win.Services
             foreach (var table in touchedTables)
                 table.WidthF = printableWidth;
         }
-
         private static string ResolveColumnKey(XRTableCell cell, Dictionary<string, string> captionToField)
         {
             string field = GetCellFieldName(cell);

@@ -46,6 +46,11 @@ namespace DevExpress.ProductsDemo.Win {
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            using (var loginForm = new DevExpress.ProductsDemo.Win.Forms.frmLogin())
+            {
+                if (loginForm.ShowDialog() != DialogResult.OK)
+                    return; // user closed/cancelled login — exit without starting frmMain
+            }
             Application.Run(new frmMain());
         }
         //

@@ -18,7 +18,7 @@ using DevExpress.XtraNavBar;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.ReportGeneration;
 using DevExpress.XtraReports.UI;
-using DevExpress.Data.Filtering; 
+using DevExpress.Data.Filtering;
 
 
 using System;
@@ -87,10 +87,37 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 GroupIdField = "ProjectId",
                 HideBorderField = "HideTopBorder",
                 GenerateFooterRow = false,
-                CustomFilterText = _currentFilterLabel,   
+                CustomFilterText = _currentFilterLabel,
+                ProgramDisplayText = programName,
+                FieldAliases = new Dictionary<string, string>
+    {
+        { "Program", "ProgramId" },
+        { "ProjectStatus", "ProjectStatusId" }
+    },
 
-                ProgramDisplayText = programName   
 
+                FixedColumnWidths = new Dictionary<string, float>
+    {
+        { "OperationNumber", 60f },
+        { "Daira", 50f },
+        { "Commune", 50f },
+        { "ProgramId", 40f },
+        { "ExpectedEndDate", 50f },
+        { "LotBudget", 85f },
+        { "RegisteredAmount", 85f },
+        { "ConsumedAmount", 85f },
+        { "Remaining", 85f },
+        { "Contractor", 60f },
+        { "StartDate", 65f },
+        { "ExecutionDuration", 40f },
+        { "PhysicalProgress", 45f },
+        { "FinancialProgress", 40f },
+        { "SectorId", 45f },
+        { "DomainId", 45f },
+        { "ProjectStatusId",40f },
+        // OperationName and Notes deliberately NOT listed here —
+        // they'll split whatever width is left over
+    }
             });
 
 
@@ -144,37 +171,37 @@ namespace DevExpress.ProductsDemo.Win.Modules
         // Helper method to convert raw ID value to friendly text using column's repository editor
         // Helper method to convert raw ID value to friendly text using column's repository editor
         private string GetFilterValueDisplayText(DevExpress.XtraGrid.Columns.GridColumn col, object val)
-{
-    if (col == null || val == null) return val?.ToString() ?? "";
-
-    // 1. Check if the column uses a LookUpEdit (e.g., DomainId, SectorId, Status)
-    if (col.RealColumnEdit is DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookup)
-    {
-        // Try looking up with the raw object first
-        object lookupText = lookup.GetDisplayValueByKeyValue(val);
-
-        // Fallback: If 'val' is a string containing an ID (e.g., "3"), convert it to an integer 
-        // to ensure DevExpress matches it with integer-based ValueMember IDs.
-        if ((lookupText == null || lookupText == DBNull.Value) && int.TryParse(val.ToString(), out int intVal))
         {
-            lookupText = lookup.GetDisplayValueByKeyValue(intVal);
+            if (col == null || val == null) return val?.ToString() ?? "";
+
+            // 1. Check if the column uses a LookUpEdit (e.g., DomainId, SectorId, Status)
+            if (col.RealColumnEdit is DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit lookup)
+            {
+                // Try looking up with the raw object first
+                object lookupText = lookup.GetDisplayValueByKeyValue(val);
+
+                // Fallback: If 'val' is a string containing an ID (e.g., "3"), convert it to an integer 
+                // to ensure DevExpress matches it with integer-based ValueMember IDs.
+                if ((lookupText == null || lookupText == DBNull.Value) && int.TryParse(val.ToString(), out int intVal))
+                {
+                    lookupText = lookup.GetDisplayValueByKeyValue(intVal);
+                }
+
+                if (lookupText != null && lookupText != DBNull.Value)
+                    return lookupText.ToString();
+            }
+            // 2. Check if the column uses an ImageComboBox
+            else if (col.RealColumnEdit is DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox imgCombo)
+            {
+                var item = imgCombo.Items.Cast<DevExpress.XtraEditors.Controls.ImageComboBoxItem>()
+                                         .FirstOrDefault(i => i.Value != null && i.Value.ToString() == val.ToString());
+                if (item != null)
+                    return item.Description;
+            }
+
+            // Clean up surrounding quotes from normal strings
+            return val.ToString().Replace("'", "").Replace("\"", "").Trim();
         }
-
-        if (lookupText != null && lookupText != DBNull.Value)
-            return lookupText.ToString();
-    }
-    // 2. Check if the column uses an ImageComboBox
-    else if (col.RealColumnEdit is DevExpress.XtraEditors.Repository.RepositoryItemImageComboBox imgCombo)
-    {
-        var item = imgCombo.Items.Cast<DevExpress.XtraEditors.Controls.ImageComboBoxItem>()
-                                 .FirstOrDefault(i => i.Value != null && i.Value.ToString() == val.ToString());
-        if (item != null)
-            return item.Description;
-    }
-
-    // Clean up surrounding quotes from normal strings
-    return val.ToString().Replace("'", "").Replace("\"", "").Trim();
-}
 
 
 
@@ -187,9 +214,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         public override void ShowColumnChooser() => gridView1.ShowCustomization();
 
-    //    private string LayoutPath =>
-    //System.IO.Path.Combine(
-    //    Application.StartupPath, "grid_layout_projects.xml");
+        //    private string LayoutPath =>
+        //System.IO.Path.Combine(
+        //    Application.StartupPath, "grid_layout_projects.xml");
 
         private string LayoutPath =>
     System.IO.Path.Combine(
@@ -261,7 +288,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.ColumnWidthChanged += (s, e) => SaveLayout();
             gridView1.ColumnPositionChanged += (s, e) => SaveLayout();
 
-            
+
             gridView1.Appearance.HeaderPanel.Font =
     new Font("Segoe UI", 8, FontStyle.Bold);
             gridView1.Appearance.Row.Font = new Font("Segoe UI", 9);
@@ -320,7 +347,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["FlagsId"].Width = 60;
 
             AddCol("Daira", "الدائرة", 100);
-           // gridView1.Columns["Daira"].OptionsColumn.AllowMerge = DefaultBoolean.True;
+            // gridView1.Columns["Daira"].OptionsColumn.AllowMerge = DefaultBoolean.True;
             AddCol("LotNumber", "N", 100);
 
             AddCol("Commune", "البلدية", 100);
@@ -343,7 +370,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             AddCol("FinancialProgress", "التقدم المالي", 100, "{0:N0} %");
             AddCol("OperationName", "اسم العملية", 180);
             AddCol("DomainId", "القطاع", 110);
-             domainLookup = new RepositoryItemLookUpEdit();
+            domainLookup = new RepositoryItemLookUpEdit();
             domainLookup.DataSource = new LookupRepository().GetAll("domains");
             domainLookup.DisplayMember = "Name";
             domainLookup.ValueMember = "Id";
@@ -357,7 +384,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
             AddCol("SectorId", "المجال", 110);
-             sectorLookup = new RepositoryItemLookUpEdit();
+            sectorLookup = new RepositoryItemLookUpEdit();
             sectorLookup.DataSource = new LookupRepository().GetAll("sectors");
             sectorLookup.DisplayMember = "Name";
             sectorLookup.ValueMember = "Id";
@@ -380,7 +407,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             AddCol("PhysicalProgress", "التقدم الفيزيائي", 100, "{0:N0} %");
 
             AddCol("ProjectStatusId", "وضعية العملية", 110);
-             statusLookup = new RepositoryItemLookUpEdit();
+            statusLookup = new RepositoryItemLookUpEdit();
             statusLookup.DataSource = new LookupRepository().GetAll("project_statuses");
             statusLookup.DisplayMember = "Name";
             statusLookup.ValueMember = "Id";
@@ -393,7 +420,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
             AddCol("AdministrativeProcedureId", "الإجراء الإداري", 130);
-             adminProcedureLookup = new RepositoryItemLookUpEdit();
+            adminProcedureLookup = new RepositoryItemLookUpEdit();
             adminProcedureLookup.DataSource = new LookupRepository().GetAll("administrative_procedures");
             adminProcedureLookup.DisplayMember = "Name";
             adminProcedureLookup.ValueMember = "Id";
@@ -405,7 +432,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["AdministrativeProcedureId"].OptionsColumn.AllowEdit = true;
 
             AddCol("SpecialStatus1Id", "الوضعية1", 130);
-             specialStatus1Lookup = new RepositoryItemLookUpEdit();
+            specialStatus1Lookup = new RepositoryItemLookUpEdit();
             specialStatus1Lookup.DataSource = new LookupRepository().GetAll("special_status1");
             specialStatus1Lookup.DisplayMember = "Name";
             specialStatus1Lookup.ValueMember = "Id";
@@ -418,7 +445,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.OptionsBehavior.AllowIncrementalSearch = false;
 
             AddCol("SpecialStatus2Id", "الوضعية2", 130);
-             specialStatus2Lookup = new RepositoryItemLookUpEdit();
+            specialStatus2Lookup = new RepositoryItemLookUpEdit();
             specialStatus2Lookup.DataSource = new LookupRepository().GetAll("special_status2");
             specialStatus2Lookup.DisplayMember = "Name";
             specialStatus2Lookup.ValueMember = "Id";
@@ -430,7 +457,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["SpecialStatus2Id"].OptionsColumn.AllowEdit = true;
 
             AddCol("SpecialStatus3Id", "الوضعية3", 130);
-             specialStatus3Lookup = new RepositoryItemLookUpEdit();
+            specialStatus3Lookup = new RepositoryItemLookUpEdit();
             specialStatus3Lookup.DataSource = new LookupRepository().GetAll("special_status3");
             specialStatus3Lookup.DisplayMember = "Name";
             specialStatus3Lookup.ValueMember = "Id";
@@ -442,6 +469,35 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["SpecialStatus3Id"].OptionsColumn.AllowEdit = true;
 
             AddCol("Notes", "الملاحظة", 150);
+
+            //
+            Core.Helpers.GridHelper.DisableSorting(gridView1,
+    "OperationNumber",
+    "FlagsId",
+    "Daira",
+    "LotNumber",
+    "Commune",
+    "ProgramId",
+    "ExpectedEndDate",
+    "FinancialProgress",
+    "OperationName",
+    "DomainId",
+    "SectorId",
+    "LotBudget",
+    "RegisteredAmount",
+    "ConsumedAmount",
+    "Remaining",
+    "Contractor",
+    "StartDate",
+    "ExecutionDuration",
+    "PhysicalProgress",
+    "ProjectStatusId",
+    "AdministrativeProcedureId",
+    "SpecialStatus1Id",
+    "SpecialStatus2Id",
+    "SpecialStatus3Id",
+    "Notes"
+);
 
 
 
@@ -670,8 +726,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         // ── Data ─────────────────────────────────────────────────────
 
-        
-       
+
+
         private void LoadData()
         {
             var all = _lotRepo.GetGridData();
@@ -709,10 +765,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
             cmb.Properties.ValueMember = "Id";
             cmb.Properties.ShowHeader = false;
             cmb.Properties.NullText = "—";
-          //  cmb.Properties.ReadOnly = true;
+            //  cmb.Properties.ReadOnly = true;
             cmb.Properties.Columns.Clear();
             cmb.Properties.Columns.Add(new LookUpColumnInfo("Name", 200));
-            
+
         }
 
         private static int? GetLookupValue(LookUpEdit cmb)
@@ -736,42 +792,42 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             // Update info
             txtupdateby.Text = lot.UpdatedBy ?? "—";
-                txtupdateddate.Text = lot.UpdatedAt.HasValue
-                    ? lot.UpdatedAt.Value.ToString("dd/MM/yyyy HH:mm")
-                    : "—";
+            txtupdateddate.Text = lot.UpdatedAt.HasValue
+                ? lot.UpdatedAt.Value.ToString("dd/MM/yyyy HH:mm")
+                : "—";
 
-             
-              
 
-                txtexceptedend.Text = lot.ExpectedEndDate.HasValue
-                    ? lot.ExpectedEndDate.Value.ToString("dd/MM/yyyy")
-                    : "—";
+
+
+            txtexceptedend.Text = lot.ExpectedEndDate.HasValue
+                ? lot.ExpectedEndDate.Value.ToString("dd/MM/yyyy")
+                : "—";
             txtexceptedend.ReadOnly = true;
 
-                if (lot.DaysRemaining.HasValue)
+            if (lot.DaysRemaining.HasValue)
+            {
+                int days = lot.DaysRemaining.Value;
+                if (days < 0)
                 {
-                    int days = lot.DaysRemaining.Value;
-                    if (days < 0)
-                    {
-                        txtremaningdays.Text = $"متأخر بـ {Math.Abs(days)} يوم";
-                        txtremaningdays.ForeColor = Color.Red;
-                    }
-                    else if (days <= 30)
-                    {
-                        txtremaningdays.Text = $"متبقي {days} يوم";
-                        txtremaningdays.ForeColor = Color.Orange;
-                    }
-                    else
-                    {
-                        txtremaningdays.Text = $"متبقي {days} يوم";
-                        txtremaningdays.ForeColor = Color.Green;
-                    }
+                    txtremaningdays.Text = $"متأخر بـ {Math.Abs(days)} يوم";
+                    txtremaningdays.ForeColor = Color.Red;
+                }
+                else if (days <= 30)
+                {
+                    txtremaningdays.Text = $"متبقي {days} يوم";
+                    txtremaningdays.ForeColor = Color.Orange;
                 }
                 else
                 {
-                    txtremaningdays.Text = "—";
-                    txtremaningdays.ForeColor = Color.Gray;
+                    txtremaningdays.Text = $"متبقي {days} يوم";
+                    txtremaningdays.ForeColor = Color.Green;
                 }
+            }
+            else
+            {
+                txtremaningdays.Text = "—";
+                txtremaningdays.ForeColor = Color.Gray;
+            }
 
             _loadingLot = false; // ← re-enable events
 
@@ -787,14 +843,14 @@ namespace DevExpress.ProductsDemo.Win.Modules
             LoadLot(_currentLot);
         }
 
-      
+
 
         // ── Grid Events ──────────────────────────────────────────────
         private void gridView1_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             ShowLotDetails();
             var lot = gridView1.GetRow(gridView1.FocusedRowHandle) as LotGridModel;
-            
+
         }
         private void gridView1_ShowingEditor(object sender, System.ComponentModel.CancelEventArgs e)
         {
@@ -897,7 +953,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             {
                 e.DisplayText = (e.Value?.ToString() ?? "")
                     .Replace('\u001F', '\n');
-                  //  .Replace('|', '\n'); // safety fallback
+                //  .Replace('|', '\n'); // safety fallback
                 return;
             }
 
@@ -907,7 +963,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 if (value == null || !value.HasValue)
                     e.DisplayText = Properties.Resources.None;
             }
-           
+
         }
 
         private void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e)
@@ -937,14 +993,14 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     {
                         // برتقالي: قريبة الانتهاء
                         e.Appearance.ForeColor = Color.FromArgb(255, 140, 0);  // orange
-                       
+
                     }
                     else
                     {
                         // أخضر: مدة كافية
                         e.Appearance.ForeColor = Color.Green;
                     }
-                  //  return;
+                    //  return;
                 }
             }
 
@@ -959,11 +1015,11 @@ namespace DevExpress.ProductsDemo.Win.Modules
             //  if ((e.Column.FieldName == "ProjectStatusId" || e.Column.FieldName == "Notes"))
             //{
             object statusVal = gridView1.GetRowCellValue(e.RowHandle, "ProjectStatusId");
-                if (statusVal != null && Convert.ToInt32(statusVal) == 7) // 7 = Closed, matches StatusFilterClosed
-                {
-                    e.Appearance.BackColor = Color.FromArgb(255, 245, 150); // soft yellow
-                    return;
-                }
+            if (statusVal != null && Convert.ToInt32(statusVal) == 7) // 7 = Closed, matches StatusFilterClosed
+            {
+                e.Appearance.BackColor = Color.FromArgb(255, 245, 150); // soft yellow
+                return;
+            }
             //}
         }
 
@@ -1004,6 +1060,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 XtraMessageBox.Show("لا توجد بيانات لتصديرها.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            LoadData();
 
             var report = BuildReportFromTemplateOrDefault();
             report.CreateDocument();
@@ -1096,11 +1153,12 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 GridHelper.GridViewFocusObject(view, obj);
         }
 
-   
+
         public void PrintStatusSummaryReport()
         {
             try
             {
+                LoadData();
                 var allData = _lotRepo.GetGridData();
                 var data = _selectedProgramId.HasValue
                     ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
@@ -1120,6 +1178,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             try
             {
+                LoadData();
                 var allData = _lotRepo.GetGridData();
                 var data = _selectedProgramId.HasValue
                     ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
@@ -1140,6 +1199,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
         public override XtraReport GetPrintReport()
         {
             if (gridView1.RowCount == 0) return null;
+            LoadData(); // ← re-pull fresh joined data from DB before printing
+
             return BuildReportFromTemplateOrDefault();
         }
         private List<LotGridModel> GetVisibleGridData()
@@ -1200,7 +1261,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             e.Handled = true;
         }
 
-      
+
 
     }
 
@@ -1335,5 +1396,5 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
     }
 
-   
+
 }

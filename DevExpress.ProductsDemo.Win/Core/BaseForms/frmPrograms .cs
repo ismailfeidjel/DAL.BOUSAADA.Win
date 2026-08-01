@@ -36,6 +36,8 @@ namespace DevExpress.ProductsDemo.Win.Forms
                 colId.OptionsColumn.AllowEdit = false;
                 colId.Visible = false;
             }
+            DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.DisableSorting(gridView, "Type", "Year", "Name", "IsClosed");
+
 
             DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.SetCaption(gridView, "Type", "النوع");
             DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.SetCaption(gridView, "Year", "السنة");

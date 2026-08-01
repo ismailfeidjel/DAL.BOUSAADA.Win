@@ -76,7 +76,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
 
             ConfigureColumns();
 
-            DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.BestFit(gridView);
+           // DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.BestFit(gridView);
 
             IsDirty = false;
 

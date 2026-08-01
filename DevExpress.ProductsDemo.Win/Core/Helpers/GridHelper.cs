@@ -111,10 +111,20 @@ namespace DevExpress.ProductsDemo.Win.Core.Helpers
             if (e.RowHandle >= 0)
                 e.Info.DisplayText = (e.RowHandle + 1).ToString();
         }
-
-        public static void BestFit(GridView view)
+        /// <summary>
+        /// Disables sorting on the given columns (by field name) for this view.
+        /// Pass the FieldName, not the caption.
+        /// </summary>
+        public static void DisableSorting(GridView view, params string[] fieldNames)
         {
-            view?.BestFitColumns();
+            if (view == null || fieldNames == null) return;
+
+            foreach (string fieldName in fieldNames)
+            {
+                var col = view.Columns[fieldName];
+                if (col != null)
+                    col.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            }
         }
 
         public static void ReadOnly(GridView view)

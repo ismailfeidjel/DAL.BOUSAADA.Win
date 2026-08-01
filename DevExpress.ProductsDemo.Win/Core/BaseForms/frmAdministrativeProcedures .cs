@@ -36,6 +36,8 @@ namespace DevExpress.ProductsDemo.Win.Forms
                 colId.OptionsColumn.AllowEdit = false;
                 colId.Visible = false;
             }
+            DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.DisableSorting(gridView, "Name");
+
 
             DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.SetCaption(gridView, "Name", "الاسم");
         }

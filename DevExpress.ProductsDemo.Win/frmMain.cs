@@ -26,6 +26,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DevExpress.Utils.Svg;
+using DevExpress.ProductsDemo.Win.Core.Helpers;
 
 namespace DevExpress.ProductsDemo.Win {
     public partial class frmMain : RibbonForm {
@@ -560,6 +561,18 @@ namespace DevExpress.ProductsDemo.Win {
         private void barButtonItem5_ItemClick(object sender, ItemClickEventArgs e)
         {
 
+        }
+
+        private void barButtonItem8_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (!CurrentSession.IsAdmin)
+            {
+                DialogHelper.Warning("ليس لك صلاحية التعديل.", "غير مسموح");
+                return;
+            }
+
+            using (var frm = new DevExpress.ProductsDemo.Win.Forms.frmUsers())
+                frm.ShowDialog(this);
         }
     }
 
