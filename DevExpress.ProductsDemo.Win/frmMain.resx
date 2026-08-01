@@ -117,21 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="helpControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="helpControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="helpControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 399</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="helpControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;helpControl1.Name" xml:space="preserve">
     <value>helpControl1</value>
   </data>
@@ -144,12 +129,26 @@
   <data name="&gt;&gt;helpControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;backstageViewControl2.Name" xml:space="preserve">
+    <value>backstageViewControl2</value>
+  </data>
+  <data name="&gt;&gt;backstageViewControl2.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.BackstageViewControl, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;backstageViewControl2.Parent" xml:space="preserve">
+    <value>backstageViewClientControl1</value>
+  </data>
+  <data name="&gt;&gt;backstageViewControl2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="backstageViewClientControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 62</value>
+    <value>1, 63</value>
   </data>
   <data name="backstageViewClientControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 399</value>
+    <value>0, 397</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="backstageViewClientControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -165,17 +164,26 @@
   <data name="&gt;&gt;backstageViewClientControl1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="printControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="backstageViewClientControl5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 63</value>
   </data>
-  <data name="printControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="printControl1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="backstageViewClientControl5.Size" type="System.Drawing.Size, System.Drawing">
     <value>0, 397</value>
   </data>
-  <data name="printControl1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="backstageViewClientControl5.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;backstageViewClientControl5.Name" xml:space="preserve">
+    <value>backstageViewClientControl5</value>
+  </data>
+  <data name="&gt;&gt;backstageViewClientControl5.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.BackstageViewClientControl, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;backstageViewClientControl5.Parent" xml:space="preserve">
+    <value>backstageViewControl1</value>
+  </data>
+  <data name="&gt;&gt;backstageViewClientControl5.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;printControl1.Name" xml:space="preserve">
     <value>printControl1</value>
@@ -208,8 +216,9 @@
     <value>backstageViewControl1</value>
   </data>
   <data name="&gt;&gt;backstageViewClientControl3.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="exportControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -217,7 +226,7 @@
     <value>0, 0</value>
   </data>
   <data name="exportControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 399</value>
+    <value>0, 397</value>
   </data>
   <data name="exportControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -235,10 +244,10 @@
     <value>0</value>
   </data>
   <data name="backstageViewClientControl4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 62</value>
+    <value>1, 63</value>
   </data>
   <data name="backstageViewClientControl4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 399</value>
+    <value>0, 397</value>
   </data>
   <data name="backstageViewClientControl4.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -253,22 +262,46 @@
     <value>backstageViewControl1</value>
   </data>
   <data name="&gt;&gt;backstageViewClientControl4.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
-  <data name="bvbiSaveAs.Caption" xml:space="preserve">
-    <value>حفظ المستند باسم</value>
+  <data name="backstageViewClientControl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 63</value>
   </data>
-  <data name="bvbiSaveAttachment.Caption" xml:space="preserve">
-    <value>حفظ المستند</value>
+  <data name="backstageViewClientControl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 397</value>
+  </data>
+  <data name="backstageViewClientControl2.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;backstageViewClientControl2.Name" xml:space="preserve">
+    <value>backstageViewClientControl2</value>
+  </data>
+  <data name="&gt;&gt;backstageViewClientControl2.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.BackstageViewClientControl, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;backstageViewClientControl2.Parent" xml:space="preserve">
+    <value>backstageViewControl1</value>
+  </data>
+  <data name="&gt;&gt;backstageViewClientControl2.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="bvtiInfo.Caption" xml:space="preserve">
     <value>معلومات</value>
+  </data>
+  <data name="backstageViewTabItem2.Caption" xml:space="preserve">
+    <value>اعدادات </value>
+  </data>
+  <data name="bvbiSaveAttachment.Caption" xml:space="preserve">
+    <value>حفظ المستند</value>
   </data>
   <data name="bvtiPrint.Caption" xml:space="preserve">
     <value>طباعة</value>
   </data>
   <data name="bvtiExport.Caption" xml:space="preserve">
-    <value>تصدير</value>
+    <value>تصدير والنسخ الاحتياطية</value>
+  </data>
+  <data name="backstageViewTabItem1.Caption" xml:space="preserve">
+    <value>الاعدادات</value>
   </data>
   <data name="bvbiExit.Caption" xml:space="preserve">
     <value>اغلاق البرنامج</value>
@@ -372,31 +405,31 @@
   <data name="rgbiCurrentViewTasks.Caption" xml:space="preserve">
     <value>Current View</value>
   </data>
-  <data name="galleryItemGroup1.Caption" xml:space="preserve">
+  <data name="galleryItemGroup8.Caption" xml:space="preserve">
     <value>Group</value>
   </data>
-  <data name="galleryItem1.Caption" xml:space="preserve">
+  <data name="galleryItem33.Caption" xml:space="preserve">
     <value>مسجلة</value>
   </data>
-  <data name="galleryItem2.Caption" xml:space="preserve">
+  <data name="galleryItem34.Caption" xml:space="preserve">
     <value>غير مسجلة</value>
   </data>
-  <data name="galleryItem3.Caption" xml:space="preserve">
+  <data name="galleryItem35.Caption" xml:space="preserve">
     <value>جارية</value>
   </data>
-  <data name="galleryItem4.Caption" xml:space="preserve">
+  <data name="galleryItem36.Caption" xml:space="preserve">
     <value>مغلقة</value>
   </data>
-  <data name="galleryItem5.Caption" xml:space="preserve">
+  <data name="galleryItem37.Caption" xml:space="preserve">
     <value>Prioritized</value>
   </data>
-  <data name="galleryItem6.Caption" xml:space="preserve">
+  <data name="galleryItem38.Caption" xml:space="preserve">
     <value>انتهاء الاجال</value>
   </data>
-  <data name="galleryItem7.Caption" xml:space="preserve">
+  <data name="galleryItem39.Caption" xml:space="preserve">
     <value>Simple List</value>
   </data>
-  <data name="galleryItem8.Caption" xml:space="preserve">
+  <data name="galleryItem40.Caption" xml:space="preserve">
     <value>Deferred</value>
   </data>
   <data name="bbiTodayFlag.Caption" xml:space="preserve">
@@ -442,19 +475,19 @@
   <data name="rgbiCurrentView.Caption" xml:space="preserve">
     <value>Current Contacts View</value>
   </data>
-  <data name="galleryItemGroup2.Caption" xml:space="preserve">
+  <data name="galleryItemGroup9.Caption" xml:space="preserve">
     <value>Group</value>
   </data>
-  <data name="galleryItem9.Caption" xml:space="preserve">
+  <data name="galleryItem41.Caption" xml:space="preserve">
     <value>List</value>
   </data>
-  <data name="galleryItem10.Caption" xml:space="preserve">
+  <data name="galleryItem42.Caption" xml:space="preserve">
     <value>Alphabetical</value>
   </data>
-  <data name="galleryItem11.Caption" xml:space="preserve">
+  <data name="galleryItem43.Caption" xml:space="preserve">
     <value>By State</value>
   </data>
-  <data name="galleryItem12.Caption" xml:space="preserve">
+  <data name="galleryItem44.Caption" xml:space="preserve">
     <value>Card</value>
   </data>
   <data name="biPrintPreview.Caption" xml:space="preserve">
@@ -536,10 +569,10 @@
   <data name="ribbonGalleryBarItem1.Caption" xml:space="preserve">
     <value>ribbonGalleryBarItem1</value>
   </data>
-  <data name="galleryItemGroup3.Caption" xml:space="preserve">
+  <data name="galleryItemGroup10.Caption" xml:space="preserve">
     <value>Group4</value>
   </data>
-  <data name="galleryItem13.Caption" xml:space="preserve">
+  <data name="galleryItem45.Caption" xml:space="preserve">
     <value>Item1</value>
   </data>
   <data name="resource.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -584,28 +617,28 @@
         ybuSYbNX4XevwO8JfoaKHzr8H6xCvOxcYVlrAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="galleryItem14.Caption" xml:space="preserve">
+  <data name="galleryItem46.Caption" xml:space="preserve">
     <value>Item2</value>
   </data>
-  <data name="galleryItem15.Caption" xml:space="preserve">
+  <data name="galleryItem47.Caption" xml:space="preserve">
     <value>Item3</value>
   </data>
-  <data name="galleryItem16.Caption" xml:space="preserve">
+  <data name="galleryItem48.Caption" xml:space="preserve">
     <value>Item4</value>
   </data>
-  <data name="galleryItemGroup4.Caption" xml:space="preserve">
+  <data name="galleryItemGroup11.Caption" xml:space="preserve">
     <value>Group5</value>
   </data>
-  <data name="galleryItem17.Caption" xml:space="preserve">
+  <data name="galleryItem49.Caption" xml:space="preserve">
     <value>Item5</value>
   </data>
-  <data name="galleryItem18.Caption" xml:space="preserve">
+  <data name="galleryItem50.Caption" xml:space="preserve">
     <value>Item6</value>
   </data>
-  <data name="galleryItem19.Caption" xml:space="preserve">
+  <data name="galleryItem51.Caption" xml:space="preserve">
     <value>Item7</value>
   </data>
-  <data name="galleryItem20.Caption" xml:space="preserve">
+  <data name="galleryItem52.Caption" xml:space="preserve">
     <value>Item8</value>
   </data>
   <data name="barButtonItem4.Caption" xml:space="preserve">
@@ -623,10 +656,10 @@
   <data name="ribbonGalleryBarItem3.Caption" xml:space="preserve">
     <value>ribbonGalleryBarItem3</value>
   </data>
-  <data name="galleryItemGroup5.Caption" xml:space="preserve">
+  <data name="galleryItemGroup12.Caption" xml:space="preserve">
     <value>Group6</value>
   </data>
-  <data name="galleryItem21.Caption" xml:space="preserve">
+  <data name="galleryItem53.Caption" xml:space="preserve">
     <value>الوضعية المفصلة</value>
   </data>
   <data name="resource.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -649,7 +682,7 @@
         aDRWNnoiIGNsYXNzPSJHcmVlbiIgLz4NCiAgPC9nPg0KPC9zdmc+Cw==
 </value>
   </data>
-  <data name="galleryItem22.Caption" xml:space="preserve">
+  <data name="galleryItem54.Caption" xml:space="preserve">
     <value>وضعية الاجتماع المركزة</value>
   </data>
   <data name="resource.SvgImage1" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -692,7 +725,7 @@
         ZSIgLz4NCiAgPC9nPg0KPC9zdmc+Cw==
 </value>
   </data>
-  <data name="galleryItem23.Caption" xml:space="preserve">
+  <data name="galleryItem55.Caption" xml:space="preserve">
     <value>وضعية حسب البلدية</value>
   </data>
   <data name="resource.SvgImage2" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -754,34 +787,34 @@
         YWNrIiAvPg0KICA8L2c+DQo8L3N2Zz4L
 </value>
   </data>
-  <data name="galleryItemGroup6.Caption" xml:space="preserve">
+  <data name="galleryItemGroup13.Caption" xml:space="preserve">
     <value>Group7</value>
   </data>
-  <data name="galleryItem25.Caption" xml:space="preserve">
+  <data name="galleryItem57.Caption" xml:space="preserve">
     <value>Item13</value>
   </data>
-  <data name="galleryItem26.Caption" xml:space="preserve">
+  <data name="galleryItem58.Caption" xml:space="preserve">
     <value>Item14</value>
   </data>
-  <data name="galleryItem27.Caption" xml:space="preserve">
+  <data name="galleryItem59.Caption" xml:space="preserve">
     <value>Item15</value>
   </data>
-  <data name="galleryItem28.Caption" xml:space="preserve">
+  <data name="galleryItem60.Caption" xml:space="preserve">
     <value>Item16</value>
   </data>
-  <data name="galleryItemGroup7.Caption" xml:space="preserve">
+  <data name="galleryItemGroup14.Caption" xml:space="preserve">
     <value>Group8</value>
   </data>
-  <data name="galleryItem29.Caption" xml:space="preserve">
+  <data name="galleryItem61.Caption" xml:space="preserve">
     <value>Item17</value>
   </data>
-  <data name="galleryItem30.Caption" xml:space="preserve">
+  <data name="galleryItem62.Caption" xml:space="preserve">
     <value>Item18</value>
   </data>
-  <data name="galleryItem31.Caption" xml:space="preserve">
+  <data name="galleryItem63.Caption" xml:space="preserve">
     <value>Item19</value>
   </data>
-  <data name="galleryItem32.Caption" xml:space="preserve">
+  <data name="galleryItem64.Caption" xml:space="preserve">
     <value>Item20</value>
   </data>
   <data name="barButtonItem8.Caption" xml:space="preserve">
@@ -818,29 +851,8 @@
   <data name="ribbonControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="rpgTasks.Text" xml:space="preserve">
-    <value>جديد / تعديل</value>
-  </data>
-  <data name="rpgFollowUp.Text" xml:space="preserve">
-    <value>متابعة العلامات المرجعية</value>
-  </data>
-  <data name="rpdCurrentViewTasks.Text" xml:space="preserve">
-    <value>متابعة حالة وتقدم العمليات</value>
-  </data>
-  <data name="rpgReports.Text" xml:space="preserve">
-    <value>طباعة التقارير</value>
-  </data>
   <data name="rpTasks.Text" xml:space="preserve">
     <value>العمليات</value>
-  </data>
-  <data name="rpgContacts.Text" xml:space="preserve">
-    <value>New / Edit</value>
-  </data>
-  <data name="rpgCurrentView.Text" xml:space="preserve">
-    <value>Current View</value>
-  </data>
-  <data name="rpgLayoutContacts.Text" xml:space="preserve">
-    <value>Layout</value>
   </data>
   <data name="rpContacts.Text" xml:space="preserve">
     <value>العمليات</value>
@@ -888,8 +900,104 @@
   <data name="&gt;&gt;ribbonControl1.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="printControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="printControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="printControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 397</value>
+  </data>
+  <data name="printControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;printControl1.Name" xml:space="preserve">
+    <value>printControl1</value>
+  </data>
+  <data name="&gt;&gt;printControl1.Type" xml:space="preserve">
+    <value>DevExpress.ProductsDemo.Win.Controls.PrintControl, DevExpress.ProductsDemo.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;printControl1.Parent" xml:space="preserve">
+    <value>backstageViewClientControl3</value>
+  </data>
+  <data name="&gt;&gt;printControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="helpControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="helpControl1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="helpControl1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 397</value>
+  </data>
+  <data name="helpControl1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;helpControl1.Name" xml:space="preserve">
+    <value>helpControl1</value>
+  </data>
+  <data name="&gt;&gt;helpControl1.Type" xml:space="preserve">
+    <value>DevExpress.ProductsDemo.Win.Controls.HelpControl, DevExpress.ProductsDemo.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;helpControl1.Parent" xml:space="preserve">
+    <value>backstageViewClientControl1</value>
+  </data>
+  <data name="&gt;&gt;helpControl1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="backstageViewControl2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="backstageViewControl2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="backstageViewControl2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 397</value>
+  </data>
+  <data name="backstageViewControl2.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;backstageViewControl2.Name" xml:space="preserve">
+    <value>backstageViewControl2</value>
+  </data>
+  <data name="&gt;&gt;backstageViewControl2.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.BackstageViewControl, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;backstageViewControl2.Parent" xml:space="preserve">
+    <value>backstageViewClientControl1</value>
+  </data>
+  <data name="&gt;&gt;backstageViewControl2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rpgTasks.Text" xml:space="preserve">
+    <value>جديد / تعديل</value>
+  </data>
+  <data name="rpgFollowUp.Text" xml:space="preserve">
+    <value>متابعة العلامات المرجعية</value>
+  </data>
+  <data name="rpdCurrentViewTasks.Text" xml:space="preserve">
+    <value>متابعة حالة وتقدم العمليات</value>
+  </data>
+  <data name="rpgReports.Text" xml:space="preserve">
+    <value>طباعة التقارير</value>
+  </data>
+  <data name="rpgContacts.Text" xml:space="preserve">
+    <value>New / Edit</value>
+  </data>
+  <data name="rpgCurrentView.Text" xml:space="preserve">
+    <value>Current View</value>
+  </data>
+  <data name="rpgLayoutContacts.Text" xml:space="preserve">
+    <value>Layout</value>
+  </data>
   <data name="nbgModules.Caption" xml:space="preserve">
     <value>الادوات المكتبية</value>
+  </data>
+  <data name="navBarControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="nbiGrid.Caption" xml:space="preserve">
     <value>ADSEC</value>
@@ -917,9 +1025,6 @@
   </data>
   <data name="nbiPdf.Caption" xml:space="preserve">
     <value>قارئ ملفات pdf</value>
-  </data>
-  <data name="navBarControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
   </data>
   <data name="navBarControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 160</value>
@@ -1029,23 +1134,23 @@
   <data name="$this.Text" xml:space="preserve">
     <value>ولاية بوسعادة -متابعة البرامج التنموية</value>
   </data>
-  <data name="&gt;&gt;bvbiSaveAs.Name" xml:space="preserve">
-    <value>bvbiSaveAs</value>
+  <data name="&gt;&gt;bvtiInfo.Name" xml:space="preserve">
+    <value>bvtiInfo</value>
   </data>
-  <data name="&gt;&gt;bvbiSaveAs.Type" xml:space="preserve">
-    <value>DevExpress.XtraBars.Ribbon.BackstageViewButtonItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  <data name="&gt;&gt;bvtiInfo.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.BackstageViewTabItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;backstageViewTabItem2.Name" xml:space="preserve">
+    <value>backstageViewTabItem2</value>
+  </data>
+  <data name="&gt;&gt;backstageViewTabItem2.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.BackstageViewTabItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;bvbiSaveAttachment.Name" xml:space="preserve">
     <value>bvbiSaveAttachment</value>
   </data>
   <data name="&gt;&gt;bvbiSaveAttachment.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.Ribbon.BackstageViewButtonItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="&gt;&gt;bvtiInfo.Name" xml:space="preserve">
-    <value>bvtiInfo</value>
-  </data>
-  <data name="&gt;&gt;bvtiInfo.Type" xml:space="preserve">
-    <value>DevExpress.XtraBars.Ribbon.BackstageViewTabItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;bvtiPrint.Name" xml:space="preserve">
     <value>bvtiPrint</value>
@@ -1058,6 +1163,18 @@
   </data>
   <data name="&gt;&gt;bvtiExport.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.Ribbon.BackstageViewTabItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;backstageViewTabItem1.Name" xml:space="preserve">
+    <value>backstageViewTabItem1</value>
+  </data>
+  <data name="&gt;&gt;backstageViewTabItem1.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.BackstageViewTabItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;backstageViewItemSeparator1.Name" xml:space="preserve">
+    <value>backstageViewItemSeparator1</value>
+  </data>
+  <data name="&gt;&gt;backstageViewItemSeparator1.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.BackstageViewItemSeparator, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;bvbiExit.Name" xml:space="preserve">
     <value>bvbiExit</value>
@@ -1287,6 +1404,12 @@
   <data name="&gt;&gt;ribbonGalleryBarItem3.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.RibbonGalleryBarItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
+  <data name="&gt;&gt;barButtonItem8.Name" xml:space="preserve">
+    <value>barButtonItem8</value>
+  </data>
+  <data name="&gt;&gt;barButtonItem8.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.BarButtonItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
   <data name="&gt;&gt;rpTasks.Name" xml:space="preserve">
     <value>rpTasks</value>
   </data>
@@ -1430,12 +1553,6 @@
   </data>
   <data name="&gt;&gt;ribbonGalleryBarItem2.Type" xml:space="preserve">
     <value>DevExpress.XtraBars.RibbonGalleryBarItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="&gt;&gt;barButtonItem8.Name" xml:space="preserve">
-    <value>barButtonItem8</value>
-  </data>
-  <data name="&gt;&gt;barButtonItem8.Type" xml:space="preserve">
-    <value>DevExpress.XtraBars.BarButtonItem, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmMain</value>

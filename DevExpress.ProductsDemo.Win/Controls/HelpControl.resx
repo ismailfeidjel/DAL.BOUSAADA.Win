@@ -133,7 +133,7 @@
     <value>1, 1</value>
   </data>
   <data name="galleryControlClient1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>358, 47</value>
+    <value>358, 542</value>
   </data>
   <data name="&gt;&gt;galleryControlClient1.Name" xml:space="preserve">
     <value>galleryControlClient1</value>
@@ -148,7 +148,7 @@
     <value>0</value>
   </data>
   <data name="galleryControl1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
+    <value>Fill</value>
   </data>
   <data name="galleryItemGroup1.Caption" xml:space="preserve">
     <value>Group1</value>
@@ -160,24 +160,44 @@
     <value>تواصل مع بن السني للحصول على الدعم حول البرنامج</value>
   </data>
   <data name="galleryItem2.Caption" xml:space="preserve">
-    <value>Getting Started </value>
+    <value>تواصل </value>
   </data>
   <data name="galleryItem2.Description" xml:space="preserve">
-    <value>See what's new and find resources to help you learn 
-the basics quickly.</value>
+    <value>تواصل مع الدعم الفني </value>
   </data>
   <data name="galleryItem3.Caption" xml:space="preserve">
-    <value>Contact Us</value>
+    <value>شروط الاستخدام</value>
   </data>
   <data name="galleryItem3.Description" xml:space="preserve">
-    <value>Let us know if you need help or how we can make 
-our components better</value>
+    <value>مواصلة استخدام البرنامج تعني موافقتك على شروط استخدامه</value>
+  </data>
+  <assembly alias="DevExpress.Data.v24.1" name="DevExpress.Data.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="resource.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjI0LjEsIFZlcnNpb249MjQuMS43
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAADoDAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgi
+        IHZpZXdCb3g9IjAgMCAzMiAzMiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+        MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3Bh
+        Y2U9InByZXNlcnZlIiBpZD0iTGF5ZXJfMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAg
+        MzIgMzIiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLlJlZHtmaWxsOiNEMTFDMUM7fQoJLkJs
+        YWNre2ZpbGw6IzcyNzI3Mjt9CgkuQmx1ZXtmaWxsOiMxMTc3RDc7fQoJLkdyZWVue2ZpbGw6IzAzOUMy
+        Mzt9CgkuWWVsbG93e2ZpbGw6I0ZGQjExNTt9CgkuV2hpdGV7ZmlsbDojRkZGRkZGO30KCS5zdDB7b3Bh
+        Y2l0eTowLjU7fQoJLnN0MXtvcGFjaXR5OjAuNzU7fQo8L3N0eWxlPg0KICA8ZyBpZD0iQWdlbmRhVmll
+        dyI+DQogICAgPHBhdGggZD0iTTEyLDEzYzAsMS43LTEuMywzLTMsM3MtMy0xLjMtMy0zczEuMy0zLDMt
+        M1MxMiwxMS4zLDEyLDEzeiBNOSwxOGMtMS43LDAtMywxLjMtMywzczEuMywzLDMsM3MzLTEuMywzLTMg
+        ICBTMTAuNywxOCw5LDE4eiIgY2xhc3M9IkdyZWVuIiAvPg0KICAgIDxwYXRoIGQ9Ik0wLDN2MjZjMCww
+        LjYsMC40LDEsMSwxaDMwYzAuNiwwLDEtMC40LDEtMVYzYzAtMC42LTAuNC0xLTEtMUgxQzAuNCwyLDAs
+        Mi40LDAsM3ogTTMwLDI4SDJWNmgyOFYyOHogTTI2LDE0ICAgSDE2di0yaDEwVjE0eiBNMjYsMjJIMTZ2
+        LTJoMTBWMjJ6IiBjbGFzcz0iQmxhY2siIC8+DQogIDwvZz4NCjwvc3ZnPgs=
+</value>
   </data>
   <data name="galleryControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 52</value>
   </data>
   <data name="galleryControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>360, 49</value>
+    <value>360, 544</value>
   </data>
   <data name="galleryControl1.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -246,6 +266,54 @@ our components better</value>
   <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="simpleButton2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 188</value>
+  </data>
+  <data name="simpleButton2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 23</value>
+  </data>
+  <data name="simpleButton2.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="simpleButton2.Text" xml:space="preserve">
+    <value>simpleButton2</value>
+  </data>
+  <data name="&gt;&gt;simpleButton2.Name" xml:space="preserve">
+    <value>simpleButton2</value>
+  </data>
+  <data name="&gt;&gt;simpleButton2.Type" xml:space="preserve">
+    <value>DevExpress.XtraEditors.SimpleButton, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;simpleButton2.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;simpleButton2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="simpleButton1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>108, 103</value>
+  </data>
+  <data name="simpleButton1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>197, 23</value>
+  </data>
+  <data name="simpleButton1.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="simpleButton1.Text" xml:space="preserve">
+    <value>simpleButton1</value>
+  </data>
+  <data name="&gt;&gt;simpleButton1.Name" xml:space="preserve">
+    <value>simpleButton1</value>
+  </data>
+  <data name="&gt;&gt;simpleButton1.Type" xml:space="preserve">
+    <value>DevExpress.XtraEditors.SimpleButton, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;simpleButton1.Parent" xml:space="preserve">
+    <value>splitContainer1.Panel2</value>
+  </data>
+  <data name="&gt;&gt;simpleButton1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="labelControl4.AutoSizeMode" type="DevExpress.XtraEditors.LabelAutoSizeMode, DevExpress.XtraEditors.v24.1">
     <value>None</value>
   </data>
@@ -271,7 +339,7 @@ our components better</value>
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;labelControl4.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
@@ -305,6 +373,18 @@ our components better</value>
   </data>
   <data name="&gt;&gt;splitContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="galleryControlClient2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="galleryControlClient2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="&gt;&gt;galleryControlClient2.Name" xml:space="preserve">
+    <value>galleryControlClient2</value>
+  </data>
+  <data name="&gt;&gt;galleryControlClient2.Type" xml:space="preserve">
+    <value>DevExpress.XtraBars.Ribbon.GalleryControlClient, DevExpress.XtraBars.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -537,6 +537,7 @@
     <Compile Include="Core\BaseForms\frmUsers .Designer.cs">
       <DependentUpon>frmUsers .cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\Helpers\AvatarHelper.cs" />
     <Compile Include="Core\Helpers\CurrentSession.cs" />
     <Compile Include="Core\Helpers\DialogHelper.cs" />
     <Compile Include="Core\Helpers\GridHelper.cs" />
@@ -557,12 +558,6 @@
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Domain\ProjectGridModel.cs" />
     <Compile Include="Domain\UserRoles.cs" />
-    <Compile Include="Forms\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\frmeditproject.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -842,9 +837,6 @@
     <EmbeddedResource Include="Core\BaseForms\frmLookupBaseDesignerSurrogate.cs.resx">
       <DependentUpon>frmLookupBaseDesignerSurrogate.cs.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmeditproject.resx">
       <DependentUpon>frmeditproject.cs</DependentUpon>
     </EmbeddedResource>
@@ -959,6 +951,7 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="DataBase\dal %288%29.sql" />
     <Content Include="DataBase\DBB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -984,10 +977,6 @@
     <None Include="DBBDataSet.xss">
       <DependentUpon>DBBDataSet.xsd</DependentUpon>
     </None>
-    <None Include="NewFolder1\Reports\Saved\f.pdf" />
-    <None Include="NewFolder1\Reports\Saved\تقرير_20260710_173046.prnx" />
-    <None Include="NewFolder1\Reports\Saved\تقرير_20260710_173046.repx" />
-    <None Include="NewFolder1\Reports\Templates\قالب_تقرير_المشاريع.repx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1001,6 +990,15 @@
     <Compile Include="Resources.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reports\Saved\f.pdf" />
+    <None Include="Reports\Saved\تقرير_20260710_173046.prnx" />
+    <None Include="Reports\Saved\تقرير_20260710_173046.repx" />
+    <None Include="Reports\Templates\قالب_تفصيل الوضعية.repx" />
+    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء1.repx" />
+    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء2.repx" />
+    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء3.repx" />
+    <None Include="Reports\Templates\قالب_تقرير_المشاريع.repx" />
+    <None Include="Reports\Templates\قالب_تقرير_الوضعية.repx" />
     <None Include="Resources\icons8_a_32px.png" />
     <None Include="Resources\icons8_c_32px_1.png" />
     <None Include="Resources\adsec.svg" />

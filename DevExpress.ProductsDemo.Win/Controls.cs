@@ -191,7 +191,7 @@ namespace DevExpress.ProductsDemo.Win {
                     OwnerForm.ShowInfo(false);
                 }
             }
-            OwnerForm.SaveAsMenuItem.Enabled = SaveAsEnable;
+           // OwnerForm.SaveAsMenuItem.Enabled = SaveAsEnable;
             OwnerForm.SaveAttachmentMenuItem.Enabled = SaveAttachmentEnable;
             ShowReminder();
             ShowInfo();

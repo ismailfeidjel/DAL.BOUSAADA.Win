@@ -361,7 +361,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.lciCopiesSpinEdit.Padding = new DevExpress.XtraLayout.Utils.Padding(20, 20, 2, 2);
             this.lciCopiesSpinEdit.Size = new System.Drawing.Size(180, 44);
             this.lciCopiesSpinEdit.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
-            this.lciCopiesSpinEdit.TextSize = new System.Drawing.Size(24, 13);
+            this.lciCopiesSpinEdit.TextSize = new System.Drawing.Size(22, 13);
             // 
             // emptySpaceItem1
             // 

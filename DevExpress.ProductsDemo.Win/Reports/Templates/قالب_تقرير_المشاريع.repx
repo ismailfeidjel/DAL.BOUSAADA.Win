@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="24.1.7.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="XtraReport" DisplayName="تقرير_20260710_173046" Landscape="true" Margins="0.5416667, 6, 0, 34.45778" PaperKind="A4" PageWidth="1169" PageHeight="827" Version="24.1" RightToLeft="Yes" RightToLeftLayout="Yes" TextAlignment="TopRight" Font="Segoe UI, 9.75pt">
+  <Bands>
+    <Item1 Ref="1" ControlType="TopMarginBand" Name="TopMargin" HeightF="0" />
+    <Item2 Ref="2" ControlType="PageHeaderBand" Name="PageHeader" HeightF="37.5" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 6.75pt">
+      <Controls>
+        <Item1 Ref="3" ControlType="XRTable" Name="table1" TextAlignment="MiddleCenter" SizeF="1162.45837,37.5" LocationFloat="0,0" Font="Segoe UI, 9pt, style=Bold" BackColor="255,242,242,242">
+          <Rows>
+            <Item1 Ref="4" ControlType="XRTableRow" Name="tableRow1" Weight="11.5">
+              <Cells>
+                <Item1 Ref="5" ControlType="XRTableCell" Name="tableCell48" Weight="263462.4095727622" Multiline="true" Text="رقـم" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="6" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="7" ControlType="XRTableCell" Name="tableCell1" Weight="881137.39765381673" Text="الدائرة" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
+                  <StylePriority Ref="8" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="9" ControlType="XRTableCell" Name="tableCell2" Weight="572299.82228803134" Text="البلدية" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
+                  <StylePriority Ref="10" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="11" ControlType="XRTableCell" Name="tableCell36" Weight="531011.52884612267" Multiline="true" Text="البرنامج" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
+                  <StylePriority Ref="12" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="13" ControlType="XRTableCell" Name="tableCell3" Weight="814679.08257568046" Text="اسم العملية" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="14" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="15" ControlType="XRTableCell" Name="tableCell27" Weight="407339.54128784023" Multiline="true" Text="المجال" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="16" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item6>
+                <Item7 Ref="17" ControlType="XRTableCell" Name="tableCell51" Weight="407339.54128784023" Multiline="true" Text="القطاع" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="18" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item7>
+                <Item8 Ref="19" ControlType="XRTableCell" Name="tableCell38" Weight="670883.4099558224" Multiline="true" Text="الغلاف المالي" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
+                  <StylePriority Ref="20" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item8>
+                <Item9 Ref="21" ControlType="XRTableCell" Name="tableCell4" Weight="583458.67263628729" Text="المبلغ المسجل" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
+                  <StylePriority Ref="22" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item9>
+                <Item10 Ref="23" ControlType="XRTableCell" Name="tableCell5" Weight="497279.56651618821" Text="المبلغ المستهلك" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
+                  <StylePriority Ref="24" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item10>
+                <Item11 Ref="25" ControlType="XRTableCell" Name="tableCell40" Weight="497279.56651618821" Multiline="true" Text="الباقي" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
+                  <StylePriority Ref="26" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item11>
+                <Item12 Ref="27" ControlType="XRTableCell" Name="tableCell6" Weight="849288.015193212" Text="تاريخ امر الانطلاق" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="28" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item12>
+                <Item13 Ref="29" ControlType="XRTableCell" Name="tableCell7" Weight="561197.20890328777" Text="المقاول" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="30" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item13>
+                <Item14 Ref="31" ControlType="XRTableCell" Name="tableCell8" Weight="529784.19391128363" Text="اجال التنفيذ" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="32" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item14>
+                <Item15 Ref="33" ControlType="XRTableCell" Name="tableCell9" Weight="536439.53307500575" CanShrink="true" Multiline="true" Text="التقدم الفيزيائي" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="34" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item15>
+                <Item16 Ref="35" ControlType="XRTableCell" Name="tableCell23" Weight="536439.53307500575" Multiline="true" Text="التقدم المالي" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="36" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item16>
+                <Item17 Ref="37" ControlType="XRTableCell" Name="tableCell10" Weight="691217.88500777283" Text="وضعية العملية" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="38" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item17>
+                <Item18 Ref="39" ControlType="XRTableCell" Name="tableCell11" Weight="2054142.8597237032" Text="الملاحظة" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
+                  <StylePriority Ref="40" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item18>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="41" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+      <StylePriority Ref="42" UseFont="false" />
+    </Item2>
+    <Item3 Ref="43" ControlType="DetailBand" Name="Detail" HeightF="39.5833321" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle">
+      <Controls>
+        <Item1 Ref="44" ControlType="XRTable" Name="table2" TextAlignment="MiddleCenter" SizeF="1162.45837,39.5833321" LocationFloat="0,0" Font="Segoe UI, 10pt" Borders="All">
+          <Rows>
+            <Item1 Ref="45" ControlType="XRTableRow" Name="tableRow2" Weight="11.5">
+              <Cells>
+                <Item1 Ref="46" ControlType="XRTableCell" Name="cellProjectNumber" Weight="263463.68795694708" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="255,242,242,242" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="47" EventName="BeforePrint" PropertyName="BorderColor" Expression="Iif(NextRowColumnValue('ProjectId') == [ProjectId], 'Left, Right', 'Left, Right,Bottom')&#xA;" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="48" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="49" ControlType="XRTableCell" Name="tableCell12" Weight="881136.32638085214" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="255,242,242,242" Padding="4,4,0,0,100" Borders="All">
+                  <ExpressionBindings>
+                    <Item1 Ref="50" EventName="BeforePrint" PropertyName="Text" Expression="[Daira]" />
+                    <Item2 Ref="51" EventName="BeforePrint" PropertyName="Borders" Expression="Iif(NextRowColumnValue('ProjectId') == [ProjectId], 'Left, Right', 'Left, Right,Bottom')" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="52" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="53" ControlType="XRTableCell" Name="tableCell13" Weight="572299.884696575" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="255,242,242,242" Padding="4,4,0,0,100" Borders="All">
+                  <ExpressionBindings>
+                    <Item1 Ref="54" EventName="BeforePrint" PropertyName="Text" Expression="[Commune]" />
+                    <Item2 Ref="55" EventName="BeforePrint" PropertyName="Borders" Expression="Iif(NextRowColumnValue('ProjectId') == [ProjectId], 'Left, Right', 'Left, Right,Bottom')&#xA;" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="56" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="57" ControlType="XRTableCell" Name="tableCell37" Weight="531012.11722070514" Multiline="true" Text="tableCell37" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="255,242,242,242" Padding="4,4,0,0,100" Borders="Left, Right, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="58" EventName="BeforePrint" PropertyName="Text" Expression="[Program]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="59" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="60" ControlType="XRTableCell" Name="tableCell14" Weight="814679.271345758" Multiline="true" TextAlignment="MiddleLeft" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 8pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="61" EventName="BeforePrint" PropertyName="Text" Expression="[OperationName]" />
+                    <Item2 Ref="62" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="63" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="64" ControlType="XRTableCell" Name="tableCell35" Weight="407339.635672879" Multiline="true" Text="tableCell35" TextAlignment="MiddleLeft" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="65" EventName="BeforePrint" PropertyName="Text" Expression="[Sector]" />
+                    <Item2 Ref="66" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')&#xA;" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="67" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item6>
+                <Item7 Ref="68" ControlType="XRTableCell" Name="tableCell52" Weight="407339.635672879" Multiline="true" Text="tableCell52" TextAlignment="MiddleLeft" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="69" EventName="BeforePrint" PropertyName="Text" Expression="[Domain]" />
+                    <Item2 Ref="70" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')&#xA;" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="71" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item7>
+                <Item8 Ref="72" ControlType="XRTableCell" Name="tableCell39" Weight="670882.19937781943" Multiline="true" Text="tableCell39" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="73" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                    <Item2 Ref="74" EventName="BeforePrint" PropertyName="Text" Expression="Iif([LotBudget] = 0, '', FormatString('{0:N2}', [LotBudget]))" />
+                    <Item3 Ref="75" EventName="BeforePrint" PropertyName="Borders" Expression="Iif(NextRowColumnValue('ProjectId') == [ProjectId], 'Left, Right', 'Left, Right,Bottom')&#xA;" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="76" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item8>
+                <Item9 Ref="77" ControlType="XRTableCell" Name="tableCell15" Weight="583458.72950598877" TextFormatString="{0:N2}" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="78" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                    <Item2 Ref="79" EventName="BeforePrint" PropertyName="Text" Expression="Iif([RegisteredAmount] = 0, '', FormatString('{0:N2}', [RegisteredAmount]))" />
+                    <Item3 Ref="80" EventName="BeforePrint" PropertyName="Borders" Expression="Iif(NextRowColumnValue('ProjectId') == [ProjectId], 'Left, Right', 'Left, Right,Bottom')&#xA;" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="81" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item9>
+                <Item10 Ref="82" ControlType="XRTableCell" Name="tableCell16" Weight="497279.56651618803" TextFormatString="{0:N2}" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="83" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                    <Item2 Ref="84" EventName="BeforePrint" PropertyName="Text" Expression="Iif([ConsumedAmount] = 0, '', FormatString('{0:N2}', [ConsumedAmount]))" />
+                    <Item3 Ref="85" EventName="BeforePrint" PropertyName="Borders" Expression="Iif(NextRowColumnValue('ProjectId') == [ProjectId], 'Left, Right', 'Left, Right,Bottom')&#xA;" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="86" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item10>
+                <Item11 Ref="87" ControlType="XRTableCell" Name="tableCell41" Weight="497279.56651618803" Multiline="true" Text="tableCell41" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="88" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                    <Item2 Ref="89" EventName="BeforePrint" PropertyName="Text" Expression="Iif([Remaining] = 0, '', FormatString('{0:N2}', [Remaining]))" />
+                    <Item3 Ref="90" EventName="BeforePrint" PropertyName="Borders" Expression="Iif(NextRowColumnValue('ProjectId') == [ProjectId], 'Left, Right', 'Left, Right,Bottom')&#xA;" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="91" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item11>
+                <Item12 Ref="92" ControlType="XRTableCell" Name="tableCell17" Weight="849288.40209793928" TextFormatString="{0:dd/MM/yyyy}" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="93" EventName="BeforePrint" PropertyName="Text" Expression="[StartDate]" />
+                    <Item2 Ref="94" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="95" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item12>
+                <Item13 Ref="96" ControlType="XRTableCell" Name="tableCell18" Weight="561197.85911188275" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="97" EventName="BeforePrint" PropertyName="Text" Expression="[Contractor]" />
+                    <Item2 Ref="98" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="99" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item13>
+                <Item14 Ref="100" ControlType="XRTableCell" Name="tableCell19" Weight="529782.86230108724" TextFormatString="{0:N0}يوم" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="101" EventName="BeforePrint" PropertyName="Text" Expression="[ExecutionDuration]" />
+                    <Item2 Ref="102" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="103" UseFont="false" UseBackColor="false" />
+                </Item14>
+                <Item15 Ref="104" ControlType="XRTableCell" Name="tableCell20" Weight="536440.12002745422" TextFormatString="{0:N0} %" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="105" EventName="BeforePrint" PropertyName="Text" Expression="[PhysicalProgress]" />
+                    <Item2 Ref="106" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="107" UseFont="false" UseBackColor="false" />
+                </Item15>
+                <Item16 Ref="108" ControlType="XRTableCell" Name="tableCell24" Weight="536440.12002745422" TextFormatString="{0:N0} %" Multiline="true" Text="tableCell24" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="109" EventName="BeforePrint" PropertyName="Text" Expression="[FinancialProgress]" />
+                    <Item2 Ref="110" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="111" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item16>
+                <Item17 Ref="112" ControlType="XRTableCell" Name="tableCell21" Weight="691217.38629510789" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 7pt, style=Bold" ForeColor="Black" BackColor="255,242,242,242" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="113" EventName="BeforePrint" PropertyName="Text" Expression="[ProjectStatus]" />
+                    <Item2 Ref="114" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '242,242,242')" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="115" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+                </Item17>
+                <Item18 Ref="116" ControlType="XRTableCell" Name="tableCell22" Weight="2054143.7128855693" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 8pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Right, Bottom">
+                  <ExpressionBindings>
+                    <Item1 Ref="117" EventName="BeforePrint" PropertyName="Text" Expression="[Notes]" />
+                    <Item2 Ref="118" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="119" UseFont="false" UseBackColor="false" />
+                </Item18>
+              </Cells>
+            </Item1>
+          </Rows>
+          <ExpressionBindings>
+            <Item1 Ref="120" EventName="BeforePrint" PropertyName="Borders" Expression="Iif(NextRowColumnValue('ProjectId') == [ProjectId], 'Left, Right, Top', 'Left, Right, Top, Bottom')" />
+          </ExpressionBindings>
+          <StylePriority Ref="121" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item3>
+    <Item4 Ref="122" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="34.45778">
+      <Controls>
+        <Item1 Ref="123" ControlType="XRPageInfo" Name="pageInfo1" SizeF="100,23" LocationFloat="941.0068,10" Padding="2,2,0,0,100" />
+      </Controls>
+    </Item4>
+    <Item5 Ref="124" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="155.208466">
+      <Controls>
+        <Item1 Ref="125" ControlType="XRLabel" Name="cellProgramName" RightToLeft="Yes" Multiline="true" Text="ADSEC 2026" TextAlignment="TopRight" SizeF="252.374878,26.45833" LocationFloat="825.2211,0" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="126" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="127" ControlType="XRLabel" Name="xrLabel5" RightToLeft="Yes" Multiline="true" CanGrow="false" Text="مصلحة التخطيط ومتابعة البرامج التنموية" TextAlignment="TopLeft" SizeF="346.124878,32.91667" LocationFloat="0,26.4583263" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="128" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="129" ControlType="XRLabel" Name="xrLabel4" RightToLeft="Yes" Multiline="true" Text="مديرية الادارة المحلية" TextAlignment="TopLeft" SizeF="252.374878,26.45833" LocationFloat="0,0" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="130" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="131" ControlType="XRTable" Name="xrTable1" AnchorVertical="Both" AnchorHorizontal="Both" TextAlignment="TopLeft" SizeF="791.737732,94.16676" LocationFloat="152.727264,61.0417061" Font="Segoe UI, 11pt, style=Bold" Padding="2,2,0,0,96" Borders="All">
+          <Rows>
+            <Item1 Ref="132" ControlType="XRTableRow" Name="xrTableRow1" Weight="1">
+              <Cells>
+                <Item1 Ref="133" ControlType="XRTableCell" Name="xrTableCell1" Weight="0.49797434095023008" CanGrow="false" Multiline="true" Text="ولايــــــــــــــــــــــــــــــــة:" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="134" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="135" ControlType="XRTableCell" Name="xrTableCell2" Weight="2.0345458280443212" CanGrow="false" Multiline="true" Text="بوسعادة" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="136" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+              </Cells>
+            </Item1>
+            <Item2 Ref="137" ControlType="XRTableRow" Name="xrTableRow2" Weight="1">
+              <Cells>
+                <Item1 Ref="138" ControlType="XRTableCell" Name="xrTableCell4" Weight="0.49797492664707632" CanGrow="false" Multiline="true" Text="وضعية المشاريع :" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="139" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="140" ControlType="XRTableCell" Name="cellFilterText" Weight="1.2682851578501992" CanGrow="false" Multiline="true" Text="المسجلة" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="141" UseFont="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="142" ControlType="XRTableCell" Name="tableCell34" Weight="0.38313004224863778" CanGrow="false" Multiline="true" Text="عددها:" TextAlignment="MiddleRight" Font="Segoe UI, 8pt, style=Bold" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="143" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="144" ControlType="XRTableCell" Name="cellProjectCounter" Weight="0.38313004224863778" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 7pt, style=Bold" Borders="Top, Right, Bottom">
+                  <StylePriority Ref="145" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+                </Item4>
+              </Cells>
+            </Item2>
+            <Item3 Ref="146" ControlType="XRTableRow" Name="xrTableRow3" Weight="1">
+              <Cells>
+                <Item1 Ref="147" ControlType="XRTableCell" Name="xrTableCell3" Weight="0.49797492664707632" CanGrow="false" Multiline="true" Text="موقــــــوفة بتـــاريخ:" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                  <StylePriority Ref="148" UseFont="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="149" ControlType="XRTableCell" Name="xrTableCell6" Weight="2.034545242347475" CanGrow="false" TextFormatString="{0:MM/dd/yyyy}" Multiline="true" Text="12-12-2012" Font="Segoe UI, 8pt, style=Bold">
+                  <ExpressionBindings>
+                    <Item1 Ref="150" EventName="BeforePrint" PropertyName="Text" Expression="Today()" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="151" UseFont="false" />
+                </Item2>
+              </Cells>
+            </Item3>
+          </Rows>
+          <StylePriority Ref="152" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item4>
+      </Controls>
+    </Item5>
+    <Item6 Ref="153" ControlType="ReportFooterBand" Name="ReportFooter" HeightF="39.5832062">
+      <Controls>
+        <Item1 Ref="154" ControlType="XRTable" Name="table3" TextAlignment="MiddleCenter" SizeF="1162.45837,37.5" LocationFloat="0,0" Font="Segoe UI, 9pt, style=Bold" BackColor="255,227,227,227">
+          <Rows>
+            <Item1 Ref="155" ControlType="XRTableRow" Name="tableRow3" Weight="11.5">
+              <Cells>
+                <Item1 Ref="156" ControlType="XRTableCell" Name="tableCell50" Weight="263463.70269023284" Multiline="true" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="157" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="158" ControlType="XRTableCell" Name="tableCell25" Weight="881140.85621028149" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="255,242,242,242" Borders="Top, Bottom">
+                  <StylePriority Ref="159" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="160" ControlType="XRTableCell" Name="tableCell26" Weight="572297.55781843292" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="255,242,242,242" Borders="All">
+                  <StylePriority Ref="161" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="162" ControlType="XRTableCell" Name="tb27" Weight="531011.52884612267" Multiline="true" Text="1" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Right, Bottom">
+                  <StylePriority Ref="163" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="164" ControlType="XRTableCell" Name="tableCell28" Weight="814679.24113023072" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="White" Borders="Left, Bottom">
+                  <StylePriority Ref="165" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="166" ControlType="XRTableCell" Name="tableCell49" Weight="407339.62056511536" Multiline="true" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="White" Borders="Bottom">
+                  <StylePriority Ref="167" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item6>
+                <Item7 Ref="168" ControlType="XRTableCell" Name="tableCell53" Weight="407339.62056511536" Multiline="true" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="White" Borders="Bottom">
+                  <StylePriority Ref="169" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item7>
+                <Item8 Ref="170" ControlType="XRTableCell" Name="tableCell29" Weight="670882.34382017981" TextFormatString="{0:N2}" Multiline="true" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="All">
+                  <Summary Ref="171" Running="Report" />
+                  <ExpressionBindings>
+                    <Item1 Ref="172" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([LotBudget])" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="173" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item8>
+                <Item9 Ref="174" ControlType="XRTableCell" Name="tableCell30" Weight="583459.42166282935" TextFormatString="{0:N2}" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="All">
+                  <Summary Ref="175" Running="Report" />
+                  <ExpressionBindings>
+                    <Item1 Ref="176" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([RegisteredAmount])" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="177" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item9>
+                <Item10 Ref="178" ControlType="XRTableCell" Name="tableCell31" Weight="497279.56651618821" TextFormatString="{0:N2}" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="All">
+                  <Summary Ref="179" Running="Report" />
+                  <ExpressionBindings>
+                    <Item1 Ref="180" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([ConsumedAmount])" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="181" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item10>
+                <Item11 Ref="182" ControlType="XRTableCell" Name="tableCell32" Weight="497279.56651618821" TextFormatString="{0:N2}" Multiline="true" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="All">
+                  <Summary Ref="183" Running="Report" />
+                  <ExpressionBindings>
+                    <Item1 Ref="184" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([Remaining])" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="185" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item11>
+                <Item12 Ref="186" ControlType="XRTableCell" Name="tableCell33" Weight="849288.015193212" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="White" Borders="Left, Top, Bottom">
+                  <StylePriority Ref="187" UseBackColor="false" UseTextAlignment="false" />
+                </Item12>
+                <Item13 Ref="188" ControlType="XRTableCell" Name="tableCell42" Weight="561197.20890328777" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="White" Borders="Top, Bottom">
+                  <StylePriority Ref="189" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item13>
+                <Item14 Ref="190" ControlType="XRTableCell" Name="tableCell43" Weight="529784.19391128363" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="White" Borders="Top, Bottom">
+                  <StylePriority Ref="191" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item14>
+                <Item15 Ref="192" ControlType="XRTableCell" Name="tableCell44" Weight="536439.53307500575" CanShrink="true" Multiline="true" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="White" Borders="Top, Bottom">
+                  <StylePriority Ref="193" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item15>
+                <Item16 Ref="194" ControlType="XRTableCell" Name="tableCell45" Weight="536439.53307500575" Multiline="true" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="White" Borders="Top, Bottom">
+                  <StylePriority Ref="195" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item16>
+                <Item17 Ref="196" ControlType="XRTableCell" Name="tableCell46" Weight="691217.88500777283" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="White" Borders="Top, Bottom">
+                  <StylePriority Ref="197" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item17>
+                <Item18 Ref="198" ControlType="XRTableCell" Name="tableCell47" Weight="2054143.0164751338" TextAlignment="MiddleCenter" StyleName="ReportHeaderBandStyle" BackColor="White" Borders="Top, Right, Bottom">
+                  <StylePriority Ref="199" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item18>
+              </Cells>
+            </Item1>
+          </Rows>
+          <StylePriority Ref="200" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
+        </Item1>
+      </Controls>
+    </Item6>
+  </Bands>
+  <StyleSheet>
+    <Item1 Ref="201" Name="ReportHeaderBandStyle" BorderStyle="Inset" Padding="4,4,0,0,100" BackColor="255,206,206,206" StringFormat="Near;Center;0;None;Character;GenericDefault" TextAlignment="MiddleLeft" />
+    <Item2 Ref="202" Name="ReportGroupHeaderBandStyle" BorderStyle="Inset" Padding="4,0,0,0,100" BackColor="255,206,206,206" StringFormat="Near;Center;0;None;Character;GenericDefault" TextAlignment="MiddleLeft" />
+    <Item3 Ref="203" Name="ReportDetailBandStyle" BorderStyle="Inset" Padding="4,4,0,0,100" BackColor="0,0,0,0" StringFormat="Near;Center;0;None;Character;GenericDefault" TextAlignment="MiddleLeft" />
+    <Item4 Ref="204" Name="ReportGroupFooterBandStyle" BorderStyle="Inset" Padding="4,4,0,0,100" BackColor="255,206,206,206" StringFormat="Near;Center;0;None;Character;GenericDefault" TextAlignment="MiddleLeft" />
+    <Item5 Ref="205" Name="ReportFooterBandStyle" BorderStyle="Inset" Padding="4,4,0,0,100" BackColor="255,206,206,206" StringFormat="Near;Center;0;None;Character;GenericDefault" TextAlignment="MiddleLeft" />
+    <Item6 Ref="206" Name="ReportOddStyle" BorderStyle="Inset" Padding="4,4,0,0,100" BackColor="0,0,0,0" StringFormat="Near;Center;0;None;Character;GenericDefault" TextAlignment="MiddleLeft" />
+    <Item7 Ref="207" Name="ReportEvenStyle" BorderStyle="Inset" Padding="4,4,0,0,100" BackColor="0,0,0,0" StringFormat="Near;Center;0;None;Character;GenericDefault" TextAlignment="MiddleLeft" />
+  </StyleSheet>
+</XtraReportsLayoutSerializer>

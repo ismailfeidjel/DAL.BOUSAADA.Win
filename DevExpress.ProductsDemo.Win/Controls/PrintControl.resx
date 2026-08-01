@@ -245,7 +245,7 @@
     <value>N00</value>
   </data>
   <data name="copySpinEdit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 20</value>
+    <value>106, 20</value>
   </data>
   <data name="copySpinEdit.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -555,9 +555,6 @@
   </data>
   <data name="printControl1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
-  </data>
-  <data name="printControl1.TooltipFont" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="&gt;&gt;printControl1.Name" xml:space="preserve">
     <value>printControl1</value>

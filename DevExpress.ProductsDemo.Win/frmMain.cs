@@ -153,7 +153,6 @@ namespace DevExpress.ProductsDemo.Win {
             InitGalleryItem(rgbiCurrentView.Gallery.Groups[0].Items[2], TagResources.ContactByState, Properties.Resources.ContactByStateDescription);
             InitGalleryItem(rgbiCurrentView.Gallery.Groups[0].Items[3], TagResources.ContactCard, Properties.Resources.ContactCardDescription);
             rgbiCurrentViewTasks.Gallery.ItemCheckMode = DevExpress.XtraBars.Ribbon.Gallery.ItemCheckMode.SingleCheck;
-            bvbiSaveAs.Tag = TagResources.MenuSaveAs;
             bvbiSaveAttachment.Tag = TagResources.MenuSaveAttachment;
             bsiNavigation.Hint = Properties.Resources.NavigationDescription;
             
@@ -169,7 +168,7 @@ namespace DevExpress.ProductsDemo.Win {
             galleryItem.Hint = description;
         }
         internal ZoomManager ZoomManager { get { return _zoomManager; } }
-        internal BackstageViewButtonItem SaveAsMenuItem { get { return bvbiSaveAs; } }
+       // internal BackstageViewButtonItem SaveAsMenuItem { get { return bvbiSaveAs; } }
         internal BackstageViewButtonItem SaveAttachmentMenuItem { get { return bvbiSaveAttachment; } }
         internal InRibbonGallery TaskGallery { get { return rgbiCurrentViewTasks.Gallery; } }
         internal PopupMenu FlagStatusMenu { get { return pmFlagStatus; } }

@@ -16,18 +16,20 @@ namespace DevExpress.ProductsDemo.Win {
     static class Program {
       
         [STAThread]
-        static void Main(string[] arguments) {
-            if(!System.Windows.Forms.SystemInformation.TerminalServerSession && Screen.AllScreens.Length > 1)
+        static void Main(string[] arguments)
+        {
+            if (!System.Windows.Forms.SystemInformation.TerminalServerSession && Screen.AllScreens.Length > 1)
                 DevExpress.XtraEditors.WindowsFormsSettings.SetPerMonitorDpiAware();
             else
                 DevExpress.XtraEditors.WindowsFormsSettings.SetDPIAware();
+
             AppHelper.WarmUp();
             DevExpress.Utils.DeserializationSettings.RegisterTrustedAssembly(typeof(LotGridModel).Assembly);
             DevExpress.Data.Filtering.EnumProcessingHelper.RegisterEnum(typeof(DevExpress.XtraPrinting.BorderSide));
-
             AppDomain.CurrentDomain.AssemblyResolve += OnCurrentDomainAssemblyResolve;
             WindowsFormsSettings.ApplyDemoSettings();
             DataHelper.ApplicationArguments = arguments;
+
             System.Globalization.CultureInfo enUs = new System.Globalization.CultureInfo("en-US");
             System.Threading.Thread.CurrentThread.CurrentCulture = enUs;
             System.Threading.Thread.CurrentThread.CurrentUICulture = enUs;
@@ -39,21 +41,39 @@ namespace DevExpress.ProductsDemo.Win {
             EnumProcessingHelper.RegisterEnum<TaskStatus>();
             EnumProcessingHelper.RegisterEnum(typeof(TaskStatus), "DevExpress.ProductsDemo.Win.TaskStatus");
             MainFormHelper.InitTakeScreen(Environment.GetCommandLineArgs());
-            //if(!MainFormHelper.TakeScreens)
-            //    SplashScreenManager.ShowForm(typeof(SplashScreen1));
 
-
+            if (!MainFormHelper.TakeScreens)
+                SplashScreenManager.ShowForm(typeof(SplashScreen1));
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            var mainForm = new frmMain();
+
+            SplashScreenManager.CloseForm(false);
+
+            // Show frmMain first so it exists as a real window (and can act as
+            // the login dialog's parent for centering), but keep it disabled/
+            // hidden from actual use until login succeeds.
+            mainForm.Show();
+            mainForm.Enabled = false;
+
+            bool loggedIn;
             using (var loginForm = new DevExpress.ProductsDemo.Win.Forms.frmLogin())
             {
-                if (loginForm.ShowDialog() != DialogResult.OK)
-                    return; // user closed/cancelled login — exit without starting frmMain
+               // loggedIn = loginForm.ShowDialog(mainForm) == DialogResult.OK;
+                loggedIn = true;
             }
-            Application.Run(new frmMain());
+
+            if (!loggedIn)
+            {
+                mainForm.Close();
+                return;
+            }
+
+            mainForm.Enabled = true;
+            Application.Run(mainForm);
         }
-        //
         static Assembly OnCurrentDomainAssemblyResolve(object sender, ResolveEventArgs args) {
             string partialName = DevExpress.Utils.AssemblyHelper.GetPartialName(args.Name).ToLower();
             if(partialName == "entityframework" || partialName == "system.data.sqlite") {
