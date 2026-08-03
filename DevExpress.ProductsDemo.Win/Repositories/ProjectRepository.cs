@@ -142,5 +142,30 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                 }
             }
         }
+
+        public void UpdateSortOrder(int projectId, int sortOrder)
+        {
+            using (var conn = new DbHelper().GetConnection())
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE Projects SET sort_order = @sortOrder WHERE Id = @projectId";
+
+                    var p1 = cmd.CreateParameter();
+                    p1.ParameterName = "@sortOrder";
+                    p1.Value = sortOrder;
+
+                    var p2 = cmd.CreateParameter();
+                    p2.ParameterName = "@projectId";
+                    p2.Value = projectId;
+
+                    cmd.Parameters.Add(p1);
+                    cmd.Parameters.Add(p2);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DevExpress.MailClient.Win;
+﻿using DevExpress.Data.Filtering;
+using DevExpress.MailClient.Win;
 using DevExpress.MailDemo.Win;
 using DevExpress.ProductsDemo.Win.Controls;
 using DevExpress.ProductsDemo.Win.Domain;
@@ -6,6 +7,8 @@ using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.ProductsDemo.Win.Repositories;
 using DevExpress.ProductsDemo.Win.Services;
 using DevExpress.Utils;
+using DevExpress.Utils.Behaviors;
+using DevExpress.Utils.DragDrop;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
@@ -18,22 +21,20 @@ using DevExpress.XtraNavBar;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.ReportGeneration;
 using DevExpress.XtraReports.UI;
-using DevExpress.Data.Filtering;
-
-
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Windows.Forms;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Modules
 {
     public partial class ProjectModule : BaseModule
     {
         public override string ModuleName => $"{_programType} - {Properties.Resources.TasksName}";
+      
 
         private List<LotGridModel> _data;
         private LotGridModel _currentLot;
@@ -71,6 +72,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             _selectedProgramId = programId;
             LoadData();
         }
+       
 
 
         private XtraReport BuildReportFromTemplateOrDefault()
@@ -240,6 +242,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             var bmp0 = new Bitmap(16, 16);
             imageList.Images.Add(bmp0);
 
+
             // Red flag
             var bmp1 = new Bitmap(16, 16);
             using (Graphics g = Graphics.FromImage(bmp1))
@@ -397,6 +400,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
             AddCol("LotBudget", "الغلاف المالي", 110, "{0:N2}");
+            AddCol("SortOrder", "S", 110);
             AddCol("RegisteredAmount", "المبلغ المسجل", 110, "{0:N2}");
             AddCol("ConsumedAmount", "المبلغ المستهلك", 110, "{0:N2}");
             AddCol("Remaining", "الباقي", 110, "{0:N2}");
@@ -550,7 +554,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
 
-            //--------
+      
 
 
             //  gridView1.Columns["OperationName"].ColumnEdit = memo;
@@ -566,6 +570,45 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void SetupProjectDragReorder()
+        {
+            behaviorManager1.Attach<DragDropBehavior>(gridView1, behavior =>
+            {
+                behavior.Properties.AllowDrop = true;
+                behavior.Properties.InsertIndicatorVisible = true;
+                behavior.Properties.PreviewVisible = true;
+
+                behavior.DragDrop += (s, e) => OnProjectRowsReordered();
+            });
+        }
+        private void OnProjectRowsReordered()
+        {
+            var projectOrder = new Dictionary<int, int>();
+            int order = 0;
+            int? lastProjectId = null;
+
+            foreach (var row in _data)
+            {
+                if (row.ProjectId != lastProjectId)
+                {
+                    order++;
+                    lastProjectId = row.ProjectId;
+                }
+
+                if (!projectOrder.ContainsKey(row.ProjectId))
+                    projectOrder[row.ProjectId] = order;
+            }
+
+            foreach (var kvp in projectOrder)
+            {
+                _projectRepo.UpdateSortOrder(kvp.Key, kvp.Value);
+            }
+        }
+
+        //
         public void RefreshLookups()
         {
             var lookupRepo = new LookupRepository();
@@ -601,6 +644,23 @@ namespace DevExpress.ProductsDemo.Win.Modules
             if (e.RowHeight < MinRowHeight)
                 e.RowHeight = MinRowHeight;
         }
+        private void gridView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            var hitInfo = gridView1.CalcHitInfo(new Point(e.X, e.Y));
+            if (!hitInfo.InRow) return;
+
+            var row = gridView1.GetRow(hitInfo.RowHandle) as LotGridModel;
+            if (row == null) return;
+
+            // Select every row belonging to the same project, so dragging any one of them drags the whole group
+            gridView1.ClearSelection();
+            for (int i = 0; i < gridView1.DataRowCount; i++)
+            {
+                if (gridView1.GetRow(i) is LotGridModel r && r.ProjectId == row.ProjectId)
+                    gridView1.SelectRow(i);
+            }
+        }
+        
 
         private bool _layoutReady = false;
         private void SaveLayout()
@@ -710,6 +770,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 base.InitModule(manager, data);
                 BuildDetailPanel();
                 SetupGrid();
+                SetupProjectDragReorder();
                 LoadData();
                 LoadLayout();
                 _layoutReady = true;

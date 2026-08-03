@@ -23,9 +23,14 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProjectModule));
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this._detailPanel = new System.Windows.Forms.Panel();
+            this.lookUp8 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUp7 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUp6 = new DevExpress.XtraEditors.LookUpEdit();
+            this.lookUp5 = new DevExpress.XtraEditors.LookUpEdit();
             this.txtexceptedend = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,13 +52,14 @@
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.colComplete = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colOverdue = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.lookUp5 = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUp6 = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUp7 = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUp8 = new DevExpress.XtraEditors.LookUpEdit();
+            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             this._detailPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp8.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp7.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp6.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp5.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).BeginInit();
@@ -66,10 +72,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUp5.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUp6.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUp7.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUp8.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -97,6 +100,34 @@
             this._detailPanel.Controls.Add(this.txtupdateby);
             resources.ApplyResources(this._detailPanel, "_detailPanel");
             this._detailPanel.Name = "_detailPanel";
+            // 
+            // lookUp8
+            // 
+            resources.ApplyResources(this.lookUp8, "lookUp8");
+            this.lookUp8.Name = "lookUp8";
+            this.lookUp8.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUp8.Properties.Buttons"))))});
+            // 
+            // lookUp7
+            // 
+            resources.ApplyResources(this.lookUp7, "lookUp7");
+            this.lookUp7.Name = "lookUp7";
+            this.lookUp7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUp7.Properties.Buttons"))))});
+            // 
+            // lookUp6
+            // 
+            resources.ApplyResources(this.lookUp6, "lookUp6");
+            this.lookUp6.Name = "lookUp6";
+            this.lookUp6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUp6.Properties.Buttons"))))});
+            // 
+            // lookUp5
+            // 
+            resources.ApplyResources(this.lookUp5, "lookUp5");
+            this.lookUp5.Name = "lookUp5";
+            this.lookUp5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUp5.Properties.Buttons"))))});
             // 
             // txtexceptedend
             // 
@@ -159,7 +190,6 @@
             this.gridView1.OptionsBehavior.AllowPixelScrolling = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsBehavior.AutoExpandAllGroups = true;
             this.gridView1.OptionsFilter.ColumnFilterPopupMode = DevExpress.XtraGrid.Columns.ColumnFilterPopupMode.Excel;
-            this.gridView1.OptionsFind.AlwaysVisible = false;
             this.gridView1.OptionsFind.FindFilterColumns = "Subject";
             this.gridView1.OptionsPrint.PrintHorzLines = false;
             this.gridView1.OptionsPrint.PrintVertLines = false;
@@ -261,7 +291,7 @@
             resources.ApplyResources(this.layoutControlItem2, "layoutControlItem2");
             this.layoutControlItem2.TextAlignMode = DevExpress.XtraLayout.TextAlignModeItem.AutoSize;
             this.layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Top;
-            this.layoutControlItem2.TextSize = new System.Drawing.Size(79, 13);
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(85, 13);
             this.layoutControlItem2.TextToControlDistance = 5;
             // 
             // colComplete
@@ -285,34 +315,6 @@
             this.colOverdue.Name = "colOverdue";
             this.colOverdue.OptionsColumn.ShowInCustomizationForm = false;
             // 
-            // lookUp5
-            // 
-            resources.ApplyResources(this.lookUp5, "lookUp5");
-            this.lookUp5.Name = "lookUp5";
-            this.lookUp5.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit1.Properties.Buttons2"))))});
-            // 
-            // lookUp6
-            // 
-            resources.ApplyResources(this.lookUp6, "lookUp6");
-            this.lookUp6.Name = "lookUp6";
-            this.lookUp6.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit1.Properties.Buttons1"))))});
-            // 
-            // lookUp7
-            // 
-            resources.ApplyResources(this.lookUp7, "lookUp7");
-            this.lookUp7.Name = "lookUp7";
-            this.lookUp7.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit2.Properties.Buttons"))))});
-            // 
-            // lookUp8
-            // 
-            resources.ApplyResources(this.lookUp8, "lookUp8");
-            this.lookUp8.Name = "lookUp8";
-            this.lookUp8.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("lookUpEdit1.Properties.Buttons"))))});
-            // 
             // ProjectModule
             // 
             resources.ApplyResources(this, "$this");
@@ -323,6 +325,10 @@
             this.layoutControl1.ResumeLayout(false);
             this._detailPanel.ResumeLayout(false);
             this._detailPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp8.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp7.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp6.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUp5.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemImageComboBox1)).EndInit();
@@ -335,10 +341,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUp5.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUp6.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUp7.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUp8.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -372,5 +375,6 @@
         private XtraEditors.LookUpEdit lookUp6;
         private XtraEditors.LookUpEdit lookUp5;
         private XtraEditors.LookUpEdit lookUp8;
+        private Utils.Behaviors.BehaviorManager behaviorManager1;
     }
 }

@@ -122,7 +122,7 @@
     <value>0, 134</value>
   </data>
   <assembly alias="DevExpress.Utils.v24.1" name="DevExpress.Utils.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-  <data name="lookUpEdit1.Properties.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v24.1">
+  <data name="lookUp8.Properties.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v24.1">
     <value>Combo</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
@@ -151,7 +151,7 @@
   <data name="lookUp7.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 103</value>
   </data>
-  <data name="lookUpEdit2.Properties.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v24.1">
+  <data name="lookUp7.Properties.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v24.1">
     <value>Combo</value>
   </data>
   <data name="lookUp7.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
@@ -178,7 +178,7 @@
   <data name="lookUp6.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 71</value>
   </data>
-  <data name="lookUpEdit1.Properties.Buttons1" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v24.1">
+  <data name="lookUp6.Properties.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v24.1">
     <value>Combo</value>
   </data>
   <data name="lookUp6.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
@@ -205,7 +205,7 @@
   <data name="lookUp5.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 39</value>
   </data>
-  <data name="lookUpEdit1.Properties.Buttons2" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v24.1">
+  <data name="lookUp5.Properties.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v24.1">
     <value>Combo</value>
   </data>
   <data name="lookUp5.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
@@ -239,7 +239,7 @@
     <value>Yes</value>
   </data>
   <data name="txtexceptedend.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
+    <value>93, 22</value>
   </data>
   <data name="txtexceptedend.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -272,7 +272,7 @@
     <value>Yes</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 13</value>
+    <value>91, 13</value>
   </data>
   <data name="label3.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -311,7 +311,7 @@
     <value>Yes</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
+    <value>67, 13</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -344,7 +344,7 @@
     <value>Yes</value>
   </data>
   <data name="txtremaningdays.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
+    <value>93, 22</value>
   </data>
   <data name="txtremaningdays.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -374,7 +374,7 @@
     <value>Yes</value>
   </data>
   <data name="txtupdateddate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
+    <value>93, 22</value>
   </data>
   <data name="txtupdateddate.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -404,7 +404,7 @@
     <value>Yes</value>
   </data>
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
+    <value>67, 13</value>
   </data>
   <data name="label1.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -440,7 +440,7 @@
     <value>Yes</value>
   </data>
   <data name="txtupdateby.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
+    <value>93, 22</value>
   </data>
   <data name="txtupdateby.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -641,6 +641,9 @@
   <data name="colComplete.Width" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
+  <metadata name="behaviorManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -727,6 +730,12 @@
   </data>
   <data name="&gt;&gt;colOverdue.Type" xml:space="preserve">
     <value>DevExpress.XtraGrid.Columns.GridColumn, DevExpress.XtraGrid.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+  </data>
+  <data name="&gt;&gt;behaviorManager1.Name" xml:space="preserve">
+    <value>behaviorManager1</value>
+  </data>
+  <data name="&gt;&gt;behaviorManager1.Type" xml:space="preserve">
+    <value>DevExpress.Utils.Behaviors.BehaviorManager, DevExpress.Utils.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ProjectModule</value>

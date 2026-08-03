@@ -93,6 +93,7 @@ public class LotGridModel
     public string Notes { get; set; }
     public int? FlagsId { get; set; }
     public bool HideTopBorder { get; set; }
+    public int SortOrder { get; set; }
 
 
     public string UpdatedBy { get; set; }

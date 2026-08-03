@@ -34,6 +34,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             p.commune_id,
             p.domain_id,
             p.sector_id,
+            p.sort_order,
             l.administrative_procedure_id,
             l.special_status1_id,
             l.special_status2_id,
@@ -107,10 +108,11 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             ON ps.id = l.project_status_id
 
         ORDER BY
+        p.sort_order,
     p.daira_id,
     p.commune_id,
     p.operation_number DESC,
-    l.lot_number DESC";
+    l.lot_number ";
 
                 using (var cmd = new MySqlCommand(sql, conn))
                 using (var rd = cmd.ExecuteReader())
@@ -137,6 +139,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                             CommuneId = rd["commune_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["commune_id"]),
                             DomainId = rd["domain_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["domain_id"]),
                             SectorId = rd["sector_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["sector_id"]),
+                            SortOrder = rd["sort_order"] == DBNull.Value ? 0 : Convert.ToInt32(rd["sort_order"]),   // ← added
                             AdministrativeProcedureId = rd["administrative_procedure_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["administrative_procedure_id"]),
                             SpecialStatus1Id = rd["special_status1_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["special_status1_id"]),
                             SpecialStatus2Id = rd["special_status2_id"] == DBNull.Value ? (int?)null : Convert.ToInt32(rd["special_status2_id"]),
