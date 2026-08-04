@@ -479,7 +479,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             Core.Helpers.GridHelper.DisableSorting(gridView1,
     "OperationNumber",
     "FlagsId",
-    "Daira",
     "LotNumber",
     "Commune",
     "ProgramId",
