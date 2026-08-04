@@ -237,38 +237,46 @@ namespace DevExpress.ProductsDemo.Win.Services
         }
 
         // ── Group numbering (e.g. number by project, not by row) ─────
-        private static void ApplyGroupNumbering<T>(XtraReport report, List<T> visibleData, GridReportOptions options)
+        public static void ApplyGroupNumbering<T>(
+    XtraReport report,
+    List<T> visibleData,
+    GridReportOptions options,
+    string resetByField = null) // 👈 Added resetByField
         {
             var cell = report.FindControl(options.NumberingCellName, true) as XRTableCell;
 
             var prop = typeof(T).GetProperty(options.GroupIdField);
             if (prop == null) return;
 
-            var groupNumbers = new Dictionary<object, int>();
+            var resetProp = !string.IsNullOrEmpty(resetByField) ? typeof(T).GetProperty(resetByField) : null;
+
+            // Stores (ResetGroupValue, GroupIdValue) -> GroupNumber
+            var groupNumbers = new Dictionary<(object ResetVal, object GroupId), int>();
+
+            object currentResetValue = null;
             int nextNumber = 1;
 
             foreach (var row in visibleData)
             {
-                object key = prop.GetValue(row);
-                if (key == null) continue;
+                object groupKey = prop.GetValue(row);
+                if (groupKey == null) continue;
 
+                object resetValue = resetProp?.GetValue(row);
+
+                // If the parent group (e.g., StageOrder) changes, reset counter to 1
+                if (resetProp != null && !Equals(resetValue, currentResetValue))
+                {
+                    currentResetValue = resetValue;
+                    nextNumber = 1;
+                }
+
+                var key = (currentResetValue, groupKey);
                 if (!groupNumbers.ContainsKey(key))
                 {
                     groupNumbers[key] = nextNumber;
                     nextNumber++;
                 }
             }
-
-            int totalGroupsCount = nextNumber - 1;
-
-            var counterCell1 = report.FindControl(options.CounterCellName, true) as XRTableCell;
-            var counterCell2 = report.FindControl(options.CounterCellName2, true) as XRTableCell;
-
-            if (counterCell1 != null)
-                counterCell1.BeforePrint += (s, e) => ((XRTableCell)s).Text = totalGroupsCount.ToString();
-
-            if (counterCell2 != null)
-                counterCell2.BeforePrint += (s, e) => ((XRTableCell)s).Text = totalGroupsCount.ToString();
 
             if (cell == null) return;
 
@@ -283,7 +291,12 @@ namespace DevExpress.ProductsDemo.Win.Services
                     return;
                 }
 
-                currentCell.Text = groupNumbers.TryGetValue(groupIdObj, out int num) ? num.ToString() : "";
+                object resetValObj = resetProp != null
+                    ? currentCell.Report.GetCurrentColumnValue(resetByField)
+                    : null;
+
+                var key = (resetValObj, groupIdObj);
+                currentCell.Text = groupNumbers.TryGetValue(key, out int num) ? num.ToString() : "";
             };
         }
 
@@ -309,7 +322,11 @@ namespace DevExpress.ProductsDemo.Win.Services
             var allRows = report.AllControls<XRTableRow>().ToList();
             if (allRows.Count == 0) return;
 
-            XRTableRow referenceRow = allRows[0];
+            // Find the row that actually contains the number cell (the Detail row)
+            XRTableRow referenceRow = allRows.FirstOrDefault(row =>
+                row.Cells.Cast<XRTableCell>().Any(c => c.Name == options.NumberingCellName)
+            ) ?? allRows[0];
+
             var keysInOrder = referenceRow.Cells.Cast<XRTableCell>()
                 .Select(c => ResolveColumnKey(c, captionToField, options.NumberingCellName))
                 .ToList();

@@ -88,10 +88,10 @@ namespace DevExpress.ProductsDemo.Win.Services
         { "Commune", 50f },
         { "Program", 40f },
         { "ExpectedEndDate", 50f },
-        { "LotBudget", 90f },
-        { "RegisteredAmount", 90f },
-        { "ConsumedAmount", 90f },
-        { "Remaining", 90f },
+        { "LotBudget", 95f },
+        { "RegisteredAmount", 95f },
+        { "ConsumedAmount", 95f },
+        { "Remaining", 95f },
         { "Contractor", 60f },
         { "StartDate", 70f },
         { "ExecutionDuration", 40f },
@@ -105,6 +105,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                     // add HighlightField/HighlightValue/HighlightColor or UniqueRowIdField here if you want those to apply too
                 };
                 GridReportBuilder.ApplyGridColumnVisibility(listPage, gridView, lifecycleOptions, out _, out _);
+                GridReportBuilder.ApplyGroupNumbering(listPage, stageRows, lifecycleOptions, "StageOrder");
                 listPage.CreateDocument();
 
                 if (combined == null)

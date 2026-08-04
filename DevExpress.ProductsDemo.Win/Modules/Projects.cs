@@ -106,7 +106,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
         { "OperationNumber", 60f },
         { "Daira", 50f },
         { "Commune", 50f },
-        { "ProgramId", 40f },
+        { "Program", 40f },
         { "ExpectedEndDate", 50f },
         { "LotBudget", 75f },
         { "RegisteredAmount", 75f },
@@ -117,9 +117,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
         { "ExecutionDuration", 40f },
         { "PhysicalProgress", 40f },
         { "FinancialProgress", 40f },
-        { "ProjectStatusId", 40f },
-        { "DomainId", 45f },
-        { "SectorId", 45f }
+        { "ProjectStatus", 40f },
+        { "Domain", 45f },
+        { "Sector", 45f }
     }
             });
 
