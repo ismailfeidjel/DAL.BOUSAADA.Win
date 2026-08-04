@@ -118,8 +118,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
         { "PhysicalProgress", 40f },
         { "FinancialProgress", 40f },
         { "ProjectStatusId", 40f },
-        { "Domain", 45f },
-        { "Sector", 45f }
+        { "DomainId", 45f },
+        { "SectorId", 45f }
     }
             });
 

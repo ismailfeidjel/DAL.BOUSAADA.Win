@@ -254,14 +254,29 @@ namespace DevExpress.ProductsDemo.Win.Modules
             if (firstShow)
             {
                 reportDesigner1.ContainerControl = this;
-                XtraReport report = new DevExpress.ProductsDemo.Win.MasterDetailReport.Report();
-                report.ReportPrintOptions.DetailCountAtDesignTime = 0;
-                foreach (XtraReportBase item in report.AllControls<XtraReportBase>())
+
+                string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", "قالب_تقرير_المشاريع.repx");
+
+                if (File.Exists(templatePath))
                 {
-                    item.ReportPrintOptions.DetailCountAtDesignTime = 0;
+                    XtraReport report = XtraReport.FromFile(templatePath, true);
+
+                    foreach (XtraReportBase item in report.AllControls<XtraReportBase>())
+                    {
+                        item.ReportPrintOptions.DetailCountAtDesignTime = 0;
+                    }
+
+                    reportDesigner1.OpenReport(report);
+                    _currentOpenReport = report;   // ← track it
                 }
-                reportDesigner1.OpenReport(report);
-                _currentOpenReport = report;   // ← track it
+                else
+                {
+                    XtraMessageBox.Show(
+                        $"القالب غير موجود:\n{templatePath}",
+                        "تنبيه",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                }
 
                 MainRibbon.AutoHideEmptyItems = true;
                 MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByText("VIEW");
@@ -277,7 +292,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             }
             MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
         }
-
         public void OpenExternalReport(XtraReport report)
         {
             if (report == null) return;

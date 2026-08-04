@@ -23,12 +23,12 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             base.ShowModule(firstShow);
             if(firstShow) {
                 reportDesigner1.ContainerControl = this;
-                XtraReport report = new DevExpress.ProductsDemo.Win.MasterDetailReport.Report();
-                report.ReportPrintOptions.DetailCountAtDesignTime = 0;
-                foreach(XtraReportBase item in report.AllControls<XtraReportBase>()) {
-                    item.ReportPrintOptions.DetailCountAtDesignTime = 0;
-                }
-                reportDesigner1.OpenReport(report);
+               // XtraReport report = new DevExpress.ProductsDemo.Win.MasterDetailReport.Report();
+                //report.ReportPrintOptions.DetailCountAtDesignTime = 0;
+                //foreach(XtraReportBase item in report.AllControls<XtraReportBase>()) {
+                //    item.ReportPrintOptions.DetailCountAtDesignTime = 0;
+                //}
+                //reportDesigner1.OpenReport(report);
                 MainRibbon.AutoHideEmptyItems = true;
                 MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByText("VIEW");
                 MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);

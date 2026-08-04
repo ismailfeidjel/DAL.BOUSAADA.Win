@@ -639,18 +639,6 @@
     <Compile Include="MasterDetailReport\LotSummaryReport.Designer.cs">
       <DependentUpon>LotSummaryReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="MasterDetailReport\Report - Copy.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MasterDetailReport\Report - Copy.Designer.cs">
-      <DependentUpon>Report - Copy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MasterDetailReport\Report.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="MasterDetailReport\Report.Designer.cs">
-      <DependentUpon>Report.cs</DependentUpon>
-    </Compile>
     <Compile Include="MasterDetailReport\XtraReport1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -874,12 +862,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MasterDetailReport\LotSummaryReport.resx">
       <DependentUpon>LotSummaryReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MasterDetailReport\Report - Copy.resx">
-      <DependentUpon>Report - Copy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MasterDetailReport\Report.resx">
-      <DependentUpon>Report.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MasterDetailReport\XtraReport1.resx">
       <DependentUpon>XtraReport1.cs</DependentUpon>
