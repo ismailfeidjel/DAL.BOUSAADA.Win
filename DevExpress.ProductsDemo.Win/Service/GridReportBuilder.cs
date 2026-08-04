@@ -102,9 +102,8 @@ namespace DevExpress.ProductsDemo.Win.Services
             if (!string.IsNullOrEmpty(options.GroupIdField))
                 ApplyGroupNumbering(report, visibleData, options);
 
-            ApplyGridColumnVisibility(report, gridView, options, out List<string> visibleKeys, out Dictionary<string, float> keyWidths);
-            if (options.GenerateFooterRow)
-                GenerateFooter(report, visibleKeys, keyWidths, options);
+            ApplyGridColumnVisibility(report, gridView, options, out List<string> visibleKeys, out Dictionary<string, float> keyWidths); if (options.GenerateFooterRow)
+              GenerateFooter(report, visibleKeys, keyWidths, options);
 
             return report;
         }
@@ -289,7 +288,8 @@ namespace DevExpress.ProductsDemo.Win.Services
         }
 
         // ── Column visibility + proportional widths ──────────────────
-        private static void ApplyGridColumnVisibility(XtraReport report, GridView gridView, GridReportOptions options, out List<string> finalKeys, out Dictionary<string, float> finalWidths)
+
+        internal static void ApplyGridColumnVisibility(XtraReport report, GridView gridView, GridReportOptions options, out List<string> finalKeys, out Dictionary<string, float> finalWidths)
         {
             finalKeys = new List<string>();
             finalWidths = new Dictionary<string, float>();
@@ -311,19 +311,19 @@ namespace DevExpress.ProductsDemo.Win.Services
 
             XRTableRow referenceRow = allRows[0];
             var keysInOrder = referenceRow.Cells.Cast<XRTableCell>()
-                .Select(c => ResolveColumnKey(c, captionToField))
+                .Select(c => ResolveColumnKey(c, captionToField, options.NumberingCellName))
                 .ToList();
 
-            System.Diagnostics.Debug.WriteLine("keysInOrder: " + string.Join(" | ", keysInOrder.Select(k => k ?? "NULL")));
-            System.Diagnostics.Debug.WriteLine("visibleFields: " + string.Join(" | ", visibleFields));
-            System.Diagnostics.Debug.WriteLine("FieldAliases count: " + options.FieldAliases.Count);
-
-
             // Hide any template column whose field isn't currently visible in the live grid
-            // (covers both explicitly-hidden grid columns and fields the grid doesn't have at all)
+            // (covers both explicitly-hidden grid columns and fields the grid doesn't have at all).
+            // The row-number cell is a special case: it isn't bound to any data field (its text
+            // is set separately by ApplyGroupNumbering), so it must never be treated as hideable.
             var hiddenIndices = new HashSet<int>();
             for (int i = 0; i < keysInOrder.Count; i++)
             {
+                if (referenceRow.Cells[i] is XRTableCell refCell && refCell.Name == options.NumberingCellName)
+                    continue; // always visible — not a real data field
+
                 string key = keysInOrder[i];
                 string gridFieldName = key != null && options.FieldAliases.TryGetValue(key, out string alias)
                     ? alias
@@ -352,12 +352,6 @@ namespace DevExpress.ProductsDemo.Win.Services
             foreach (var k in flexibleKeys)
                 resolvedWidths[k] = flexibleWidthEach;
 
-            resolvedWidths.TryGetValue("OperationName", out float opNameWidth);
-            resolvedWidths.TryGetValue("Notes", out float notesWidth);
-
-            System.Diagnostics.Debug.WriteLine($"OperationName width: {opNameWidth}");
-            System.Diagnostics.Debug.WriteLine($"Notes width: {notesWidth}");
-
             var touchedTables = new HashSet<XRTable>();
 
             foreach (XRTableRow row in allRows)
@@ -378,7 +372,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                         string key = keysInOrder[i];
                         float w = resolvedWidths.TryGetValue(key, out float rw) ? rw : 0f;
                         cells[i].WidthF = w;
-                        cells[i].Weight = w;   // ← THE FIX: Weight drives actual layout, WidthF alone doesn't stick
+                        cells[i].Weight = w;   // Weight drives actual layout, WidthF alone doesn't stick
 
                         rowTotal += w;
 
@@ -399,8 +393,12 @@ namespace DevExpress.ProductsDemo.Win.Services
             foreach (var table in touchedTables)
                 table.WidthF = printableWidth;
         }
-        private static string ResolveColumnKey(XRTableCell cell, Dictionary<string, string> captionToField)
+
+        private static string ResolveColumnKey(XRTableCell cell, Dictionary<string, string> captionToField, string numberingCellName)
         {
+            if (cell.Name == numberingCellName)
+                return "__RowNumber__"; // synthetic key — not a real data field, always kept visible
+
             string field = GetCellFieldName(cell);
             if (field != null) return field;
 

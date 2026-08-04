@@ -25,56 +25,56 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup8 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem33 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem34 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem35 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem36 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem37 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem38 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem39 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem40 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup9 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem41 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem42 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem43 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem44 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup10 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem45 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem46 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem47 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem48 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup11 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem49 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem50 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem51 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem52 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup12 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem53 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem54 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem55 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem56 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup13 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem57 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem58 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem59 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem60 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup14 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem61 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem62 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem63 = new DevExpress.XtraBars.Ribbon.GalleryItem();
-            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem64 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup1 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem1 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem2 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem3 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem4 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem5 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem6 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem7 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem8 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup2 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem9 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem10 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem11 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem12 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup3 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem13 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem14 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem15 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem16 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup4 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem17 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem18 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem19 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem20 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup5 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem21 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem22 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem23 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem24 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup6 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem25 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem26 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem27 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem28 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup7 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem29 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem30 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem31 = new DevExpress.XtraBars.Ribbon.GalleryItem();
+            DevExpress.XtraBars.Ribbon.GalleryItem galleryItem32 = new DevExpress.XtraBars.Ribbon.GalleryItem();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.backstageViewControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
+            this.backstageViewClientControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
+            this.helpControl1 = new DevExpress.ProductsDemo.Win.Controls.HelpControl();
+            this.backstageViewControl2 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
             this.backstageViewClientControl3 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
             this.printControl1 = new DevExpress.ProductsDemo.Win.Controls.PrintControl();
             this.backstageViewClientControl4 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
             this.exportControl1 = new DevExpress.ProductsDemo.Win.Controls.ExportControl();
-            this.backstageViewClientControl2 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
-            this.backstageViewClientControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
-            this.helpControl1 = new DevExpress.ProductsDemo.Win.Controls.HelpControl();
-            this.backstageViewControl2 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
             this.backstageViewClientControl5 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
+            this.backstageViewClientControl2 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
             this.bvtiInfo = new DevExpress.XtraBars.Ribbon.BackstageViewTabItem();
             this.backstageViewTabItem2 = new DevExpress.XtraBars.Ribbon.BackstageViewTabItem();
             this.bvbiSaveAttachment = new DevExpress.XtraBars.Ribbon.BackstageViewButtonItem();
@@ -151,10 +151,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).BeginInit();
             this.backstageViewControl1.SuspendLayout();
-            this.backstageViewClientControl3.SuspendLayout();
-            this.backstageViewClientControl4.SuspendLayout();
             this.backstageViewClientControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl2)).BeginInit();
+            this.backstageViewClientControl3.SuspendLayout();
+            this.backstageViewClientControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemZoomTrackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDuration1)).BeginInit();
@@ -233,9 +233,9 @@
             // backstageViewControl1
             // 
             this.backstageViewControl1.Controls.Add(this.backstageViewClientControl1);
-            this.backstageViewControl1.Controls.Add(this.backstageViewClientControl5);
             this.backstageViewControl1.Controls.Add(this.backstageViewClientControl3);
             this.backstageViewControl1.Controls.Add(this.backstageViewClientControl4);
+            this.backstageViewControl1.Controls.Add(this.backstageViewClientControl5);
             this.backstageViewControl1.Controls.Add(this.backstageViewClientControl2);
             this.backstageViewControl1.Items.Add(this.bvtiInfo);
             this.backstageViewControl1.Items.Add(this.backstageViewTabItem2);
@@ -253,6 +253,25 @@
             this.backstageViewControl1.VisibleInDesignTime = true;
             this.backstageViewControl1.ItemClick += new DevExpress.XtraBars.Ribbon.BackstageViewItemEventHandler(this.backstageViewControl1_ItemClick);
             this.backstageViewControl1.Click += new System.EventHandler(this.backstageViewControl1_Click);
+            // 
+            // backstageViewClientControl1
+            // 
+            this.backstageViewClientControl1.Controls.Add(this.helpControl1);
+            this.backstageViewClientControl1.Controls.Add(this.backstageViewControl2);
+            resources.ApplyResources(this.backstageViewClientControl1, "backstageViewClientControl1");
+            this.backstageViewClientControl1.Name = "backstageViewClientControl1";
+            // 
+            // helpControl1
+            // 
+            this.helpControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
+            resources.ApplyResources(this.helpControl1, "helpControl1");
+            this.helpControl1.ForeColor = System.Drawing.Color.Transparent;
+            this.helpControl1.Name = "helpControl1";
+            // 
+            // backstageViewControl2
+            // 
+            resources.ApplyResources(this.backstageViewControl2, "backstageViewControl2");
+            this.backstageViewControl2.Name = "backstageViewControl2";
             // 
             // backstageViewClientControl3
             // 
@@ -279,34 +298,15 @@
             this.exportControl1.ForeColor = System.Drawing.Color.Transparent;
             this.exportControl1.Name = "exportControl1";
             // 
-            // backstageViewClientControl2
-            // 
-            resources.ApplyResources(this.backstageViewClientControl2, "backstageViewClientControl2");
-            this.backstageViewClientControl2.Name = "backstageViewClientControl2";
-            // 
-            // backstageViewClientControl1
-            // 
-            this.backstageViewClientControl1.Controls.Add(this.helpControl1);
-            this.backstageViewClientControl1.Controls.Add(this.backstageViewControl2);
-            resources.ApplyResources(this.backstageViewClientControl1, "backstageViewClientControl1");
-            this.backstageViewClientControl1.Name = "backstageViewClientControl1";
-            // 
-            // helpControl1
-            // 
-            this.helpControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(248)))));
-            resources.ApplyResources(this.helpControl1, "helpControl1");
-            this.helpControl1.ForeColor = System.Drawing.Color.Transparent;
-            this.helpControl1.Name = "helpControl1";
-            // 
-            // backstageViewControl2
-            // 
-            resources.ApplyResources(this.backstageViewControl2, "backstageViewControl2");
-            this.backstageViewControl2.Name = "backstageViewControl2";
-            // 
             // backstageViewClientControl5
             // 
             resources.ApplyResources(this.backstageViewClientControl5, "backstageViewClientControl5");
             this.backstageViewClientControl5.Name = "backstageViewClientControl5";
+            // 
+            // backstageViewClientControl2
+            // 
+            resources.ApplyResources(this.backstageViewClientControl2, "backstageViewClientControl2");
+            this.backstageViewClientControl2.Name = "backstageViewClientControl2";
             // 
             // bvtiInfo
             // 
@@ -446,51 +446,51 @@
             this.rgbiCurrentViewTasks.Gallery.Appearance.ItemCaptionAppearance.Pressed.Options.UseTextOptions = true;
             this.rgbiCurrentViewTasks.Gallery.Appearance.ItemCaptionAppearance.Pressed.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.rgbiCurrentViewTasks.Gallery.ColumnCount = 4;
-            resources.ApplyResources(galleryItemGroup8, "galleryItemGroup8");
-            resources.ApplyResources(galleryItem33, "galleryItem33");
-            galleryItem33.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ListByDate;
-            galleryItem33.Tag = "StatusFilterRegistered";
-            galleryItem33.Value = "StatusFilterRegistered";
-            resources.ApplyResources(galleryItem34, "galleryItem34");
-            galleryItem34.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Today1;
-            galleryItem34.Tag = "StatusFilterUnregistered";
-            galleryItem34.Value = "StatusFilterUnregistered";
-            resources.ApplyResources(galleryItem35, "galleryItem35");
-            galleryItem35.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ToDoList;
-            galleryItem35.Tag = "StatusFilterOngoing";
-            galleryItem35.Value = "StatusFilterOngoing";
-            resources.ApplyResources(galleryItem36, "galleryItem36");
-            galleryItem36.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Completed__2_;
-            galleryItem36.Tag = "StatusFilterClosed";
-            galleryItem36.Value = "StatusFilterClosed";
-            resources.ApplyResources(galleryItem37, "galleryItem37");
-            galleryItem37.Enabled = false;
-            galleryItem37.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.important;
-            galleryItem37.Tag = "TaskPrioritized";
-            resources.ApplyResources(galleryItem38, "galleryItem38");
-            galleryItem38.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Overdue;
-            galleryItem38.Tag = "StatusFilterOverdueActive";
-            galleryItem38.Value = "StatusFilterOverdueActive";
-            resources.ApplyResources(galleryItem39, "galleryItem39");
-            galleryItem39.Enabled = false;
-            galleryItem39.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.List;
-            galleryItem39.Tag = "TaskSimpleList";
-            resources.ApplyResources(galleryItem40, "galleryItem40");
-            galleryItem40.Checked = true;
-            galleryItem40.Enabled = false;
-            galleryItem40.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Deferred;
-            galleryItem40.Tag = "TaskDeferred";
-            galleryItemGroup8.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
-            galleryItem33,
-            galleryItem34,
-            galleryItem35,
-            galleryItem36,
-            galleryItem37,
-            galleryItem38,
-            galleryItem39,
-            galleryItem40});
+            resources.ApplyResources(galleryItemGroup1, "galleryItemGroup1");
+            resources.ApplyResources(galleryItem1, "galleryItem1");
+            galleryItem1.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ListByDate;
+            galleryItem1.Tag = "StatusFilterRegistered";
+            galleryItem1.Value = "StatusFilterRegistered";
+            resources.ApplyResources(galleryItem2, "galleryItem2");
+            galleryItem2.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Today1;
+            galleryItem2.Tag = "StatusFilterUnregistered";
+            galleryItem2.Value = "StatusFilterUnregistered";
+            resources.ApplyResources(galleryItem3, "galleryItem3");
+            galleryItem3.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ToDoList;
+            galleryItem3.Tag = "StatusFilterOngoing";
+            galleryItem3.Value = "StatusFilterOngoing";
+            resources.ApplyResources(galleryItem4, "galleryItem4");
+            galleryItem4.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Completed__2_;
+            galleryItem4.Tag = "StatusFilterClosed";
+            galleryItem4.Value = "StatusFilterClosed";
+            resources.ApplyResources(galleryItem5, "galleryItem5");
+            galleryItem5.Enabled = false;
+            galleryItem5.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.important;
+            galleryItem5.Tag = "TaskPrioritized";
+            resources.ApplyResources(galleryItem6, "galleryItem6");
+            galleryItem6.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Overdue;
+            galleryItem6.Tag = "StatusFilterOverdueActive";
+            galleryItem6.Value = "StatusFilterOverdueActive";
+            resources.ApplyResources(galleryItem7, "galleryItem7");
+            galleryItem7.Enabled = false;
+            galleryItem7.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.List;
+            galleryItem7.Tag = "TaskSimpleList";
+            resources.ApplyResources(galleryItem8, "galleryItem8");
+            galleryItem8.Checked = true;
+            galleryItem8.Enabled = false;
+            galleryItem8.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Deferred;
+            galleryItem8.Tag = "TaskDeferred";
+            galleryItemGroup1.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
+            galleryItem1,
+            galleryItem2,
+            galleryItem3,
+            galleryItem4,
+            galleryItem5,
+            galleryItem6,
+            galleryItem7,
+            galleryItem8});
             this.rgbiCurrentViewTasks.Gallery.Groups.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItemGroup[] {
-            galleryItemGroup8});
+            galleryItemGroup1});
             this.rgbiCurrentViewTasks.Gallery.ImageSize = new System.Drawing.Size(32, 32);
             this.rgbiCurrentViewTasks.Gallery.ItemCheckMode = DevExpress.XtraBars.Ribbon.Gallery.ItemCheckMode.SingleRadio;
             this.rgbiCurrentViewTasks.Gallery.RowCount = 2;
@@ -626,27 +626,27 @@
             this.rgbiCurrentView.Gallery.Appearance.ItemCaptionAppearance.Pressed.Options.UseTextOptions = true;
             this.rgbiCurrentView.Gallery.Appearance.ItemCaptionAppearance.Pressed.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.rgbiCurrentView.Gallery.ColumnCount = 4;
-            resources.ApplyResources(galleryItemGroup9, "galleryItemGroup9");
-            resources.ApplyResources(galleryItem41, "galleryItem41");
-            galleryItem41.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.List;
-            galleryItem41.Tag = "List";
-            resources.ApplyResources(galleryItem42, "galleryItem42");
-            galleryItem42.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.SortAsc;
-            galleryItem42.Tag = "Alphabetical";
-            resources.ApplyResources(galleryItem43, "galleryItem43");
-            galleryItem43.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ByState;
-            galleryItem43.Tag = "ByState";
-            resources.ApplyResources(galleryItem44, "galleryItem44");
-            galleryItem44.Checked = true;
-            galleryItem44.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Card;
-            galleryItem44.Tag = "Card";
-            galleryItemGroup9.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
-            galleryItem41,
-            galleryItem42,
-            galleryItem43,
-            galleryItem44});
+            resources.ApplyResources(galleryItemGroup2, "galleryItemGroup2");
+            resources.ApplyResources(galleryItem9, "galleryItem9");
+            galleryItem9.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.List;
+            galleryItem9.Tag = "List";
+            resources.ApplyResources(galleryItem10, "galleryItem10");
+            galleryItem10.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.SortAsc;
+            galleryItem10.Tag = "Alphabetical";
+            resources.ApplyResources(galleryItem11, "galleryItem11");
+            galleryItem11.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ByState;
+            galleryItem11.Tag = "ByState";
+            resources.ApplyResources(galleryItem12, "galleryItem12");
+            galleryItem12.Checked = true;
+            galleryItem12.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Card;
+            galleryItem12.Tag = "Card";
+            galleryItemGroup2.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
+            galleryItem9,
+            galleryItem10,
+            galleryItem11,
+            galleryItem12});
             this.rgbiCurrentView.Gallery.Groups.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItemGroup[] {
-            galleryItemGroup9});
+            galleryItemGroup2});
             this.rgbiCurrentView.Gallery.ImageSize = new System.Drawing.Size(32, 32);
             this.rgbiCurrentView.Gallery.ItemCheckMode = DevExpress.XtraBars.Ribbon.Gallery.ItemCheckMode.SingleRadio;
             this.rgbiCurrentView.Gallery.RowCount = 1;
@@ -714,30 +714,30 @@
             // 
             // 
             // 
-            resources.ApplyResources(galleryItemGroup10, "galleryItemGroup10");
-            resources.ApplyResources(galleryItem45, "galleryItem45");
-            galleryItem45.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
-            resources.ApplyResources(galleryItem46, "galleryItem46");
-            resources.ApplyResources(galleryItem47, "galleryItem47");
-            resources.ApplyResources(galleryItem48, "galleryItem48");
-            galleryItemGroup10.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
-            galleryItem45,
-            galleryItem46,
-            galleryItem47,
-            galleryItem48});
-            resources.ApplyResources(galleryItemGroup11, "galleryItemGroup11");
-            resources.ApplyResources(galleryItem49, "galleryItem49");
-            resources.ApplyResources(galleryItem50, "galleryItem50");
-            resources.ApplyResources(galleryItem51, "galleryItem51");
-            resources.ApplyResources(galleryItem52, "galleryItem52");
-            galleryItemGroup11.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
-            galleryItem49,
-            galleryItem50,
-            galleryItem51,
-            galleryItem52});
+            resources.ApplyResources(galleryItemGroup3, "galleryItemGroup3");
+            resources.ApplyResources(galleryItem13, "galleryItem13");
+            galleryItem13.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("resource.Image")));
+            resources.ApplyResources(galleryItem14, "galleryItem14");
+            resources.ApplyResources(galleryItem15, "galleryItem15");
+            resources.ApplyResources(galleryItem16, "galleryItem16");
+            galleryItemGroup3.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
+            galleryItem13,
+            galleryItem14,
+            galleryItem15,
+            galleryItem16});
+            resources.ApplyResources(galleryItemGroup4, "galleryItemGroup4");
+            resources.ApplyResources(galleryItem17, "galleryItem17");
+            resources.ApplyResources(galleryItem18, "galleryItem18");
+            resources.ApplyResources(galleryItem19, "galleryItem19");
+            resources.ApplyResources(galleryItem20, "galleryItem20");
+            galleryItemGroup4.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
+            galleryItem17,
+            galleryItem18,
+            galleryItem19,
+            galleryItem20});
             this.ribbonGalleryBarItem1.Gallery.Groups.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItemGroup[] {
-            galleryItemGroup10,
-            galleryItemGroup11});
+            galleryItemGroup3,
+            galleryItemGroup4});
             this.ribbonGalleryBarItem1.Id = 111;
             this.ribbonGalleryBarItem1.Name = "ribbonGalleryBarItem1";
             // 
@@ -783,47 +783,49 @@
             this.ribbonGalleryBarItem3.Gallery.Appearance.ItemCaptionAppearance.Pressed.Options.UseTextOptions = true;
             this.ribbonGalleryBarItem3.Gallery.Appearance.ItemCaptionAppearance.Pressed.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.ribbonGalleryBarItem3.Gallery.ColumnCount = 4;
-            resources.ApplyResources(galleryItemGroup12, "galleryItemGroup12");
-            resources.ApplyResources(galleryItem53, "galleryItem53");
-            galleryItem53.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage")));
-            galleryItem53.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.None;
-            galleryItem53.Tag = "PrintGrid";
-            resources.ApplyResources(galleryItem54, "galleryItem54");
-            galleryItem54.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage1")));
-            galleryItem54.Tag = "PrintStatusSummary";
-            resources.ApplyResources(galleryItem55, "galleryItem55");
-            galleryItem55.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage2")));
-            galleryItem55.Tag = "PrintCommuneSummary";
-            galleryItem56.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage3")));
-            galleryItemGroup12.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
-            galleryItem53,
-            galleryItem54,
-            galleryItem55,
-            galleryItem56});
-            resources.ApplyResources(galleryItemGroup13, "galleryItemGroup13");
-            resources.ApplyResources(galleryItem57, "galleryItem57");
-            resources.ApplyResources(galleryItem58, "galleryItem58");
-            resources.ApplyResources(galleryItem59, "galleryItem59");
-            resources.ApplyResources(galleryItem60, "galleryItem60");
-            galleryItemGroup13.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
-            galleryItem57,
-            galleryItem58,
-            galleryItem59,
-            galleryItem60});
-            resources.ApplyResources(galleryItemGroup14, "galleryItemGroup14");
-            resources.ApplyResources(galleryItem61, "galleryItem61");
-            resources.ApplyResources(galleryItem62, "galleryItem62");
-            resources.ApplyResources(galleryItem63, "galleryItem63");
-            resources.ApplyResources(galleryItem64, "galleryItem64");
-            galleryItemGroup14.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
-            galleryItem61,
-            galleryItem62,
-            galleryItem63,
-            galleryItem64});
+            resources.ApplyResources(galleryItemGroup5, "galleryItemGroup5");
+            resources.ApplyResources(galleryItem21, "galleryItem21");
+            galleryItem21.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage")));
+            galleryItem21.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.None;
+            galleryItem21.Tag = "PrintGrid";
+            resources.ApplyResources(galleryItem22, "galleryItem22");
+            galleryItem22.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage1")));
+            galleryItem22.Tag = "PrintStatusSummary";
+            resources.ApplyResources(galleryItem23, "galleryItem23");
+            galleryItem23.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage2")));
+            galleryItem23.Tag = "PrintCommuneSummary";
+            galleryItem24.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage3")));
+            galleryItem24.Tag = "PrintProjectLifecycleReport";
+            galleryItem24.Value = "PrintProjectLifecycleReport";
+            galleryItemGroup5.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
+            galleryItem21,
+            galleryItem22,
+            galleryItem23,
+            galleryItem24});
+            resources.ApplyResources(galleryItemGroup6, "galleryItemGroup6");
+            resources.ApplyResources(galleryItem25, "galleryItem25");
+            resources.ApplyResources(galleryItem26, "galleryItem26");
+            resources.ApplyResources(galleryItem27, "galleryItem27");
+            resources.ApplyResources(galleryItem28, "galleryItem28");
+            galleryItemGroup6.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
+            galleryItem25,
+            galleryItem26,
+            galleryItem27,
+            galleryItem28});
+            resources.ApplyResources(galleryItemGroup7, "galleryItemGroup7");
+            resources.ApplyResources(galleryItem29, "galleryItem29");
+            resources.ApplyResources(galleryItem30, "galleryItem30");
+            resources.ApplyResources(galleryItem31, "galleryItem31");
+            resources.ApplyResources(galleryItem32, "galleryItem32");
+            galleryItemGroup7.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
+            galleryItem29,
+            galleryItem30,
+            galleryItem31,
+            galleryItem32});
             this.ribbonGalleryBarItem3.Gallery.Groups.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItemGroup[] {
-            galleryItemGroup12,
-            galleryItemGroup13,
-            galleryItemGroup14});
+            galleryItemGroup5,
+            galleryItemGroup6,
+            galleryItemGroup7});
             this.ribbonGalleryBarItem3.Gallery.ImageSize = new System.Drawing.Size(32, 32);
             this.ribbonGalleryBarItem3.Gallery.RowCount = 2;
             this.ribbonGalleryBarItem3.Gallery.ShowItemText = true;
@@ -1119,10 +1121,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl1)).EndInit();
             this.backstageViewControl1.ResumeLayout(false);
-            this.backstageViewClientControl3.ResumeLayout(false);
-            this.backstageViewClientControl4.ResumeLayout(false);
             this.backstageViewClientControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.backstageViewControl2)).EndInit();
+            this.backstageViewClientControl3.ResumeLayout(false);
+            this.backstageViewClientControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemZoomTrackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemSpinEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDuration1)).EndInit();

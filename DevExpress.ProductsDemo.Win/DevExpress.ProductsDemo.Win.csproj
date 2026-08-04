@@ -803,6 +803,7 @@
     <Compile Include="Service\GridReportBuilder.cs" />
     <Compile Include="Service\LotService.cs" />
     <Compile Include="Service\ProgramService.cs" />
+    <Compile Include="Service\ProjectLifecycleReportBuilder.cs" />
     <Compile Include="Service\ProjectService.cs" />
     <Compile Include="Service\StatusSummaryReportBuilder.cs" />
     <Compile Include="XRDesignRibbonControllerResources.Designer.cs">

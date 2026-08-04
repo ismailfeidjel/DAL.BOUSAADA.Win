@@ -91,34 +91,35 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 GenerateFooterRow = false,
                 CustomFilterText = _currentFilterLabel,
                 ProgramDisplayText = programName,
+
                 FieldAliases = new Dictionary<string, string>
     {
         { "Program", "ProgramId" },
-        { "ProjectStatus", "ProjectStatusId" }
+        { "ProjectStatus", "ProjectStatusId" },
+        { "Domain", "DomainId" },
+        { "Sector", "SectorId" }
     },
-
 
                 FixedColumnWidths = new Dictionary<string, float>
     {
+        { "__RowNumber__", 30f },
         { "OperationNumber", 60f },
         { "Daira", 50f },
         { "Commune", 50f },
         { "ProgramId", 40f },
         { "ExpectedEndDate", 50f },
-        { "LotBudget", 85f },
-        { "RegisteredAmount", 85f },
-        { "ConsumedAmount", 85f },
-        { "Remaining", 85f },
+        { "LotBudget", 75f },
+        { "RegisteredAmount", 75f },
+        { "ConsumedAmount", 75f },
+        { "Remaining", 75f },
         { "Contractor", 60f },
-        { "StartDate", 65f },
+        { "StartDate", 60f },
         { "ExecutionDuration", 40f },
-        { "PhysicalProgress", 45f },
+        { "PhysicalProgress", 40f },
         { "FinancialProgress", 40f },
-        { "SectorId", 45f },
-        { "DomainId", 45f },
-        { "ProjectStatusId",40f },
-        // OperationName and Notes deliberately NOT listed here —
-        // they'll split whatever width is left over
+        { "ProjectStatusId", 40f },
+        { "Domain", 45f },
+        { "Sector", 45f }
     }
             });
 
@@ -1155,6 +1156,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 case "PrintCommuneSummary":
                     PrintCommuneSummaryReport();
                     break;
+                case "PrintProjectLifecycleReport":
+                    PrintProjectLifecycleReport();
+                    break;
 
                 // existing status-filter tags, if not already handled elsewhere:
                 case "StatusFilterClosed":
@@ -1277,6 +1281,25 @@ namespace DevExpress.ProductsDemo.Win.Modules
             }
 
             return visibleRows;
+        }
+        public void PrintProjectLifecycleReport()
+        {
+            try
+            {
+                var programs = GetPrograms().Cast<ProgramLookupItem>().ToList();
+
+                var report = ProjectLifecycleReportBuilder.Build(gridView1, programs, programId =>
+                {
+                    var all = _lotRepo.GetGridData();
+                    return all.Where(r => r.ProgramId == programId).ToList();
+                });
+
+                report.ShowPreviewDialog();
+            }
+            catch (InvalidOperationException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void gridView1_CustomDrawCell(object sender, RowCellCustomDrawEventArgs e)
