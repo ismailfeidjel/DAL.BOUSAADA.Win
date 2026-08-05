@@ -72,7 +72,35 @@ namespace DevExpress.ProductsDemo.Win.Modules
             _selectedProgramId = programId;
             LoadData();
         }
-       
+        private Func<LotGridModel, bool> _currentLotFilter = null;
+
+        private void ApplyProjectLevelFilter(Func<LotGridModel, bool> lotPredicate)
+        {
+            _currentLotFilter = lotPredicate;
+
+            if (lotPredicate == null)
+            {
+                // No filter — show everything
+                gridControl1.DataSource = _data;
+                gridView1.ActiveFilterString = "";
+                return;
+            }
+
+            // Find which projects have at least one lot matching the predicate
+            var matchingProjectIds = _data
+                .Where(lotPredicate)
+                .Select(r => r.ProjectId)
+                .ToHashSet();
+
+            // Show ALL lots for those projects — not just the matching lots
+            var filtered = _data
+                .Where(r => matchingProjectIds.Contains(r.ProjectId))
+                .ToList();
+
+            gridControl1.DataSource = filtered;
+            gridView1.ActiveFilterString = ""; // clear grid-level filter since we filter at data level
+        }
+
 
 
         private XtraReport BuildReportFromTemplateOrDefault()
@@ -108,12 +136,12 @@ namespace DevExpress.ProductsDemo.Win.Modules
         { "Commune", 50f },
         { "Program", 40f },
         { "ExpectedEndDate", 50f },
-        { "LotBudget", 75f },
-        { "RegisteredAmount", 75f },
-        { "ConsumedAmount", 75f },
-        { "Remaining", 75f },
+        { "LotBudget", 80f },
+        { "RegisteredAmount", 80f },
+        { "ConsumedAmount", 80f },
+        { "Remaining", 80f },
         { "Contractor", 60f },
-        { "StartDate", 60f },
+        { "StartDate", 65f },
         { "ExecutionDuration", 40f },
         { "PhysicalProgress", 40f },
         { "FinancialProgress", 40f },
@@ -787,15 +815,16 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         // ── Data ─────────────────────────────────────────────────────
 
-
-
         private void LoadData()
         {
             var all = _lotRepo.GetGridData();
             _data = _selectedProgramId.HasValue
                 ? all.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
                 : all;
-            gridControl1.DataSource = _data;
+
+            // Re-apply the current project-level filter if one is active,
+            // otherwise bind the full dataset directly
+            ApplyProjectLevelFilter(_currentLotFilter);
         }
 
         // ── Detail Panel ─────────────────────────────────────────────
@@ -1161,24 +1190,24 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
                 // existing status-filter tags, if not already handled elsewhere:
                 case "StatusFilterClosed":
-                    gridView1.ActiveFilterString = "[ProjectStatusId] = 7";
+                    ApplyProjectLevelFilter(r => r.ProjectStatusId == 7);
                     break;
                 case "StatusFilterOverdueActive":
-                    string filterCriteria = "[ProjectStatusId] <> 7 And [ExpectedEndDate] < Today() And Not IsNull([StartDate])";
-
-                    // Clear previous filters and apply the complex filter string directly
-                    gridView1.ActiveFilter.Clear();
-                    gridView1.ActiveFilterString = filterCriteria;
+                    ApplyProjectLevelFilter(r =>
+                        r.ProjectStatusId != 7 &&
+                        r.ExpectedEndDate.HasValue &&
+                        r.ExpectedEndDate.Value < DateTime.Now &&
+                        r.StartDate.HasValue);
                     break;
 
                 case "StatusFilterOngoing":
-                    gridView1.ActiveFilterString = "[ProjectStatusId] = 3";
+                    ApplyProjectLevelFilter(r => r.ProjectStatusId == 3);
                     break;
                 case "StatusFilterUnregistered":
-                    gridView1.ActiveFilterString = "[ProjectStatusId] = 1";
+                    ApplyProjectLevelFilter(r => r.ProjectStatusId == 1);
                     break;
                 case "StatusFilterRegistered":
-                    gridView1.ActiveFilterString = "[ProjectStatusId] = 2";
+                    ApplyProjectLevelFilter(r => r.ProjectStatusId == 2)    ;
                     break;
                 case "ClearFilter":
                     gridView1.ActiveFilterString = "";

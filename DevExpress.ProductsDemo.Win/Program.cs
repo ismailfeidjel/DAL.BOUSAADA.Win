@@ -61,8 +61,8 @@ namespace DevExpress.ProductsDemo.Win {
             bool loggedIn;
             using (var loginForm = new DevExpress.ProductsDemo.Win.Forms.frmLogin())
             {
-               // loggedIn = loginForm.ShowDialog(mainForm) == DialogResult.OK;
-                loggedIn = true;
+                loggedIn = loginForm.ShowDialog(mainForm) == DialogResult.OK;
+               // loggedIn = true;
             }
 
             if (!loggedIn)
