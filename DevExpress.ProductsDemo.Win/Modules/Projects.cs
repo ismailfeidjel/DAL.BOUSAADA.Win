@@ -28,6 +28,8 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using DevExpress.Data.Filtering.Helpers;
+using System.ComponentModel;
 
 namespace DevExpress.ProductsDemo.Win.Modules
 {
@@ -73,6 +75,64 @@ namespace DevExpress.ProductsDemo.Win.Modules
             LoadData();
         }
         private Func<LotGridModel, bool> _currentLotFilter = null;
+        // Stores the IDs of projects that have at least one matching lot
+        private HashSet<int> _matchedProjectIds = new HashSet<int>();
+
+        private void gridView1_ColumnFilterChanged(object sender, EventArgs e)
+        {
+            _matchedProjectIds.Clear();
+
+            var criteria = gridView1.ActiveFilterCriteria;
+
+            // If the filter was cleared or data isn't loaded yet, exit early
+            if (ReferenceEquals(criteria, null) || _data == null)
+                return;
+
+            try
+            {
+                // 1. Create an evaluator to test our raw data against the grid's active filter
+                PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(LotGridModel));
+                var evaluator = new ExpressionEvaluator(props, criteria);
+
+                // 2. Find all projects that have at least ONE row matching the filter
+                foreach (var lot in _data)
+                {
+                    if (evaluator.Fit(lot))
+                    {
+                        _matchedProjectIds.Add(lot.ProjectId);
+                    }
+                }
+            }
+            catch
+            {
+                // Ignore parse errors that might happen temporarily while typing in the filter row
+            }
+        }
+
+        private void gridView1_CustomRowFilter(object sender, RowFilterEventArgs e)
+        {
+            // If there is no active filter, let the grid handle visibility normally
+            if (ReferenceEquals(gridView1.ActiveFilterCriteria, null))
+                return;
+
+            // Get the ProjectId of the current row being evaluated by the grid
+            object projectIdObj = gridView1.GetListSourceRowCellValue(e.ListSourceRow, "ProjectId");
+
+            if (projectIdObj != null && int.TryParse(projectIdObj.ToString(), out int projectId))
+            {
+                // If this ProjectId is in our matched list, show the row (and all its sibling lots)
+                if (_matchedProjectIds.Contains(projectId))
+                {
+                    e.Visible = true;
+                    e.Handled = true; // Tell the grid we made the visibility decision
+                }
+                else
+                {
+                    e.Visible = false;
+                    e.Handled = true;
+                }
+            }
+        }
 
         private void ApplyProjectLevelFilter(Func<LotGridModel, bool> lotPredicate)
         {
@@ -308,6 +368,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.OptionsBehavior.EditorShowMode = EditorShowMode.MouseDownFocused;
             gridView1.ShowingEditor += gridView1_ShowingEditor;
             gridView1.CalcRowHeight += gridView1_CalcRowHeight;
+
+            gridView1.ColumnFilterChanged += gridView1_ColumnFilterChanged;
+            gridView1.CustomRowFilter += gridView1_CustomRowFilter;
 
 
 
