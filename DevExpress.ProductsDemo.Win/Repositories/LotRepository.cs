@@ -108,8 +108,9 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             ON ps.id = l.project_status_id
 
         ORDER BY
-        p.sort_order,
+
     p.daira_id,
+        p.sort_order,
     p.commune_id,
     p.operation_number DESC,
     l.lot_number ";
