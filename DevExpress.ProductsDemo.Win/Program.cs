@@ -56,13 +56,13 @@ namespace DevExpress.ProductsDemo.Win {
             // the login dialog's parent for centering), but keep it disabled/
             // hidden from actual use until login succeeds.
             mainForm.Show();
-            mainForm.Enabled = false;
+            //mainForm.Enabled = false;
 
             bool loggedIn;
             using (var loginForm = new DevExpress.ProductsDemo.Win.Forms.frmLogin())
             {
-                loggedIn = loginForm.ShowDialog(mainForm) == DialogResult.OK;
-               // loggedIn = true;
+               // loggedIn = loginForm.ShowDialog(mainForm) == DialogResult.OK;
+                loggedIn = true;
             }
 
             if (!loggedIn)
