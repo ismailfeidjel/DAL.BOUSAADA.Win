@@ -7,6 +7,8 @@ using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.ProductsDemo.Win.Repositories;
 using DevExpress.ProductsDemo.Win.Services;
 using DevExpress.Utils;
+using DevExpress.XtraEditors;
+using System.Collections.Generic;
 using DevExpress.Utils.Behaviors;
 using DevExpress.Utils.DragDrop;
 using DevExpress.XtraBars.Ribbon;
@@ -76,64 +78,84 @@ namespace DevExpress.ProductsDemo.Win.Modules
         }
         private Func<LotGridModel, bool> _currentLotFilter = null;
         // Stores the IDs of projects that have at least one matching lot
-        private HashSet<int> _matchedProjectIds = new HashSet<int>();
 
-        private void gridView1_ColumnFilterChanged(object sender, EventArgs e)
+
+        private HashSet<int> _matchedProjectIds = new HashSet<int>(); private CriteriaOperator _lastCriteria = null;
+        
+
+// ... inside your ProjectModule class ...
+
+private bool _isCustomFiltering = false;
+
+    private void gridView1_ColumnFilterChanged(object sender, EventArgs e)
+    {
+        if (_isCustomFiltering) return;
+
+        // Pass 1: The grid has naturally filtered the rows based on the user's input.
+        // We loop through the currently visible data rows and collect their Project IDs.
+        _matchedProjectIds.Clear();
+
+        // In DevExpress, row handles 0 through (DataRowCount - 1) represent the filtered, visible data rows.
+        for (int i = 0; i < gridView1.DataRowCount; i++)
         {
-            _matchedProjectIds.Clear();
-
-            var criteria = gridView1.ActiveFilterCriteria;
-
-            // If the filter was cleared or data isn't loaded yet, exit early
-            if (ReferenceEquals(criteria, null) || _data == null)
-                return;
-
-            try
+            if (gridView1.GetRow(i) is LotGridModel lot)
             {
-                // 1. Create an evaluator to test our raw data against the grid's active filter
-                PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(LotGridModel));
-                var evaluator = new ExpressionEvaluator(props, criteria);
-
-                // 2. Find all projects that have at least ONE row matching the filter
-                foreach (var lot in _data)
-                {
-                    if (evaluator.Fit(lot))
-                    {
-                        _matchedProjectIds.Add(lot.ProjectId);
-                    }
-                }
-            }
-            catch
-            {
-                // Ignore parse errors that might happen temporarily while typing in the filter row
+                _matchedProjectIds.Add(lot.ProjectId);
             }
         }
 
-        private void gridView1_CustomRowFilter(object sender, RowFilterEventArgs e)
+        // Pass 2: Re-evaluate row visibility to bring back the sibling lots
+        _isCustomFiltering = true;
+
+        // Save the user's cursor position so typing in the auto-filter row isn't interrupted
+        var focusedColumn = gridView1.FocusedColumn;
+        var focusedRow = gridView1.FocusedRowHandle;
+
+        gridView1.RefreshData(); // This triggers CustomRowFilter below for the second pass
+
+        // Restore focus to the filter row if the user was typing
+        if (focusedRow == DevExpress.XtraGrid.GridControl.AutoFilterRowHandle && focusedColumn != null)
         {
-            // If there is no active filter, let the grid handle visibility normally
-            if (ReferenceEquals(gridView1.ActiveFilterCriteria, null))
-                return;
+            gridView1.FocusedRowHandle = focusedRow;
+            gridView1.FocusedColumn = focusedColumn;
+            gridView1.ShowEditor();
 
-            // Get the ProjectId of the current row being evaluated by the grid
-            object projectIdObj = gridView1.GetListSourceRowCellValue(e.ListSourceRow, "ProjectId");
-
-            if (projectIdObj != null && int.TryParse(projectIdObj.ToString(), out int projectId))
+            // Move the cursor to the end of the text they were typing
+            if (gridView1.ActiveEditor is TextEdit editor && editor.Text != null)
             {
-                // If this ProjectId is in our matched list, show the row (and all its sibling lots)
-                if (_matchedProjectIds.Contains(projectId))
+                editor.SelectionStart = editor.Text.Length;
+            }
+        }
+
+        _isCustomFiltering = false;
+    }
+
+    private void gridView1_CustomRowFilter(object sender, DevExpress.XtraGrid.Views.Base.RowFilterEventArgs e)
+    {
+        // If there is no active filter, let the grid display everything normally
+        if (ReferenceEquals(gridView1.ActiveFilterCriteria, null))
+            return;
+
+        // Only intervene during our custom second pass
+        if (_isCustomFiltering)
+        {
+            var dataSource = gridView1.DataSource as System.Collections.IList;
+            if (dataSource != null && e.ListSourceRow >= 0 && e.ListSourceRow < dataSource.Count)
+            {
+                if (dataSource[e.ListSourceRow] is LotGridModel lot)
                 {
-                    e.Visible = true;
-                    e.Handled = true; // Tell the grid we made the visibility decision
-                }
-                else
-                {
-                    e.Visible = false;
+                    // Force this lot to be visible if its ProjectId was collected in Pass 1
+                    e.Visible = _matchedProjectIds.Contains(lot.ProjectId);
                     e.Handled = true;
                 }
             }
         }
+    }
 
+
+
+    
+        
         private void ApplyProjectLevelFilter(Func<LotGridModel, bool> lotPredicate)
         {
             _currentLotFilter = lotPredicate;
@@ -664,17 +686,112 @@ namespace DevExpress.ProductsDemo.Win.Modules
         /// <summary>
         /// 
         /// </summary>
+        /// 
+        private LotGridModel _draggedRow;
+        private Point _dragStartPoint;
+
         private void SetupProjectDragReorder()
         {
-            behaviorManager1.Attach<DragDropBehavior>(gridView1, behavior =>
-            {
-                behavior.Properties.AllowDrop = true;
-                behavior.Properties.InsertIndicatorVisible = true;
-                behavior.Properties.PreviewVisible = true;
+            gridControl1.AllowDrop = true;
 
-                behavior.DragDrop += (s, e) => OnProjectRowsReordered();
-            });
+            gridView1.MouseDown += GridView1_MouseDown_ForDrag;
+            gridView1.MouseMove += GridView1_MouseMove_ForDrag;
+
+            gridControl1.DragOver += GridControl1_DragOver;
+            gridControl1.DragDrop += GridControl1_DragDrop;
         }
+
+        private void GridView1_MouseDown_ForDrag(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left) return;
+
+            var hitInfo = gridView1.CalcHitInfo(new Point(e.X, e.Y));
+            if (!hitInfo.InRow) { _draggedRow = null; return; }
+
+            _draggedRow = gridView1.GetRow(hitInfo.RowHandle) as LotGridModel;
+            _dragStartPoint = e.Location;
+        }
+
+        private void GridView1_MouseMove_ForDrag(object sender, MouseEventArgs e)
+        {
+            if (_draggedRow == null || e.Button != MouseButtons.Left) return;
+
+            // Only start the actual drag once the mouse has moved a few pixels —
+            // avoids triggering a drag on a simple click.
+            if (Math.Abs(e.X - _dragStartPoint.X) < 5 && Math.Abs(e.Y - _dragStartPoint.Y) < 5)
+                return;
+
+            var rowToDrag = _draggedRow;
+            _draggedRow = null; // consume — prevents re-triggering mid-drag
+
+            gridControl1.DoDragDrop(rowToDrag, DragDropEffects.Move);
+        }
+
+        private void GridControl1_DragOver(object sender, DragEventArgs e)
+        {
+            e.Effect = e.Data.GetDataPresent(typeof(LotGridModel))
+                ? DragDropEffects.Move
+                : DragDropEffects.None;
+        }
+        private void GridControl1_DragDrop(object sender, DragEventArgs e)
+        {
+            if (!e.Data.GetDataPresent(typeof(LotGridModel))) return;
+
+            var sourceRow = e.Data.GetData(typeof(LotGridModel)) as LotGridModel;
+            if (sourceRow == null || _data == null) return;
+
+            Point clientPoint = gridControl1.PointToClient(new Point(e.X, e.Y));
+            var hitInfo = gridView1.CalcHitInfo(clientPoint);
+            if (!hitInfo.InRow) return;
+
+            var targetRow = gridView1.GetRow(hitInfo.RowHandle) as LotGridModel;
+            if (targetRow == null || sourceRow.ProjectId == targetRow.ProjectId) return;
+
+            var draggedLots = _data
+                .Where(r => r.ProjectId == sourceRow.ProjectId)
+                .OrderBy(r => r.LotNumber)
+                .ToList();
+
+            if (!draggedLots.Any()) return;
+
+            foreach (var lot in draggedLots)
+                _data.Remove(lot);
+
+            int targetIndex = _data.IndexOf(targetRow);
+            if (targetIndex < 0) targetIndex = _data.Count;
+
+            // Use the GridView's own row info (via ViewInfo) to find the row's
+            // vertical bounds — avoids the missing GetRowBounds API.
+            var viewInfo = gridView1.GetViewInfo() as DevExpress.XtraGrid.Views.Grid.ViewInfo.GridViewInfo;
+            var rowInfo = viewInfo?.GetGridRowInfo(hitInfo.RowHandle);
+
+            bool dropAfter = true; // sensible default if we can't determine bounds
+            if (rowInfo != null)
+            {
+                int rowTop = rowInfo.Bounds.Top;
+                int rowHeight = rowInfo.Bounds.Height;
+                dropAfter = clientPoint.Y > (rowTop + rowHeight / 2);
+            }
+
+            if (dropAfter)
+            {
+                while (targetIndex < _data.Count && _data[targetIndex].ProjectId == targetRow.ProjectId)
+                    targetIndex++;
+            }
+            else
+            {
+                while (targetIndex > 0 && _data[targetIndex - 1].ProjectId == targetRow.ProjectId)
+                    targetIndex--;
+            }
+
+            _data.InsertRange(targetIndex, draggedLots);
+
+            OnProjectRowsReordered();
+
+            gridControl1.RefreshDataSource();
+        }
+
+
         private void OnProjectRowsReordered()
         {
             var projectOrder = new Dictionary<int, int>();
@@ -690,7 +807,11 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 }
 
                 if (!projectOrder.ContainsKey(row.ProjectId))
+                {
                     projectOrder[row.ProjectId] = order;
+                }
+
+                row.SortOrder = order;
             }
 
             foreach (var kvp in projectOrder)
@@ -1213,7 +1334,12 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 XtraMessageBox.Show("لا توجد بيانات لتصديرها.", "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            string currentFilter = gridView1.ActiveFilterString;
             LoadData();
+            if (!string.IsNullOrEmpty(currentFilter))
+            {
+                gridView1.ActiveFilterString = currentFilter;
+            }
 
             var report = BuildReportFromTemplateOrDefault();
             report.CreateDocument();
@@ -1273,7 +1399,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     ApplyProjectLevelFilter(r => r.ProjectStatusId == 2)    ;
                     break;
                 case "ClearFilter":
-                    gridView1.ActiveFilterString = "";
+                  //  gridView1.ActiveFilterString = "";
+                    ApplyProjectLevelFilter(null);
+
                     break;
             }
             _currentFilterLabel = FilterTagLabels.TryGetValue(tag, out string label) ? label : "";
@@ -1355,8 +1483,16 @@ namespace DevExpress.ProductsDemo.Win.Modules
         public override XtraReport GetPrintReport()
         {
             if (gridView1.RowCount == 0) return null;
+            // 1. Save the user's Live Grid filter
+            string currentFilter = gridView1.ActiveFilterString;
+
             LoadData(); // ← re-pull fresh joined data from DB before printing
 
+            // 2. Restore the filter
+            if (!string.IsNullOrEmpty(currentFilter))
+            {
+                gridView1.ActiveFilterString = currentFilter;
+            }
             return BuildReportFromTemplateOrDefault();
         }
         private List<LotGridModel> GetVisibleGridData()
