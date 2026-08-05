@@ -10,7 +10,7 @@
 
 #pragma warning disable 1591
 
-namespace DevExpress.ProductsDemo.Win {
+namespace Dal.DALSI.Win {
     
     
     /// <summary>
@@ -3964,7 +3964,7 @@ namespace DevExpress.ProductsDemo.Win {
         }
     }
 }
-namespace DevExpress.ProductsDemo.Win.DBBDataSetTableAdapters {
+namespace Dal.DALSI.Win.DBBDataSetTableAdapters {
     
     
     /// <summary>
@@ -4285,7 +4285,7 @@ namespace DevExpress.ProductsDemo.Win.DBBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::DevExpress.ProductsDemo.Win.Properties.Settings.Default.DBBConnectionString;
+            this._connection.ConnectionString = global::Dal.DALSI.Win.Properties.Settings.Default.DBBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5383,7 +5383,7 @@ namespace DevExpress.ProductsDemo.Win.DBBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::DevExpress.ProductsDemo.Win.Properties.Settings.Default.DBBConnectionString;
+            this._connection.ConnectionString = global::Dal.DALSI.Win.Properties.Settings.Default.DBBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5972,7 +5972,7 @@ namespace DevExpress.ProductsDemo.Win.DBBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::DevExpress.ProductsDemo.Win.Properties.Settings.Default.DBBConnectionString;
+            this._connection.ConnectionString = global::Dal.DALSI.Win.Properties.Settings.Default.DBBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6568,7 +6568,7 @@ namespace DevExpress.ProductsDemo.Win.DBBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::DevExpress.ProductsDemo.Win.Properties.Settings.Default.DBBConnectionString;
+            this._connection.ConnectionString = global::Dal.DALSI.Win.Properties.Settings.Default.DBBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6898,7 +6898,7 @@ namespace DevExpress.ProductsDemo.Win.DBBDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.OleDb.OleDbConnection();
-            this._connection.ConnectionString = global::DevExpress.ProductsDemo.Win.Properties.Settings.Default.DBBConnectionString;
+            this._connection.ConnectionString = global::Dal.DALSI.Win.Properties.Settings.Default.DBBConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
