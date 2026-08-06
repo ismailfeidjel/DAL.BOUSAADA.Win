@@ -148,32 +148,50 @@ namespace DevExpress.ProductsDemo.Win.Services
             var result = new List<ProjectStageRow>();
             var sourceProps = typeof(LotGridModel).GetProperties();
 
-            foreach (var row in data)
+            // 1. Group the flat data by ProjectId to keep sibling lots together
+            var groupedByProject = data.GroupBy(r => r.ProjectId);
+
+            foreach (var projectGroup in groupedByProject)
             {
+                // 2. Evaluate the stage using the first lot (the primary project row)
+                var primaryLot = projectGroup.First();
+
                 var stage = Stages.FirstOrDefault(s =>
                     s.isAdminProc
-                        ? row.AdministrativeProcedureId == s.id
-                        : row.ProjectStatusId == s.id);
+                        ? primaryLot.AdministrativeProcedureId == s.id
+                        : primaryLot.ProjectStatusId == s.id);
 
+                // If the project doesn't map to a stage, skip the entire project
                 if (stage.label == null) continue;
 
-                var stageRow = new ProjectStageRow();
-
-                // Copy EVERY property from LotGridModel onto ProjectStageRow — no more manual field lists to keep in sync
-                foreach (var prop in sourceProps)
+                // 3. Loop through ALL lots in this project and force them into the same stage
+                foreach (var row in projectGroup)
                 {
-                    var targetProp = typeof(ProjectStageRow).GetProperty(prop.Name);
-                    if (targetProp != null && targetProp.CanWrite)
-                        targetProp.SetValue(stageRow, prop.GetValue(row));
+                    var stageRow = new ProjectStageRow();
+
+                    // Copy EVERY property from LotGridModel onto ProjectStageRow
+                    foreach (var prop in sourceProps)
+                    {
+                        var targetProp = typeof(ProjectStageRow).GetProperty(prop.Name);
+                        if (targetProp != null && targetProp.CanWrite)
+                        {
+                            targetProp.SetValue(stageRow, prop.GetValue(row));
+                        }
+                    }
+
+                    stageRow.StageOrder = stage.order;
+                    stageRow.StageLabel = stage.label;
+
+                    result.Add(stageRow);
                 }
-
-                stageRow.StageOrder = stage.order;
-                stageRow.StageLabel = stage.label;
-
-                result.Add(stageRow);
             }
 
-            return result.OrderBy(r => r.StageOrder).ThenBy(r => r.ProjectId).ToList();
+            // 4. Sort by Stage -> Project -> internal Lot order so they display perfectly grouped
+            return result
+                .OrderBy(r => r.StageOrder)
+                .ThenBy(r => r.ProjectId)
+                .ThenBy(r => r.LotNumber)
+                .ToList();
         }
     }
 }

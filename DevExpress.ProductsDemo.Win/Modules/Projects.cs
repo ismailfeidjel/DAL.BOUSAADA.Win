@@ -32,6 +32,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using DevExpress.Data.Filtering.Helpers;
 using System.ComponentModel;
+using DevExpress.XtraBars;
+using DevExpress.XtraPrinting.Preview;
 
 namespace DevExpress.ProductsDemo.Win.Modules
 {
@@ -1526,6 +1528,60 @@ private bool _isCustomFiltering = false;
             catch (InvalidOperationException ex)
             {
                 XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        public void ShowPreviewWithPowerPointButton(XtraReport report)
+        {
+            // 1. Generate the document first
+            report.CreateDocument();
+
+            // 2. Wrap the report in a Print Tool
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // 3. Access the Ribbon-based Preview Form
+                PrintPreviewRibbonFormEx ribbonForm = printTool.PreviewRibbonForm;
+
+                // 4. Create your custom button
+                BarButtonItem btnExportPptx = new BarButtonItem();
+                btnExportPptx.Caption = "تصدير إلى PowerPoint";
+
+                // Optional: If you want to use a built-in DevExpress SVG icon
+                // btnExportPptx.ImageOptions.SvgImage = DevExpress.Images.SvgImageCollection.FromResources("...svg");
+
+                // 5. Attach the click event using the exporter class we just built
+                btnExportPptx.ItemClick += (sender, e) =>
+                {
+                    using (SaveFileDialog dialog = new SaveFileDialog())
+                    {
+                        dialog.Filter = "PowerPoint Presentation|*.pptx";
+                        dialog.Title = "تصدير التقرير إلى عرض تقديمي";
+                        dialog.FileName = "تقرير_المشاريع.pptx";
+
+                        if (dialog.ShowDialog() == DialogResult.OK)
+                        {
+                            // Call the PowerPointExoporter class
+                            PowerPointReportExporter.ExportReportToPptx(report, dialog.FileName);
+
+                            // Open the file for the user
+                            System.Diagnostics.Process.Start(dialog.FileName);
+                        }
+                    }
+                };
+
+                // 6. Add the button to a new group on the main Preview tab
+                if (ribbonForm.Ribbon.Pages.Count > 0)
+                {
+                    RibbonPage previewPage = ribbonForm.Ribbon.Pages[0]; // The main print preview page
+
+                    RibbonPageGroup customGroup = new RibbonPageGroup("إضافات"); // "Extras" or custom group name
+                    customGroup.ItemLinks.Add(btnExportPptx);
+
+                    // Add the group to the page
+                    previewPage.Groups.Add(customGroup);
+                }
+
+                // 7. Show the custom preview dialog
+                printTool.ShowPreviewDialog();
             }
         }
 
