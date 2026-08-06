@@ -1560,7 +1560,7 @@ private bool _isCustomFiltering = false;
                         if (dialog.ShowDialog() == DialogResult.OK)
                         {
                             // Call the PowerPointExoporter class
-                            PowerPointReportExporter.ExportReportToPptx(report, dialog.FileName);
+                            //PowerPointReportExporter.ExportReportToPptx(report, dialog.FileName);
 
                             // Open the file for the user
                             System.Diagnostics.Process.Start(dialog.FileName);
