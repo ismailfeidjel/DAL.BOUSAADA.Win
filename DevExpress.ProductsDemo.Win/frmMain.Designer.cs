@@ -794,6 +794,7 @@
             resources.ApplyResources(galleryItem23, "galleryItem23");
             galleryItem23.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage2")));
             galleryItem23.Tag = "PrintCommuneSummary";
+            resources.ApplyResources(galleryItem24, "galleryItem24");
             galleryItem24.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage3")));
             galleryItem24.Tag = "PrintProjectLifecycleReport";
             galleryItem24.Value = "PrintProjectLifecycleReport";
@@ -804,9 +805,15 @@
             galleryItem24});
             resources.ApplyResources(galleryItemGroup6, "galleryItemGroup6");
             resources.ApplyResources(galleryItem25, "galleryItem25");
+            galleryItem25.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage4")));
             resources.ApplyResources(galleryItem26, "galleryItem26");
+            galleryItem26.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage5")));
             resources.ApplyResources(galleryItem27, "galleryItem27");
+            galleryItem27.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage6")));
             resources.ApplyResources(galleryItem28, "galleryItem28");
+            galleryItem28.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage7")));
+            galleryItem28.Tag = "btnExportToPowerPoint_Click";
+            galleryItem28.Value = "btnExportToPowerPoint_Click";
             galleryItemGroup6.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
             galleryItem25,
             galleryItem26,
@@ -814,6 +821,7 @@
             galleryItem28});
             resources.ApplyResources(galleryItemGroup7, "galleryItemGroup7");
             resources.ApplyResources(galleryItem29, "galleryItem29");
+            galleryItem29.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage8")));
             resources.ApplyResources(galleryItem30, "galleryItem30");
             resources.ApplyResources(galleryItem31, "galleryItem31");
             resources.ApplyResources(galleryItem32, "galleryItem32");

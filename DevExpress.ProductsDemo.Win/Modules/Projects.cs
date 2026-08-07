@@ -156,6 +156,14 @@ private bool _isCustomFiltering = false;
 
 
 
+
+
+
+
+
+
+
+
     
         
         private void ApplyProjectLevelFilter(Func<LotGridModel, bool> lotPredicate)
@@ -1378,6 +1386,9 @@ private bool _isCustomFiltering = false;
                 case "PrintProjectLifecycleReport":
                     PrintProjectLifecycleReport();
                     break;
+                case "btnExportToPowerPoint_Click":
+                    btnExportToPowerPoint_Click();
+                    break;
 
                 // existing status-filter tags, if not already handled elsewhere:
                 case "StatusFilterClosed":
@@ -1528,6 +1539,33 @@ private bool _isCustomFiltering = false;
             catch (InvalidOperationException ex)
             {
                 XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnExportToPowerPoint_Click( )
+        {
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                dialog.Filter = "PowerPoint Presentation|*.pptx";
+                dialog.Title = "تصدير التقرير إلى عرض تقديمي";
+                dialog.FileName = "444.pptx";
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var programs = GetPrograms().Cast<ProgramLookupItem>().ToList();
+
+                    var report = ProjectLifecycleReportBuilder.Build(gridView1, programs, programId =>
+                    {
+                        var all = _lotRepo.GetGridData();
+                        return all.Where(r => r.ProgramId == programId).ToList();
+                    });
+
+                    // 2. Export to PPTX
+                    PowerPointReportExporter.ExportReportToPptx(report, dialog.FileName);
+
+                    // 3. Optionally open the file automatically for the user
+                    System.Diagnostics.Process.Start(dialog.FileName);
+                }
             }
         }
         public void ShowPreviewWithPowerPointButton(XtraReport report)

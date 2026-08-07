@@ -354,6 +354,11 @@
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.PowerPoint.15.0.4420.1018\lib\net20\Microsoft.Office.Interop.PowerPoint.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MySql.Data, Version=9.6.0.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.9.6.0\lib\net462\MySql.Data.dll</HintPath>
     </Reference>
@@ -792,6 +797,7 @@
     <Compile Include="Service\CommuneSummaryReportBuilder.cs" />
     <Compile Include="Service\GridReportBuilder.cs" />
     <Compile Include="Service\LotService.cs" />
+    <Compile Include="Service\PowerPointReportExporter.cs" />
     <Compile Include="Service\ProgramService.cs" />
     <Compile Include="Service\ProjectLifecycleReportBuilder.cs" />
     <Compile Include="Service\ProjectService.cs" />
@@ -1395,6 +1401,17 @@
     <Folder Include="Core\Interfaces\" />
     <Folder Include="Core\Models\" />
     <Folder Include="Documents\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <!--ONLY NETCORE3  
   <ItemGroup>
