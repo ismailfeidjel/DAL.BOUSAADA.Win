@@ -21,11 +21,11 @@ namespace DevExpress.ProductsDemo.Win.Services
 
         private static readonly (int order, string label, bool isAdminProc, int id)[] Stages =
         {
-            (1, "دفتر",   true,  1),
-            (2, "اعلان",  true,  2),
-            (3, "فتح",    true,  9),
-            (4, "منح",    true,  3),
-            (5, "CFM",    true,  5),
+            (1, "دفتر الشروط",   true,  1),
+            (2, "الاعلان عن طلب العروض",  true,  2),
+            (3, "الفتح والتقييم",    true,  9),
+            (4, "المنح المؤقت",    true,  3),
+            (5, "المراقبة الميزانياتية الولائية",    true,  5),
             (6, "جارية",   false, 3),
             (7, "متوقفة",  false, 4),
             (8, "منتهية",  false, 5),
