@@ -6,7 +6,6 @@ using DevExpress.XtraGrid.Columns;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DevExpress.ProductsDemo.Win.Core.Helpers;
 
 
 namespace DevExpress.ProductsDemo.Win.Forms
@@ -82,5 +81,5 @@ namespace DevExpress.ProductsDemo.Win.Forms
                 _repo.Delete(TableName, entity.Id);
         }
     }
-   
+
 }

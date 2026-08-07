@@ -1,6 +1,5 @@
 ﻿using DevExpress.ProductsDemo.Win.Domain;
 using DevExpress.ProductsDemo.Win.Repositories;
-using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
@@ -8,7 +7,6 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Forms

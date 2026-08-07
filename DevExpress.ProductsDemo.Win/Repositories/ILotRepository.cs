@@ -6,7 +6,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 {
     public interface ILotRepository
     {
-         List<LotGridModel> GetGridData();
+        List<LotGridModel> GetGridData();
         List<LotGridModel> GetByProjectId(int projectId);
 
         Lot GetById(int id);

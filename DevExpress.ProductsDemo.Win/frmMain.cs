@@ -3,7 +3,7 @@ using DevExpress.DXperience.Demos;
 using DevExpress.MailClient.Win;
 using DevExpress.MailClient.Win.Forms;
 using DevExpress.MailDemo.Win;
-using DevExpress.ProductsDemo.Win.Forms;
+using DevExpress.ProductsDemo.Win.Core.Helpers;
 using DevExpress.ProductsDemo.Win.Modules;
 using DevExpress.Utils.Taskbar;
 using DevExpress.Utils.Taskbar.Core;
@@ -14,8 +14,6 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraNavBar;
 using DevExpress.XtraPrinting;
-using DevExpress.XtraReports.Native;
-using DevExpress.XtraReports.ReportGeneration;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraSplashScreen;
@@ -25,11 +23,11 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using DevExpress.Utils.Svg;
-using DevExpress.ProductsDemo.Win.Core.Helpers;
 
-namespace DevExpress.ProductsDemo.Win {
-    public partial class frmMain : RibbonForm {
+namespace DevExpress.ProductsDemo.Win
+{
+    public partial class frmMain : RibbonForm
+    {
         ModulesNavigator modulesNavigator;
         ZoomManager _zoomManager;
         List<BarItem> AllowCustomizationMenuList = new List<BarItem>();
@@ -45,7 +43,8 @@ namespace DevExpress.ProductsDemo.Win {
 
 
 
-        public frmMain() {
+        public frmMain()
+        {
             TaskbarHelper.InitDemoJumpList(TaskbarAssistant.Default, this);
             InitializeComponent();
             RibbonButtonsInitialize();
@@ -59,11 +58,13 @@ namespace DevExpress.ProductsDemo.Win {
             guideGenerator = new GuideGenerator();
             guideGenerator.CreateWhatsThisItem(ribbonControl1, () => { return this; });
         }
-        protected override void OnLoad(EventArgs e) {
+        protected override void OnLoad(EventArgs e)
+        {
             base.OnLoad(e);
             SplashScreenManager.CloseForm(false);
-           // DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
-            if (MainFormHelper.TakeScreens) {
+            // DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
+            if (MainFormHelper.TakeScreens)
+            {
                 this.StartPosition = FormStartPosition.Manual;
                 this.Location = new Point(0, 0);
                 this.Height = 700;
@@ -107,14 +108,17 @@ namespace DevExpress.ProductsDemo.Win {
 
 
         NavBarItem[] links;
-        string TakeModule(int num) {
+        string TakeModule(int num)
+        {
             string info = ((NavBarGroupTagObject)links[num].Tag).Name;
             modulesNavigator.ChangeSelectedItem(new NavBarItemLink(links[num]), null, false);
             pcMain.Focus();
             return $"{info}";
         }
-        void NavigationInitialize() {
-            foreach(NavBarItemLink link in nbgModules.ItemLinks) {
+        void NavigationInitialize()
+        {
+            foreach (NavBarItemLink link in nbgModules.ItemLinks)
+            {
                 BarButtonItem item = new BarButtonItem(ribbonControl1.Manager, link.Item.Caption);
                 item.Tag = link;
                 item.Glyph = link.Item.SmallImage;
@@ -123,10 +127,12 @@ namespace DevExpress.ProductsDemo.Win {
             }
         }
 
-        void item_ItemClick(object sender, ItemClickEventArgs e) {
+        void item_ItemClick(object sender, ItemClickEventArgs e)
+        {
             nbgModules.SelectedLink = (NavBarItemLink)e.Item.Tag;
         }
-        void RibbonButtonsInitialize() {
+        void RibbonButtonsInitialize()
+        {
             InitBarButtonItem(bbiNewTask, TagResources.TaskNew, Properties.Resources.NewTaskDescription);
             InitBarButtonItem(bbiEditTask, TagResources.TaskEdit, Properties.Resources.EditTaskDescription);
             InitBarButtonItem(bbiDeleteTask, TagResources.TaskDelete, Properties.Resources.DeleteTaskDescription);
@@ -155,7 +161,7 @@ namespace DevExpress.ProductsDemo.Win {
             rgbiCurrentViewTasks.Gallery.ItemCheckMode = DevExpress.XtraBars.Ribbon.Gallery.ItemCheckMode.SingleCheck;
             bvbiSaveAttachment.Tag = TagResources.MenuSaveAttachment;
             bsiNavigation.Hint = Properties.Resources.NavigationDescription;
-            
+
             AllowCustomizationMenuList.Add(bsiNavigation);
             AllowCustomizationMenuList.Add(skinDropDownButtonItem1);
             ribbonControl1.Toolbar.ItemLinks.Add(skinDropDownButtonItem1);
@@ -163,19 +169,22 @@ namespace DevExpress.ProductsDemo.Win {
             ribbonControl1.Toolbar.ItemLinks.Add(skinPaletteRibbonGalleryBarItem1);
         }
 
-        void InitGalleryItem(GalleryItem galleryItem, string tag, string description) {
+        void InitGalleryItem(GalleryItem galleryItem, string tag, string description)
+        {
             galleryItem.Tag = tag;
             galleryItem.Hint = description;
         }
         internal ZoomManager ZoomManager { get { return _zoomManager; } }
-       // internal BackstageViewButtonItem SaveAsMenuItem { get { return bvbiSaveAs; } }
+        // internal BackstageViewButtonItem SaveAsMenuItem { get { return bvbiSaveAs; } }
         internal BackstageViewButtonItem SaveAttachmentMenuItem { get { return bvbiSaveAttachment; } }
         internal InRibbonGallery TaskGallery { get { return rgbiCurrentViewTasks.Gallery; } }
         internal PopupMenu FlagStatusMenu { get { return pmFlagStatus; } }
-        void InitBarButtonItem(DevExpress.XtraBars.BarButtonItem buttonItem, object tag) {
+        void InitBarButtonItem(DevExpress.XtraBars.BarButtonItem buttonItem, object tag)
+        {
             InitBarButtonItem(buttonItem, tag, string.Empty);
         }
-        void InitBarButtonItem(DevExpress.XtraBars.BarButtonItem buttonItem, object tag, string description) {
+        void InitBarButtonItem(DevExpress.XtraBars.BarButtonItem buttonItem, object tag, string description)
+        {
             buttonItem.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(bbi_ItemClick);
             buttonItem.Hint = description;
             buttonItem.Tag = tag;
@@ -240,7 +249,8 @@ namespace DevExpress.ProductsDemo.Win {
             }
         }
 
-        void InitNavBarItemLinks() {
+        void InitNavBarItemLinks()
+        {
             nbiSpreadsheet.Tag = new NavBarGroupTagObject("Spreadsheet", typeof(DevExpress.ProductsDemo.Win.Modules.SpreadsheetModule), RibbonControlColorScheme.Green);
             nbiWord.Tag = new NavBarGroupTagObject("Word", typeof(DevExpress.ProductsDemo.Win.Modules.WordModule), RibbonControlColorScheme.DarkBlue);
             nbiReports.Tag = new NavBarGroupTagObject("Reports", typeof(DevExpress.ProductsDemo.Win.Modules.ReportsModule), RibbonControlColorScheme.Teal);
@@ -252,83 +262,100 @@ namespace DevExpress.ProductsDemo.Win {
 #endif
             nbiSnap.Visible = false;
             //nbiCharts.Tag = new NavBarGroupTagObject("Charts", typeof(DevExpress.ProductsDemo.Win.Modules.AnalyticsModule));
-           // nbiScheduler.Tag = new NavBarGroupTagObject("Scheduler", typeof(DevExpress.ProductsDemo.Win.Modules.SchedulerModule), RibbonControlColorScheme.Purple);
+            // nbiScheduler.Tag = new NavBarGroupTagObject("Scheduler", typeof(DevExpress.ProductsDemo.Win.Modules.SchedulerModule), RibbonControlColorScheme.Purple);
             nbiPdf.Tag = new NavBarGroupTagObject("PdfViewer", typeof(DevExpress.ProductsDemo.Win.Modules.PdfViewerModule), RibbonControlColorScheme.Orange);
             nbiMaps.Tag = new NavBarGroupTagObject("Maps", typeof(DevExpress.ProductsDemo.Win.Modules.MapsModule), RibbonControlColorScheme.Red);
             nbgModules.SelectedLinkIndex = 0;
         }
-        internal void EnableLayoutButtons(bool enabled) {
+        internal void EnableLayoutButtons(bool enabled)
+        {
             bbiFlipLayout.Enabled = enabled;
         }
-        internal void EnableEditContact(bool enabled) {
+        internal void EnableEditContact(bool enabled)
+        {
             bbiDeleteContact.Enabled = enabled;
             bbiEditContact.Enabled = enabled;
         }
-        internal void EnabledFlagButtons(bool enabledCurrentTask, bool enabledEdit, Task task) {
-            List<BarButtonItem> list = new List<BarButtonItem> { bbiTodayFlag, bbiTomorrowFlag, bbiThisWeekFlag, 
+        internal void EnabledFlagButtons(bool enabledCurrentTask, bool enabledEdit, Task task)
+        {
+            List<BarButtonItem> list = new List<BarButtonItem> { bbiTodayFlag, bbiTomorrowFlag, bbiThisWeekFlag,
                 bbiNextWeekFlag, bbiNoDateFlag, bbiCustomFlag };
-            foreach(BarButtonItem item in list) {
+            foreach (BarButtonItem item in list)
+            {
                 item.Enabled = enabledCurrentTask;
-                if(task != null)
+                if (task != null)
                     item.Down = task.FlagStatus.Equals(item.Tag);
                 else item.Down = false;
             }
             bbiDeleteTask.Enabled = enabledCurrentTask;
             bbiEditTask.Enabled = enabledEdit;
         }
-        internal void EnableZoomControl(bool enabled) {
+        internal void EnableZoomControl(bool enabled)
+        {
             beiZoom.Visibility = enabled ? BarItemVisibility.Always : BarItemVisibility.Never;
         }
-        internal void ShowInfo(int? count) {
-            if(count == null) bsiInfo.Caption = string.Empty;
+        internal void ShowInfo(int? count)
+        {
+            if (count == null) bsiInfo.Caption = string.Empty;
             else
                 bsiInfo.Caption = string.Format(Properties.Resources.InfoText, count.Value);
             HtmlText = "ولاية بوسعادة تطبيق متابعة البرامج التنموية"; // string.Format("{0}{1}", GetModuleName(), GetModulePartName());
         }
-     
-        private void navBarControl1_SelectedLinkChanged(object sender, XtraNavBar.ViewInfo.NavBarSelectedLinkChangedEventArgs e) {
-            if(e.Link != null)
+
+        private void navBarControl1_SelectedLinkChanged(object sender, XtraNavBar.ViewInfo.NavBarSelectedLinkChangedEventArgs e)
+        {
+            if (e.Link != null)
                 modulesNavigator.ChangeSelectedItem(e.Link, null);
         }
-        private void bbi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e) {
+        private void bbi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
             modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Tag));
         }
-        private void frmMain_KeyDown(object sender, KeyEventArgs e) {
+        private void frmMain_KeyDown(object sender, KeyEventArgs e)
+        {
             modulesNavigator.CurrentModule.SendKeyDown(e);
         }
-        private void navBarControl1_NavPaneStateChanged(object sender, EventArgs e) {
+        private void navBarControl1_NavPaneStateChanged(object sender, EventArgs e)
+        {
             SetPageLayoutStyle();
         }
-        private void bvbiExit_ItemClick(object sender, BackstageViewItemEventArgs e) {
+        private void bvbiExit_ItemClick(object sender, BackstageViewItemEventArgs e)
+        {
             this.Close();
         }
 
-        private void galleryControlGallery1_ItemClick(object sender, GalleryItemClickEventArgs e) {
+        private void galleryControlGallery1_ItemClick(object sender, GalleryItemClickEventArgs e)
+        {
             modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Tag));
         }
 
-        private void backstageViewControl1_ItemClick(object sender, BackstageViewItemEventArgs e) {
-            if(modulesNavigator.CurrentModule == null) return;
+        private void backstageViewControl1_ItemClick(object sender, BackstageViewItemEventArgs e)
+        {
+            if (modulesNavigator.CurrentModule == null) return;
             modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Tag));
         }
-        void SetPageLayoutStyle() {
+        void SetPageLayoutStyle()
+        {
             bbiNormal.Down = navBarControl1.OptionsNavPane.NavPaneState == NavPaneState.Expanded;
             bbiReading.Down = navBarControl1.OptionsNavPane.NavPaneState == NavPaneState.Collapsed;
         }
 
-        private void bbiNormal_ItemClick(object sender, ItemClickEventArgs e) {
-            if(bbiNormal.Down) navBarControl1.OptionsNavPane.NavPaneState = NavPaneState.Expanded;
+        private void bbiNormal_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (bbiNormal.Down) navBarControl1.OptionsNavPane.NavPaneState = NavPaneState.Expanded;
             else
                 bbiNormal.Down = true;
         }
 
-        private void bbiReading_ItemClick(object sender, ItemClickEventArgs e) {
-            if(bbiReading.Down) navBarControl1.OptionsNavPane.NavPaneState = NavPaneState.Collapsed;
+        private void bbiReading_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (bbiReading.Down) navBarControl1.OptionsNavPane.NavPaneState = NavPaneState.Collapsed;
             else
                 bbiReading.Down = true;
         }
 
-        private void rgbiCurrentView_GalleryInitDropDownGallery(object sender, InplaceGalleryEventArgs e) {
+        private void rgbiCurrentView_GalleryInitDropDownGallery(object sender, InplaceGalleryEventArgs e)
+        {
             e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiManageView);
             e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiSaveCurrentView);
             e.PopupGallery.SynchWithInRibbonGallery = true;
@@ -357,15 +384,17 @@ namespace DevExpress.ProductsDemo.Win {
         }
 
 
-        private void bvtiPrint_SelectedChanged(object sender, BackstageViewItemEventArgs e) {
+        private void bvtiPrint_SelectedChanged(object sender, BackstageViewItemEventArgs e)
+        {
             //if (modulesNavigator.CurrentModule is ProjectModule pm)
-             //   pm.PrintGrid();
-           if (backstageViewControl1.SelectedTab == bvtiPrint)
-               this.printControl1.InitPrintingSystem();///here
+            //   pm.PrintGrid();
+            if (backstageViewControl1.SelectedTab == bvtiPrint)
+                this.printControl1.InitPrintingSystem();///here
 
         }
-        private void ribbonControl1_BeforeApplicationButtonContentControlShow(object sender, EventArgs e) {
-            if(backstageViewControl1.SelectedTab == bvtiPrint) backstageViewControl1.SelectedTab = bvtiInfo;
+        private void ribbonControl1_BeforeApplicationButtonContentControlShow(object sender, EventArgs e)
+        {
+            if (backstageViewControl1.SelectedTab == bvtiPrint) backstageViewControl1.SelectedTab = bvtiInfo;
             bvtiPrint.Enabled = CurrentRichEdit != null || CurrentPrintableComponent != null;
             bvtiExport.Enabled = CurrentExportComponent != null;
         }
@@ -374,36 +403,43 @@ namespace DevExpress.ProductsDemo.Win {
         public RichEditControl CurrentRichEdit { get { return modulesNavigator.CurrentModule.CurrentRichEdit; } }
         public string CurrentModuleName { get { return modulesNavigator.CurrentModule.ModuleName; } }
 
-        private void ribbonControl1_ShowCustomizationMenu(object sender, RibbonCustomizationMenuEventArgs e) {
+        private void ribbonControl1_ShowCustomizationMenu(object sender, RibbonCustomizationMenuEventArgs e)
+        {
             e.CustomizationMenu.InitializeMenu();
-            if(e.Link == null || !AllowCustomizationMenuList.Contains(e.Link.Item))
+            if (e.Link == null || !AllowCustomizationMenuList.Contains(e.Link.Item))
                 e.CustomizationMenu.RemoveLink(e.CustomizationMenu.ItemLinks[0]);
         }
         public RibbonStatusBar RibbonStatusBar { get { return ribbonStatusBar1; } }
-        internal void ShowReminder(List<Task> reminders) {
+        internal void ShowReminder(List<Task> reminders)
+        {
             bool allowReminders = reminders != null && reminders.Count > 0;
             bbiReminder.Visibility = allowReminders ? BarItemVisibility.Always : BarItemVisibility.Never;
             bsiTemp.Visibility = allowReminders ? BarItemVisibility.Never : BarItemVisibility.Always;
-            if(allowReminders) {
+            if (allowReminders)
+            {
                 bbiReminder.Caption = string.Format(Properties.Resources.ReminderText, reminders.Count);
                 bbiReminder.Tag = reminders;
             }
         }
-        public void ShowInfo(bool visible) {
+        public void ShowInfo(bool visible)
+        {
             bsiInfo.Visibility = bsiTemp.Visibility = visible ? BarItemVisibility.Always : BarItemVisibility.Never;
         }
 
-        private void biPrintPreview_ItemClick(object sender, ItemClickEventArgs e) {
+        private void biPrintPreview_ItemClick(object sender, ItemClickEventArgs e)
+        {
             ShowPrintPreview();
         }
-        protected void ShowPrintPreview() {
-            if(CurrentPrintableComponent == null) return;
+        protected void ShowPrintPreview()
+        {
+            if (CurrentPrintableComponent == null) return;
             PrintableComponentLink link = new PrintableComponentLink(new PrintingSystem());
-            if(modulesNavigator.CurrentModule.AllowRtfTitle) {
+            if (modulesNavigator.CurrentModule.AllowRtfTitle)
+            {
                 link.RtfReportHeader = @"{\rtf1\ansi\ansicpg1251\deff0\deflang1049{\fonttbl{\f0\fnil\fcharset0 Segoe UI;}}
 {\*\generator Msftedit 5.41.21.2510;}\viewkind4\uc1\pard\sa200\sl276\slmult1\qc\lang9\f0\fs32 " + CurrentModuleName + @"\par
 }";
-            } 
+            }
             link.Component = CurrentPrintableComponent;
             link.Landscape = true;
             link.Margins = new System.Drawing.Printing.Margins(20, 20, 20, 20); // ← add this
@@ -431,10 +467,13 @@ namespace DevExpress.ProductsDemo.Win {
             }
         }
 
-        private void bbiReminder_ItemClick(object sender, ItemClickEventArgs e) {
-            using(frmReminders frm = new frmReminders()) {
+        private void bbiReminder_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            using (frmReminders frm = new frmReminders())
+            {
                 frm.InitData(bbiReminder.Tag as List<Task>);
-                if(frm.ShowDialog(this) == System.Windows.Forms.DialogResult.OK) {
+                if (frm.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                {
                     modulesNavigator.CurrentModule.FocusObject(frm.CurrentTask);
                     modulesNavigator.CurrentModule.ButtonClick(TagResources.TaskEdit);
                 }
@@ -472,7 +511,7 @@ namespace DevExpress.ProductsDemo.Win {
 
             if (modulesNavigator.CurrentModule is ProjectModule pm)
                 pm.ShowAdd();
-          
+
         }
 
         public void SwitchToReportsAndLoad(XtraReport report)
@@ -484,7 +523,7 @@ namespace DevExpress.ProductsDemo.Win {
             // Explicitly iterate through the NavBarItemLink objects in the group's ItemLinks collection
             foreach (NavBarItemLink link in nbgModules.ItemLinks)
             {
-        if (link.Item == nbiReports)
+                if (link.Item == nbiReports)
                 {
                     reportsLink = link;
                     break;
@@ -494,10 +533,10 @@ namespace DevExpress.ProductsDemo.Win {
             if (reportsLink != null)
             {
                 // 1. Programmatically trigger the navigation shift
-                modulesNavigator.ChangeSelectedItem(reportsLink, null); 
-        
-        // 2. Access the freshly loaded module instance and inject the report
-        if (modulesNavigator.CurrentModule is ReportsModule reportsMod)
+                modulesNavigator.ChangeSelectedItem(reportsLink, null);
+
+                // 2. Access the freshly loaded module instance and inject the report
+                if (modulesNavigator.CurrentModule is ReportsModule reportsMod)
                 {
                     reportsMod.OpenExternalReport(report);
                 }
@@ -509,7 +548,7 @@ namespace DevExpress.ProductsDemo.Win {
             //modulesNavigator.CurrentModule?.ShowColumnChooser();
             if (modulesNavigator.CurrentModule is ProjectModule pm)
             {
-               ///  pm.ExportGridToDesignerReport();
+                ///  pm.ExportGridToDesignerReport();
                 pm.PrintStatusSummaryReport();
                 pm.PrintCommuneSummaryReport();
             }
@@ -536,7 +575,7 @@ namespace DevExpress.ProductsDemo.Win {
             {
                 frm.ShowDialog(this);
             }
-            
+
 
             if (modulesNavigator.CurrentModule is ProjectModule pm)
                 pm.RefreshLookups();
@@ -551,7 +590,7 @@ namespace DevExpress.ProductsDemo.Win {
         {
             if (modulesNavigator.CurrentModule is ProjectModule pm)
             {
-                
+
                 pm.PrintCommuneSummaryReport();
             }
 

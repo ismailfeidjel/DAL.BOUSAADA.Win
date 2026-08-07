@@ -1,14 +1,11 @@
 ﻿using DevExpress.Data.Filtering;
-using DevExpress.Utils.Extensions;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraPrinting.Native;
 using DevExpress.XtraReports.ReportGeneration;
 using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -21,7 +18,7 @@ namespace DevExpress.ProductsDemo.Win.Services
     /// without hardcoding any module-specific field names.
     /// </summary>
     /// 
-  
+
     public class GridReportOptions
     {
         public string TemplateKey { get; set; }
@@ -53,11 +50,11 @@ namespace DevExpress.ProductsDemo.Win.Services
     public static class GridReportBuilder
     {
         // ── Entry point ──────────────────────────────────────────────
-        public static XtraReport Build<T>(GridView gridView, List<T> visibleData, GridReportOptions options) 
+        public static XtraReport Build<T>(GridView gridView, List<T> visibleData, GridReportOptions options)
         {
             string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", options.TemplateKey + ".repx");
 
-        XtraReport report;
+            XtraReport report;
             if (File.Exists(templatePath))
             {
                 report = XtraReport.FromFile(templatePath, true);
@@ -103,7 +100,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                 ApplyGroupNumbering(report, visibleData, options);
 
             ApplyGridColumnVisibility(report, gridView, options, out List<string> visibleKeys, out Dictionary<string, float> keyWidths); if (options.GenerateFooterRow)
-              GenerateFooter(report, visibleKeys, keyWidths, options);
+                GenerateFooter(report, visibleKeys, keyWidths, options);
 
             return report;
         }
@@ -115,7 +112,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             if (cell is XRLabel lbl) lbl.Text = options.ProgramDisplayText;
             else if (cell is XRTableCell tcell) tcell.Text = options.ProgramDisplayText;
         }
-       
+
 
         // ── Margins ──────────────────────────────────────────────────
         public static void EnsureSafeMargins(XtraReport report)

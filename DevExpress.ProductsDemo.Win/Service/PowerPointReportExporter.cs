@@ -1,10 +1,10 @@
-﻿using System;
+﻿using DevExpress.XtraPrinting;
+using DevExpress.XtraReports.UI;
+using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using DevExpress.XtraPrinting;
-using DevExpress.XtraReports.UI;
-using PPT = Microsoft.Office.Interop.PowerPoint;
 using MsoTriState = Microsoft.Office.Core.MsoTriState;
+using PPT = Microsoft.Office.Interop.PowerPoint;
 
 namespace DevExpress.ProductsDemo.Win.Services
 {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DevExpress.ProductsDemo.Win.Services
 {
-    public class LotService 
+    public class LotService
     {
         private readonly ILotRepository _repository;
 
@@ -19,7 +19,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             return _repository.GetGridData();
         }
 
-      
+
         public Lot GetById(int id)
         {
             return _repository.GetById(id);
@@ -32,7 +32,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             return _repository.Insert(lot);
         }
 
- 
+
 
         public bool Delete(int id)
         {
@@ -53,7 +53,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             if (lot.PhysicalProgress < 0 ||
                 lot.PhysicalProgress > 100)
                 throw new Exception("نسبة الإنجاز يجب أن تكون بين 0 و 100");
-             
+
             if (lot.LotBudget < 0)
                 throw new Exception("مبلغ الحصة غير صحيح");
 

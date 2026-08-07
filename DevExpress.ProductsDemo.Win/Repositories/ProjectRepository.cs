@@ -42,7 +42,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
                             HasLots = Convert.ToBoolean(rd["has_lots"]),
 
-                            
+
 
                             CreatedAt = Convert.ToDateTime(rd["created_at"]),
                             UpdatedAt = Convert.ToDateTime(rd["updated_at"]),

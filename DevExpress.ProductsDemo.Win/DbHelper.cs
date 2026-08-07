@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
 
 namespace DevExpress.ProductsDemo.Win
 {
@@ -13,6 +12,6 @@ namespace DevExpress.ProductsDemo.Win
             return new MySqlConnection(_connectionString);
         }
 
-       
+
     }
 }

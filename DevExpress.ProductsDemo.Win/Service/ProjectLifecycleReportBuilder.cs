@@ -1,5 +1,4 @@
 ﻿using DevExpress.ProductsDemo.Win.Domain;
-using DevExpress.ProductsDemo.Win.MasterDetailReport;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using System;
@@ -7,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using static System.Windows.Forms.Design.AxImporter;
 
 namespace DevExpress.ProductsDemo.Win.Services
 {

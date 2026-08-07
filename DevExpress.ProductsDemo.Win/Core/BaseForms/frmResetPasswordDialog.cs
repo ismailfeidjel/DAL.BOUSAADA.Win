@@ -1,6 +1,5 @@
 ﻿using DevExpress.XtraEditors;
 using System;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Forms

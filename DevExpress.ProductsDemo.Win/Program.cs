@@ -1,9 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Reflection;
-using System.Windows.Forms;
-using DevExpress.Data.Filtering;
+﻿using DevExpress.Data.Filtering;
 using DevExpress.DXperience.Demos;
 using DevExpress.MailClient.Win;
 using DevExpress.MailDemo.Win;
@@ -11,10 +6,17 @@ using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
+using System;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 
-namespace DevExpress.ProductsDemo.Win {
-    static class Program {
-      
+namespace DevExpress.ProductsDemo.Win
+{
+    static class Program
+    {
+
         [STAThread]
         static void Main(string[] arguments)
         {
@@ -61,7 +63,7 @@ namespace DevExpress.ProductsDemo.Win {
             bool loggedIn;
             using (var loginForm = new DevExpress.ProductsDemo.Win.Forms.frmLogin())
             {
-               // loggedIn = loginForm.ShowDialog(mainForm) == DialogResult.OK;
+                // loggedIn = loginForm.ShowDialog(mainForm) == DialogResult.OK;
                 loggedIn = true;
             }
 
@@ -74,9 +76,11 @@ namespace DevExpress.ProductsDemo.Win {
             mainForm.Enabled = true;
             Application.Run(mainForm);
         }
-        static Assembly OnCurrentDomainAssemblyResolve(object sender, ResolveEventArgs args) {
+        static Assembly OnCurrentDomainAssemblyResolve(object sender, ResolveEventArgs args)
+        {
             string partialName = DevExpress.Utils.AssemblyHelper.GetPartialName(args.Name).ToLower();
-            if(partialName == "entityframework" || partialName == "system.data.sqlite") {
+            if (partialName == "entityframework" || partialName == "system.data.sqlite")
+            {
                 string path = Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location), "..\\..\\bin", partialName + ".dll");
                 return DevExpress.Data.Internal.SafeTypeResolver.GetOrLoadAssemblyFrom(path);
             }

@@ -28,8 +28,8 @@ namespace DevExpress.ProductsDemo.Win.Domain
 
         public int? UpdatedBy { get; set; }
 
-      
 
-     
+
+
     }
 }

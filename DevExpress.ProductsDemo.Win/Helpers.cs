@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using DevExpress.DemoData.Model;
+﻿using DevExpress.DemoData.Model;
 using DevExpress.Images;
 using DevExpress.LookAndFeel;
 using DevExpress.MailClient.Win;
 using DevExpress.MailDemo.Win;
-using DevExpress.ProductsDemo.Win.Modules;
 using DevExpress.Skins;
 using DevExpress.Utils;
 using DevExpress.Utils.DPI;
@@ -32,10 +22,21 @@ using DevExpress.XtraReports.UI;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraScheduler;
 using DevExpress.XtraSpreadsheet;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Linq;
+using System.Windows.Forms;
 
-namespace DevExpress.ProductsDemo.Win {
-    public static class AppHelper {
-        public static void WarmUp() {
+namespace DevExpress.ProductsDemo.Win
+{
+    public static class AppHelper
+    {
+        public static void WarmUp()
+        {
             System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(BaseReallifeDemo).TypeHandle);
             System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(ImagesAssemblyType).TypeHandle);
             System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(AppearanceObject).TypeHandle);
@@ -56,28 +57,35 @@ namespace DevExpress.ProductsDemo.Win {
             System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(typeof(DataAccess.UI.FilterEditorControl).TypeHandle);
         }
     }
-    public class GridHelper {
-        public static void GridViewFocusObject(ColumnView cView, object obj) {
-            if(obj == null) return;
+    public class GridHelper
+    {
+        public static void GridViewFocusObject(ColumnView cView, object obj)
+        {
+            if (obj == null) return;
             int oldFocusedRowHandle = cView.FocusedRowHandle;
-            for(int i = 0; i < cView.DataRowCount; ++i) {
+            for (int i = 0; i < cView.DataRowCount; ++i)
+            {
                 object rowObj = cView.GetRow(i) as object;
-                if(rowObj == null) continue;
-                if(ReferenceEquals(obj, rowObj)) {
-                    if(i == oldFocusedRowHandle)
+                if (rowObj == null) continue;
+                if (ReferenceEquals(obj, rowObj))
+                {
+                    if (i == oldFocusedRowHandle)
                         cView.FocusedRowHandle = GridControl.InvalidRowHandle;
                     cView.FocusedRowHandle = i;
                     break;
                 }
             }
         }
-        public static void SetFindControlImages(GridControl grid) {
+        public static void SetFindControlImages(GridControl grid)
+        {
             FindControl fControl = null;
-            foreach(Control ctrl in grid.Controls) {
+            foreach (Control ctrl in grid.Controls)
+            {
                 fControl = ctrl as FindControl;
-                if(fControl != null) break;
+                if (fControl != null) break;
             }
-            if(fControl != null) {
+            if (fControl != null)
+            {
                 fControl.FindButton.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Search1;
                 fControl.FindButton.ImageOptions.SvgImageSize = new Size(16, 16);
                 fControl.ClearButton.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Delete;
@@ -86,59 +94,78 @@ namespace DevExpress.ProductsDemo.Win {
             }
         }
     }
-    public class ImageHelper {
-        public static Bitmap GetScaleImage(Image image, Size size) {
+    public class ImageHelper
+    {
+        public static Bitmap GetScaleImage(Image image, Size size)
+        {
             return new Bitmap(image, size.Width, size.Height);
         }
     }
-    public class ColorHelper {
-        public static void UpdateColor(ImageList list, UserLookAndFeel lf) {
-            for(int i = 0; i < list.Images.Count; i++)
+    public class ColorHelper
+    {
+        public static void UpdateColor(ImageList list, UserLookAndFeel lf)
+        {
+            for (int i = 0; i < list.Images.Count; i++)
                 list.Images[i] = SetColor(list.Images[i] as Bitmap, GetHeaderForeColor(lf));
         }
-        public static Color GetHeaderForeColor(UserLookAndFeel lf) {
+        public static Color GetHeaderForeColor(UserLookAndFeel lf)
+        {
             Color ret = SystemColors.ControlText;
-            if(lf.ActiveStyle != ActiveLookAndFeelStyle.Skin) return ret;
+            if (lf.ActiveStyle != ActiveLookAndFeelStyle.Skin) return ret;
             return GridSkins.GetSkin(lf)[GridSkins.SkinHeader].Color.GetForeColor();
         }
-        static Bitmap SetColor(Bitmap bmp, Color color) {
-            for(int i = 0; i < bmp.Width; i++)
-                for(int j = 0; j < bmp.Height; j++)
-                    if(bmp.GetPixel(i, j).Name != "0")
+        static Bitmap SetColor(Bitmap bmp, Color color)
+        {
+            for (int i = 0; i < bmp.Width; i++)
+                for (int j = 0; j < bmp.Height; j++)
+                    if (bmp.GetPixel(i, j).Name != "0")
                         bmp.SetPixel(i, j, color);
             return bmp;
         }
-        public static Color DisabledTextColor {
-            get {
+        public static Color DisabledTextColor
+        {
+            get
+            {
                 return CommonSkins.GetSkin(DevExpress.LookAndFeel.UserLookAndFeel.Default).Colors.GetColor("DisabledText");
             }
         }
-        public static Color CriticalColor {
-            get {
+        public static Color CriticalColor
+        {
+            get
+            {
                 return CommonColors.GetCriticalColor(DevExpress.LookAndFeel.UserLookAndFeel.Default);
             }
         }
-        public static Color WarningColor {
-            get {
+        public static Color WarningColor
+        {
+            get
+            {
                 return CommonColors.GetWarningColor(DevExpress.LookAndFeel.UserLookAndFeel.Default);
             }
         }
-        static string GetRGBColor(Color color) {
+        static string GetRGBColor(Color color)
+        {
             return string.Format("{0},{1},{2}", color.R, color.G, color.B);
         }
     }
-    public class ObjectHelper {
-        public static void StartProcess(string processName) {
-            if(Data.Utils.SafeProcess.Start(processName) == null)
+    public class ObjectHelper
+    {
+        public static void StartProcess(string processName)
+        {
+            if (Data.Utils.SafeProcess.Start(processName) == null)
                 XtraMessageBox.Show("", Properties.Resources.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
-    
-    public class ValidationRulesHelper {
+
+    public class ValidationRulesHelper
+    {
         static ConditionValidationRule _ruleIsNotBlank = null;
-        public static ConditionValidationRule RuleIsNotBlank {
-            get {
-                if(_ruleIsNotBlank == null) {
+        public static ConditionValidationRule RuleIsNotBlank
+        {
+            get
+            {
+                if (_ruleIsNotBlank == null)
+                {
                     _ruleIsNotBlank = new ConditionValidationRule();
                     _ruleIsNotBlank.ConditionOperator = ConditionOperator.IsNotBlank;
                     _ruleIsNotBlank.ErrorText = Properties.Resources.RuleIsNotBlankWarning;
@@ -148,16 +175,20 @@ namespace DevExpress.ProductsDemo.Win {
             }
         }
     }
-    public class EditorHelper {
-        public static RepositoryItemImageComboBox CreateTaskStatusImageComboBox(RepositoryItemImageComboBox edit) {
+    public class EditorHelper
+    {
+        public static RepositoryItemImageComboBox CreateTaskStatusImageComboBox(RepositoryItemImageComboBox edit)
+        {
             Array arr = Enum.GetValues(typeof(TaskStatus));
             edit.Items.Clear();
-            foreach(TaskStatus status in arr)
+            foreach (TaskStatus status in arr)
                 edit.Items.Add(new ImageComboBoxItem(GetStringByTaskStatus(status), status, (int)status));
             return edit;
         }
-        static string GetStringByTaskStatus(TaskStatus status) {
-            switch(status) {
+        static string GetStringByTaskStatus(TaskStatus status)
+        {
+            switch (status)
+            {
                 case TaskStatus.Completed: return Properties.Resources.TaskStatusCompleted;
                 case TaskStatus.Deferred: return Properties.Resources.TaskStatusDeferred;
                 case TaskStatus.InProgress: return Properties.Resources.TaskStatusInProgress;
@@ -165,14 +196,16 @@ namespace DevExpress.ProductsDemo.Win {
             }
             return Properties.Resources.TaskStatusNotStarted;
         }
-        public static RepositoryItemImageComboBox CreateTaskCategoryImageComboBox(RepositoryItemImageComboBox edit) {
+        public static RepositoryItemImageComboBox CreateTaskCategoryImageComboBox(RepositoryItemImageComboBox edit)
+        {
             edit.Items.Clear();
             edit.Items.Add(new ImageComboBoxItem(Properties.Resources.TaskCategoryHouseChores, TaskCategory.HouseChores, 0));
             edit.Items.Add(new ImageComboBoxItem(Properties.Resources.TaskCategoryShopping, TaskCategory.Shopping, 1));
             edit.Items.Add(new ImageComboBoxItem(Properties.Resources.TaskCategoryOffice, TaskCategory.Office, 2));
             return edit;
         }
-        public static RepositoryItemImageComboBox CreateFlagStatusImageComboBox(RepositoryItemImageComboBox edit) {
+        public static RepositoryItemImageComboBox CreateFlagStatusImageComboBox(RepositoryItemImageComboBox edit)
+        {
             edit.Items.Clear();
             edit.SmallImages = CreateFlagStatusImageCollection();
             edit.GlyphAlignment = HorzAlignment.Center;
@@ -185,7 +218,8 @@ namespace DevExpress.ProductsDemo.Win {
             edit.Items.Add(new ImageComboBoxItem(Properties.Resources.Completed, FlagStatus.Completed, (int)FlagStatus.Completed));
             return edit;
         }
-        public static void InitPersonComboBox(RepositoryItemImageComboBox edit) {
+        public static void InitPersonComboBox(RepositoryItemImageComboBox edit)
+        {
             SvgImageCollection iCollection = new SvgImageCollection();
             iCollection.Add(Properties.Resources.Mr1);
             iCollection.Add(Properties.Resources.Ms1);
@@ -193,7 +227,8 @@ namespace DevExpress.ProductsDemo.Win {
             edit.Items.Add(new ImageComboBoxItem(Properties.Resources.Female, ContactGender.Female, 1));
             edit.SmallImages = iCollection;
         }
-        public static void InitTitleComboBox(RepositoryItemImageComboBox edit) {
+        public static void InitTitleComboBox(RepositoryItemImageComboBox edit)
+        {
             SvgImageCollection iCollection = new SvgImageCollection();
             iCollection.Add(Properties.Resources.Doctor1);
             iCollection.Add(Properties.Resources.Miss1);
@@ -210,15 +245,18 @@ namespace DevExpress.ProductsDemo.Win {
             edit.Items.Add(new ImageComboBoxItem(GetTitleNameByContactTitle(ContactTitle.Prof), ContactTitle.Prof, 5));
             edit.SmallImages = iCollection;
         }
-        public static void InitPriorityComboBox(RepositoryItemImageComboBox edit) {
+        public static void InitPriorityComboBox(RepositoryItemImageComboBox edit)
+        {
             edit.Items.Clear();
             edit.Items.AddRange(new DevExpress.XtraEditors.Controls.ImageComboBoxItem[] {
                 new DevExpress.XtraEditors.Controls.ImageComboBoxItem(Properties.Resources.PriorityLow, 0, 0),
                 new DevExpress.XtraEditors.Controls.ImageComboBoxItem(Properties.Resources.PriorityMedium, 1, -1),
                 new DevExpress.XtraEditors.Controls.ImageComboBoxItem(Properties.Resources.PriorityHigh, 2, 1)});
         }
-        public static string GetTitleNameByContactTitle(ContactTitle title) {
-            switch(title) {
+        public static string GetTitleNameByContactTitle(ContactTitle title)
+        {
+            switch (title)
+            {
                 case ContactTitle.Dr: return Properties.Resources.ContactTitleDr;
                 case ContactTitle.Miss: return Properties.Resources.ContactTitleMiss;
                 case ContactTitle.Mr: return Properties.Resources.ContactTitleMr;
@@ -228,7 +266,8 @@ namespace DevExpress.ProductsDemo.Win {
             }
             return string.Empty;
         }
-        static SvgImageCollection CreateFlagStatusImageCollection() {
+        static SvgImageCollection CreateFlagStatusImageCollection()
+        {
             SvgImageCollection ret = new SvgImageCollection();
             ret.Add(Properties.Resources.Today_Flag1);
             ret.Add(Properties.Resources.Tomorrow_Flag1);
@@ -240,29 +279,35 @@ namespace DevExpress.ProductsDemo.Win {
             return ret;
         }
 
-        internal static List<string> GetCities() {
+        internal static List<string> GetCities()
+        {
             IEnumerable cities = (from contact in DataHelper.Contacts select contact.City).OrderBy(s => s).Distinct();
             return cities.Cast<string>().ToList();
         }
-        internal static List<string> GetStates() {
+        internal static List<string> GetStates()
+        {
             IEnumerable states = (from contact in DataHelper.Contacts select contact.State).OrderBy(s => s).Distinct();
             return states.Cast<string>().ToList();
         }
     }
-    public class MapUtils {
+    public class MapUtils
+    {
         static string key = DevExpress.Map.Native.DXBingKeyVerifier.BingKeyWinProductsDemo;
         public static string DevExpressBingKey { get { return key; } }
 
-        public static BingMapDataProvider CreateBingDataProvider(BingMapKind kind) {
+        public static BingMapDataProvider CreateBingDataProvider(BingMapKind kind)
+        {
             return new BingMapDataProvider() { BingKey = DevExpressBingKey, Kind = kind };
         }
-        public static Image ScaleImage(Image source, ScaleHelper scaleHelper) {
+        public static Image ScaleImage(Image source, ScaleHelper scaleHelper)
+        {
             Size sourceSize = source.Size;
             Size deviceImageSize = scaleHelper.ScaleSize(sourceSize);
-            if(sourceSize == deviceImageSize)
+            if (sourceSize == deviceImageSize)
                 return source;
             Bitmap bitmap = new Bitmap(deviceImageSize.Width, deviceImageSize.Height, PixelFormat.Format24bppRgb);
-            using(Graphics graphics = Graphics.FromImage(bitmap)) {
+            using (Graphics graphics = Graphics.FromImage(bitmap))
+            {
                 graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
                 RectangleF srcRect = new RectangleF(0f, 0f, (float)source.Size.Width, (float)source.Size.Height);
                 RectangleF destRect = new RectangleF(0f, 0f, (float)deviceImageSize.Width, (float)deviceImageSize.Height);

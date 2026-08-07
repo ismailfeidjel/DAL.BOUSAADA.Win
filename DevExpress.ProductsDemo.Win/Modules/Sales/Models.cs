@@ -1,14 +1,17 @@
-﻿using System;
-using System.Drawing;
-using System.Collections.Generic;
+﻿using DevExpress.DXperience.Demos;
 using DevExpress.SalesDemo.Model;
 using DevExpress.SalesDemo.Win.Modules;
 using DevExpress.XtraCharts;
-using DevExpress.DXperience.Demos;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
 
-namespace DevExpress.SalesDemo.Win {
-    public static class ChartUtils {
-        public static Palette GeneratePalette() {
+namespace DevExpress.SalesDemo.Win
+{
+    public static class ChartUtils
+    {
+        public static Palette GeneratePalette()
+        {
             return new Palette("SalesPalette", PaletteScaleMode.Repeat, new PaletteEntry[] {
                 new PaletteEntry(Color.FromArgb(0x46, 0x68, 0xA5)),
                 new PaletteEntry(Color.FromArgb(0xA5, 0x46, 0x71)),
@@ -19,8 +22,10 @@ namespace DevExpress.SalesDemo.Win {
                 new PaletteEntry(Color.FromArgb(0xFC, 0xC6, 0x53))
             });
         }
-        public static void CustomDrawAxisLabel(object sender, CustomDrawAxisLabelEventArgs e) {
-            if (e.Item.Axis is AxisY) {
+        public static void CustomDrawAxisLabel(object sender, CustomDrawAxisLabelEventArgs e)
+        {
+            if (e.Item.Axis is AxisY)
+            {
                 double value = ((double)e.Item.AxisValue);
                 e.Item.Text = DoubleToShortString(value);
             }
@@ -30,12 +35,14 @@ namespace DevExpress.SalesDemo.Win {
             if (chart.LookAndFeel.ActiveSkinName == "Office 2016 Dark")
                 e.Item.TextColor = Color.White;
         }
-        public static void CustomDrawSeriesPointLegendMarker(object sender, CustomDrawSeriesPointEventArgs e) {
+        public static void CustomDrawSeriesPointLegendMarker(object sender, CustomDrawSeriesPointEventArgs e)
+        {
             Bitmap markerBitmap = CreateLegendMarker(e.LegendMarkerSize, e.LegendDrawOptions.Color);
             e.LegendMarkerImage = markerBitmap;
             e.DisposeLegendMarkerImage = true;
         }
-        public static void CustomDrawPieSeriesPoint(object sender, CustomDrawSeriesPointEventArgs e) {
+        public static void CustomDrawPieSeriesPoint(object sender, CustomDrawSeriesPointEventArgs e)
+        {
             Bitmap markerBitmap = CreateLegendMarker(e.LegendMarkerSize, e.LegendDrawOptions.Color);
             e.LegendMarkerImage = markerBitmap;
             e.DisposeLegendMarkerImage = true;
@@ -47,7 +54,8 @@ namespace DevExpress.SalesDemo.Win {
             if (chart.LookAndFeel.ActiveSkinName == "Office 2016 Dark")
                 e.LegendTextColor = Color.White;
         }
-        public static void CustomDrawBarSeriesPoint(object sender, CustomDrawSeriesPointEventArgs e) {
+        public static void CustomDrawBarSeriesPoint(object sender, CustomDrawSeriesPointEventArgs e)
+        {
             double value = e.SeriesPoint.Values[0];
             if (value >= 1000000)
                 e.LabelText = Math.Round(value / 1000000).ToString() + "M";
@@ -55,16 +63,20 @@ namespace DevExpress.SalesDemo.Win {
                 e.LabelText = Math.Round(value / 1000).ToString() + "K";
         }
 
-        static Bitmap CreateLegendMarker(Size size, Color color) {
+        static Bitmap CreateLegendMarker(Size size, Color color)
+        {
             Bitmap bmp = new Bitmap(size.Width, size.Height);
-            using (Graphics gr = Graphics.FromImage(bmp)) {
-                using (Brush brush = new SolidBrush(color)) {
+            using (Graphics gr = Graphics.FromImage(bmp))
+            {
+                using (Brush brush = new SolidBrush(color))
+                {
                     gr.FillRectangle(brush, new Rectangle(Point.Empty, size));
                 }
             }
             return bmp;
         }
-        static string DoubleToShortString(double value) {
+        static string DoubleToShortString(double value)
+        {
             if (value >= 1000000)
                 return Math.Round(value / 1000000).ToString() + "M";
             else if (value >= 1000)
@@ -74,7 +86,8 @@ namespace DevExpress.SalesDemo.Win {
         }
     }
 
-    public class DailySalesPerformance : ISalesPerformanceProvider {
+    public class DailySalesPerformance : ISalesPerformanceProvider
+    {
         IDataProvider dataProvider;
 
         public SalesPerformanceMode Mode { get { return SalesPerformanceMode.Day; } }
@@ -86,20 +99,24 @@ namespace DevExpress.SalesDemo.Win {
         public double SalesValueSecond { get { return GetTotalSales(DateTimeUtils.GetDayRange(TutorialConstants.Today.AddDays(-1))); } }
         public double SalesValueThird { get { return GetTotalSales(DateTimeUtils.GetLastWeekRange()); } }
 
-        public DailySalesPerformance(IDataProvider dataProvider) {
+        public DailySalesPerformance(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
 
-        public object GetChartData(DateTime date) {
+        public object GetChartData(DateTime date)
+        {
             DateTimeRange range = DateTimeUtils.GetDayRange(date);
             return dataProvider.GetSales(range.Start, range.End, GroupingPeriod.Hour);
         }
-        double GetTotalSales(DateTimeRange range) {
+        double GetTotalSales(DateTimeRange range)
+        {
             return (double)dataProvider.GetTotalSalesByRange(range.Start, range.End).TotalCost;
         }
     }
 
-    public class MonthlySalesPerformance : ISalesPerformanceProvider {
+    public class MonthlySalesPerformance : ISalesPerformanceProvider
+    {
         IDataProvider dataProvider;
 
         public SalesPerformanceMode Mode { get { return SalesPerformanceMode.Month; } }
@@ -111,20 +128,24 @@ namespace DevExpress.SalesDemo.Win {
         public double SalesValueSecond { get { return GetTotalSales(DateTimeUtils.GetMonthRange(TutorialConstants.Today.AddMonths(-1))); } }
         public double SalesValueThird { get { return GetTotalSales(DateTimeUtils.GetLastYearRange()); } }
 
-        public MonthlySalesPerformance(IDataProvider dataProvider) {
+        public MonthlySalesPerformance(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
 
-        public object GetChartData(DateTime date) {
+        public object GetChartData(DateTime date)
+        {
             DateTimeRange range = DateTimeUtils.GetMonthRange(date);
             return dataProvider.GetSales(range.Start, range.End, GroupingPeriod.Day);
         }
-        double GetTotalSales(DateTimeRange range) {
+        double GetTotalSales(DateTimeRange range)
+        {
             return (double)dataProvider.GetTotalSalesByRange(range.Start, range.End).TotalCost;
         }
     }
 
-    public class DailySalesByProduct : ISalesPerformanceProvider {
+    public class DailySalesByProduct : ISalesPerformanceProvider
+    {
         IDataProvider dataProvider;
 
         public SalesPerformanceMode Mode { get { return SalesPerformanceMode.Day; } }
@@ -136,20 +157,24 @@ namespace DevExpress.SalesDemo.Win {
         public double SalesValueSecond { get { return GetTotalSales(DateTimeUtils.GetDayRange(TutorialConstants.Today.AddMonths(-1))); } }
         public double SalesValueThird { get { return GetTotalSales(DateTimeUtils.GetLastWeekRange()); } }
 
-        public DailySalesByProduct(IDataProvider dataProvider) {
+        public DailySalesByProduct(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
 
-        public object GetChartData(DateTime date) {
+        public object GetChartData(DateTime date)
+        {
             DateTimeRange range = DateTimeUtils.GetDayRange(date);
             return dataProvider.GetSalesByProduct(range.Start, range.End, GroupingPeriod.All);
         }
-        double GetTotalSales(DateTimeRange range) {
+        double GetTotalSales(DateTimeRange range)
+        {
             return (double)dataProvider.GetTotalSalesByRange(range.Start, range.End).TotalCost;
         }
     }
 
-    public class UnitSalesByProduct : ISalesPerformanceProvider {
+    public class UnitSalesByProduct : ISalesPerformanceProvider
+    {
         IDataProvider dataProvider;
 
         public SalesPerformanceMode Mode { get { return SalesPerformanceMode.Month; } }
@@ -161,34 +186,42 @@ namespace DevExpress.SalesDemo.Win {
         public double SalesValueSecond { get { return GetTotalSales(DateTimeUtils.GetMonthRange(TutorialConstants.Today.AddMonths(-1))); } }
         public double SalesValueThird { get { return GetTotalSales(DateTimeUtils.GetLastYearRange()); } }
 
-        public UnitSalesByProduct(IDataProvider dataProvider) {
+        public UnitSalesByProduct(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
 
-        public object GetChartData(DateTime date) {
+        public object GetChartData(DateTime date)
+        {
             DateTimeRange range = DateTimeUtils.GetMonthRange(date);
             return dataProvider.GetSalesByProduct(range.Start, range.End, GroupingPeriod.All);
         }
-        double GetTotalSales(DateTimeRange range) {
+        double GetTotalSales(DateTimeRange range)
+        {
             return (double)dataProvider.GetTotalSalesByRange(range.Start, range.End).Units;
         }
     }
 
-    public class ProductsSalesByRange : ISalesByRangeProvider {
+    public class ProductsSalesByRange : ISalesByRangeProvider
+    {
         IDataProvider dataProvider;
 
-        public ProductsSalesByRange(IDataProvider dataProvider) {
+        public ProductsSalesByRange(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
-        public IEnumerable<SalesGroup> GetSalesDataForItemForPeriod(DateTime start, DateTime end) {
+        public IEnumerable<SalesGroup> GetSalesDataForItemForPeriod(DateTime start, DateTime end)
+        {
             return dataProvider.GetSalesByProduct(start, end, GroupingPeriod.All);
         }
-        public IEnumerable<SalesGroup> GetSalesDataForAllItemsForPeriod(DateTime start, DateTime end) {
+        public IEnumerable<SalesGroup> GetSalesDataForAllItemsForPeriod(DateTime start, DateTime end)
+        {
             return dataProvider.GetSales(start, end, GroupingPeriod.Day);
         }
     }
 
-    public class DailySalesBySector : ISalesPerformanceProvider {
+    public class DailySalesBySector : ISalesPerformanceProvider
+    {
         IDataProvider dataProvider;
 
         public SalesPerformanceMode Mode { get { return SalesPerformanceMode.Day; } }
@@ -200,20 +233,24 @@ namespace DevExpress.SalesDemo.Win {
         public double SalesValueSecond { get { return GetTotalSales(DateTimeUtils.GetDayRange(TutorialConstants.Today.AddMonths(-1))); } }
         public double SalesValueThird { get { return GetTotalSales(DateTimeUtils.GetLastWeekRange()); } }
 
-        public DailySalesBySector(IDataProvider dataProvider) {
+        public DailySalesBySector(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
 
-        public object GetChartData(DateTime date) {
+        public object GetChartData(DateTime date)
+        {
             DateTimeRange range = DateTimeUtils.GetDayRange(date);
             return dataProvider.GetSalesBySector(range.Start, range.End, GroupingPeriod.All);
         }
-        double GetTotalSales(DateTimeRange range) {
+        double GetTotalSales(DateTimeRange range)
+        {
             return (double)dataProvider.GetTotalSalesByRange(range.Start, range.End).TotalCost;
         }
     }
 
-    public class UnitSalesBySector : ISalesPerformanceProvider {
+    public class UnitSalesBySector : ISalesPerformanceProvider
+    {
         IDataProvider dataProvider;
 
         public SalesPerformanceMode Mode { get { return SalesPerformanceMode.Month; } }
@@ -225,34 +262,42 @@ namespace DevExpress.SalesDemo.Win {
         public double SalesValueSecond { get { return GetTotalSales(DateTimeUtils.GetMonthRange(TutorialConstants.Today.AddMonths(-1))); } }
         public double SalesValueThird { get { return GetTotalSales(DateTimeUtils.GetLastYearRange()); } }
 
-        public UnitSalesBySector(IDataProvider dataProvider) {
+        public UnitSalesBySector(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
 
-        public object GetChartData(DateTime date) {
+        public object GetChartData(DateTime date)
+        {
             DateTimeRange range = DateTimeUtils.GetMonthRange(date);
             return dataProvider.GetSalesBySector(range.Start, range.End, GroupingPeriod.All);
         }
-        double GetTotalSales(DateTimeRange range) {
+        double GetTotalSales(DateTimeRange range)
+        {
             return (double)dataProvider.GetTotalSalesByRange(range.Start, range.End).Units;
         }
     }
 
-    public class SectorSalesByRange : ISalesByRangeProvider {
+    public class SectorSalesByRange : ISalesByRangeProvider
+    {
         IDataProvider dataProvider;
 
-        public SectorSalesByRange(IDataProvider dataProvider) {
+        public SectorSalesByRange(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
-        public IEnumerable<SalesGroup> GetSalesDataForItemForPeriod(DateTime start, DateTime end) {
+        public IEnumerable<SalesGroup> GetSalesDataForItemForPeriod(DateTime start, DateTime end)
+        {
             return dataProvider.GetSalesBySector(start, end, GroupingPeriod.All);
         }
-        public IEnumerable<SalesGroup> GetSalesDataForAllItemsForPeriod(DateTime start, DateTime end) {
+        public IEnumerable<SalesGroup> GetSalesDataForAllItemsForPeriod(DateTime start, DateTime end)
+        {
             return dataProvider.GetSales(start, end, GroupingPeriod.Day);
         }
     }
 
-    public class DailySalesByRegion : ISalesPerformanceProvider {
+    public class DailySalesByRegion : ISalesPerformanceProvider
+    {
         IDataProvider dataProvider;
 
         public SalesPerformanceMode Mode { get { return SalesPerformanceMode.Day; } }
@@ -264,20 +309,24 @@ namespace DevExpress.SalesDemo.Win {
         public double SalesValueSecond { get { return GetTotalSales(DateTimeUtils.GetDayRange(TutorialConstants.Today.AddMonths(-1))); } }
         public double SalesValueThird { get { return GetTotalSales(DateTimeUtils.GetLastWeekRange()); } }
 
-        public DailySalesByRegion(IDataProvider dataProvider) {
+        public DailySalesByRegion(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
 
-        public object GetChartData(DateTime date) {
+        public object GetChartData(DateTime date)
+        {
             DateTimeRange range = DateTimeUtils.GetDayRange(date);
             return dataProvider.GetSalesByRegion(range.Start, range.End, GroupingPeriod.All);
         }
-        double GetTotalSales(DateTimeRange range) {
+        double GetTotalSales(DateTimeRange range)
+        {
             return (double)dataProvider.GetTotalSalesByRange(range.Start, range.End).TotalCost;
         }
     }
 
-    public class UnitSalesByRegion : ISalesPerformanceProvider {
+    public class UnitSalesByRegion : ISalesPerformanceProvider
+    {
         IDataProvider dataProvider;
 
         public SalesPerformanceMode Mode { get { return SalesPerformanceMode.Month; } }
@@ -289,43 +338,54 @@ namespace DevExpress.SalesDemo.Win {
         public double SalesValueSecond { get { return GetTotalSales(DateTimeUtils.GetMonthRange(TutorialConstants.Today.AddMonths(-1))); } }
         public double SalesValueThird { get { return GetTotalSales(DateTimeUtils.GetLastYearRange()); } }
 
-        public UnitSalesByRegion(IDataProvider dataProvider) {
+        public UnitSalesByRegion(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
 
-        public object GetChartData(DateTime date) {
+        public object GetChartData(DateTime date)
+        {
             DateTimeRange range = DateTimeUtils.GetMonthRange(date);
             return dataProvider.GetSalesByRegion(range.Start, range.End, GroupingPeriod.All);
         }
-        double GetTotalSales(DateTimeRange range) {
+        double GetTotalSales(DateTimeRange range)
+        {
             return (double)dataProvider.GetTotalSalesByRange(range.Start, range.End).Units;
         }
     }
 
-    public class RegionSalesByRange : ISalesByRangeProvider {
+    public class RegionSalesByRange : ISalesByRangeProvider
+    {
         IDataProvider dataProvider;
 
-        public RegionSalesByRange(IDataProvider dataProvider) {
+        public RegionSalesByRange(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
-        public IEnumerable<SalesGroup> GetSalesDataForItemForPeriod(DateTime start, DateTime end) {
+        public IEnumerable<SalesGroup> GetSalesDataForItemForPeriod(DateTime start, DateTime end)
+        {
             return dataProvider.GetSalesByRegion(start, end, GroupingPeriod.All);
         }
-        public IEnumerable<SalesGroup> GetSalesDataForAllItemsForPeriod(DateTime start, DateTime end) {
+        public IEnumerable<SalesGroup> GetSalesDataForAllItemsForPeriod(DateTime start, DateTime end)
+        {
             return dataProvider.GetSales(start, end, GroupingPeriod.Day);
         }
     }
 
-    public class ChannelsSalesByRange : ISalesByRangeProvider {
+    public class ChannelsSalesByRange : ISalesByRangeProvider
+    {
         IDataProvider dataProvider;
 
-        public ChannelsSalesByRange(IDataProvider dataProvider) {
+        public ChannelsSalesByRange(IDataProvider dataProvider)
+        {
             this.dataProvider = dataProvider;
         }
-        public IEnumerable<SalesGroup> GetSalesDataForItemForPeriod(DateTime start, DateTime end) {
+        public IEnumerable<SalesGroup> GetSalesDataForItemForPeriod(DateTime start, DateTime end)
+        {
             return dataProvider.GetSalesByChannel(start, end, GroupingPeriod.All);
         }
-        public IEnumerable<SalesGroup> GetSalesDataForAllItemsForPeriod(DateTime start, DateTime end) {
+        public IEnumerable<SalesGroup> GetSalesDataForAllItemsForPeriod(DateTime start, DateTime end)
+        {
             return dataProvider.GetSales(start, end, GroupingPeriod.Day);
         }
     }

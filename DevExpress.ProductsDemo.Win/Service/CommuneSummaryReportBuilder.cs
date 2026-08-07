@@ -68,7 +68,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                 GridReportBuilder.EnsureSafeMargins(partReport);
                 partReport.Landscape = true;
                 partReport.DataSource = rows;
-                ApplyProgramTitle(partReport, programName);  
+                ApplyProgramTitle(partReport, programName);
                 partReport.CreateDocument();
 
                 partReports.Add(partReport);

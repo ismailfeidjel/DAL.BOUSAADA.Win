@@ -1,10 +1,4 @@
 ﻿using DevExpress.XtraEditors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Core.BaseForms
 {
@@ -112,7 +106,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             // 
             // btnSave
             // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Appearance.BorderColor = System.Drawing.Color.Wheat;
             this.btnSave.Appearance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -129,7 +123,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             // 
             // btnClose
             // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnClose.Appearance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClose.Appearance.Options.UseFont = true;
@@ -143,7 +137,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRefresh.Appearance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRefresh.Appearance.Options.UseFont = true;
@@ -157,7 +151,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             // 
             // btnDelete
             // 
-            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDelete.Appearance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Appearance.Options.UseFont = true;
@@ -171,7 +165,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             // 
             // btnNew
             // 
-            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnNew.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnNew.Appearance.BorderColor = System.Drawing.Color.Wheat;
             this.btnNew.Appearance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -289,19 +283,19 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
         }
 
         protected XtraLayout.LayoutControl layoutControl1;
-        protected  XtraLayout.LayoutControlGroup Root;
-        protected  XtraLayout.EmptySpaceItem emptySpaceItem1;
-        protected  XtraLayout.SimpleSeparator simpleSeparator1;
-        protected  XtraEditors.LabelControl lblStatus;
-        protected  XtraGrid.GridControl gridControl;
-        protected  XtraGrid.Views.Grid.GridView gridView;
-        protected  XtraEditors.SidePanel sidePanel1;
-        protected  XtraEditors.SimpleButton btnClose;
-        protected  XtraEditors.SimpleButton btnRefresh;
-        protected  XtraEditors.SimpleButton btnDelete;
-        protected  XtraEditors.SimpleButton btnNew;
-        protected  XtraLayout.LayoutControlItem layoutControlItem1;
-        protected  XtraLayout.LayoutControlItem layoutControlItem2;
+        protected XtraLayout.LayoutControlGroup Root;
+        protected XtraLayout.EmptySpaceItem emptySpaceItem1;
+        protected XtraLayout.SimpleSeparator simpleSeparator1;
+        protected XtraEditors.LabelControl lblStatus;
+        protected XtraGrid.GridControl gridControl;
+        protected XtraGrid.Views.Grid.GridView gridView;
+        protected XtraEditors.SidePanel sidePanel1;
+        protected XtraEditors.SimpleButton btnClose;
+        protected XtraEditors.SimpleButton btnRefresh;
+        protected XtraEditors.SimpleButton btnDelete;
+        protected XtraEditors.SimpleButton btnNew;
+        protected XtraLayout.LayoutControlItem layoutControlItem1;
+        protected XtraLayout.LayoutControlItem layoutControlItem2;
         private XtraBars.BarButtonItem bbiNewTask;
         protected SimpleButton btnSave;
         protected XtraLayout.LayoutControlItem layoutControlItem3;

@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Windows.Forms;
-using DevExpress.DXperience.Demos;
+﻿using DevExpress.DXperience.Demos;
 using DevExpress.MailClient.Win;
 using DevExpress.ProductsDemo.Win.Domain;
 using DevExpress.Utils;
@@ -23,13 +15,24 @@ using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraSplashScreen;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
 
-namespace DevExpress.ProductsDemo.Win {
-    public class ModulesNavigator {
+namespace DevExpress.ProductsDemo.Win
+{
+    public class ModulesNavigator
+    {
         RibbonControl ribbon;
         PanelControl panel;
         string _currentModuleName = string.Empty;
-        public ModulesNavigator(RibbonControl ribbon, PanelControl panel) {
+        public ModulesNavigator(RibbonControl ribbon, PanelControl panel)
+        {
             this.ribbon = ribbon;
             this.panel = panel;
         }
@@ -125,43 +128,53 @@ namespace DevExpress.ProductsDemo.Win {
                 groupObject.Module.ShowModule(firstShow);
             }
         }
-        public BaseModule CurrentModule {
-            get {
+        public BaseModule CurrentModule
+        {
+            get
+            {
                 if (panel.Controls.Count == 0)
                     return null;
                 return panel.Controls[0] as BaseModule;
             }
         }
     }
-    public class BaseControl : XtraUserControl {
-        public BaseControl() {
+    public class BaseControl : XtraUserControl
+    {
+        public BaseControl()
+        {
             if (!DesignTimeTools.IsDesignMode)
                 LookAndFeel.ActiveLookAndFeel.StyleChanged += new EventHandler(ActiveLookAndFeel_StyleChanged);
             this.VisibleChanged += new EventHandler(BaseControl_VisibleChanged);
         }
-        void BaseControl_VisibleChanged(object sender, EventArgs e) {
-            if (this.Visible) {
+        void BaseControl_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible)
+            {
                 ShowControlFirstTime();
                 this.VisibleChanged -= new EventHandler(BaseControl_VisibleChanged);
             }
         }
         internal virtual void ShowControlFirstTime() { }
-        protected override void OnLoad(EventArgs e) {
+        protected override void OnLoad(EventArgs e)
+        {
             base.OnLoad(e);
             if (!DesignTimeTools.IsDesignMode)
                 LookAndFeelStyleChanged();
         }
-        protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing)
+        {
             if (disposing && !DesignTimeTools.IsDesignMode)
                 LookAndFeel.ActiveLookAndFeel.StyleChanged -= new EventHandler(ActiveLookAndFeel_StyleChanged);
             base.Dispose(disposing);
         }
-        void ActiveLookAndFeel_StyleChanged(object sender, EventArgs e) {
+        void ActiveLookAndFeel_StyleChanged(object sender, EventArgs e)
+        {
             LookAndFeelStyleChanged();
         }
         protected virtual void LookAndFeelStyleChanged() { }
     }
-    public class BaseModule : BaseControl {
+    public class BaseModule : BaseControl
+    {
         protected string _partName = string.Empty;
         public virtual bool HasProgramSelector => false;
         public virtual List<LookupItem> GetPrograms() => new List<LookupItem>();
@@ -176,22 +189,26 @@ namespace DevExpress.ProductsDemo.Win {
         internal frmMain OwnerForm { get { return this.FindForm() as frmMain; } }
         protected RibbonControl MainRibbon { get { return OwnerForm.Ribbon; } }
 
-        internal virtual void ShowModule(bool firstShow) {
+        internal virtual void ShowModule(bool firstShow)
+        {
             if (OwnerForm == null)
                 return;
-            if (AutoMergeRibbon && ChildRibbon != null) {
+            if (AutoMergeRibbon && ChildRibbon != null)
+            {
                 OwnerForm.Ribbon.MergeRibbon(ChildRibbon);
-                    RibbonPage page = OwnerForm.Ribbon.Pages.GetPageByText("VIEW");
-                    if(page != null) {
-                        OwnerForm.Ribbon.MergedPages.Remove(page);
-                        OwnerForm.Ribbon.MergedPages.Insert(OwnerForm.Ribbon.MergedPages.Count, page);
-                    }
-                if(ChildRibbonStatusBar != null) {
+                RibbonPage page = OwnerForm.Ribbon.Pages.GetPageByText("VIEW");
+                if (page != null)
+                {
+                    OwnerForm.Ribbon.MergedPages.Remove(page);
+                    OwnerForm.Ribbon.MergedPages.Insert(OwnerForm.Ribbon.MergedPages.Count, page);
+                }
+                if (ChildRibbonStatusBar != null)
+                {
                     OwnerForm.RibbonStatusBar.MergeStatusBar(ChildRibbonStatusBar);
                     OwnerForm.ShowInfo(false);
                 }
             }
-           // OwnerForm.SaveAsMenuItem.Enabled = SaveAsEnable;
+            // OwnerForm.SaveAsMenuItem.Enabled = SaveAsEnable;
             OwnerForm.SaveAttachmentMenuItem.Enabled = SaveAttachmentEnable;
             ShowReminder();
             ShowInfo();
@@ -201,8 +218,9 @@ namespace DevExpress.ProductsDemo.Win {
             OwnerForm.OnModuleShown(this);
         }
         internal virtual void FocusObject(object obj) { }
-        protected virtual void ShowReminder() {
-            if(OwnerForm != null)
+        protected virtual void ShowReminder()
+        {
+            if (OwnerForm != null)
                 OwnerForm.ShowReminder(null);
         }
 
@@ -210,10 +228,12 @@ namespace DevExpress.ProductsDemo.Win {
         {
             return null; // default: no report representation, fall back to link-based printing
         }
-        internal void ShowInfo() {
+        internal void ShowInfo()
+        {
             if (OwnerForm == null)
                 return;
-            if (Grid == null) {
+            if (Grid == null)
+            {
                 OwnerForm.ShowInfo(null);
                 return;
             }
@@ -223,68 +243,85 @@ namespace DevExpress.ProductsDemo.Win {
             else
                 OwnerForm.ShowInfo(list.Count);
         }
-        internal virtual void HideModule() {
-            if(AutoMergeRibbon && OwnerForm != null) {
-                if(OwnerForm.Ribbon.MergedRibbon == ChildRibbon) {
+        internal virtual void HideModule()
+        {
+            if (AutoMergeRibbon && OwnerForm != null)
+            {
+                if (OwnerForm.Ribbon.MergedRibbon == ChildRibbon)
+                {
                     RibbonPage page = OwnerForm.Ribbon.MergedPages.GetPageByText("VIEW");
-                    if(page != null) OwnerForm.Ribbon.Pages.Add(page);
+                    if (page != null) OwnerForm.Ribbon.Pages.Add(page);
                     OwnerForm.Ribbon.UnMergeRibbon();
                 }
                 OwnerForm.RibbonStatusBar.UnMergeStatusBar();
                 OwnerForm.ShowInfo(true);
             }
         }
-        internal virtual void InitModule(IDXMenuManager manager, object data) {
+        internal virtual void InitModule(IDXMenuManager manager, object data)
+        {
             SetMenuManager(this.Controls, manager);
-            if (Grid != null && Grid.MainView is ColumnView) {
+            if (Grid != null && Grid.MainView is ColumnView)
+            {
                 ((ColumnView)Grid.MainView).ColumnFilterChanged += new EventHandler(BaseModule_ColumnFilterChanged);
             }
             CapitalizeChildRibbonPages();
         }
-        void CapitalizeChildRibbonPages() {
+        void CapitalizeChildRibbonPages()
+        {
             if (ChildRibbon == null)
                 return;
             foreach (RibbonPage page in ChildRibbon.Pages)
                 page.Text = page.Text.ToUpper();
-            foreach (RibbonPageCategory category in ChildRibbon.PageCategories) {
+            foreach (RibbonPageCategory category in ChildRibbon.PageCategories)
+            {
                 foreach (RibbonPage page in category.Pages)
                     page.Text = page.Text.ToUpper();
             }
         }
-        internal void ShowInfo(ColumnView view) {
+        internal void ShowInfo(ColumnView view)
+        {
             if (OwnerForm == null) return;
             ShowReminder();
             OwnerForm.ShowInfo(view.DataRowCount);
         }
-        void BaseModule_ColumnFilterChanged(object sender, EventArgs e) {
+        void BaseModule_ColumnFilterChanged(object sender, EventArgs e)
+        {
             ShowInfo(sender as ColumnView);
         }
-        void SetMenuManager(ControlCollection controlCollection, IDXMenuManager manager) {
-            foreach (Control ctrl in controlCollection) {
+        void SetMenuManager(ControlCollection controlCollection, IDXMenuManager manager)
+        {
+            foreach (Control ctrl in controlCollection)
+            {
                 GridControl gridControl = ctrl as GridControl;
-                if (gridControl != null) {
+                if (gridControl != null)
+                {
                     gridControl.MenuManager = manager;
                     break;
                 }
                 PivotGridControl pivot = ctrl as PivotGridControl;
-                if(pivot != null) {
+                if (pivot != null)
+                {
                     pivot.MenuManager = manager;
                     break;
                 }
                 BaseEdit edit = ctrl as BaseEdit;
-                if (edit != null) {
+                if (edit != null)
+                {
                     edit.MenuManager = manager;
                     break;
                 }
                 SetMenuManager(ctrl.Controls, manager);
             }
         }
-        RibbonControl FindRibbon(ControlCollection controls) {
+        RibbonControl FindRibbon(ControlCollection controls)
+        {
             RibbonControl res = controls.OfType<Control>().FirstOrDefault(x => x is RibbonControl) as RibbonControl;
             if (res != null)
                 return res;
-            foreach (Control control in controls) {
-                if (control.HasChildren) {
+            foreach (Control control in controls)
+            {
+                if (control.HasChildren)
+                {
                     res = FindRibbon(control.Controls);
                     if (res != null)
                         return res;
@@ -295,7 +332,8 @@ namespace DevExpress.ProductsDemo.Win {
 
         protected virtual bool AllowZoomControl { get { return false; } }
         protected virtual void SetZoomCaption() { }
-        public virtual float ZoomFactor {
+        public virtual float ZoomFactor
+        {
             get { return 1; }
             set { }
         }
@@ -314,17 +352,21 @@ namespace DevExpress.ProductsDemo.Win {
         [DefaultValue(false)]
         protected virtual bool AutoMergeRibbon { get; private set; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
-        protected virtual RibbonControl ChildRibbon {
-            get {
+        protected virtual RibbonControl ChildRibbon
+        {
+            get
+            {
                 if (!AutoMergeRibbon)
                     return null;
                 return FindRibbon(Controls);
             }
         }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
-        protected virtual RibbonStatusBar ChildRibbonStatusBar {
-            get {
-                if(ChildRibbon != null) return ChildRibbon.StatusBar;
+        protected virtual RibbonStatusBar ChildRibbonStatusBar
+        {
+            get
+            {
+                if (ChildRibbon != null) return ChildRibbon.StatusBar;
                 return null;
             }
         }
@@ -361,8 +403,10 @@ namespace DevExpress.ProductsDemo.Win {
             set { _module = value; }
         }
     }
-    public class BackstageViewLabel : LabelControl {
-        public BackstageViewLabel() {
+    public class BackstageViewLabel : LabelControl
+    {
+        public BackstageViewLabel()
+        {
             Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
             LineLocation = DevExpress.XtraEditors.LineLocation.Bottom;
@@ -370,14 +414,16 @@ namespace DevExpress.ProductsDemo.Win {
             ShowLineShadow = false;
         }
     }
-    public class ZoomManager {
+    public class ZoomManager
+    {
         ZoomTrackBarControl _zoomControl;
         int _zoomFactor = 0;
         List<int> zoomValues = new List<int>() { 100, 115, 130, 150, 200, 250, 300, 350, 400, 500 };
         RibbonControl ribbon;
         BarEditItem beiZoom;
         ModulesNavigator modulesNavigator;
-        public ZoomManager(RibbonControl ribbon, ModulesNavigator modulesNavigator, BarEditItem beItem) {
+        public ZoomManager(RibbonControl ribbon, ModulesNavigator modulesNavigator, BarEditItem beItem)
+        {
             this.ribbon = ribbon;
             this.modulesNavigator = modulesNavigator;
             this.beiZoom = beItem;
@@ -385,9 +431,11 @@ namespace DevExpress.ProductsDemo.Win {
             this.beiZoom.ShownEditor += new DevExpress.XtraBars.ItemClickEventHandler(this.beiZoom_ShownEditor);
         }
         ZoomTrackBarControl ZoomControl { get { return _zoomControl; } }
-        public int ZoomFactor {
+        public int ZoomFactor
+        {
             get { return _zoomFactor; }
-            set {
+            set
+            {
                 _zoomFactor = value;
                 beiZoom.Caption = string.Format(" {0}%", ZoomFactor);
                 int index = zoomValues.IndexOf(ZoomFactor);
@@ -398,33 +446,40 @@ namespace DevExpress.ProductsDemo.Win {
                 modulesNavigator.CurrentModule.ZoomFactor = (float)ZoomFactor / 100;
             }
         }
-        public void SetZoomCaption(string caption) {
+        public void SetZoomCaption(string caption)
+        {
             beiZoom.Caption = caption;
         }
-        private void beiZoom_ShownEditor(object sender, ItemClickEventArgs e) {
+        private void beiZoom_ShownEditor(object sender, ItemClickEventArgs e)
+        {
             this._zoomControl = ribbon.Manager.ActiveEditor as ZoomTrackBarControl;
-            if (ZoomControl != null) {
+            if (ZoomControl != null)
+            {
                 ZoomControl.ValueChanged += new EventHandler(OnZoomTackValueChanged);
                 OnZoomTackValueChanged(ZoomControl, EventArgs.Empty);
             }
         }
-        private void beiZoom_HiddenEditor(object sender, ItemClickEventArgs e) {
+        private void beiZoom_HiddenEditor(object sender, ItemClickEventArgs e)
+        {
             ZoomControl.ValueChanged -= new EventHandler(OnZoomTackValueChanged);
             this._zoomControl = null;
         }
-        private void OnZoomTackValueChanged(object sender, EventArgs e) {
+        private void OnZoomTackValueChanged(object sender, EventArgs e)
+        {
             int val = val = ZoomControl.Value * 10;
             if (ZoomControl.Value > 10)
                 val = zoomValues[ZoomControl.Value - 10];
             ZoomFactor = val;
         }
     }
-    public class ObjectToolTipController : IDisposable {
+    public class ObjectToolTipController : IDisposable
+    {
         ToolTipController controller;
         Control parent;
         object _editObject;
         public object EditObject { get { return _editObject; } }
-        public ObjectToolTipController(Control parent) {
+        public ObjectToolTipController(Control parent)
+        {
             this.parent = parent;
             this.parent.Disposed += new EventHandler(delegate { Dispose(); });
             this.controller = new ToolTipController();
@@ -435,7 +490,8 @@ namespace DevExpress.ProductsDemo.Win {
             parent.MouseDown += new MouseEventHandler(delegate { HideHint(false); });
             parent.MouseLeave += new EventHandler(delegate { HideHint(true); });
         }
-        public void ShowHint(object editObject, Point location) {
+        public void ShowHint(object editObject, Point location)
+        {
             if (object.Equals(editObject, this._editObject))
                 return;
             this._editObject = editObject;
@@ -449,33 +505,41 @@ namespace DevExpress.ProductsDemo.Win {
             info.ToolTipPosition = this.parent.PointToScreen(location);
             controller.ShowHint(info);
         }
-        protected virtual void InitToolTipItem(ToolTipItem item) {
+        protected virtual void InitToolTipItem(ToolTipItem item)
+        {
         }
-        public void HideHint(bool clearCurrentObject) {
+        public void HideHint(bool clearCurrentObject)
+        {
             if (clearCurrentObject)
                 this._editObject = null;
             this.controller.HideHint();
         }
         #region IDisposable Members
-        public void Dispose() {
+        public void Dispose()
+        {
             this.Dispose(true);
             GC.SuppressFinalize(this);
         }
-        protected virtual void Dispose(bool disposing) {
-            if (disposing) {
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
                 this.controller.Dispose();
             }
         }
-        ~ObjectToolTipController() {
+        ~ObjectToolTipController()
+        {
             Dispose(false);
         }
         #endregion
     }
-    public class ContactToolTipController : ObjectToolTipController {
+    public class ContactToolTipController : ObjectToolTipController
+    {
         const int MaxPhotoWidth = 120, MaxPhotoHeight = 120;
         public ContactToolTipController(Control parent) : base(parent) { }
         Contact CurrentContact { get { return EditObject as Contact; } }
-        protected override void InitToolTipItem(ToolTipItem item) {
+        protected override void InitToolTipItem(ToolTipItem item)
+        {
             if (CurrentContact == null)
                 return;
             if (CurrentContact.Photo != null)
@@ -483,28 +547,34 @@ namespace DevExpress.ProductsDemo.Win {
             item.Text = CurrentContact.GetContactInfoHtml();
         }
     }
-    public class ImageCreator {
-        public static Image CreateImage(Image srcImage, int maxWidth, int maxHeight) {
+    public class ImageCreator
+    {
+        public static Image CreateImage(Image srcImage, int maxWidth, int maxHeight)
+        {
             if (srcImage == null)
                 return null;
             Size size = GetPhotoSize(srcImage, maxWidth, maxHeight);
             Image ret = new Bitmap(size.Width, size.Height);
-            using (Graphics gr = Graphics.FromImage(ret)) {
+            using (Graphics gr = Graphics.FromImage(ret))
+            {
                 gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
                 gr.DrawImage(srcImage, new Rectangle(0, 0, size.Width, size.Height));
             }
             return ret;
         }
-        static Size GetPhotoSize(Image image, int maxWidth, int maxHeight) {
+        static Size GetPhotoSize(Image image, int maxWidth, int maxHeight)
+        {
             int width = Math.Min(maxWidth, image.Width),
                 height = width * image.Height / image.Width;
-            if (height > maxHeight) {
+            if (height > maxHeight)
+            {
                 height = maxHeight;
                 width = height * image.Width / image.Height;
             }
             return new Size(width, height);
         }
-        public static Rectangle GetZoomDestRectangle(Rectangle r, Image img) {
+        public static Rectangle GetZoomDestRectangle(Rectangle r, Image img)
+        {
             float horzRatio = Math.Min((float)r.Width / img.Width, 1);
             float vertRatio = Math.Min((float)r.Height / img.Height, 1);
             float zoomRatio = Math.Min(horzRatio, vertRatio);

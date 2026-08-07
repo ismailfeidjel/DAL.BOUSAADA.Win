@@ -1,25 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
 using DevExpress.Drawing;
 using DevExpress.Drawing.Printing;
-using DevExpress.XtraPrinting;
-using DevExpress.XtraPrinting.Preview;
+using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraBars.Ribbon.Gallery;
-using System.Drawing.Printing;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraBars;
-using DevExpress.XtraEditors;
+using DevExpress.XtraPrinting;
+using System;
+using System.Drawing.Printing;
+using System.Windows.Forms;
 
-namespace DevExpress.ProductsDemo.Win.Controls {
-    public partial class PrintControl : RibbonApplicationUserControl {
+namespace DevExpress.ProductsDemo.Win.Controls
+{
+    public partial class PrintControl : RibbonApplicationUserControl
+    {
         GalleryItem memoStyle, tableStyle;
-        public PrintControl() {
+        public PrintControl()
+        {
             InitializeComponent();
             splitContainer1.Panel1MinSize = layoutControlGroup1.MinSize.Width + 6;
             this.ddbOrientation.DropDownControl = CreateOrientationGallery();
@@ -33,31 +29,37 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             zoomTextEdit.EditValue = 70;
             updatedZoom = false;
         }
-        int GetZoomValue() {
-            if(zoomTrackBarControl1.Value <= 40)
+        int GetZoomValue()
+        {
+            if (zoomTrackBarControl1.Value <= 40)
                 return 10 + 90 * (zoomTrackBarControl1.Value - 0) / 40;
             else
                 return 100 + 400 * (zoomTrackBarControl1.Value - 40) / 40;
         }
-        int ZoomValueToValue(int zoomValue) {
-            if(zoomValue < 100)
+        int ZoomValueToValue(int zoomValue)
+        {
+            if (zoomValue < 100)
                 return Math.Min(80, Math.Max(0, (zoomValue - 10) * 40 / 90));
             return Math.Min(80, Math.Max(0, (zoomValue - 100) * 40 / 400 + 40));
         }
         bool updatedZoom = false;
-        private void zoomTrackBarControl1_EditValueChanged(object sender, EventArgs e) {
-            if(updatedZoom) return;
+        private void zoomTrackBarControl1_EditValueChanged(object sender, EventArgs e)
+        {
+            if (updatedZoom) return;
             updatedZoom = true;
-            try {
+            try
+            {
                 zoomTextEdit.EditValue = GetZoomValue();
             }
-            finally {
+            finally
+            {
                 updatedZoom = false;
             }
         }
-        public void InitPrintingSystem() {
+        public void InitPrintingSystem()
+        {
             frmMain frm = BackstageView.Ribbon.FindForm() as frmMain;
-            BarManager manager = frm == null || frm.Ribbon == null? null: frm.Ribbon.Manager;
+            BarManager manager = frm == null || frm.Ribbon == null ? null : frm.Ribbon.Manager;
             ((GalleryDropDown)this.ddbOrientation.DropDownControl).Manager = manager;
             ((GalleryDropDown)this.ddbMargins.DropDownControl).Manager = manager;
             ((GalleryDropDown)this.ddbPaperSize.DropDownControl).Manager = manager;
@@ -65,7 +67,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             ((GalleryDropDown)this.ddbPrinter.DropDownControl).Manager = manager;
             ((GalleryDropDown)this.ddbDuplex.DropDownControl).Manager = manager;
             ((GalleryDropDown)this.ddbPrintStyle.DropDownControl).Manager = manager;
-            lciPrintStyle.Visibility = frm.CurrentRichEdit == null ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never : 
+            lciPrintStyle.Visibility = frm.CurrentRichEdit == null ? DevExpress.XtraLayout.Utils.LayoutVisibility.Never :
                 DevExpress.XtraLayout.Utils.LayoutVisibility.Always;
             CreateDocument();
         }
@@ -100,17 +102,21 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.pageButtonEdit.EditValue = 1;
             UpdatePagesInfo();
         }
-        void CreateLink(PrintingSystem ps) {
+        void CreateLink(PrintingSystem ps)
+        {
             frmMain frm = BackstageView.Ribbon.FindForm() as frmMain;
             bool showMemo = memoStyle.Checked && frm.CurrentRichEdit != null;
-            if(showMemo) {
+            if (showMemo)
+            {
                 Link link = new Link(ps);
                 link.RtfReportHeader = frm.CurrentRichEdit.RtfText;
                 link.PaperKind = GetPaperKind();
                 link.Landscape = GetLandscape();
                 link.Margins = GetMargins();
                 link.CreateDocument();
-            } else {
+            }
+            else
+            {
                 PrintableComponentLink link = new PrintableComponentLink(ps);
                 link.Component = frm.CurrentPrintableComponent;
                 link.PaperKind = GetPaperKind();
@@ -123,21 +129,25 @@ namespace DevExpress.ProductsDemo.Win.Controls {
 
             }
         }
-        void OnStartPrint(object sender, PrintDocumentEventArgs e) {
+        void OnStartPrint(object sender, PrintDocumentEventArgs e)
+        {
             e.PrintDocument.PrinterSettings.Copies = (short)this.copySpinEdit.Value;
             GetMargins();
             e.PrintDocument.PrinterSettings.Collate = (bool)this.ddbCollate.Tag;
-            e.PrintDocument.PrinterSettings.Duplex = ((bool)this.ddbDuplex.Tag)? Duplex.Horizontal: Duplex.Simplex;
+            e.PrintDocument.PrinterSettings.Duplex = ((bool)this.ddbDuplex.Tag) ? Duplex.Horizontal : Duplex.Simplex;
         }
-        private void zoomTextEdit_EditValueChanged(object sender, EventArgs e) {
-            try {
+        private void zoomTextEdit_EditValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
                 int zoomValue = Int32.Parse((string)zoomTextEdit.EditValue.ToString());
                 this.zoomTrackBarControl1.Value = ZoomValueToValue(zoomValue);
                 this.printControl1.Zoom = 0.01f * (int)zoomValue;
             }
-            catch(Exception) { }
+            catch (Exception) { }
         }
-        GalleryDropDown CreateListBoxGallery() {
+        GalleryDropDown CreateListBoxGallery()
+        {
             GalleryDropDown res = new GalleryDropDown();
             res.Gallery.FixedImageSize = false;
             res.Gallery.ShowItemText = true;
@@ -170,7 +180,8 @@ namespace DevExpress.ProductsDemo.Win.Controls {
 
             return res;
         }
-        GalleryDropDown CreateOrientationGallery() {
+        GalleryDropDown CreateOrientationGallery()
+        {
             GalleryDropDown res = CreateListBoxGallery();
             GalleryItem portraitItem = new GalleryItem();
             portraitItem.Image = Properties.Resources.PageOrientationPortrait;
@@ -186,7 +197,8 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             landscapeItem.Checked = true;
             return res;
         }
-        GalleryDropDown CreateMarginsGallery() {
+        GalleryDropDown CreateMarginsGallery()
+        {
             GalleryDropDown res = CreateListBoxGallery();
             GalleryItem normal = new GalleryItem();
             normal.Image = Properties.Resources.PageMarginsNormal;
@@ -220,7 +232,8 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             narrow.Checked = true;
             return res;
         }
-        GalleryDropDown CreatePageSizeGallery() {
+        GalleryDropDown CreatePageSizeGallery()
+        {
             GalleryDropDown res = CreateListBoxGallery();
             GalleryItem letter = new GalleryItem();
             letter.Image = Properties.Resources.PaperKind_Letter;
@@ -282,7 +295,8 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             a4.Checked = true;
             return res;
         }
-        GalleryDropDown CreateCollateGallery() {
+        GalleryDropDown CreateCollateGallery()
+        {
             GalleryDropDown res = CreateListBoxGallery();
             GalleryItem collated = new GalleryItem();
             collated.Image = Properties.Resources.MultiplePagesLarge;
@@ -302,7 +316,8 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             collated.Checked = true;
             return res;
         }
-        GalleryDropDown CreateDuplexGallery() {
+        GalleryDropDown CreateDuplexGallery()
+        {
             GalleryDropDown res = CreateListBoxGallery();
             GalleryItem oneSided = new GalleryItem();
             oneSided.Image = Properties.Resources.MultiplePagesLarge;
@@ -322,7 +337,8 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             oneSided.Checked = true;
             return res;
         }
-        GalleryDropDown CreatePrintStyleGallery() {
+        GalleryDropDown CreatePrintStyleGallery()
+        {
             GalleryDropDown res = CreateListBoxGallery();
             res.Gallery.ItemCheckMode = ItemCheckMode.SingleRadio;
             memoStyle = new GalleryItem();
@@ -339,46 +355,54 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             memoStyle.Checked = true;
             return res;
         }
-        void OnPrintStyleGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e) {
+        void OnPrintStyleGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e)
+        {
             this.ddbPrintStyle.Text = e.Item.Caption;
             this.ddbPrintStyle.Image = e.Item.Image;
             this.ddbPrintStyle.ImageOptions.SvgImage = e.Item.ImageOptions.SvgImage;
-            if(printControl1.PrintingSystem != null)
+            if (printControl1.PrintingSystem != null)
                 CreateDocument();
         }
-        void OnDuplexGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e) {
+        void OnDuplexGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e)
+        {
             this.ddbDuplex.Text = e.Item.Caption;
             this.ddbDuplex.Image = e.Item.Image;
             this.ddbDuplex.ImageOptions.SvgImage = e.Item.ImageOptions.SvgImage;
             this.ddbDuplex.Tag = e.Item.Tag;
         }
-        GalleryDropDown CreatePrintersGallery() {
+        GalleryDropDown CreatePrintersGallery()
+        {
             GalleryDropDown res = CreateListBoxGallery();
             PrinterSettings ps = new PrinterSettings();
             GalleryItem defaultPrinter = null;
-            try {
-                foreach(string str in PrinterSettings.InstalledPrinters) {
+            try
+            {
+                foreach (string str in PrinterSettings.InstalledPrinters)
+                {
                     GalleryItem item = new GalleryItem();
                     item.Image = Properties.Resources.PrintDirectLarge;
                     item.ImageOptions.SvgImage = Properties.Resources.Print1;
                     item.Caption = str;
                     res.Gallery.Groups[0].Items.Add(item);
                     ps.PrinterName = str;
-                    if(ps.IsDefaultPrinter)
+                    if (ps.IsDefaultPrinter)
                         defaultPrinter = item;
                 }
-            } catch { }
+            }
+            catch { }
             res.Gallery.ItemCheckedChanged += new GalleryItemEventHandler(OnPrinterGalleryItemCheckedChanged);
-            if(defaultPrinter != null)
+            if (defaultPrinter != null)
                 defaultPrinter.Checked = true;
             return res;
         }
-        void OnMarginsGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e) {
+        void OnMarginsGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e)
+        {
             this.ddbMargins.Image = e.Item.Image;
             this.ddbMargins.ImageOptions.SvgImage = e.Item.ImageOptions.SvgImage;
             this.ddbMargins.Text = e.Item.Caption;
             this.ddbMargins.Tag = e.Item.Tag;
-            if(this.printControl1.PrintingSystem != null) {
+            if (this.printControl1.PrintingSystem != null)
+            {
                 DXMargins margins = GetMargins();
                 this.printControl1.PrintingSystem.PageSettings.LeftMargin = (int)margins.Left;
                 this.printControl1.PrintingSystem.PageSettings.RightMargin = (int)margins.Right;
@@ -387,105 +411,126 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             }
             UpdatePageButtonsEnabledState();
         }
-        DXMargins GetMargins() {
+        DXMargins GetMargins()
+        {
             Padding p = (Padding)this.ddbMargins.Tag;
             return new DXMargins((float)(p.Left * 3.9), (float)(p.Right * 3.9), (float)(p.Top * 3.9), (float)(p.Bottom * 3.9));
         }
-        void OnPrinterGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e) {
+        void OnPrinterGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e)
+        {
             this.ddbPrinter.Text = e.Item.Caption;
             this.ddbPrinter.Image = e.Item.Image;
             this.ddbPrinter.ImageOptions.SvgImage = e.Item.ImageOptions.SvgImage;
         }
-        void OnCollateGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e) {
+        void OnCollateGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e)
+        {
             this.ddbCollate.Image = e.Item.Image;
             this.ddbCollate.ImageOptions.SvgImage = e.Item.ImageOptions.SvgImage;
             this.ddbCollate.Text = e.Item.Caption;
             this.ddbCollate.Tag = e.Item.Tag;
         }
-        void OnPaperSizeGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e) {
+        void OnPaperSizeGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e)
+        {
             this.ddbPaperSize.Image = e.Item.Image;
             this.ddbPaperSize.ImageOptions.SvgImage = e.Item.ImageOptions.SvgImage;
             this.ddbPaperSize.Text = e.Item.Caption;
             this.ddbPaperSize.Tag = e.Item.Tag;
-            if(this.printControl1.PrintingSystem != null) 
+            if (this.printControl1.PrintingSystem != null)
                 this.printControl1.PrintingSystem.PageSettings.PaperKind = GetPaperKind();
             UpdatePageButtonsEnabledState();
         }
-        DXPaperKind GetPaperKind() {
+        DXPaperKind GetPaperKind()
+        {
             return (DXPaperKind)this.ddbPaperSize.Tag;
         }
-        void OnOrientationGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e) {
+        void OnOrientationGalleryItemCheckedChanged(object sender, GalleryItemEventArgs e)
+        {
             ddbOrientation.Text = e.Item.Caption;
             ddbOrientation.Image = e.Item.Image;
             ddbOrientation.ImageOptions.SvgImage = e.Item.ImageOptions.SvgImage;
-            if(printControl1.PrintingSystem != null)
+            if (printControl1.PrintingSystem != null)
                 this.printControl1.PrintingSystem.PageSettings.Landscape = GetLandscape();
             UpdatePageButtonsEnabledState();
         }
-        bool GetLandscape() {
-            if(ddbOrientation.DropDownControl != null)
+        bool GetLandscape()
+        {
+            if (ddbOrientation.DropDownControl != null)
                 return ((GalleryDropDown)ddbOrientation.DropDownControl).Gallery.Groups[0].Items[1].Checked;
             return false;
         }
-        private void printButton_Click(object sender, EventArgs e) {
+        private void printButton_Click(object sender, EventArgs e)
+        {
             frmMain frm = BackstageView.Ribbon.FindForm() as frmMain;
             // If you have the report instance (frm.CurrentReport), use ReportPrintTool:
-            if(frm.CurrentReport != null) {
+            if (frm.CurrentReport != null)
+            {
                 new DevExpress.XtraReports.UI.ReportPrintTool(frm.CurrentReport).Print(this.ddbPrinter.Text);
                 return;
             }
             ((PrintingSystem)this.printControl1.PrintingSystem).Print(this.ddbPrinter.Text);
         }
 
-        private void pageButtonEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e) {
+        private void pageButtonEdit_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
             int pageIndex = (int)this.pageButtonEdit.EditValue;
-            if(e.Button.Kind == ButtonPredefines.Left) {
-                if(pageIndex > 1)
+            if (e.Button.Kind == ButtonPredefines.Left)
+            {
+                if (pageIndex > 1)
                     pageIndex--;
             }
-            else if(e.Button.Kind == ButtonPredefines.Right) {
-                if(pageIndex < this.printControl1.PrintingSystem.Pages.Count)
-                    pageIndex ++;
+            else if (e.Button.Kind == ButtonPredefines.Right)
+            {
+                if (pageIndex < this.printControl1.PrintingSystem.Pages.Count)
+                    pageIndex++;
             }
             this.pageButtonEdit.EditValue = pageIndex;
         }
 
-        private void pageButtonEdit_EditValueChanging(object sender, ChangingEventArgs e) {
-            try {
+        private void pageButtonEdit_EditValueChanging(object sender, ChangingEventArgs e)
+        {
+            try
+            {
                 int pageIndex = Int32.Parse(e.NewValue.ToString());
-                if(pageIndex < 1)
+                if (pageIndex < 1)
                     pageIndex = 1;
-                else if(pageIndex > this.printControl1.PrintingSystem.Pages.Count)
+                else if (pageIndex > this.printControl1.PrintingSystem.Pages.Count)
                     pageIndex = this.printControl1.PrintingSystem.Pages.Count;
                 e.NewValue = pageIndex;
             }
-            catch(Exception) {
+            catch (Exception)
+            {
                 e.NewValue = 1;
             }
         }
-        void UpdatePagesInfo() {
-            if(printControl1.PrintingSystem != null) {
+        void UpdatePagesInfo()
+        {
+            if (printControl1.PrintingSystem != null)
+            {
                 this.pageButtonEdit.Properties.DisplayFormat.FormatString = Properties.Resources.PageInfo + printControl1.PrintingSystem.Pages.Count;
                 this.printButton.Enabled = printControl1.PrintingSystem.Pages.Count > 0;
                 this.pageButtonEdit.Enabled = printControl1.PrintingSystem.Pages.Count > 0;
             }
         }
-        void UpdatePageButtonsEnabledState(int pageIndex) {
-            if(printControl1.PrintingSystem == null) return;
+        void UpdatePageButtonsEnabledState(int pageIndex)
+        {
+            if (printControl1.PrintingSystem == null) return;
             this.pageButtonEdit.Properties.Buttons[0].Enabled = pageIndex != 1;
             this.pageButtonEdit.Properties.Buttons[1].Enabled = pageIndex != printControl1.PrintingSystem.Pages.Count;
             UpdatePagesInfo();
         }
-        void UpdatePageButtonsEnabledState() {
+        void UpdatePageButtonsEnabledState()
+        {
             UpdatePageButtonsEnabledState(this.printControl1.SelectedPageIndex + 1);
         }
-        private void pageButtonEdit_EditValueChanged(object sender, EventArgs e) {
+        private void pageButtonEdit_EditValueChanged(object sender, EventArgs e)
+        {
             int pageIndex = Convert.ToInt32(this.pageButtonEdit.EditValue);
             this.printControl1.SelectedPageIndex = pageIndex - 1;
             UpdatePageButtonsEnabledState(pageIndex);
         }
 
-        private void printControl1_SelectedPageChanged(object sender, EventArgs e) {
+        private void printControl1_SelectedPageChanged(object sender, EventArgs e)
+        {
             this.pageButtonEdit.EditValue = this.printControl1.SelectedPageIndex + 1;
         }
     }

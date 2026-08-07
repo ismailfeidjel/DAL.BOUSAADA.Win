@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using DevExpress.MailClient.Win;
+﻿using DevExpress.MailClient.Win;
 using DevExpress.XtraWaitForm;
+using System.Windows.Forms;
 
-namespace DevExpress.ProductsDemo.Win.Forms {
-    public partial class wfMain : DemoWaitForm {
-        public wfMain() {
+namespace DevExpress.ProductsDemo.Win.Forms
+{
+    public partial class wfMain : DemoWaitForm
+    {
+        public wfMain()
+        {
             DevExpress.Utils.LocalizationHelper.SetCurrentCulture(DataHelper.ApplicationArguments);
             InitializeComponent();
-            this.RightToLeft=RightToLeft.Yes;
-             ProgressPanel.Caption = DevExpress.ProductsDemo.Win.Properties.Resources.ProgressPanelCaption;
+            this.RightToLeft = RightToLeft.Yes;
+            ProgressPanel.Caption = DevExpress.ProductsDemo.Win.Properties.Resources.ProgressPanelCaption;
 
-             ProgressPanel.Description = DevExpress.ProductsDemo.Win.Properties.Resources.ProgressPanelDescription;
+            ProgressPanel.Description = DevExpress.ProductsDemo.Win.Properties.Resources.ProgressPanelDescription;
         }
     }
 }

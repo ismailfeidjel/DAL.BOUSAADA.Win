@@ -1,30 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
+﻿using DevExpress.MailClient.Win;
 using DevExpress.Utils.Menu;
-using DevExpress.XtraBars.Ribbon;
-using DevExpress.MailClient.Win;
+using DevExpress.XtraEditors;
+using System;
+using System.Windows.Forms;
 
-namespace DevExpress.ProductsDemo.Win.Forms {
-    public partial class frmEditContact : XtraForm {
+namespace DevExpress.ProductsDemo.Win.Forms
+{
+    public partial class frmEditContact : XtraForm
+    {
         Contact contact, bindingContact;
-        public frmEditContact() {
+        public frmEditContact()
+        {
             InitializeComponent();
         }
-        public frmEditContact(Contact contact, IDXMenuManager menuManager) {
+        public frmEditContact(Contact contact, IDXMenuManager menuManager)
+        {
             InitializeComponent();
             this.contact = contact;
             this.bindingContact = contact.Clone();
             InitEditors();
             InitMenuManager(menuManager);
             pePhoto.Image = bindingContact.Photo;
-            
+
             teFirstName.DataBindings.Add("Text", bindingContact.FullName, "FirstName");
             teLastName.DataBindings.Add("Text", bindingContact.FullName, "LastName");
             teMiddleName.DataBindings.Add("Text", bindingContact.FullName, "MiddleName");
@@ -42,28 +39,35 @@ namespace DevExpress.ProductsDemo.Win.Forms {
             InitValidationProvider();
         }
 
-        void InitValidationProvider() {
+        void InitValidationProvider()
+        {
             dxValidationProvider1.SetValidationRule(teFirstName, ValidationRulesHelper.RuleIsNotBlank);
             dxValidationProvider1.SetValidationRule(teLastName, ValidationRulesHelper.RuleIsNotBlank);
         }
-        void UpdateCaption() {
+        void UpdateCaption()
+        {
             Text = bindingContact.Name;
         }
-        void InitMenuManager(IDXMenuManager menuManager) {
-            foreach(Control ctrl in lcMain.Controls) {
+        void InitMenuManager(IDXMenuManager menuManager)
+        {
+            foreach (Control ctrl in lcMain.Controls)
+            {
                 BaseEdit edit = ctrl as BaseEdit;
-                if(edit != null) {
+                if (edit != null)
+                {
                     edit.MenuManager = menuManager;
                 }
             }
         }
-        void InitEditors() {
+        void InitEditors()
+        {
             EditorHelper.InitPersonComboBox(icbGender.Properties);
             EditorHelper.InitTitleComboBox(icbTitle.Properties);
             cbeCity.Properties.Items.AddRange(EditorHelper.GetCities());
             cbeState.Properties.Items.AddRange(EditorHelper.GetStates());
         }
-        private void sbOK_Click(object sender, EventArgs e) {
+        private void sbOK_Click(object sender, EventArgs e)
+        {
             bindingContact.Photo = pePhoto.Image;
             contact.Assign(bindingContact);
         }

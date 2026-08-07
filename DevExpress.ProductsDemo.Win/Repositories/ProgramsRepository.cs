@@ -1,6 +1,4 @@
-﻿using DevExpress.ProductsDemo.Win.Core.Helpers;
-using DevExpress.ProductsDemo.Win.Domain;
-using System;
+﻿using DevExpress.ProductsDemo.Win.Domain;
 using System.Collections.Generic;
 
 namespace DevExpress.ProductsDemo.Win.Repositories
@@ -39,7 +37,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
         public void Insert(ProgramLookupItem program)
         {
-            
+
             using (var conn = new DbHelper().GetConnection())
             {
                 conn.Open();
@@ -54,9 +52,9 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                 }
             }
 
-            
-            
-           
+
+
+
         }
         public List<string> GetDistinctTypes()
         {

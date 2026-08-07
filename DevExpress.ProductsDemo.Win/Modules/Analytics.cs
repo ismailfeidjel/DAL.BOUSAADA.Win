@@ -1,6 +1,4 @@
-﻿using System;
-using System.Drawing;
-using DevExpress.DXperience.Demos;
+﻿using DevExpress.DXperience.Demos;
 using DevExpress.LookAndFeel;
 using DevExpress.SalesDemo.Model;
 using DevExpress.SalesDemo.Win;
@@ -8,23 +6,30 @@ using DevExpress.Utils.Frames;
 using DevExpress.XtraCharts;
 using DevExpress.XtraGauges.Core.Base;
 using DevExpress.XtraGauges.Core.Drawing;
+using System;
+using System.Drawing;
 
-namespace DevExpress.ProductsDemo.Win.Modules {
-    public partial class AnalyticsModule : BaseModule {
+namespace DevExpress.ProductsDemo.Win.Modules
+{
+    public partial class AnalyticsModule : BaseModule
+    {
         Series SalesBySectorSeries { get { return chartSalesbySecor.Series[0]; } }
-        public AnalyticsModule() {
+        public AnalyticsModule()
+        {
             InitializeComponent();
             Initialize();
             AssignShader();
         }
-        void AssignShader() {
+        void AssignShader()
+        {
             var shader = new FlatBackgroundShader(LookAndFeel);
             needleFiscalYear.Shader = shader;
             needleFiscalToData.Shader = shader;
             arcScaleBackgroundLayerComponent3.Shader = shader;
             arcScaleBackgroundLayerComponent4.Shader = shader;
         }
-        void Initialize() {
+        void Initialize()
+        {
             IDataProvider dataProvider = DataSource.GetDataProvider();
             SalesBySectorSeries.DataSource = dataProvider.GetSalesBySector(new DateTime(), TutorialConstants.Now, GroupingPeriod.All);
 
@@ -51,47 +56,57 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             fiscalYear.Text = prevYearSales.TotalCost.ToString("$0,0");
             needleFiscalYear.Value = (float)prevYearSales.TotalCost;
         }
-        internal class FlatBackgroundShader : BaseColorShader {
+        internal class FlatBackgroundShader : BaseColorShader
+        {
             readonly Color backColorToReplace = Color.FromArgb(255, 255, 255);
             readonly Color borderColorToReplace = Color.FromArgb(243, 243, 243);
             Color backColor;
             Color borderColor;
             UserLookAndFeel lookAndFeel;
-            public FlatBackgroundShader(UserLookAndFeel lookAndFeel) {
+            public FlatBackgroundShader(UserLookAndFeel lookAndFeel)
+            {
                 this.lookAndFeel = lookAndFeel;
                 lookAndFeel.StyleChanged += OnStyleChanged;
                 UpdateColors();
             }
-            void OnStyleChanged(object sender, EventArgs e) {
+            void OnStyleChanged(object sender, EventArgs e)
+            {
                 UpdateColors();
             }
-            private void UpdateColors() {
+            private void UpdateColors()
+            {
                 backColor = LookAndFeelHelper.GetSystemColorEx(lookAndFeel, SystemColors.Control);
                 bool isDarkSkin = FrameHelper.IsDarkSkin(lookAndFeel.ActiveLookAndFeel);
                 double scale = isDarkSkin ? 1.2 : 0.95;
                 borderColor = Color.FromArgb(Math.Min((int)(backColor.R * scale), 255), Math.Min((int)(backColor.G * scale), 255), Math.Min((int)(backColor.B * scale), 255));
             }
-            protected override void OnDispose() {
+            protected override void OnDispose()
+            {
                 base.OnDispose();
-                if(lookAndFeel != null) {
+                if (lookAndFeel != null)
+                {
                     lookAndFeel.StyleChanged -= OnStyleChanged;
                     lookAndFeel = null;
                 }
             }
             protected override void OnCreate() { }
-            protected override void ProcessCore(ref Color sourceColor) {
-                if(sourceColor == backColorToReplace)
+            protected override void ProcessCore(ref Color sourceColor)
+            {
+                if (sourceColor == backColorToReplace)
                     sourceColor = backColor;
-                if(sourceColor == borderColorToReplace)
+                if (sourceColor == borderColorToReplace)
                     sourceColor = borderColor;
             }
-            protected override BaseObject CloneCore() {
+            protected override BaseObject CloneCore()
+            {
                 return new FlatBackgroundShader(lookAndFeel);
             }
-            protected override string GetShaderTypeTag() {
+            protected override string GetShaderTypeTag()
+            {
                 return "Empty";
             }
-            protected override string GetShaderDataTag() {
+            protected override string GetShaderDataTag()
+            {
                 return string.Empty;
             }
             protected override void Assign(string shaderData) { }

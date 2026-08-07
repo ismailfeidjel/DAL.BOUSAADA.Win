@@ -5,7 +5,6 @@ using DevExpress.ProductsDemo.Win.Repositories;
 using DevExpress.XtraGrid.Columns;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DevExpress.ProductsDemo.Win.Forms
 {
@@ -78,9 +77,9 @@ namespace DevExpress.ProductsDemo.Win.Forms
 
             if (!string.IsNullOrEmpty(error))
             {
-                DialogHelper.Validation(error);         
+                DialogHelper.Validation(error);
                 throw new SilentCancelException();
-                
+
             }
         }
 

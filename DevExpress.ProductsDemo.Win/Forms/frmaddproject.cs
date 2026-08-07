@@ -1,23 +1,11 @@
-﻿using DevExpress.DataProcessing.InMemoryDataProcessor;
-using DevExpress.MailClient.Win;
-using DevExpress.ProductsDemo.Win.Domain;
+﻿using DevExpress.ProductsDemo.Win.Domain;
 using DevExpress.ProductsDemo.Win.Repositories;
-using DevExpress.Utils.Menu;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraTab;
-using Mysqlx.Crud;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Contracts;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Forms
@@ -42,7 +30,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
             InitializeComponent();
             PopulateLookups();
 #if DEBUG
-           // LoadTestData();
+            // LoadTestData();
 #endif
 
 
@@ -229,11 +217,11 @@ namespace DevExpress.ProductsDemo.Win.Forms
 
                         transaction.Commit();
                         DialogResult = DialogResult.OK;
-                        XtraMessageBox.Show( "تم حفظ ال مشروع", "Success",    MessageBoxButtons.OK, MessageBoxIcon.Information);     Close();
+                        XtraMessageBox.Show("تم حفظ ال مشروع", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information); Close();
                     }
                     catch (Exception ex)
                     {
-                        transaction.Rollback(); 
+                        transaction.Rollback();
                         XtraMessageBox.Show(
                             $"فشل الحفظ، تم التراجع عن جميع التغييرات.\n\n{ex.Message}\n{ex.InnerException?.Message}",
                             "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -244,68 +232,68 @@ namespace DevExpress.ProductsDemo.Win.Forms
             }
 
 
-           
+
         }
-private void bbiCancel_ItemClick(object sender, ItemClickEventArgs e)
-{
-    DialogResult = DialogResult.Cancel;
-    Close();
-}
+        private void bbiCancel_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+            Close();
+        }
         // ── Validation ────────────────────────────────────────────────────
 
         private bool ValidateAll()
-{
-    bool ok = true;
+        {
+            bool ok = true;
 
-    ok &= Require(txtOperationNumber, "Operation Number is required");
-    ok &= Require(txtOperationName, "Operation Name is required");
-    ok &= RequireLookup(cmbProgram, "Program is required");
-    ok &= RequireLookup(cmbDaira, "Daira is required");
-    ok &= RequireLookup(cmbCommune, "Commune is required");
-    ok &= RequireLookup(cmbDomain, "Domain is required");
-    ok &= RequireLookup(cmbSector, "Sector is required");
-   // ok &= Require(txtLotName, "Lot Name is required");
-    return ok;
-}
-private bool Require(TextEdit txt, string msg)
-{
-    if (!string.IsNullOrWhiteSpace(txt.Text)) return true;
-    XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-    txt.Focus();
-    return false;
-}
-private bool RequireLookup(LookUpEdit cmb, string msg)
-{
-    if (cmb.EditValue != null && cmb.EditValue != DBNull.Value) return true;
-    XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-    cmb.Focus();
-    return false;
-}
-private bool Fail(string msg)
-{
-    XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-    return false;
-}
+            ok &= Require(txtOperationNumber, "Operation Number is required");
+            ok &= Require(txtOperationName, "Operation Name is required");
+            ok &= RequireLookup(cmbProgram, "Program is required");
+            ok &= RequireLookup(cmbDaira, "Daira is required");
+            ok &= RequireLookup(cmbCommune, "Commune is required");
+            ok &= RequireLookup(cmbDomain, "Domain is required");
+            ok &= RequireLookup(cmbSector, "Sector is required");
+            // ok &= Require(txtLotName, "Lot Name is required");
+            return ok;
+        }
+        private bool Require(TextEdit txt, string msg)
+        {
+            if (!string.IsNullOrWhiteSpace(txt.Text)) return true;
+            XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            txt.Focus();
+            return false;
+        }
+        private bool RequireLookup(LookUpEdit cmb, string msg)
+        {
+            if (cmb.EditValue != null && cmb.EditValue != DBNull.Value) return true;
+            XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            cmb.Focus();
+            return false;
+        }
+        private bool Fail(string msg)
+        {
+            XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return false;
+        }
 
-// ── Helpers ───────────────────────────────────────────────────────
-private static string NullIfBlank(string s) =>
-    string.IsNullOrWhiteSpace(s) ? null : s.Trim();
+        // ── Helpers ───────────────────────────────────────────────────────
+        private static string NullIfBlank(string s) =>
+            string.IsNullOrWhiteSpace(s) ? null : s.Trim();
 
-private static int? NullableId(LookUpEdit cmb) =>
-    cmb.EditValue == null || cmb.EditValue == DBNull.Value
-        ? (int?)null : Convert.ToInt32(cmb.EditValue);
-
-
-
-// Caller reads this after ShowDialog returns OK
+        private static int? NullableId(LookUpEdit cmb) =>
+            cmb.EditValue == null || cmb.EditValue == DBNull.Value
+                ? (int?)null : Convert.ToInt32(cmb.EditValue);
 
 
 
+        // Caller reads this after ShowDialog returns OK
 
-private void ucContactInfo1_Load(object sender, EventArgs e)
-{
 
-}
+
+
+        private void ucContactInfo1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void groupControl5_Paint(object sender, PaintEventArgs e)
         {
@@ -322,25 +310,25 @@ private void ucContactInfo1_Load(object sender, EventArgs e)
 
 
             if (!tabLot2.PageVisible)
-                {
-                    tabLot2.PageVisible = true;
-                    tabContainer.SelectedTabPage = tabLot2;
-                    btnRemoveLot.Enabled=true;
+            {
+                tabLot2.PageVisible = true;
+                tabContainer.SelectedTabPage = tabLot2;
+                btnRemoveLot.Enabled = true;
                 HasLots = true; // أو chkHasLots.Checked = true
 
                 return;
-                }
+            }
 
-                if (!tabLot3.PageVisible && tabLot2.PageVisible)
-                {
+            if (!tabLot3.PageVisible && tabLot2.PageVisible)
+            {
                 tabLot3.PageVisible = true;
                 tabContainer.SelectedTabPage = tabLot3;
                 btnRemoveLot.Enabled = true;
                 btnAddLot.Enabled = false;
                 HasLots = true;
-                    return;
-                }
-            
+                return;
+            }
+
 
         }
 
@@ -356,7 +344,7 @@ private void ucContactInfo1_Load(object sender, EventArgs e)
                 tabLot2.PageVisible = false;
                 tabLot3.PageVisible = false;
                 btnRemoveLot.Enabled = false;
-                HasLots=false;
+                HasLots = false;
 
 
             }

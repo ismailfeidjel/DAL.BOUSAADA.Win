@@ -4,7 +4,6 @@ using DevExpress.ProductsDemo.Win.Repositories;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
-using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.ComponentModel;
 using System.Linq;

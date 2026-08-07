@@ -1,12 +1,10 @@
-﻿using System;
+﻿using DevExpress.Utils;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Drawing;
-using DevExpress.Utils;
-using System.Reflection;
 
-namespace DevExpress.MailDemo.Win {
+namespace DevExpress.MailDemo.Win
+{
     [Flags]
     public enum ContactGender { Male, Female }
     public enum DialogRole { New, Edit }
@@ -14,7 +12,8 @@ namespace DevExpress.MailDemo.Win {
     public enum TaskCategory { HouseChores, Shopping, Office };
     public enum FlagStatus { Today, Tomorrow, ThisWeek, NextWeek, NoDate, Custom, Completed };
     public enum ContactTitle { None, Dr, Miss, Mr, Mrs, Ms, Prof };
-    public class TagResources {
+    public class TagResources
+    {
         public const string FlipLayout = "FlipLayout";
         public const string MenuSaveAs = "SaveAs";
         public const string MenuSaveAttachment = "SaveAttachment";
@@ -38,7 +37,8 @@ namespace DevExpress.MailDemo.Win {
         public const string ContactEdit = "EditContact";
         public const string ContactDelete = "DeleteContact";
     }
-    public class CollectionResources {
+    public class CollectionResources
+    {
         public static List<string> HouseTasks = new List<string>() {
             "Set-up home theater (surround sound) system",
             "Install 3 overhead lights in bedroom",
@@ -116,7 +116,8 @@ namespace DevExpress.MailDemo.Win {
             "Scan docs, and put in desktop folder",
             "Print registration stickers"};
     }
-    public class FontResources {
+    public class FontResources
+    {
         public static Font StrikeoutFont = new Font(AppearanceObject.DefaultFont, FontStyle.Strikeout);
         public static Font BoldFont = new Font(AppearanceObject.DefaultFont, FontStyle.Bold);
     }

@@ -2,13 +2,17 @@
 using System.Data.Common;
 using System.Data.OleDb;
 
-namespace DevExpress.Demos.SalesDBGenerator {
-    public class SalesGenerator : DevExpress.SalesDemo.Model.IDataGenerator {
+namespace DevExpress.Demos.SalesDBGenerator
+{
+    public class SalesGenerator : DevExpress.SalesDemo.Model.IDataGenerator
+    {
         DateTime currentDate = DateTime.Today.AddDays(40);
         DateTime minRequiredDate = DateTime.Today.AddDays(-360);
         int maxId = 0;
-        public bool Run(string connectionString) {
-            using(var connection = new OleDbConnection(connectionString)) {
+        public bool Run(string connectionString)
+        {
+            using (var connection = new OleDbConnection(connectionString))
+            {
                 connection.Open();
                 //new OleDbCommand("delete * from sales", connection).ExecuteNonQuery(); //FOR TEST PURPOSES
                 var helper = new SqlHelper<OleDbConnection, OleDbCommand>();
@@ -16,10 +20,11 @@ namespace DevExpress.Demos.SalesDBGenerator {
                 DateTime maxDate = helper.GetDate(helper.ReadValue(connection, "select max(sale_date) from sales"));
                 this.maxId = helper.GetInt(helper.ReadValue(connection, "select max(id) from sales"));
                 DateTime startDate = minRequiredDate;
-                if(minDate > startDate && maxDate != DateTime.MinValue) {
+                if (minDate > startDate && maxDate != DateTime.MinValue)
+                {
                     startDate = maxDate.AddDays(1);
                 }
-                if(maxDate > DateTime.Today.AddDays(2))
+                if (maxDate > DateTime.Today.AddDays(2))
                     return true;
                 double daysCount = currentDate.Subtract(startDate).TotalDays;
                 RaiseStart();
@@ -30,8 +35,10 @@ namespace DevExpress.Demos.SalesDBGenerator {
             return true;
         }
         readonly DevExpress.Data.Utils.NonCryptographicRandom random = new DevExpress.Data.Utils.NonCryptographicRandom(100);
-        void Generate(OleDbConnection connection, DateTime startDate, int daysCount) {
-            using(OleDbCommand command = new OleDbCommand()) {
+        void Generate(OleDbConnection connection, DateTime startDate, int daysCount)
+        {
+            using (OleDbCommand command = new OleDbCommand())
+            {
                 command.Connection = connection;
                 command.CommandText = "insert into sales (id, units, cost_per_unit, discount, total_cost, sale_date, productId, RegionId, ChannelId, SectorId) values (@id, @units, @cost_per_unit, @discount, @total_cost, @sale_date, @productId, @RegionId, @ChannelId, @SectorId)";
                 command.Parameters.AddRange(
@@ -49,7 +56,8 @@ namespace DevExpress.Demos.SalesDBGenerator {
                     }
                 );
                 command.Prepare();
-                for(int n = 0; n < daysCount; n++) {
+                for (int n = 0; n < daysCount; n++)
+                {
                     Console.Write("{0} of {1}\r", n + 1, daysCount);
                     GenerateDay(command, startDate.AddDays(n));
                     RaiseProgress((double)n / (double)daysCount);
@@ -60,18 +68,21 @@ namespace DevExpress.Demos.SalesDBGenerator {
         int startTime = 8;
         int endTime = 17;
         double dailySalesGrowth = 0.007d;
-        void GenerateDay(DbCommand command, DateTime day) {
+        void GenerateDay(DbCommand command, DateTime day)
+        {
             double totalDays = day.Subtract(minRequiredDate).TotalDays;
             int salesPerDay = random.Next(180, (int)(200 * (1 + (totalDays * dailySalesGrowth) / 10)));
             int[] generateIntervals = GenerateTimeIntervals(salesPerDay);
             DateTime start = new DateTime(day.Year, day.Month, day.Day, startTime, 0, 0);
-            for(int d = 0; d < generateIntervals.Length; d++) {
-                for(int x = 0; x < generateIntervals[d]; x++)
+            for (int d = 0; d < generateIntervals.Length; d++)
+            {
+                for (int x = 0; x < generateIntervals[d]; x++)
                     GenerateSale(command, start);
                 start = start.AddMinutes(timeInterval);
             }
         }
-        void GenerateSale(DbCommand command, DateTime date) {
+        void GenerateSale(DbCommand command, DateTime date)
+        {
             int id = GetId();
             int region = regions[rndRegions[random.Next(0, rndRegions.Length)]].Id;
             int channel = channels[rndChannels[random.Next(0, rndChannels.Length)]].Id;
@@ -96,17 +107,19 @@ namespace DevExpress.Demos.SalesDBGenerator {
             command.ExecuteNonQuery();
         }
         int GetId() { return ++maxId; }
-        int[] GenerateTimeIntervals(int salesPerDay) {
+        int[] GenerateTimeIntervals(int salesPerDay)
+        {
             int count = ((endTime) - startTime) * (60 / timeInterval);
             int[] res = new int[count + 1];
             int salesPerInterval = salesPerDay / res.Length;
-            for(int n = 10; ; n++) {
+            for (int n = 10; ; n++)
+            {
                 int num = random.Next(salesPerInterval - (int)(salesPerInterval * 0.8), salesPerInterval + (int)(salesPerInterval * 0.3));
-                if(num > salesPerDay) num = salesPerDay;
+                if (num > salesPerDay) num = salesPerDay;
                 salesPerDay -= num;
                 res[n] += num;
-                if(num < 1) break;
-                if(n >= res.Length - 1) n = 0;
+                if (num < 1) break;
+                if (n >= res.Length - 1) n = 0;
             }
             return res;
         }
@@ -114,16 +127,19 @@ namespace DevExpress.Demos.SalesDBGenerator {
         public event SalesDemo.Model.ProgressEventHandler GenerationStart;
         public event SalesDemo.Model.ProgressEventHandler GenerationProgress;
         public event SalesDemo.Model.ProgressEventHandler GenerationComplete;
-        void RaiseStart() {
-            if(GenerationStart != null)
+        void RaiseStart()
+        {
+            if (GenerationStart != null)
                 GenerationStart(this, new SalesDemo.Model.ProgressEventArgs(0));
         }
-        void RaiseProgress(double progress) {
-            if(GenerationProgress != null)
+        void RaiseProgress(double progress)
+        {
+            if (GenerationProgress != null)
                 GenerationProgress(this, new SalesDemo.Model.ProgressEventArgs((int)(100.0 * progress)));
         }
-        void RaiseComplete() {
-            if(GenerationComplete != null)
+        void RaiseComplete()
+        {
+            if (GenerationComplete != null)
                 GenerationComplete(this, new SalesDemo.Model.ProgressEventArgs(100));
         }
         #endregion Progress
@@ -167,21 +183,25 @@ namespace DevExpress.Demos.SalesDBGenerator {
         };
         #endregion Sample Data
     }
-    public class Product {
+    public class Product
+    {
         public int Id { get; set; }
         public string Name { get; set; }
         public int Price { get; set; }
         public int Discount { get; set; }
     }
-    public class Region {
+    public class Region
+    {
         public int Id { get; set; }
         public string Name { get; set; }
     }
-    public class Channel {
+    public class Channel
+    {
         public int Id { get; set; }
         public string Name { get; set; }
     }
-    public class Sector {
+    public class Sector
+    {
         public int Id { get; set; }
         public string Name { get; set; }
     }

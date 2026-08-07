@@ -1,5 +1,4 @@
-﻿using DevExpress.ProductsDemo.Win.Forms;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using System;
 using System.Windows.Forms;
 
@@ -80,7 +79,7 @@ namespace DevExpress.ProductsDemo.Win.Core.Helpers
             }
             catch (SilentCancelException)
             {
-                return false; 
+                return false;
             }
             catch (Exception ex)
             {

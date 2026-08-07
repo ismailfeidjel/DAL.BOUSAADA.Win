@@ -1,46 +1,32 @@
 ﻿using DevExpress.Data.Filtering;
-using DevExpress.MailClient.Win;
-using DevExpress.MailDemo.Win;
-using DevExpress.ProductsDemo.Win.Controls;
 using DevExpress.ProductsDemo.Win.Domain;
 using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.ProductsDemo.Win.Repositories;
 using DevExpress.ProductsDemo.Win.Services;
 using DevExpress.Utils;
-using DevExpress.XtraEditors;
-using System.Collections.Generic;
-using DevExpress.Utils.Behaviors;
-using DevExpress.Utils.DragDrop;
+using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraNavBar;
 using DevExpress.XtraPrinting;
-using DevExpress.XtraReports.ReportGeneration;
+using DevExpress.XtraPrinting.Preview;
 using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using DevExpress.Data.Filtering.Helpers;
-using System.ComponentModel;
-using DevExpress.XtraBars;
-using DevExpress.XtraPrinting.Preview;
 
 namespace DevExpress.ProductsDemo.Win.Modules
 {
     public partial class ProjectModule : BaseModule
     {
         public override string ModuleName => $"{_programType} - {Properties.Resources.TasksName}";
-      
+
 
         private List<LotGridModel> _data;
         private LotGridModel _currentLot;
@@ -83,76 +69,76 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
         private HashSet<int> _matchedProjectIds = new HashSet<int>(); private CriteriaOperator _lastCriteria = null;
-        
 
-// ... inside your ProjectModule class ...
 
-private bool _isCustomFiltering = false;
+        // ... inside your ProjectModule class ...
 
-    private void gridView1_ColumnFilterChanged(object sender, EventArgs e)
-    {
-        if (_isCustomFiltering) return;
+        private bool _isCustomFiltering = false;
 
-        // Pass 1: The grid has naturally filtered the rows based on the user's input.
-        // We loop through the currently visible data rows and collect their Project IDs.
-        _matchedProjectIds.Clear();
-
-        // In DevExpress, row handles 0 through (DataRowCount - 1) represent the filtered, visible data rows.
-        for (int i = 0; i < gridView1.DataRowCount; i++)
+        private void gridView1_ColumnFilterChanged(object sender, EventArgs e)
         {
-            if (gridView1.GetRow(i) is LotGridModel lot)
+            if (_isCustomFiltering) return;
+
+            // Pass 1: The grid has naturally filtered the rows based on the user's input.
+            // We loop through the currently visible data rows and collect their Project IDs.
+            _matchedProjectIds.Clear();
+
+            // In DevExpress, row handles 0 through (DataRowCount - 1) represent the filtered, visible data rows.
+            for (int i = 0; i < gridView1.DataRowCount; i++)
             {
-                _matchedProjectIds.Add(lot.ProjectId);
-            }
-        }
-
-        // Pass 2: Re-evaluate row visibility to bring back the sibling lots
-        _isCustomFiltering = true;
-
-        // Save the user's cursor position so typing in the auto-filter row isn't interrupted
-        var focusedColumn = gridView1.FocusedColumn;
-        var focusedRow = gridView1.FocusedRowHandle;
-
-        gridView1.RefreshData(); // This triggers CustomRowFilter below for the second pass
-
-        // Restore focus to the filter row if the user was typing
-        if (focusedRow == DevExpress.XtraGrid.GridControl.AutoFilterRowHandle && focusedColumn != null)
-        {
-            gridView1.FocusedRowHandle = focusedRow;
-            gridView1.FocusedColumn = focusedColumn;
-            gridView1.ShowEditor();
-
-            // Move the cursor to the end of the text they were typing
-            if (gridView1.ActiveEditor is TextEdit editor && editor.Text != null)
-            {
-                editor.SelectionStart = editor.Text.Length;
-            }
-        }
-
-        _isCustomFiltering = false;
-    }
-
-    private void gridView1_CustomRowFilter(object sender, DevExpress.XtraGrid.Views.Base.RowFilterEventArgs e)
-    {
-        // If there is no active filter, let the grid display everything normally
-        if (ReferenceEquals(gridView1.ActiveFilterCriteria, null))
-            return;
-
-        // Only intervene during our custom second pass
-        if (_isCustomFiltering)
-        {
-            var dataSource = gridView1.DataSource as System.Collections.IList;
-            if (dataSource != null && e.ListSourceRow >= 0 && e.ListSourceRow < dataSource.Count)
-            {
-                if (dataSource[e.ListSourceRow] is LotGridModel lot)
+                if (gridView1.GetRow(i) is LotGridModel lot)
                 {
-                    // Force this lot to be visible if its ProjectId was collected in Pass 1
-                    e.Visible = _matchedProjectIds.Contains(lot.ProjectId);
-                    e.Handled = true;
+                    _matchedProjectIds.Add(lot.ProjectId);
+                }
+            }
+
+            // Pass 2: Re-evaluate row visibility to bring back the sibling lots
+            _isCustomFiltering = true;
+
+            // Save the user's cursor position so typing in the auto-filter row isn't interrupted
+            var focusedColumn = gridView1.FocusedColumn;
+            var focusedRow = gridView1.FocusedRowHandle;
+
+            gridView1.RefreshData(); // This triggers CustomRowFilter below for the second pass
+
+            // Restore focus to the filter row if the user was typing
+            if (focusedRow == DevExpress.XtraGrid.GridControl.AutoFilterRowHandle && focusedColumn != null)
+            {
+                gridView1.FocusedRowHandle = focusedRow;
+                gridView1.FocusedColumn = focusedColumn;
+                gridView1.ShowEditor();
+
+                // Move the cursor to the end of the text they were typing
+                if (gridView1.ActiveEditor is TextEdit editor && editor.Text != null)
+                {
+                    editor.SelectionStart = editor.Text.Length;
+                }
+            }
+
+            _isCustomFiltering = false;
+        }
+
+        private void gridView1_CustomRowFilter(object sender, DevExpress.XtraGrid.Views.Base.RowFilterEventArgs e)
+        {
+            // If there is no active filter, let the grid display everything normally
+            if (ReferenceEquals(gridView1.ActiveFilterCriteria, null))
+                return;
+
+            // Only intervene during our custom second pass
+            if (_isCustomFiltering)
+            {
+                var dataSource = gridView1.DataSource as System.Collections.IList;
+                if (dataSource != null && e.ListSourceRow >= 0 && e.ListSourceRow < dataSource.Count)
+                {
+                    if (dataSource[e.ListSourceRow] is LotGridModel lot)
+                    {
+                        // Force this lot to be visible if its ProjectId was collected in Pass 1
+                        e.Visible = _matchedProjectIds.Contains(lot.ProjectId);
+                        e.Handled = true;
+                    }
                 }
             }
         }
-    }
 
 
 
@@ -164,8 +150,8 @@ private bool _isCustomFiltering = false;
 
 
 
-    
-        
+
+
         private void ApplyProjectLevelFilter(Func<LotGridModel, bool> lotPredicate)
         {
             _currentLotFilter = lotPredicate;
@@ -677,7 +663,7 @@ private bool _isCustomFiltering = false;
 
 
 
-      
+
 
 
             //  gridView1.Columns["OperationName"].ColumnEdit = memo;
@@ -882,7 +868,7 @@ private bool _isCustomFiltering = false;
                     gridView1.SelectRow(i);
             }
         }
-        
+
 
         private bool _layoutReady = false;
         private void SaveLayout()
@@ -1409,10 +1395,10 @@ private bool _isCustomFiltering = false;
                     ApplyProjectLevelFilter(r => r.ProjectStatusId == 1);
                     break;
                 case "StatusFilterRegistered":
-                    ApplyProjectLevelFilter(r => r.ProjectStatusId == 2)    ;
+                    ApplyProjectLevelFilter(r => r.ProjectStatusId == 2);
                     break;
                 case "ClearFilter":
-                  //  gridView1.ActiveFilterString = "";
+                    //  gridView1.ActiveFilterString = "";
                     ApplyProjectLevelFilter(null);
 
                     break;
@@ -1542,7 +1528,7 @@ private bool _isCustomFiltering = false;
             }
         }
 
-        private void btnExportToPowerPoint_Click( )
+        private void btnExportToPowerPoint_Click()
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {

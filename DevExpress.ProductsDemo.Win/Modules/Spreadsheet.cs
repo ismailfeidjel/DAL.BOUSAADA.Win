@@ -1,35 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using DevExpress.XtraBars.Ribbon;
-using System.IO;
-using DevExpress.ProductsDemo.Win.Forms;
-using DevExpress.Spreadsheet;
-using DevExpress.XtraPrinting;
-using DevExpress.ProductsDemo.Win.Modules.OutgoingMail;
+﻿using DevExpress.ProductsDemo.Win.Modules.OutgoingMail;
+using System;
 
-namespace DevExpress.ProductsDemo.Win.Modules {
-    public partial class SpreadsheetModule : BaseModule {
+namespace DevExpress.ProductsDemo.Win.Modules
+{
+    public partial class SpreadsheetModule : BaseModule
+    {
 
         private readonly IOutgoingMailRepository _repository;
 
 
-        public SpreadsheetModule() {
+        public SpreadsheetModule()
+        {
             InitializeComponent();
 
             _repository = new OutgoingMailRepository();
 
             LoadData();
         }
-                
+
         protected override bool AutoMergeRibbon { get { return true; } }
         public override bool AllowRtfTitle { get { return true; } }
-        internal override void ShowModule(bool firstShow) {
+        internal override void ShowModule(bool firstShow)
+        {
             base.ShowModule(firstShow);
         }
         private void LoadData()

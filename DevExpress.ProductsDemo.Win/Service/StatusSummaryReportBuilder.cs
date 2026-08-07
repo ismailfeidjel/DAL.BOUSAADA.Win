@@ -1,8 +1,6 @@
-﻿using DevExpress.ProductsDemo.Win.Repositories;
-using DevExpress.XtraReports.UI;
+﻿using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -38,7 +36,7 @@ namespace DevExpress.ProductsDemo.Win.Services
        .GroupBy(r => r.ProjectId)
        .Select(g => g.First())
        .Where(r => r.ProjectStatusId != 8)   // ملغاة — excluded from all stats
-       .ToList(); 
+       .ToList();
             int Count(Func<LotGridModel, bool> predicate) => byProject.Count(predicate);
 
             int totalProjects = byProject.Count;
@@ -67,7 +65,7 @@ namespace DevExpress.ProductsDemo.Win.Services
               ? ""
               : Math.Round(100.0 * Count(r =>
                     r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
-                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7) / totalProjects).ToString()+"%";
+                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7) / totalProjects).ToString() + "%";
 
             var communesAllStatus2 = byProject
         .GroupBy(r => r.Commune)
@@ -96,7 +94,7 @@ namespace DevExpress.ProductsDemo.Win.Services
     + data.Where(r => r.AdministrativeProcedureId == 4)
           .Sum(r => r.LotBudget);
 
-            
+
 
 
 
@@ -121,8 +119,8 @@ namespace DevExpress.ProductsDemo.Win.Services
                 ["tableCell62"] = totalProjects.ToString(),//العدد الكلي
                 ["tableCell70"] = var70.ToString(),// الواردة من البلديات
 
-                ["tableCell78"] = (totalProjects-var70).ToString(),//على مستوى البلديات
-                ["tableCell4"] = percentText,   
+                ["tableCell78"] = (totalProjects - var70).ToString(),//على مستوى البلديات
+                ["tableCell4"] = percentText,
                 //نسبة اولى
                 ["tableCell2"] = (totalProjects == 0 ? "" : Math.Round(100.0 * Convert.ToDouble(var70 / totalProjects)).ToString()) + " %",
                 //نسبة المؤشرة
@@ -130,29 +128,29 @@ namespace DevExpress.ProductsDemo.Win.Services
 
                 //
                 //   ["tableCell74"] = "",//عدد الملفات الواردة من البلديات للعمليات الاضافية
-                ["tableCell33"] =( Count(r => r.AdministrativeProcedureId == 4) + Count(r => r.AdministrativeProcedureId == 10)).ToString(),//عدد العمليات قيد التسجيل(على مستوى الادارة المحلية)
+                ["tableCell33"] = (Count(r => r.AdministrativeProcedureId == 4) + Count(r => r.AdministrativeProcedureId == 10)).ToString(),//عدد العمليات قيد التسجيل(على مستوى الادارة المحلية)
                 ["tableCell100"] = Count(r => r.AdministrativeProcedureId == 5).ToString(),//عدد العمليات على مستوى الرقابة الميزانياتية للولاية
                 ["tableCell106"] = Count(r => r.AdministrativeProcedureId == 10).ToString(),//عدد العمليات والحصص بدون تغطية مالية والمؤجلة
                 ["tableCell112"] = Count(r => r.AdministrativeProcedureId == 6).ToString(),//عدد العمليات بصدد ارسالها لامين الخزينة الولائية للتسديد
                 ["tableCell121"] = Count(r => r.AdministrativeProcedureId == 7).ToString(),//عدد العمليات على مستوى  الخزينة الولائية للتسديد
-                 ["tableCell22"] = Count(r => r.AdministrativeProcedureId == 8).ToString(),//عدد العمليات التي تم صب مبالغها لدى امناء خزائن البلديات
+                ["tableCell22"] = Count(r => r.AdministrativeProcedureId == 8).ToString(),//عدد العمليات التي تم صب مبالغها لدى امناء خزائن البلديات
 
 
                 ["tableCell25"] = communesAllStatus2.Count == 0 ? "لا يوجد" : string.Join("، ", communesAllStatus2),//البلديات التي اكملت ايداع ملفات التسجيل :
                 ["tableCell7"] = communesAllStatus2.Count.ToString(),//عدد :
 
-                ["tableCell27"] =  communesAnyStatus2Value2.Count == 0 ? "لا يوجد" : string.Join("، ", communesAnyStatus2Value2),//البلديات التي لم تكمل ايداع ملفات التسجيل :
+                ["tableCell27"] = communesAnyStatus2Value2.Count == 0 ? "لا يوجد" : string.Join("، ", communesAnyStatus2Value2),//البلديات التي لم تكمل ايداع ملفات التسجيل :
                 ["tableCell32"] = communesAnyStatus2Value2.Count.ToString(),//عدد :
 
                 ["tableCell68"] = totalBudget.ToString("N2", CultureInfo.InvariantCulture) + "دج",//الغلاف المالي :
                 ["tableCell72"] = registeredOperationsAmount1.ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ تسجيل مبدئي :
-                ["tableCell80"] = (totalBudget - registeredOperationsAmount1- (totalBudget - totalreg)).ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ غير مسجل :
+                ["tableCell80"] = (totalBudget - registeredOperationsAmount1 - (totalBudget - totalreg)).ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ غير مسجل :
                 ["tableCell84"] = registeredOperationsAmount2.ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ تسجيل نهائي :
                 ["tableCell90"] = totalreg.ToString("N2", CultureInfo.InvariantCulture) + "دج",//الرصيد :
-                ["tableCell94"] =(totalBudget-totalreg).ToString("N2", CultureInfo.InvariantCulture) + "دج",//الباقي :
+                ["tableCell94"] = (totalBudget - totalreg).ToString("N2", CultureInfo.InvariantCulture) + "دج",//الباقي :
 
 
-              //  //عدد العمليات المسجلة (المؤشرة من طرف المراقب الميزانياتي) :
+                //  //عدد العمليات المسجلة (المؤشرة من طرف المراقب الميزانياتي) :
                 ["tableCell82"] = var37.ToString(),
             };
         }

@@ -3,7 +3,6 @@ using DevExpress.ProductsDemo.Win.Core.Helpers;
 using DevExpress.ProductsDemo.Win.Repositories;
 using DevExpress.XtraEditors;
 using System;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Forms

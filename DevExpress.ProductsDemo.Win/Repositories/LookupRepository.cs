@@ -44,8 +44,8 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
             return list;
         }
-    
-    public List<ProgramLookupItem> GetPrograms(string type)
+
+        public List<ProgramLookupItem> GetPrograms(string type)
         {
             var result = new List<ProgramLookupItem>();
 
@@ -121,7 +121,8 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                 {
                     cmd.Parameters.AddWithValue("@id", id);
                     try
-                    {mbox:
+                    {
+                    mbox:
                         cmd.ExecuteNonQuery();
                     }
                     catch (MySqlException ex) when (ex.Number == 1451) // FK constraint violation
@@ -133,4 +134,5 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             }
         }
 
-    } }
+    }
+}

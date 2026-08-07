@@ -1,21 +1,24 @@
-﻿using System;
-using System.Data;
-using System.Linq;
-using System.Collections.Generic;
-using System.Globalization;
-using DevExpress.XtraPivotGrid;
-using DevExpress.XtraCharts;
-using DevExpress.SalesDemo.Model;
+﻿using DevExpress.SalesDemo.Model;
 using DevExpress.SalesDemo.Win;
 using DevExpress.SalesDemo.Win.Modules;
+using DevExpress.XtraCharts;
+using DevExpress.XtraPivotGrid;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
+using System.Linq;
 
-namespace DevExpress.ProductsDemo.Win.Modules {
-    public partial class PivotModuleNew : BaseModule {
+namespace DevExpress.ProductsDemo.Win.Modules
+{
+    public partial class PivotModuleNew : BaseModule
+    {
         protected override bool AutoMergeRibbon { get { return true; } }
         DateTimeRange currentRange, range;
         IDataProvider dataProvider;
-        RangeControlSalesClient rangeControlClient; 
-        public PivotModuleNew() {
+        RangeControlSalesClient rangeControlClient;
+        public PivotModuleNew()
+        {
             InitializeComponent();
             InitializePivot();
             Initialize();
@@ -25,22 +28,25 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             LookAndFeel_StyleChanged(null, EventArgs.Empty);
         }
 
-        void LookAndFeel_StyleChanged(object sender, EventArgs e) {
+        void LookAndFeel_StyleChanged(object sender, EventArgs e)
+        {
             //tiles.AppearanceItem.Normal.BackColor = LookAndFeelHelper.GetSystemColor(LookAndFeel, SystemColors.Control);
             //tiles.AppearanceItem.Normal.ForeColor = LookAndFeelHelper.GetSystemColor(LookAndFeel, SystemColors.ControlText);
             //tiles.AppearanceItem.Normal.BorderColor = LookAndFeelHelper.GetSystemColor(LookAndFeel, SystemColors.ControlDark);
         }
 
-        private void InitializePivot() {
+        private void InitializePivot()
+        {
             pivot.OptionsFilterPopup.FieldFilterPopupMode = FieldFilterPopupMode.Excel;
             pivot.Fields.Add(new PivotGridField("StartOfPeriod", PivotArea.RowArea) { Caption = "Year", GroupInterval = PivotGroupInterval.DateYear, TotalsVisibility = PivotTotalsVisibility.None });
             pivot.Fields.Add(new PivotGridField("StartOfPeriod", PivotArea.RowArea) { Caption = "Month", GroupInterval = PivotGroupInterval.DateMonth, TotalsVisibility = PivotTotalsVisibility.None });
-            pivot.Fields.Add(new PivotGridField("GroupName", PivotArea.ColumnArea) { Caption = "Product"});
+            pivot.Fields.Add(new PivotGridField("GroupName", PivotArea.ColumnArea) { Caption = "Product" });
             pivot.Fields.Add(new PivotGridField("TotalCost", PivotArea.DataArea) { Caption = "Sales" });
             pivot.Fields.Add(new PivotGridField("Units", PivotArea.DataArea) { Caption = "Units" });
         }
 
-        private void UpdateData() {
+        private void UpdateData()
+        {
             this.rangeControl.RangeChanged -= rangeControl_RangeChanged;
             ucUnits.SetSalesPerformanceProvider(new UnitsByProductByDateRange(dataProvider, this.currentRange));
             ucSales.SetSalesPerformanceProvider(new SalesByProductByDateRange(dataProvider, this.currentRange));
@@ -54,7 +60,8 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             ucSales.Annotation.ShapePosition = new FreePosition() { DockCorner = XtraCharts.DockCorner.LeftTop };
         }
 
-        void Initialize() {
+        void Initialize()
+        {
             this.dataProvider = DataSource.GetDataProvider();
             this.range = this.currentRange = DateTimeUtils.GetOneYearRange();
             ucSales.Diagram.AxisY.Visibility = Utils.DefaultBoolean.False;
@@ -84,39 +91,45 @@ namespace DevExpress.ProductsDemo.Win.Modules {
             this.rangeControlClient.UpdateData(sales);
 
         }
-        void UpdateTiles() {
+        void UpdateTiles()
+        {
             var ytd = DateTimeUtils.GetYtdRange();
             var ytdPrev = new DateTimeRange(ytd.Start.AddYears(-1), ytd.End.AddYears(-1));
             var ytdSales = dataProvider.GetTotalSalesByRange(ytd.Start, ytd.End);
             tiUnitSales.Elements[1].Text = ytdSales.Units.ToString("n0");
             tiDirectSales.Elements[1].Text = ytdSales.TotalCost.ToString("$#,##0,,M", CultureInfo.InvariantCulture);
             var ytdSalesPrev = dataProvider.GetTotalSalesByRange(ytdPrev.Start, ytdPrev.End);
-            if(ytdSalesPrev.TotalCost != decimal.Zero) {
+            if (ytdSalesPrev.TotalCost != decimal.Zero)
+            {
                 decimal percents = (ytdSales.TotalCost - ytdSalesPrev.TotalCost) / ytdSalesPrev.TotalCost;
                 tiRevenue.Elements[1].Text = string.Format("{1}{0:P1}", Math.Abs(percents), percents < 0 ? "-" : "+");
             }
             else tiRevenue.Elements[1].Text = "N/A";
 
             var sector = dataProvider.GetSalesBySector(ytd.Start, ytd.End, GroupingPeriod.All).OrderByDescending(q => q.TotalCost).FirstOrDefault();
-            if(sector == null) {
+            if (sector == null)
+            {
                 tiBestSector.Visible = false;
             }
-            else {
+            else
+            {
                 tiBestSector.Text = string.Format(tiBestSector.Text, sector.GroupName.ToUpper());
                 tiBestSector.Elements[1].Text = sector.TotalCost.ToString("$#,##0,,M", CultureInfo.InvariantCulture);
             }
         }
 
-        void rangeControl_RangeChanged(object sender, XtraEditors.RangeControlRangeEventArgs range) {
+        void rangeControl_RangeChanged(object sender, XtraEditors.RangeControlRangeEventArgs range)
+        {
             DateTime start = this.range.Start.AddDays((int)range.Range.Minimum);
             DateTime end = this.range.Start.AddDays((int)range.Range.Maximum);
             this.currentRange = new DateTimeRange(start, end);
             UpdateData();
-            
+
         }
 
     }
-    public class SalesByProductByDateRange: ISalesPerformanceProvider {
+    public class SalesByProductByDateRange : ISalesPerformanceProvider
+    {
         protected IDataProvider dataProvider;
         protected DateTimeRange range;
         public SalesPerformanceMode Mode { get { return SalesPerformanceMode.Month; } }
@@ -128,18 +141,22 @@ namespace DevExpress.ProductsDemo.Win.Modules {
         public virtual double SalesValueSecond { get { return 0; } }
         public virtual double SalesValueThird { get { return 0; } }
 
-        public SalesByProductByDateRange(IDataProvider dataProvider, DateTimeRange range) {
+        public SalesByProductByDateRange(IDataProvider dataProvider, DateTimeRange range)
+        {
             this.range = range;
             this.dataProvider = dataProvider;
         }
 
-        public virtual object GetChartData(DateTime date) {
+        public virtual object GetChartData(DateTime date)
+        {
             return dataProvider.GetSalesByProduct(range.Start, range.End, GroupingPeriod.All);
         }
     }
-    public class UnitsByProductByDateRange : SalesByProductByDateRange {
+    public class UnitsByProductByDateRange : SalesByProductByDateRange
+    {
         public UnitsByProductByDateRange(IDataProvider dataProvider, DateTimeRange range) : base(dataProvider, range) { }
-        public override object GetChartData(DateTime date) {
+        public override object GetChartData(DateTime date)
+        {
             return dataProvider.GetSalesByProduct(range.Start, range.End, GroupingPeriod.All);
         }
         public override string ChartValueDataMember { get { return "Units"; } }

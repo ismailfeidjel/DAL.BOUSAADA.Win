@@ -1,13 +1,7 @@
 ﻿using DevExpress.ProductsDemo.Win.Core.Helpers;
-using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Core.BaseForms
@@ -76,7 +70,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
 
             ConfigureColumns();
 
-           // DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.BestFit(gridView);
+            // DevExpress.ProductsDemo.Win.Core.Helpers.GridHelper.BestFit(gridView);
 
             IsDirty = false;
 
@@ -108,11 +102,12 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
                 foreach (var item in DataSource)
                 {
                     Validate(item);// still throws OperationCanceledException after showing its own Validation() message
-                        Save(item);
+                    Save(item);
                 }
             });
 
-            if (!ok) {
+            if (!ok)
+            {
 
                 IsDirty = false;
                 LoadData();

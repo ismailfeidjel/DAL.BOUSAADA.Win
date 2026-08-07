@@ -1,31 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
+﻿using DevExpress.MailClient.Win;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraBars.Ribbon;
-using DevExpress.MailClient.Win;
+using DevExpress.XtraEditors;
+using System;
+using System.ComponentModel;
+using System.Windows.Forms;
 
-namespace DevExpress.ProductsDemo.Win.Forms {
-    public partial class frmEditTask : RibbonForm {
+namespace DevExpress.ProductsDemo.Win.Forms
+{
+    public partial class frmEditTask : RibbonForm
+    {
         Task task, bindingTask;
-        public frmEditTask() {
+        public frmEditTask()
+        {
             InitializeComponent();
         }
-        public frmEditTask(Task task, IDXMenuManager menuManager) {
+        public frmEditTask(Task task, IDXMenuManager menuManager)
+        {
             InitializeComponent();
             this.task = task;
             this.bindingTask = task.Clone();
             InitEditors();
             InitMenuManager(menuManager);
-            if(bindingTask.StartDate.HasValue)
+            if (bindingTask.StartDate.HasValue)
                 deStartDate.DateTime = bindingTask.StartDate.Value;
-            if(bindingTask.DueDate.HasValue)
+            if (bindingTask.DueDate.HasValue)
                 deDueDate.DateTime = bindingTask.DueDate.Value;
             teSubject.DataBindings.Add("Text", bindingTask, "Subject");
             icbStatus.DataBindings.Add("EditValue", bindingTask, "Status");
@@ -35,55 +34,68 @@ namespace DevExpress.ProductsDemo.Win.Forms {
             richEditControl1.DataBindings.Add("HtmlText", bindingTask, "Description");
             UpdateCaption();
             InitValidationProvider();
-            if(task.AssignTo != null) {
+            if (task.AssignTo != null)
+            {
                 ucContactInfo1.Init(task.AssignTo, string.Empty);
                 splitContainerControl1.Collapsed = LayoutOption.TaskCollapsed;
-            } else
+            }
+            else
                 splitContainerControl1.PanelVisibility = SplitPanelVisibility.Panel1;
         }
 
-        void InitValidationProvider() {
+        void InitValidationProvider()
+        {
             dxValidationProvider1.SetValidationRule(teSubject, ValidationRulesHelper.RuleIsNotBlank);
         }
-        void UpdateCaption() {
+        void UpdateCaption()
+        {
             Text = bindingTask.Subject;
         }
-        void InitMenuManager(IDXMenuManager menuManager) {
-            foreach(Control ctrl in lcMain.Controls) {
+        void InitMenuManager(IDXMenuManager menuManager)
+        {
+            foreach (Control ctrl in lcMain.Controls)
+            {
                 BaseEdit edit = ctrl as BaseEdit;
-                if(edit != null) {
+                if (edit != null)
+                {
                     edit.MenuManager = menuManager;
                 }
             }
         }
-        void InitEditors() {
+        void InitEditors()
+        {
             EditorHelper.CreateTaskCategoryImageComboBox(icbCategory.Properties);
             EditorHelper.CreateTaskStatusImageComboBox(icbStatus.Properties);
             EditorHelper.InitPriorityComboBox(icbPriority.Properties);
         }
-        private void sbOK_Click(object sender, EventArgs e) {
-            if(deDueDate.DateTime != DateTime.MinValue)
+        private void sbOK_Click(object sender, EventArgs e)
+        {
+            if (deDueDate.DateTime != DateTime.MinValue)
                 bindingTask.DueDate = deDueDate.DateTime;
-            if(deStartDate.DateTime != DateTime.MinValue)
+            if (deStartDate.DateTime != DateTime.MinValue)
                 bindingTask.StartDate = deStartDate.DateTime;
             task.Assign(bindingTask);
         }
 
-        private void richEditControl1_SelectionChanged(object sender, EventArgs e) {
+        private void richEditControl1_SelectionChanged(object sender, EventArgs e)
+        {
             tableToolsRibbonPageCategory1.Visible = richEditControl1.IsSelectionInTable();
             floatingPictureToolsRibbonPageCategory1.Visible = richEditControl1.IsFloatingObjectSelected;
         }
 
-        private void sePercentComplete_EditValueChanged(object sender, EventArgs e) {
+        private void sePercentComplete_EditValueChanged(object sender, EventArgs e)
+        {
             sePercentComplete.DoValidate();
         }
 
-        private void icbStatus_SelectedIndexChanged(object sender, EventArgs e) {
+        private void icbStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
             icbStatus.DoValidate();
         }
-        protected override void OnClosing(CancelEventArgs e) {
+        protected override void OnClosing(CancelEventArgs e)
+        {
             base.OnClosing(e);
-            if(task.AssignTo != null)
+            if (task.AssignTo != null)
                 LayoutOption.TaskCollapsed = splitContainerControl1.Collapsed;
         }
     }

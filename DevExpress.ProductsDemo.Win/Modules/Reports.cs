@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using DevExpress.XtraReports.UI; 
-using System.IO;
-using DevExpress.XtraBars.Docking;
+﻿using DevExpress.XtraBars.Docking;
 using DevExpress.XtraEditors;
-using DevExpress.ProductsDemo.Win.Repositories;
+using DevExpress.XtraReports.UI;
+using System;
+using System.Data;
 using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Modules
 {
@@ -23,7 +17,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         static ReportsModule()
         {
-           // string dbPath = DevExpress.Utils.FilesHelper.FindingFileName(AppDomain.CurrentDomain.BaseDirectory, @"Data\nwind.mdb", false);
+            // string dbPath = DevExpress.Utils.FilesHelper.FindingFileName(AppDomain.CurrentDomain.BaseDirectory, @"Data\nwind.mdb", false);
 
             //AppDomain.CurrentDomain.SetData("DataDirectory", Path.GetDirectoryName(dbPath));
 
@@ -44,7 +38,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             InitializeComponent();
             SetupTemplatesPanel();
         }
-      
+
 
         private DockPanel _templatesPanel;
         private ListBoxControl _templatesList;
@@ -141,17 +135,17 @@ namespace DevExpress.ProductsDemo.Win.Modules
             if (MainRibbon != null && ribbonPagePreview != null)
                 MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
         }
-      
-
-       
-
-        
 
 
 
 
 
- 
+
+
+
+
+
+
         internal override void ShowModule(bool firstShow)
         {
             base.ShowModule(firstShow);
@@ -243,7 +237,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             Controls.Add(lbl);
             Controls.Add(txt);
             Controls.Add(btnOk);
-            Controls.Add(btnCancel); 
+            Controls.Add(btnCancel);
 
             Shown += (s, e) => txt.Focus();
         }
