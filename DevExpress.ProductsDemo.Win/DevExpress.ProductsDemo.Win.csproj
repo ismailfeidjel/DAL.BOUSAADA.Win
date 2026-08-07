@@ -997,12 +997,30 @@
     <None Include="Reports\Saved\f.pdf" />
     <None Include="Reports\Saved\تقرير_20260710_173046.prnx" />
     <None Include="Reports\Saved\تقرير_20260710_173046.repx" />
-    <None Include="Reports\Templates\قالب_تفصيل الوضعية.repx" />
-    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء1.repx" />
-    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء2.repx" />
-    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء3.repx" />
-    <None Include="Reports\Templates\قالب_تقرير_المشاريع.repx" />
-    <None Include="Reports\Templates\قالب_تقرير_الوضعية.repx" />
+    <None Include="Reports\Templates\قالب_تفصيل الوضعية.repx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء1.repx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء2.repx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء3.repx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\Templates\قالب_تقرير_المشاريع.repx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\Templates\قالب_تقرير_المشاريع_حسب_المرحلة.repx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\Templates\قالب_تقرير_الوضعية.repx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Reports\Templates\قالب_صفحة_فاصلة_البرنامج.repx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\icons8_a_32px.png" />
     <None Include="Resources\icons8_c_32px_1.png" />
     <None Include="Resources\adsec.svg" />
@@ -1190,7 +1208,7 @@
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
+      <Install>false</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
       <Visible>False</Visible>
@@ -1413,6 +1431,7 @@
     <Folder Include="Core\Interfaces\" />
     <Folder Include="Core\Models\" />
     <Folder Include="Documents\" />
+    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
