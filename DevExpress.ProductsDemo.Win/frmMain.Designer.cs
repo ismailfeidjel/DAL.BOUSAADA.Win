@@ -806,8 +806,12 @@
             resources.ApplyResources(galleryItemGroup6, "galleryItemGroup6");
             resources.ApplyResources(galleryItem25, "galleryItem25");
             galleryItem25.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage4")));
+            galleryItem25.Tag = "PrintCommuneSummary2";
+            galleryItem25.Value = "PrintCommuneSummary2";
             resources.ApplyResources(galleryItem26, "galleryItem26");
             galleryItem26.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage5")));
+            galleryItem26.Tag = "PrintFinancialConsumptionReport";
+            galleryItem26.Value = "PrintFinancialConsumptionReport";
             resources.ApplyResources(galleryItem27, "galleryItem27");
             galleryItem27.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage6")));
             resources.ApplyResources(galleryItem28, "galleryItem28");
@@ -822,6 +826,8 @@
             resources.ApplyResources(galleryItemGroup7, "galleryItemGroup7");
             resources.ApplyResources(galleryItem29, "galleryItem29");
             galleryItem29.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage8")));
+            galleryItem29.Tag = "PrintDomainSummary";
+            galleryItem29.Value = "PrintDomainSummary";
             resources.ApplyResources(galleryItem30, "galleryItem30");
             resources.ApplyResources(galleryItem31, "galleryItem31");
             resources.ApplyResources(galleryItem32, "galleryItem32");

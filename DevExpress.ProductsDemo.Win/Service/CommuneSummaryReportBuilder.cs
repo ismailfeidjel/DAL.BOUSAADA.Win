@@ -14,9 +14,12 @@ namespace DevExpress.ProductsDemo.Win.Services
         public decimal LotBudget { get; set; }
         public decimal RegisteredAmount { get; set; }
         public decimal RemainingAmount { get; set; }
+        public decimal ConsumedAmount { get; set; }   
+
 
         public int AnnouncedCount { get; set; }
         public int ReceivedCount { get; set; }
+
         public int RemainingCount { get; set; }
 
         // Admin procedure stage counts
@@ -94,7 +97,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             if (control is XRLabel lbl)
                 lbl.Text = programName;
         }
-        private static List<CommuneSummaryRow> ComputeCommuneRows(List<LotGridModel> data)
+        internal static List<CommuneSummaryRow> ComputeCommuneRows(List<LotGridModel> data)
         {
             var result = new List<CommuneSummaryRow>();
 
@@ -122,6 +125,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                     // Money still sums across ALL lots (a project can have multiple budget lines)
                     LotBudget = rows.Sum(r => r.LotBudget),
                     RegisteredAmount = rows.Sum(r => r.RegisteredAmount),
+                    ConsumedAmount = rows.Sum(r => r.ConsumedAmount),
                     RemainingAmount = rows.Sum(r => r.LotBudget) - rows.Sum(r => r.RegisteredAmount),
 
                     AnnouncedCount = announced,
@@ -155,6 +159,106 @@ namespace DevExpress.ProductsDemo.Win.Services
             }
 
             return result;
+        }
+    }
+
+    public static class CommuneSummary2ReportBuilder
+    {
+        private static readonly string[] PartTemplateKeys =
+       {
+            "قالب_تقرير_البلديات",
+        };
+
+        public static XtraReport Build(List<LotGridModel> data, string programName)
+        {
+            var rows = CommuneSummaryReportBuilder.ComputeCommuneRows(data);
+
+            var partReports = new List<XtraReport>();
+            foreach (string key in PartTemplateKeys)
+            {
+                string path = Path.Combine(Application.StartupPath, "Reports", "Templates", key + ".repx");
+                if (!File.Exists(path))
+                    throw new InvalidOperationException($"القالب غير موجود: {path}\nيرجى إنشائه أولاً من تبويب التقارير.");
+
+                XtraReport partReport = XtraReport.FromFile(path, true);
+                GridReportBuilder.EnsureSafeMargins(partReport);
+                partReport.Landscape = false;
+                partReport.DataSource = rows;
+                ApplyProgramTitle(partReport, programName);
+                partReport.CreateDocument();
+
+                partReports.Add(partReport);
+            }
+
+            // Merge every part's generated pages into the first report's document
+            XtraReport combined = partReports[0];
+            for (int i = 1; i < partReports.Count; i++)
+            {
+                XtraReport part = partReports[i];
+                combined.ModifyDocument(modifier =>
+                {
+                    for (int p = 0; p < part.PrintingSystem.Pages.Count; p++)
+                        modifier.InsertPage(combined.PrintingSystem.Pages.Count, part.PrintingSystem.Pages[p]);
+                });
+            }
+
+            return combined;
+        }
+        private static void ApplyProgramTitle(XtraReport report, string programName)
+        {
+            var control = report.FindControl("cellProgramName", true); // the title label in your ReportHeader
+            if (control is XRLabel lbl)
+                lbl.Text = programName;
+        }
+    }
+
+    public static class FinancialConsumptionReportBuilder
+    {
+        private static readonly string[] PartTemplateKeys =
+        {
+        "قالب_تقرير_الاستهلاك_المالي",
+    };
+
+        public static XtraReport Build(List<LotGridModel> data, string programName)
+        {
+            var rows = CommuneSummaryReportBuilder.ComputeCommuneRows(data);
+
+            var partReports = new List<XtraReport>();
+            foreach (string key in PartTemplateKeys)
+            {
+                string path = Path.Combine(Application.StartupPath, "Reports", "Templates", key + ".repx");
+                if (!File.Exists(path))
+                    throw new InvalidOperationException($"القالب غير موجود: {path}\nيرجى إنشائه أولاً من تبويب التقارير.");
+
+                XtraReport partReport = XtraReport.FromFile(path, true);
+                GridReportBuilder.EnsureSafeMargins(partReport);
+                partReport.Landscape = false;
+                partReport.DataSource = rows;
+                ApplyProgramTitle(partReport, programName);
+                partReport.CreateDocument();
+
+                partReports.Add(partReport);
+            }
+
+            XtraReport combined = partReports[0];
+            for (int i = 1; i < partReports.Count; i++)
+            {
+                XtraReport part = partReports[i];
+                combined.ModifyDocument(modifier =>
+                {
+                    for (int p = 0; p < part.PrintingSystem.Pages.Count; p++)
+                        modifier.InsertPage(combined.PrintingSystem.Pages.Count, part.PrintingSystem.Pages[p]);
+                });
+            }
+
+            return combined;
+        }
+
+        private static void ApplyProgramTitle(XtraReport report, string programName)
+        {
+            var control = report.FindControl("cellProgramName", true);
+            if (control is XRLabel lbl)
+                lbl.Text = programName;
         }
     }
 }

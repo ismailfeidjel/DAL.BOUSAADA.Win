@@ -1369,6 +1369,15 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 case "PrintCommuneSummary":
                     PrintCommuneSummaryReport();
                     break;
+                case "PrintCommuneSummary2":
+                    PrintCommuneSummaryReport2();
+                    break;
+                case "PrintDomainSummary":
+                    PrintDomainSummaryReport();
+                    break;
+                case "PrintFinancialConsumptionReport":
+                    PrintFinancialConsumptionReport();
+                    break;
                 case "PrintProjectLifecycleReport":
                     PrintProjectLifecycleReport();
                     break;
@@ -1471,6 +1480,72 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
 
                 var report = CommuneSummaryReportBuilder.Build(data, programName);
+                report.ShowPreviewDialog();   // ← no CreateDocument() here — Build() already produced the merged document
+            }
+            catch (InvalidOperationException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void PrintFinancialConsumptionReport()
+        {
+            try
+            {
+                LoadData();
+                var allData = _lotRepo.GetGridData();
+                var data = _selectedProgramId.HasValue
+                    ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
+                    : allData;
+
+                string programName = GetPrograms()
+                    .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
+
+                var report = FinancialConsumptionReportBuilder.Build(data, programName);
+                report.ShowPreviewDialog();
+            }
+            catch (InvalidOperationException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void PrintDomainSummaryReport()
+        {
+            try
+            {
+                var allData = _lotRepo.GetGridData();
+                var data = _selectedProgramId.HasValue
+                    ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
+                    : allData;
+
+                string programName = GetPrograms()
+                    .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
+
+                var report = DomainSummaryReportBuilder.Build(data, programName);
+                report.CreateDocument();
+                report.ShowPreviewDialog();
+            }
+            catch (InvalidOperationException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void PrintCommuneSummaryReport2()
+        {
+            try
+            {
+                LoadData();
+                var allData = _lotRepo.GetGridData();
+                var data = _selectedProgramId.HasValue
+                    ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
+                    : allData;
+
+                string programName = GetPrograms()
+                    .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
+
+                var report = CommuneSummary2ReportBuilder.Build(data, programName);
                 report.ShowPreviewDialog();   // ← no CreateDocument() here — Build() already produced the merged document
             }
             catch (InvalidOperationException ex)

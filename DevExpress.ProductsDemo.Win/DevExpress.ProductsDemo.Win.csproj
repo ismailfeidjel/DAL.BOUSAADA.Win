@@ -807,6 +807,7 @@
     <Compile Include="Sales.Model\SalesForecastMaker.cs" />
     <Compile Include="Sales.Model\Utils.cs" />
     <Compile Include="Service\CommuneSummaryReportBuilder.cs" />
+    <Compile Include="Service\DomainSummaryReportBuilder.cs" />
     <Compile Include="Service\GridReportBuilder.cs" />
     <Compile Include="Service\LotService.cs" />
     <Compile Include="Service\PowerPointReportExporter.cs" />
@@ -973,8 +974,6 @@
     <None Include="DataBase\Reports\Saved\f.pdf" />
     <None Include="DataBase\Reports\Saved\تقرير_20260710_173046.prnx" />
     <None Include="DataBase\Reports\Saved\تقرير_20260710_173046.repx" />
-    <None Include="DataBase\Reports\Templates\قالب_تقرير_المشاريع.repx" />
-    <None Include="DataBase\Reports\Templates\قالب_تقرير_الوضعية.repx" />
     <None Include="DBBDataSet.xsc">
       <DependentUpon>DBBDataSet.xsd</DependentUpon>
     </None>
@@ -1027,6 +1026,9 @@
     <Content Include="Reports\Templates\قالب_صفحة_فاصلة_البرنامج.repx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Reports\Templates\قالب_تقرير_الاستهلاك_المالي.repx" />
+    <None Include="Reports\Templates\قالب_تقرير_البلديات.repx" />
+    <None Include="Reports\Templates\قالب_تقرير_حسب_مجال_التدخل.repx" />
     <None Include="Resources\icons8_a_32px.png" />
     <None Include="Resources\icons8_c_32px_1.png" />
     <None Include="Resources\adsec.svg" />
@@ -1436,6 +1438,7 @@
     <Folder Include="Core\Extensions\" />
     <Folder Include="Core\Interfaces\" />
     <Folder Include="Core\Models\" />
+    <Folder Include="DataBase\Reports\Templates\" />
     <Folder Include="Documents\" />
     <Folder Include="NewFolder1\" />
   </ItemGroup>

@@ -136,7 +136,7 @@
     <value>helpControl1</value>
   </data>
   <data name="&gt;&gt;helpControl1.Type" xml:space="preserve">
-    <value>DevExpress.ProductsDemo.Win.Controls.HelpControl, DevExpress.ProductsDemo.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DevExpress.ProductsDemo.Win.Controls.HelpControl, Bousaada.Dal.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;helpControl1.Parent" xml:space="preserve">
     <value>backstageViewClientControl1</value>
@@ -205,7 +205,7 @@
     <value>printControl1</value>
   </data>
   <data name="&gt;&gt;printControl1.Type" xml:space="preserve">
-    <value>DevExpress.ProductsDemo.Win.Controls.PrintControl, DevExpress.ProductsDemo.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DevExpress.ProductsDemo.Win.Controls.PrintControl, Bousaada.Dal.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;printControl1.Parent" xml:space="preserve">
     <value>backstageViewClientControl3</value>
@@ -250,7 +250,7 @@
     <value>exportControl1</value>
   </data>
   <data name="&gt;&gt;exportControl1.Type" xml:space="preserve">
-    <value>DevExpress.ProductsDemo.Win.Controls.ExportControl, DevExpress.ProductsDemo.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DevExpress.ProductsDemo.Win.Controls.ExportControl, Bousaada.Dal.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;exportControl1.Parent" xml:space="preserve">
     <value>backstageViewClientControl4</value>
