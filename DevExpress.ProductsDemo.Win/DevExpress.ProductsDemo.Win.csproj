@@ -31,7 +31,7 @@
     <PublisherName>ismailfeidjel</PublisherName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -958,6 +958,12 @@
     <Content Include="DataBase\DBB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="grid_layout_projects_ADSEC.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="grid_layout_projects_CGSCL.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Modules\dal.sql" />
     <Content Include="nwindDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
@@ -997,30 +1003,30 @@
     <None Include="Reports\Saved\f.pdf" />
     <None Include="Reports\Saved\تقرير_20260710_173046.prnx" />
     <None Include="Reports\Saved\تقرير_20260710_173046.repx" />
-    <None Include="Reports\Templates\قالب_تفصيل الوضعية.repx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء1.repx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء2.repx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء3.repx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Reports\Templates\قالب_تقرير_المشاريع.repx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Reports\Templates\قالب_تقرير_المشاريع_حسب_المرحلة.repx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Reports\Templates\قالب_تقرير_الوضعية.repx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Reports\Templates\قالب_صفحة_فاصلة_البرنامج.repx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Content Include="Reports\Templates\قالب_تفصيل الوضعية.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Templates\قالب_تقرير_البلديات_جزء1.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Templates\قالب_تقرير_البلديات_جزء2.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Templates\قالب_تقرير_البلديات_جزء3.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Templates\قالب_تقرير_المشاريع.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Templates\قالب_تقرير_المشاريع_حسب_المرحلة.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Templates\قالب_تقرير_الوضعية.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Templates\قالب_صفحة_فاصلة_البرنامج.repx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\icons8_a_32px.png" />
     <None Include="Resources\icons8_c_32px_1.png" />
     <None Include="Resources\adsec.svg" />
