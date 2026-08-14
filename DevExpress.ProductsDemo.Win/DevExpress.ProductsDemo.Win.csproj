@@ -1001,33 +1001,6 @@
     <None Include="Reports\Saved\f.pdf" />
     <None Include="Reports\Saved\تقرير_20260710_173046.prnx" />
     <None Include="Reports\Saved\تقرير_20260710_173046.repx" />
-    <Content Include="Reports\Templates\قالب_تفصيل الوضعية.repx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Templates\قالب_تقرير_البلديات_جزء1.repx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Templates\قالب_تقرير_البلديات_جزء2.repx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Templates\قالب_تقرير_البلديات_جزء3.repx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Templates\قالب_تقرير_المشاريع.repx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Templates\قالب_تقرير_المشاريع_حسب_المرحلة.repx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Templates\قالب_تقرير_الوضعية.repx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Reports\Templates\قالب_صفحة_فاصلة_البرنامج.repx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="Reports\Templates\قالب_تقرير_الاستهلاك_المالي.repx" />
-    <None Include="Reports\Templates\قالب_تقرير_البلديات.repx" />
-    <None Include="Reports\Templates\قالب_تقرير_حسب_مجال_التدخل.repx" />
     <None Include="Resources\icons8_a_32px.png" />
     <None Include="Resources\icons8_c_32px_1.png" />
     <None Include="Resources\adsec.svg" />

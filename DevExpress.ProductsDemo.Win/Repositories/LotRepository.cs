@@ -108,8 +108,9 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
         ORDER BY
 
-    p.daira_id,
         p.sort_order,
+
+    p.daira_id,
     p.commune_id,
     p.operation_number DESC,
     l.lot_number ";
@@ -214,11 +215,9 @@ namespace DevExpress.ProductsDemo.Win.Repositories
         SELECT
             l.id,
             l.project_id,
-
             p.operation_number,
             p.operation_name,
             pr.name AS program,
-            
             p.program_id,
             p.daira_id,
             p.commune_id,
