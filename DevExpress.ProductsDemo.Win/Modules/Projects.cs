@@ -1455,8 +1455,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 var data = _selectedProgramId.HasValue
                     ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
                     : allData;
+                string programName = GetPrograms()
+                    .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
 
-                var report = StatusSummaryReportBuilder.Build(data);
+                var report = StatusSummaryReportBuilder.Build(data, programName);
                 report.CreateDocument();
                 report.ShowPreviewDialog();
             }

@@ -26,6 +26,11 @@ namespace DevExpress.ProductsDemo.Win.Services
         public int FinishedCount { get; set; }
         public int ReceivedFundsCount { get; set; }
         public int ClosedCount { get; set; }
+
+        public int StudiededCount { get; set; }
+        public int FundeddCount { get; set; }
+        public decimal FundeddAmount { get; set; }
+
     }
 
     public static class DomainSummaryReportBuilder
@@ -77,6 +82,10 @@ namespace DevExpress.ProductsDemo.Win.Services
                 int registered = projects.Count(r =>
                     r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
                     r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7);
+                int studied = projects.Count(r =>
+                    r.AdministrativeProcedureId == 4 || r.AdministrativeProcedureId == 5 );
+                int funded = projects.Count(r =>
+                    r.AdministrativeProcedureId == 8);
 
                 // إضافة العدادات الجديدة بناءً على قائمة projects
                 int notStarted = projects.Count(r => r.ProjectStatusId == 2);
@@ -93,6 +102,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                     AnnouncedCount = announced,
                     LotBudget = lots.Sum(r => r.LotBudget),
                     RegisteredAmount = lots.Sum(r => r.RegisteredAmount),
+                    FundeddAmount = lots.Sum(r => r.AdministrativeProcedureId==8 ? r.RegisteredAmount : 0),
                     RegisteredCount = registered,
                     UnregisteredCount = announced - registered,
 
@@ -102,7 +112,9 @@ namespace DevExpress.ProductsDemo.Win.Services
                     StoppedCount = stopped,
                     FinishedCount = finished,
                     ReceivedFundsCount = receivedFunds,
-                    ClosedCount = closed
+                    ClosedCount = closed,
+                    StudiededCount= studied,
+                    FundeddCount=funded
                 });
             }
 

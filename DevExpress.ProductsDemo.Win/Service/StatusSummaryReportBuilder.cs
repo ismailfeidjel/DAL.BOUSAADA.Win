@@ -12,7 +12,7 @@ namespace DevExpress.ProductsDemo.Win.Services
     {
         public const string TemplateKey = "قالب_تقرير_الوضعية";
 
-        public static XtraReport Build(List<LotGridModel> data)
+        public static XtraReport Build(List<LotGridModel> data , string programName)
         {
             string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", TemplateKey + ".repx");
 
@@ -23,6 +23,9 @@ namespace DevExpress.ProductsDemo.Win.Services
             GridReportBuilder.EnsureSafeMargins(report);
 
             report.DataSource = data;   // ← new: template can now also bind fields/summaries directly
+            var programCell = report.FindControl("cellProgramName", true);
+            if (programCell is XRLabel lbl) lbl.Text = programName;
+            else if (programCell is XRTableCell ptc) ptc.Text = programName;
 
             var stats = ComputeStats(data);
             FillNamedControls(report, stats);
@@ -30,6 +33,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             return report;
         }
 
+        
         private static Dictionary<string, string> ComputeStats(List<LotGridModel> data)
         {
             var byProject = data
