@@ -43,7 +43,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             bool IsReceived(LotGridModel r) =>
         r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
         r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7 ||
-        r.AdministrativeProcedureId == 4;
+        r.AdministrativeProcedureId == 4 ||r.AdministrativeProcedureId==5 ;
             int specialStatus2Count = Count(r => r.SpecialStatus2Id == 1);
 
             decimal totalBudget = data.Sum(r => r.LotBudget);
@@ -89,7 +89,7 @@ namespace DevExpress.ProductsDemo.Win.Services
     .Sum(r => r.RegisteredAmount);
             decimal registeredOperationsAmount1 =
     data.Where(r => r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
-                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7)
+                    r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7 || r.AdministrativeProcedureId == 4 || r.AdministrativeProcedureId == 5)
         .Sum(r => r.RegisteredAmount)
     + data.Where(r => r.AdministrativeProcedureId == 4)
           .Sum(r => r.LotBudget);
@@ -143,7 +143,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                 ["tableCell32"] = communesAnyStatus2Value2.Count.ToString(),//عدد :
 
                 ["tableCell68"] = totalBudget.ToString("N2", CultureInfo.InvariantCulture) + "دج",//الغلاف المالي :
-                ["tableCell72"] = registeredOperationsAmount1.ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ تسجيل مبدئي :
+                ["tableCell72"] = registeredOperationsAmount1.ToString("N2", CultureInfo.InvariantCulture) + "دج",// الواردة من البلديات مبلغ تسجيل  :
                 ["tableCell80"] = (totalBudget - registeredOperationsAmount1 - (totalBudget - totalreg)).ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ غير مسجل :
                 ["tableCell84"] = registeredOperationsAmount2.ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ تسجيل نهائي :
                 ["tableCell90"] = totalreg.ToString("N2", CultureInfo.InvariantCulture) + "دج",//الرصيد :

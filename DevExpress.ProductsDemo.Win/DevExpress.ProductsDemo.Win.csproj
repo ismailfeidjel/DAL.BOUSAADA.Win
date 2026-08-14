@@ -555,7 +555,6 @@
     <Compile Include="Core\BaseForms\frmUsers .Designer.cs">
       <DependentUpon>frmUsers .cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\DomainSummaryReportBuilder.cs" />
     <Compile Include="Core\Helpers\AvatarHelper.cs" />
     <Compile Include="Core\Helpers\CurrentSession.cs" />
     <Compile Include="Core\Helpers\DialogHelper.cs" />
