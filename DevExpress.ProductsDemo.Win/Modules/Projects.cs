@@ -1594,7 +1594,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 var report = ProjectLifecycleReportBuilder.Build(gridView1, programs, programId =>
                 {
                     var all = _lotRepo.GetGridData();
-                    return all.Where(r => r.ProgramId == programId).ToList();
+                    return all.Where(r => r.ProgramId == programId && (r.DairaId==2 || r.DairaId == 8)).ToList();
                 });
 
                 report.ShowPreviewDialog();
@@ -1620,7 +1620,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     var report = ProjectLifecycleReportBuilder.Build(gridView1, programs, programId =>
                     {
                         var all = _lotRepo.GetGridData();
-                        return all.Where(r => r.ProgramId == programId).ToList();
+                        return all.Where(r => r.ProgramId == programId && (r.DairaId == 2 || r.DairaId == 8)).ToList();
                     });
 
                     // 2. Export to PPTX
