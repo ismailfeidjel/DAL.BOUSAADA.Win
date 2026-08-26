@@ -27,7 +27,7 @@ namespace DevExpress.ProductsDemo.Win.Services
         public int ReceivedFundsCount { get; set; }
         public int ClosedCount { get; set; }
 
-        public int StudiededCount { get; set; }
+        public int SCount { get; set; }
         public int FundeddCount { get; set; }
         public decimal FundeddAmount { get; set; }
 
@@ -82,8 +82,8 @@ namespace DevExpress.ProductsDemo.Win.Services
                 int registered = projects.Count(r =>
                     r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
                     r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7);
-                int studied = projects.Count(r =>
-                    r.AdministrativeProcedureId == 4 || r.AdministrativeProcedureId == 5 );
+                int scount = projects.Count(r =>
+                    r.ProjectStatusId == 8  );
                 int funded = projects.Count(r =>
                     r.AdministrativeProcedureId == 8);
 
@@ -103,8 +103,8 @@ namespace DevExpress.ProductsDemo.Win.Services
                     LotBudget = lots.Sum(r => r.LotBudget),
                     RegisteredAmount = lots.Sum(r => r.RegisteredAmount),
                     FundeddAmount = lots.Sum(r => r.AdministrativeProcedureId==8 ? r.RegisteredAmount : 0),
-                    RegisteredCount = registered,
-                    UnregisteredCount = announced - registered,
+                    RegisteredCount = registered ,
+                    UnregisteredCount = announced - registered ,
 
                     // إسناد القيم الجديدة للكائن
                     NotstartedCount = notStarted,
@@ -113,7 +113,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                     FinishedCount = finished,
                     ReceivedFundsCount = receivedFunds,
                     ClosedCount = closed,
-                    StudiededCount= studied,
+                    SCount= scount,
                     FundeddCount=funded
                 });
             }

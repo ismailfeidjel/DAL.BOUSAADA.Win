@@ -1587,16 +1587,27 @@ namespace DevExpress.ProductsDemo.Win.Modules
         }
         public void PrintProjectLifecycleReport()
         {
+            List<int> selectedDairaIds;
+
+            using (var dlg = new frmSelectDairas())
+            {
+                if (dlg.ShowDialog(this) != DialogResult.OK)
+                    return; // user cancelled — don't generate anything
+
+                selectedDairaIds = dlg.SelectedDairaIds;
+            }
+
             try
             {
                 var programs = GetPrograms().Cast<ProgramLookupItem>().ToList();
-
                 var report = ProjectLifecycleReportBuilder.Build(gridView1, programs, programId =>
                 {
                     var all = _lotRepo.GetGridData();
-                    return all.Where(r => r.ProgramId == programId && (r.DairaId==2 || r.DairaId == 8)).ToList();
+                    return all.Where(r =>
+                        r.ProgramId == programId &&
+                        (selectedDairaIds.Count == 0 || (r.DairaId.HasValue && selectedDairaIds.Contains(r.DairaId.Value)))
+                    ).ToList();
                 });
-
                 report.ShowPreviewDialog();
             }
             catch (InvalidOperationException ex)
@@ -1620,7 +1631,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     var report = ProjectLifecycleReportBuilder.Build(gridView1, programs, programId =>
                     {
                         var all = _lotRepo.GetGridData();
-                        return all.Where(r => r.ProgramId == programId && (r.DairaId == 2 || r.DairaId == 8)).ToList();
+                        return all.Where(r => r.ProgramId == programId /*&& (r.DairaId == 2 || r.DairaId == 8)*/).ToList();
                     });
 
                     // 2. Export to PPTX

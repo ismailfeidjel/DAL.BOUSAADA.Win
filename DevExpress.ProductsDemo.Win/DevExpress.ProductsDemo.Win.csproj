@@ -549,6 +549,12 @@
     <Compile Include="Core\BaseForms\frmSectors.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Core\BaseForms\frmSelectDairas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\BaseForms\frmSelectDairas.Designer.cs">
+      <DependentUpon>frmSelectDairas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Core\BaseForms\frmUsers .cs">
       <SubType>Form</SubType>
     </Compile>
