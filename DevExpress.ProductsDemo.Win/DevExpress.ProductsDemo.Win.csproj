@@ -961,6 +961,7 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="DataBase\dal %288%29.sql" />
+    <Content Include="DataBase\dal22222222222222.sql" />
     <Content Include="DataBase\DBB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
