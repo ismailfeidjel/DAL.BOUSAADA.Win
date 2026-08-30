@@ -1,5 +1,7 @@
-﻿namespace DevExpress.ProductsDemo.Win {
-    partial class frmMain {
+﻿namespace DevExpress.ProductsDemo.Win
+{
+    partial class frmMain
+    {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -9,8 +11,10 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing) {
-            if(disposing && (components != null)) {
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -22,7 +26,8 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent() {
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             DevExpress.XtraBars.Ribbon.GalleryItemGroup galleryItemGroup1 = new DevExpress.XtraBars.Ribbon.GalleryItemGroup();
@@ -448,7 +453,8 @@
             this.rgbiCurrentViewTasks.Gallery.ColumnCount = 4;
             resources.ApplyResources(galleryItemGroup1, "galleryItemGroup1");
             resources.ApplyResources(galleryItem1, "galleryItem1");
-            galleryItem1.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ListByDate;
+            galleryItem1.Checked = true;
+            galleryItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage")));
             galleryItem1.Tag = "SaveCurrentFilter";
             galleryItem1.Value = "SaveCurrentFilter";
             resources.ApplyResources(galleryItem2, "galleryItem2");
@@ -456,7 +462,6 @@
             galleryItem2.Tag = "StatusFilterUnregistered";
             galleryItem2.Value = "StatusFilterUnregistered";
             resources.ApplyResources(galleryItem3, "galleryItem3");
-            galleryItem3.Checked = true;
             galleryItem3.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ToDoList;
             galleryItem3.Tag = "StatusFilterOngoing";
             galleryItem3.Value = "StatusFilterOngoing";
@@ -785,17 +790,17 @@
             this.ribbonGalleryBarItem3.Gallery.ColumnCount = 4;
             resources.ApplyResources(galleryItemGroup5, "galleryItemGroup5");
             resources.ApplyResources(galleryItem21, "galleryItem21");
-            galleryItem21.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage")));
+            galleryItem21.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage1")));
             galleryItem21.ImageOptions.SvgImageColorizationMode = DevExpress.Utils.SvgImageColorizationMode.None;
             galleryItem21.Tag = "PrintGrid";
             resources.ApplyResources(galleryItem22, "galleryItem22");
-            galleryItem22.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage1")));
+            galleryItem22.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage2")));
             galleryItem22.Tag = "PrintStatusSummary";
             resources.ApplyResources(galleryItem23, "galleryItem23");
-            galleryItem23.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage2")));
+            galleryItem23.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage3")));
             galleryItem23.Tag = "PrintCommuneSummary";
             resources.ApplyResources(galleryItem24, "galleryItem24");
-            galleryItem24.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage3")));
+            galleryItem24.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage4")));
             galleryItem24.Tag = "PrintProjectLifecycleReport";
             galleryItem24.Value = "PrintProjectLifecycleReport";
             galleryItemGroup5.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
@@ -805,15 +810,17 @@
             galleryItem24});
             resources.ApplyResources(galleryItemGroup6, "galleryItemGroup6");
             resources.ApplyResources(galleryItem25, "galleryItem25");
-            galleryItem25.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage4")));
+            galleryItem25.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage5")));
             galleryItem25.Tag = "PrintCommuneSummary2";
             galleryItem25.Value = "PrintCommuneSummary2";
             resources.ApplyResources(galleryItem26, "galleryItem26");
-            galleryItem26.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage5")));
+            galleryItem26.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage6")));
             galleryItem26.Tag = "PrintFinancialConsumptionReport";
             galleryItem26.Value = "PrintFinancialConsumptionReport";
-            galleryItem27.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage6")));
-            galleryItem28.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage7")));
+            resources.ApplyResources(galleryItem27, "galleryItem27");
+            galleryItem27.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage7")));
+            resources.ApplyResources(galleryItem28, "galleryItem28");
+            galleryItem28.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage8")));
             galleryItem28.Tag = "btnExportToPowerPoint_Click";
             galleryItem28.Value = "btnExportToPowerPoint_Click";
             galleryItemGroup6.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
@@ -822,9 +829,13 @@
             galleryItem27,
             galleryItem28});
             resources.ApplyResources(galleryItemGroup7, "galleryItemGroup7");
-            galleryItem29.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage8")));
+            resources.ApplyResources(galleryItem29, "galleryItem29");
+            galleryItem29.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage9")));
             galleryItem29.Tag = "PrintDomainSummary";
             galleryItem29.Value = "PrintDomainSummary";
+            resources.ApplyResources(galleryItem30, "galleryItem30");
+            resources.ApplyResources(galleryItem31, "galleryItem31");
+            resources.ApplyResources(galleryItem32, "galleryItem32");
             galleryItemGroup7.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
             galleryItem29,
             galleryItem30,

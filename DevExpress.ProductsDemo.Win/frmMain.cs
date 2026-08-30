@@ -194,7 +194,7 @@ namespace DevExpress.ProductsDemo.Win
             AllowCustomizationMenuList.Add(bsiNavigation);
             AllowCustomizationMenuList.Add(skinDropDownButtonItem1);
             ribbonControl1.Toolbar.ItemLinks.Add(skinDropDownButtonItem1);
-            AllowCustomizationMenuList.Add(skinPaletteRibbonGalleryBarItem1);
+            AllowCustomizationMenuList.Add(skinPaletteRibbonGalleryBarItem1); 
             ribbonControl1.Toolbar.ItemLinks.Add(skinPaletteRibbonGalleryBarItem1);
         }
 
@@ -204,7 +204,7 @@ namespace DevExpress.ProductsDemo.Win
             galleryItem.Hint = description;
         }
         internal ZoomManager ZoomManager { get { return _zoomManager; } }
-        // internal BackstageViewButtonItem SaveAsMenuItem { get { return bvbiSaveAs; } }
+        // internal BackstageViewButtonItem SaveAsMenuItem { get { return bvbiSaveAs; } } 
         internal BackstageViewButtonItem SaveAttachmentMenuItem { get { return bvbiSaveAttachment; } }
         internal InRibbonGallery TaskGallery { get { return rgbiCurrentViewTasks.Gallery; } }
         internal PopupMenu FlagStatusMenu { get { return pmFlagStatus; } }
@@ -395,16 +395,19 @@ namespace DevExpress.ProductsDemo.Win
             // modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Tag));
             if (modulesNavigator.CurrentModule == null) return;
 
-            if (e.Item.Checked)
-            {
-                // First press: Item becomes checked -> Apply the specific filter
-                modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Value));
-            }
-            else
-            {
-                // Second press: Item becomes unchecked -> Send a command to clear the filter
-                modulesNavigator.CurrentModule.ButtonClick("ClearFilter");
-            }
+
+                if (e.Item.Checked)
+                {
+                    // First press: Item becomes checked -> Apply the specific filter
+                    modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Value));
+                }
+                else
+                {
+                    //if ( !  e.Item.Value.ToString().StartsWith("SaveCurrentFilter"))
+                        // Second press: Item becomes unchecked -> Send a command to clear the filter
+                        modulesNavigator.CurrentModule.ButtonClick("ClearFilter");
+                }
+            
         }
 
         private void galleryReportPrinting_GalleryItemClick(object sender, GalleryItemClickEventArgs e)

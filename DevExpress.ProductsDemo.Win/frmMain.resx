@@ -445,28 +445,54 @@
     <value>Group</value>
   </data>
   <data name="galleryItem1.Caption" xml:space="preserve">
-    <value>حفظ الفلتر</value>
+    <value>مسجلة</value>
+  </data>
+  <assembly alias="DevExpress.Data.v24.1" name="DevExpress.Data.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="resource.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjI0LjEsIFZlcnNpb249MjQuMS43
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAABsEAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgi
+        IHZpZXdCb3g9IjAgMCAzMiAzMiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+        MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3Bh
+        Y2U9InByZXNlcnZlIiBpZD0iTGF5ZXJfMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAg
+        MzIgMzIiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLkJsdWV7ZmlsbDojMTE3N0Q3O30KCS5Z
+        ZWxsb3d7ZmlsbDojRkZCMTE1O30KCS5SZWR7ZmlsbDojRDExQzFDO30KCS5HcmVlbntmaWxsOiMwMzlD
+        MjM7fQoJLkJsYWNre2ZpbGw6IzcyNzI3Mjt9CgkuV2hpdGV7ZmlsbDojRkZGRkZGO30KCS5zdDB7b3Bh
+        Y2l0eTowLjU7fQoJLnN0MXtvcGFjaXR5OjAuNzU7fQoJLnN0MntkaXNwbGF5Om5vbmU7fQoJLnN0M3tk
+        aXNwbGF5OmlubGluZTtmaWxsOiNGRkIxMTU7fQoJLnN0NHtkaXNwbGF5OmlubGluZTt9Cgkuc3Q1e2Rp
+        c3BsYXk6aW5saW5lO29wYWNpdHk6MC43NTt9Cgkuc3Q2e2Rpc3BsYXk6aW5saW5lO29wYWNpdHk6MC41
+        O30KCS5zdDd7ZGlzcGxheTppbmxpbmU7ZmlsbDojMDM5QzIzO30KCS5zdDh7ZGlzcGxheTppbmxpbmU7
+        ZmlsbDojRDExQzFDO30KCS5zdDl7ZGlzcGxheTppbmxpbmU7ZmlsbDojMTE3N0Q3O30KCS5zdDEwe2Rp
+        c3BsYXk6aW5saW5lO2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU+DQogIDxnIGlkPSJTZWN1cml0eV94NUZf
+        UGVybWlzc2lvbl94NUZfT2JqZWN0Ij4NCiAgICA8cG9seWdvbiBwb2ludHM9IjAsNCAyNCw0IDI0LDgg
+        MTQsMTggMTQsMjYgMTAsMzAgMTAsMTggMCw4ICAiIGNsYXNzPSJZZWxsb3ciIC8+DQogICAgPHBhdGgg
+        ZD0iTTI0LDE0Yy00LjQsMC04LDMuNi04LDhzMy42LDgsOCw4czgtMy42LDgtOFMyOC40LDE0LDI0LDE0
+        eiBNMjIuNSwyNkwxOSwyMi41bDEuNS0xLjVsMiwybDUtNWwxLjUsMS41ICAgTDIyLjUsMjZ6IiBjbGFz
+        cz0iR3JlZW4iIC8+DQogIDwvZz4NCjwvc3ZnPgs=
+</value>
   </data>
   <data name="galleryItem2.Caption" xml:space="preserve">
-    <value>انتهاء الاجال</value>
+    <value>غير مسجلة</value>
   </data>
   <data name="galleryItem3.Caption" xml:space="preserve">
-    <value>List</value>
+    <value>جارية</value>
   </data>
   <data name="galleryItem4.Caption" xml:space="preserve">
-    <value>Alphabetical</value>
+    <value>مغلقة</value>
   </data>
   <data name="galleryItem5.Caption" xml:space="preserve">
-    <value>By State</value>
+    <value>Prioritized</value>
   </data>
   <data name="galleryItem6.Caption" xml:space="preserve">
-    <value>Card</value>
+    <value>انتهاء الاجال</value>
   </data>
   <data name="galleryItem7.Caption" xml:space="preserve">
-    <value>Item1</value>
+    <value>Simple List</value>
   </data>
   <data name="galleryItem8.Caption" xml:space="preserve">
-    <value>Item2</value>
+    <value>Deferred</value>
   </data>
   <data name="bbiTodayFlag.Caption" xml:space="preserve">
     <value>بن سني</value>
@@ -515,16 +541,16 @@
     <value>Group</value>
   </data>
   <data name="galleryItem9.Caption" xml:space="preserve">
-    <value>Item3</value>
+    <value>List</value>
   </data>
   <data name="galleryItem10.Caption" xml:space="preserve">
-    <value>Item4</value>
+    <value>Alphabetical</value>
   </data>
   <data name="galleryItem11.Caption" xml:space="preserve">
-    <value>Item5</value>
+    <value>By State</value>
   </data>
   <data name="galleryItem12.Caption" xml:space="preserve">
-    <value>Item6</value>
+    <value>Card</value>
   </data>
   <data name="biPrintPreview.Caption" xml:space="preserve">
     <value>Print Preview</value>
@@ -570,7 +596,6 @@
   <data name="barButtonItem2.Caption" xml:space="preserve">
     <value>البرامج</value>
   </data>
-  <assembly alias="DevExpress.Data.v24.1" name="DevExpress.Data.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
   <data name="barButtonItem2.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjI0LjEsIFZlcnNpb249MjQuMS43
@@ -609,7 +634,7 @@
     <value>Group4</value>
   </data>
   <data name="galleryItem13.Caption" xml:space="preserve">
-    <value>Item7</value>
+    <value>Item1</value>
   </data>
   <data name="resource.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -655,28 +680,28 @@
 </value>
   </data>
   <data name="galleryItem14.Caption" xml:space="preserve">
-    <value>Item8</value>
+    <value>Item2</value>
   </data>
   <data name="galleryItem15.Caption" xml:space="preserve">
-    <value>الوضعية المفصلة</value>
+    <value>Item3</value>
   </data>
   <data name="galleryItem16.Caption" xml:space="preserve">
-    <value>وضعية الاجتماع المركزة</value>
+    <value>Item4</value>
   </data>
   <data name="galleryItemGroup4.Caption" xml:space="preserve">
     <value>Group5</value>
   </data>
   <data name="galleryItem17.Caption" xml:space="preserve">
-    <value>وضعية حسب البلدية</value>
+    <value>Item5</value>
   </data>
   <data name="galleryItem18.Caption" xml:space="preserve">
-    <value>وضعية الاجتماع</value>
+    <value>Item6</value>
   </data>
   <data name="galleryItem19.Caption" xml:space="preserve">
-    <value>تجميع البلدبات</value>
+    <value>Item7</value>
   </data>
   <data name="galleryItem20.Caption" xml:space="preserve">
-    <value>تجميع الاستهلاك</value>
+    <value>Item8</value>
   </data>
   <data name="barButtonItem4.Caption" xml:space="preserve">
     <value>barButtonItem4</value>
@@ -697,31 +722,7 @@
     <value>Group6</value>
   </data>
   <data name="galleryItem21.Caption" xml:space="preserve">
-    <value>تجميع الدوائر</value>
-  </data>
-  <data name="resource.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjI0LjEsIFZlcnNpb249MjQuMS43
-        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
-        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAACIDAAAC77u/
-        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgi
-        IHZpZXdCb3g9IjAgMCAzMiAzMiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
-        MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3Bh
-        Y2U9InByZXNlcnZlIiBpZD0iTGF5ZXJfMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAg
-        MzIgMzIiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLlllbGxvd3tmaWxsOiNGRkIxMTU7fQoJ
-        LlJlZHtmaWxsOiNEMTFDMUM7fQoJLkJsYWNre2ZpbGw6IzcyNzI3Mjt9CgkuQmx1ZXtmaWxsOiMxMTc3
-        RDc7fQoJLldoaXRle2ZpbGw6I0ZGRkZGRjt9CgkuR3JlZW57ZmlsbDojMDM5QzIzO30KCS5zdDB7b3Bh
-        Y2l0eTowLjc1O30KCS5zdDF7b3BhY2l0eTowLjU7fQoJLnN0MntvcGFjaXR5OjAuMjU7fQoJLnN0M3tm
-        aWxsOiNGRkIxMTU7fQo8L3N0eWxlPg0KICA8ZyAvPg0KICA8ZyBpZD0iRWRpdEZpbHRlciI+DQogICAg
-        PHBvbHlnb24gcG9pbnRzPSIxMiwyMy4yIDE2LDE5LjIgMTYsMTYgMjYsNiAyNiwyIDIsMiAyLDYgMTIs
-        MTYgICIgY2xhc3M9IlllbGxvdyIgLz4NCiAgICA8cGF0aCBkPSJNMjcsMTlMMTcsMjlsLTQtNGwxMC0x
-        MEwyNywxOXogTTI4LDE4bDEuNy0xLjdjMC40LTAuNCwwLjQtMSwwLTEuM0wyNywxMi4zYy0wLjQtMC40
-        LTEtMC40LTEuMywwTDI0LDE0ICAgTDI4LDE4eiBNMTIsMjZ2NGg0TDEyLDI2eiIgY2xhc3M9IkJsdWUi
-        IC8+DQogIDwvZz4NCjwvc3ZnPgs=
-</value>
-  </data>
-  <data name="galleryItem22.Caption" xml:space="preserve">
-    <value>عرض مرئي</value>
+    <value>الوضعية المفصلة</value>
   </data>
   <data name="resource.SvgImage1" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -743,8 +744,8 @@
         aDRWNnoiIGNsYXNzPSJHcmVlbiIgLz4NCiAgPC9nPg0KPC9zdmc+Cw==
 </value>
   </data>
-  <data name="galleryItem23.Caption" xml:space="preserve">
-    <value>حسب محال التدخل</value>
+  <data name="galleryItem22.Caption" xml:space="preserve">
+    <value>وضعية الاجتماع المركزة</value>
   </data>
   <data name="resource.SvgImage2" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -786,8 +787,8 @@
         ZSIgLz4NCiAgPC9nPg0KPC9zdmc+Cw==
 </value>
   </data>
-  <data name="galleryItem24.Caption" xml:space="preserve">
-    <value>Item18</value>
+  <data name="galleryItem23.Caption" xml:space="preserve">
+    <value>وضعية حسب البلدية</value>
   </data>
   <data name="resource.SvgImage3" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -830,11 +831,8 @@
         OSwxNnoiIGNsYXNzPSJZZWxsb3ciIC8+DQogIDwvZz4NCjwvc3ZnPgs=
 </value>
   </data>
-  <data name="galleryItemGroup6.Caption" xml:space="preserve">
-    <value>Group7</value>
-  </data>
-  <data name="galleryItem25.Caption" xml:space="preserve">
-    <value>Item19</value>
+  <data name="galleryItem24.Caption" xml:space="preserve">
+    <value>وضعية الاجتماع</value>
   </data>
   <data name="resource.SvgImage4" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -854,8 +852,11 @@
         YWNrIiAvPg0KICA8L2c+DQo8L3N2Zz4L
 </value>
   </data>
-  <data name="galleryItem26.Caption" xml:space="preserve">
-    <value>Item20</value>
+  <data name="galleryItemGroup6.Caption" xml:space="preserve">
+    <value>Group7</value>
+  </data>
+  <data name="galleryItem25.Caption" xml:space="preserve">
+    <value>تجميع البلدبات</value>
   </data>
   <data name="resource.SvgImage5" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -875,6 +876,9 @@
         DQogICAgPHBhdGggZD0iTTE2LDhWNGgtMnY0aC0ydjEyaDJ2OGgydi04aDJWOEgxNnogTTE2LDE4aC0y
         di04aDJWMTh6IiBjbGFzcz0iQmxhY2siIC8+DQogIDwvZz4NCjwvc3ZnPgs=
 </value>
+  </data>
+  <data name="galleryItem26.Caption" xml:space="preserve">
+    <value>تجميع الاستهلاك</value>
   </data>
   <data name="resource.SvgImage6" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -897,6 +901,9 @@
         MS4xLDIuNywyLDYsMnM2LTAuOSw2LTJ2LTRDMzAsMTYuOSwyNy4zLDE2LDI0LDE2eiIgY2xhc3M9Illl
         bGxvdyIgLz4NCiAgPC9nPg0KPC9zdmc+Cw==
 </value>
+  </data>
+  <data name="galleryItem27.Caption" xml:space="preserve">
+    <value>تجميع الدوائر</value>
   </data>
   <data name="resource.SvgImage7" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -927,8 +934,8 @@
         Lz4NCiAgICA8L2c+DQogIDwvZz4NCjwvc3ZnPgs=
 </value>
   </data>
-  <data name="galleryItemGroup7.Caption" xml:space="preserve">
-    <value>Group8</value>
+  <data name="galleryItem28.Caption" xml:space="preserve">
+    <value>عرض مرئي</value>
   </data>
   <data name="resource.SvgImage8" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -947,6 +954,40 @@
         LDQuOC0xNUMzMCw5LjQsMjguMiw0LjIsMjUuMiwweiBNMjQsMThIMTR2LTZoMTBWMTh6IiBjbGFzcz0i
         Qmx1ZSIgLz4NCiAgPC9nPg0KPC9zdmc+Cw==
 </value>
+  </data>
+  <data name="galleryItemGroup7.Caption" xml:space="preserve">
+    <value>Group8</value>
+  </data>
+  <data name="galleryItem29.Caption" xml:space="preserve">
+    <value>حسب محال التدخل</value>
+  </data>
+  <data name="resource.SvgImage9" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v24.1" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjI0LjEsIFZlcnNpb249MjQuMS43
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAAMYCAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgeD0iMHB4IiB5PSIwcHgi
+        IHZpZXdCb3g9IjAgMCAzMiAzMiIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcv
+        MjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3Bh
+        Y2U9InByZXNlcnZlIiBpZD0iTGF5ZXJfMSIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAg
+        MzIgMzIiPg0KICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgoJLlJlZHtmaWxsOiNEMTFDMUM7fQoJLlll
+        bGxvd3tmaWxsOiNGRkIxMTU7fQoJLkJsdWV7ZmlsbDojMTE3N0Q3O30KCS5HcmVlbntmaWxsOiMwMzlD
+        MjM7fQoJLkJsYWNre2ZpbGw6IzcyNzI3Mjt9CgkuV2hpdGV7ZmlsbDojRkZGRkZGO30KCS5zdDB7b3Bh
+        Y2l0eTowLjU7fQoJLnN0MXtvcGFjaXR5OjAuNzU7fQoJLnN0MntvcGFjaXR5OjAuMzU7fQoJLnN0M3tv
+        cGFjaXR5OjAuNjU7fQo8L3N0eWxlPg0KICA8ZyBpZD0iU3RvY2siPg0KICAgIDxwYXRoIGQ9Ik00LDIy
+        aDR2Mkg0djRIMlY4aDJWMjJ6IE0yMCwxMFY2aC0ydjIwaDJWMTJoNHYtMkgyMHoiIGNsYXNzPSJSZWQi
+        IC8+DQogICAgPHBhdGggZD0iTTE2LDZ2MmgtNHYxMmgtMlYyaDJ2NEgxNnogTTI4LDE0VjRoLTJ2MTZo
+        MnYtNGg0di0ySDI4eiIgY2xhc3M9IkJsYWNrIiAvPg0KICA8L2c+DQo8L3N2Zz4L
+</value>
+  </data>
+  <data name="galleryItem30.Caption" xml:space="preserve">
+    <value>Item18</value>
+  </data>
+  <data name="galleryItem31.Caption" xml:space="preserve">
+    <value>Item19</value>
+  </data>
+  <data name="galleryItem32.Caption" xml:space="preserve">
+    <value>Item20</value>
   </data>
   <data name="barButtonItem8.Caption" xml:space="preserve">
     <value>المستخدمين</value>

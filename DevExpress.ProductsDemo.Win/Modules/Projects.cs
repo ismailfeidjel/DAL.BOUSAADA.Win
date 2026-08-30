@@ -1380,7 +1380,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             var saved = new Repositories.SavedFiltersRepository().GetAll().FirstOrDefault(f => f.Id == filterId);
             if (saved == null) return;
-
             try
             {
                 gridView1.ActiveFilterCriteria = CriteriaOperator.Parse(saved.FilterCriteria);
