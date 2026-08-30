@@ -1404,6 +1404,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         protected internal override void ButtonClick(string tag)
         {
+            XtraMessageBox.Show($"Tag received: {tag}");   // ← temporary, remove after testing
+
 
             if (tag != null && tag.StartsWith("SavedFilter:"))
             {
@@ -1474,6 +1476,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
         }
+
+        
+
+
 
         internal override void ShowModule(bool firstShow)
         {

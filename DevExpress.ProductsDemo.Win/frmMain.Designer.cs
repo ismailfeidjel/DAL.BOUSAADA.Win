@@ -453,7 +453,6 @@
             this.rgbiCurrentViewTasks.Gallery.ColumnCount = 4;
             resources.ApplyResources(galleryItemGroup1, "galleryItemGroup1");
             resources.ApplyResources(galleryItem1, "galleryItem1");
-            galleryItem1.Checked = true;
             galleryItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage")));
             galleryItem1.Tag = "SaveCurrentFilter";
             galleryItem1.Value = "SaveCurrentFilter";
@@ -462,6 +461,7 @@
             galleryItem2.Tag = "StatusFilterUnregistered";
             galleryItem2.Value = "StatusFilterUnregistered";
             resources.ApplyResources(galleryItem3, "galleryItem3");
+            galleryItem3.Checked = true;
             galleryItem3.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ToDoList;
             galleryItem3.Tag = "StatusFilterOngoing";
             galleryItem3.Value = "StatusFilterOngoing";
@@ -500,6 +500,7 @@
             this.rgbiCurrentViewTasks.Gallery.ItemCheckMode = DevExpress.XtraBars.Ribbon.Gallery.ItemCheckMode.SingleRadio;
             this.rgbiCurrentViewTasks.Gallery.RowCount = 2;
             this.rgbiCurrentViewTasks.Gallery.ShowItemText = true;
+            this.rgbiCurrentViewTasks.Gallery.InitDropDownGallery += new DevExpress.XtraBars.Ribbon.InplaceGalleryEventHandler(this.rgbiCurrentViewTasks_InitDropDownGallery);
             this.rgbiCurrentViewTasks.Id = 44;
             this.rgbiCurrentViewTasks.Name = "rgbiCurrentViewTasks";
             this.rgbiCurrentViewTasks.GalleryItemClick += new DevExpress.XtraBars.Ribbon.GalleryItemClickEventHandler(this.rgbiCurrentViewTasks_GalleryItemClick);

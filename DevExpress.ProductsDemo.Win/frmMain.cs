@@ -644,6 +644,34 @@ namespace DevExpress.ProductsDemo.Win
             using (var frm = new DevExpress.ProductsDemo.Win.Forms.frmUsers())
                 frm.ShowDialog(this);
         }
+
+        private void rgbiCurrentViewTasks_InitDropDownGallery(object sender, DevExpress.XtraBars.Ribbon.Gallery.InplaceGalleryEventArgs e)
+        {
+            e.PopupGallery.SynchWithInRibbonGallery = true;
+
+            e.PopupGallery.ItemClick += (s, args) =>
+            {
+                if (modulesNavigator.CurrentModule == null) return;
+
+                string caption = args.Item.Caption;
+
+                // Popup items don't preserve Tag reliably — resolve by matching Caption
+                // against the saved filter's Name instead.
+                var match = new Repositories.SavedFiltersRepository()
+                    .GetAll()
+                    .FirstOrDefault(f => f.Name == caption);
+
+                if (match != null)
+                {
+                    modulesNavigator.CurrentModule.ButtonClick($"SavedFilter:{match.Id}");
+                }
+                else
+                {
+                    // Not a saved filter — fall back to whatever the built-in status items use.
+                    modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", args.Item.Tag));
+                }
+            };
+        }
     }
 
 }
