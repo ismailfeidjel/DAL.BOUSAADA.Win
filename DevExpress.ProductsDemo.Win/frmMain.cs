@@ -96,6 +96,7 @@ namespace DevExpress.ProductsDemo.Win
                 var item = new XtraBars.Ribbon.GalleryItem();
                 item.Caption = f.Name;
                 item.Tag = $"SavedFilter:{f.Id}";
+                item.Value= $"SavedFilter:{f.Id}";
                 item.Checked = true;
                 item.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Card;
                 _savedFiltersGroup.Items.Add(item);
@@ -645,7 +646,7 @@ namespace DevExpress.ProductsDemo.Win
                 frm.ShowDialog(this);
         }
 
-        private void rgbiCurrentViewTasks_InitDropDownGallery(object sender, DevExpress.XtraBars.Ribbon.Gallery.InplaceGalleryEventArgs e)
+        private void rgbiCurrentViewTasks_InitDropDownGallery(object sender, InplaceGalleryEventArgs e)
         {
             e.PopupGallery.SynchWithInRibbonGallery = true;
 
