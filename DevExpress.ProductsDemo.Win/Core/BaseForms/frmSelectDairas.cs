@@ -16,7 +16,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
         public frmSelectDairas()
         {
             Text = "اختر الدوائر";
-            Width = 350;
+            Width = 450;
             Height = 450;
             RightToLeftLayout = true;
             StartPosition = FormStartPosition.CenterParent;

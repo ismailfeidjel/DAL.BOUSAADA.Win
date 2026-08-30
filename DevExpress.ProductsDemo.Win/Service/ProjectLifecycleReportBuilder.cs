@@ -57,6 +57,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             {
                 var data = getDataForProgram(program.Id);
                 var stageRows = ComputeStageRows(data);
+                if (stageRows.Count == 0) continue;
 
                 XtraReport titlePage = BuildTitlePage(titleTemplatePath, program.Name);
                 titlePage.CreateDocument();

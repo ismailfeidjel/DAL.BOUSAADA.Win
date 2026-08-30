@@ -1,4 +1,4 @@
-﻿namespace DevExpress.ProductsDemo.Win.Core.BaseForms
+﻿namespace DevExpress.ProductsDemo.Win.Forms
 {
-  
+
 }

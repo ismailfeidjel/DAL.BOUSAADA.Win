@@ -581,6 +581,7 @@
     <Compile Include="Domain\LotGridModel.cs" />
     <Compile Include="Domain\Project.cs" />
     <Compile Include="Domain\ProjectGridModel.cs" />
+    <Compile Include="Domain\SavedFilterItem.cs" />
     <Compile Include="Domain\UserRoles.cs" />
     <Compile Include="Forms\frmeditproject.cs">
       <SubType>Form</SubType>
@@ -805,6 +806,7 @@
     <Compile Include="Repositories\LotRepository.cs" />
     <Compile Include="Repositories\ProgramsRepository.cs" />
     <Compile Include="Repositories\ProjectRepository.cs" />
+    <Compile Include="Repositories\SavedFiltersRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Sales.Model\BusinessObjects.cs" />
     <Compile Include="Sales.Model\Interfaces.cs" />

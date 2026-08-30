@@ -449,13 +449,14 @@
             resources.ApplyResources(galleryItemGroup1, "galleryItemGroup1");
             resources.ApplyResources(galleryItem1, "galleryItem1");
             galleryItem1.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ListByDate;
-            galleryItem1.Tag = "StatusFilterRegistered";
-            galleryItem1.Value = "StatusFilterRegistered";
+            galleryItem1.Tag = "SaveCurrentFilter";
+            galleryItem1.Value = "SaveCurrentFilter";
             resources.ApplyResources(galleryItem2, "galleryItem2");
             galleryItem2.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Today1;
             galleryItem2.Tag = "StatusFilterUnregistered";
             galleryItem2.Value = "StatusFilterUnregistered";
             resources.ApplyResources(galleryItem3, "galleryItem3");
+            galleryItem3.Checked = true;
             galleryItem3.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ToDoList;
             galleryItem3.Tag = "StatusFilterOngoing";
             galleryItem3.Value = "StatusFilterOngoing";
@@ -476,7 +477,6 @@
             galleryItem7.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.List;
             galleryItem7.Tag = "TaskSimpleList";
             resources.ApplyResources(galleryItem8, "galleryItem8");
-            galleryItem8.Checked = true;
             galleryItem8.Enabled = false;
             galleryItem8.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Deferred;
             galleryItem8.Tag = "TaskDeferred";
@@ -812,9 +812,7 @@
             galleryItem26.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage5")));
             galleryItem26.Tag = "PrintFinancialConsumptionReport";
             galleryItem26.Value = "PrintFinancialConsumptionReport";
-            resources.ApplyResources(galleryItem27, "galleryItem27");
             galleryItem27.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage6")));
-            resources.ApplyResources(galleryItem28, "galleryItem28");
             galleryItem28.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage7")));
             galleryItem28.Tag = "btnExportToPowerPoint_Click";
             galleryItem28.Value = "btnExportToPowerPoint_Click";
@@ -824,13 +822,9 @@
             galleryItem27,
             galleryItem28});
             resources.ApplyResources(galleryItemGroup7, "galleryItemGroup7");
-            resources.ApplyResources(galleryItem29, "galleryItem29");
             galleryItem29.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage8")));
             galleryItem29.Tag = "PrintDomainSummary";
             galleryItem29.Value = "PrintDomainSummary";
-            resources.ApplyResources(galleryItem30, "galleryItem30");
-            resources.ApplyResources(galleryItem31, "galleryItem31");
-            resources.ApplyResources(galleryItem32, "galleryItem32");
             galleryItemGroup7.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {
             galleryItem29,
             galleryItem30,

@@ -1,4 +1,5 @@
 ﻿using DevExpress.Data.Filtering;
+using DevExpress.Data.Linq.Helpers;
 using DevExpress.ProductsDemo.Win.Domain;
 using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.ProductsDemo.Win.Repositories;
@@ -9,6 +10,7 @@ using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -19,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Modules
@@ -1353,12 +1356,68 @@ namespace DevExpress.ProductsDemo.Win.Modules
             ["ClearFilter"] = "",
         };
 
+        //-------------------------------------------------------------------------------------------------------------------
+        private void SaveCurrentFilterAsNew()
+        {
+            var criteria = gridView1.ActiveFilterCriteria;
+            if (criteria == null)
+            {
+                XtraMessageBox.Show("لا يوجد فلتر نشط. أنشئ فلتراً في الجدول أولاً.", "تنبيه",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (var dlg = new SimpleInputDialog("حفظ الفلتر", "اسم الفلتر:"))
+            {
+                if (dlg.ShowDialog() != DialogResult.OK || string.IsNullOrWhiteSpace(dlg.InputText)) return;
+
+                new Repositories.SavedFiltersRepository().Insert(dlg.InputText, criteria.ToString());
+            }
+
+            (OwnerForm as frmMain)?.RefreshSavedFilterGallery();
+        }
+        private void ApplySavedFilter(int filterId)
+        {
+            var saved = new Repositories.SavedFiltersRepository().GetAll().FirstOrDefault(f => f.Id == filterId);
+            if (saved == null) return;
+
+            try
+            {
+                gridView1.ActiveFilterCriteria = CriteriaOperator.Parse(saved.FilterCriteria);
+            }
+            catch
+            {
+                gridView1.ActiveFilterString = saved.FilterCriteria; // fallback if parsing fails
+            }
+
+            // Force the existing sibling-restore logic to run, since setting the
+            // criteria in code isn't guaranteed to raise ColumnFilterChanged reliably.
+            gridView1_ColumnFilterChanged(gridView1, EventArgs.Empty);
+        }
+
+
+
+
+
+        //---------------------------------------------------------------------------------------------------
+
 
 
         protected internal override void ButtonClick(string tag)
         {
+
+            if (tag != null && tag.StartsWith("SavedFilter:"))
+            {
+                if (int.TryParse(tag.Substring("SavedFilter:".Length), out int filterId))
+                    ApplySavedFilter(filterId);
+                return;
+            }
+
             switch (tag)
             {
+                case "SaveCurrentFilter":
+                    SaveCurrentFilterAsNew();
+                    return; // don't fall through to the filter-label logic below
                 case "PrintGrid":
                     PrintCurrentGridReport();
                     break;
@@ -1413,6 +1472,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     break;
             }
             _currentFilterLabel = FilterTagLabels.TryGetValue(tag, out string label) ? label : "";
+
 
         }
 
@@ -1618,6 +1678,15 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         private void btnExportToPowerPoint_Click()
         {
+            List<int> selectedDairaIds;
+
+            using (var dlg = new frmSelectDairas())
+            {
+                if (dlg.ShowDialog(this) != DialogResult.OK)
+                    return; // user cancelled — don't generate anything
+
+                selectedDairaIds = dlg.SelectedDairaIds;
+            }
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
                 dialog.Filter = "PowerPoint Presentation|*.pptx";
@@ -1626,19 +1695,36 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var programs = GetPrograms().Cast<ProgramLookupItem>().ToList();
-
-                    var report = ProjectLifecycleReportBuilder.Build(gridView1, programs, programId =>
+                    try
                     {
-                        var all = _lotRepo.GetGridData();
-                        return all.Where(r => r.ProgramId == programId /*&& (r.DairaId == 2 || r.DairaId == 8)*/).ToList();
-                    });
+                        var programs = GetPrograms().Cast<ProgramLookupItem>().ToList();
 
-                    // 2. Export to PPTX
-                    PowerPointReportExporter.ExportReportToPptx(report, dialog.FileName);
 
-                    // 3. Optionally open the file automatically for the user
-                    System.Diagnostics.Process.Start(dialog.FileName);
+
+                        var report = ProjectLifecycleReportBuilder.Build(gridView1, programs, programId =>
+                        {
+                            var all = _lotRepo.GetGridData();
+                            return all.Where(r =>
+                                r.ProgramId == programId &&
+                                (selectedDairaIds.Count == 0 || (r.DairaId.HasValue && selectedDairaIds.Contains(r.DairaId.Value)))
+                            ).ToList();
+                        });
+
+                        // 2. Export to PPTX
+                        PowerPointReportExporter.ExportReportToPptx(report, dialog.FileName);
+
+                        // 3. Optionally open the file automatically for the user
+                        System.Diagnostics.Process.Start(dialog.FileName);
+                    }
+                    catch (Exception ex)
+                    {
+                        XtraMessageBox.Show(
+                            $"فشل التصدير إلى PowerPoint.\n\n{ex.Message}",
+                            "خطأ",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+
+                    }
                 }
             }
         }

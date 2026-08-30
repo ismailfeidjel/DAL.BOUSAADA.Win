@@ -14,6 +14,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraNavBar;
 using DevExpress.XtraPrinting;
+using DevExpress.XtraReports.ReportGallery;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraSplashScreen;
@@ -23,11 +24,14 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using GalleryItem = DevExpress.XtraBars.Ribbon.GalleryItem;
 
 namespace DevExpress.ProductsDemo.Win
 {
     public partial class frmMain : RibbonForm
     {
+        private GalleryItemGroup _savedFiltersGroup;
+
         ModulesNavigator modulesNavigator;
         ZoomManager _zoomManager;
         List<BarItem> AllowCustomizationMenuList = new List<BarItem>();
@@ -48,6 +52,7 @@ namespace DevExpress.ProductsDemo.Win
             TaskbarHelper.InitDemoJumpList(TaskbarAssistant.Default, this);
             InitializeComponent();
             RibbonButtonsInitialize();
+            SetupSavedFiltersGalleryGroup();
             SetupProgramSelectorRibbon();
             modulesNavigator = new ModulesNavigator(ribbonControl1, pcMain);
             _zoomManager = new ZoomManager(ribbonControl1, modulesNavigator, beiZoom);
@@ -70,6 +75,30 @@ namespace DevExpress.ProductsDemo.Win
                 this.Height = 700;
                 links = new NavBarItem[] { nbiGrid, nbiScheduler, nbiSpreadsheet, nbiWord, nbiPdf };
                 MainFormHelper.TakeAllScreens(TakeModule, links.Length, this, pcMain, null, demoName: "DevExpress.ProductsDemo.Win");
+            }
+        }
+
+        private void SetupSavedFiltersGalleryGroup()
+        {
+            _savedFiltersGroup = new GalleryItemGroup();
+            _savedFiltersGroup.Caption = "الفلاتر المحفوظة";
+            rgbiCurrentViewTasks.Gallery.Groups.Add(_savedFiltersGroup);
+            RefreshSavedFilterGallery();
+        }
+        public void RefreshSavedFilterGallery()
+        {
+            if (_savedFiltersGroup == null) return;
+
+            _savedFiltersGroup.Items.Clear();
+
+            foreach (var f in new Repositories.SavedFiltersRepository().GetAll())
+            {
+                var item = new XtraBars.Ribbon.GalleryItem();
+                item.Caption = f.Name;
+                item.Tag = $"SavedFilter:{f.Id}";
+                item.Checked = true;
+                item.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Card;
+                _savedFiltersGroup.Items.Add(item);
             }
         }
 
