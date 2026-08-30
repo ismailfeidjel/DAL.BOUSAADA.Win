@@ -84,7 +84,21 @@ namespace DevExpress.ProductsDemo.Win
             _savedFiltersGroup.Caption = "الفلاتر المحفوظة";
             rgbiCurrentViewTasks.Gallery.Groups.Add(_savedFiltersGroup);
             RefreshSavedFilterGallery();
+
+            bbiManageSavedFilters = new BarButtonItem(ribbonControl1.Manager, "إدارة الفلاتر المحفوظة...");
+            bbiManageSavedFilters.ItemClick += BbiManageSavedFilters_ItemClick;
+
         }
+
+        private void BbiManageSavedFilters_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            using (var frm = new Core.BaseForms.frmManageSavedFilters())
+            {
+                frm.ShowDialog(this);
+            }
+            RefreshSavedFilterGallery();
+        }
+
         public void RefreshSavedFilterGallery()
         {
             if (_savedFiltersGroup == null) return;
@@ -645,19 +659,26 @@ namespace DevExpress.ProductsDemo.Win
             using (var frm = new DevExpress.ProductsDemo.Win.Forms.frmUsers())
                 frm.ShowDialog(this);
         }
+        private BarButtonItem bbiManageSavedFilters;
+
+
+
 
         private void rgbiCurrentViewTasks_InitDropDownGallery(object sender, InplaceGalleryEventArgs e)
         {
             e.PopupGallery.SynchWithInRibbonGallery = true;
+
+            bool alreadyAdded = e.PopupGallery.GalleryDropDown.ItemLinks
+                .Cast<BarItemLink>()
+                .Any(l => l.Item == bbiManageSavedFilters);
+            if (!alreadyAdded)
+                e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiManageSavedFilters);
 
             e.PopupGallery.ItemClick += (s, args) =>
             {
                 if (modulesNavigator.CurrentModule == null) return;
 
                 string caption = args.Item.Caption;
-
-                // Popup items don't preserve Tag reliably — resolve by matching Caption
-                // against the saved filter's Name instead.
                 var match = new Repositories.SavedFiltersRepository()
                     .GetAll()
                     .FirstOrDefault(f => f.Name == caption);
@@ -668,7 +689,6 @@ namespace DevExpress.ProductsDemo.Win
                 }
                 else
                 {
-                    // Not a saved filter — fall back to whatever the built-in status items use.
                     modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", args.Item.Tag));
                 }
             };

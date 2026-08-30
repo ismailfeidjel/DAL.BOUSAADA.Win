@@ -143,18 +143,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         private void ApplyProjectLevelFilter(Func<LotGridModel, bool> lotPredicate)
         {
             _currentLotFilter = lotPredicate;
@@ -1348,11 +1336,11 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         private static readonly Dictionary<string, string> FilterTagLabels = new Dictionary<string, string>
         {
-            ["StatusFilterClosed"] = "الحالة: مغلقة",
-            ["StatusFilterOverdueActive"] = "الحالة: آجال الانجاز منتهية",
-            ["StatusFilterOngoing"] = "الحالة: جارية",
-            ["StatusFilterUnregistered"] = "الحالة: غير مسجلة",
-            ["StatusFilterRegistered"] = "الحالة: غير منطلقة",
+            ["StatusFilterClosed"] = " مغلقة",
+            ["StatusFilterOverdueActive"] = " آجال الانجاز منتهية",
+            ["StatusFilterOngoing"] = " جارية",
+            ["StatusFilterUnregistered"] = " غير مسجلة",
+            ["StatusFilterRegistered"] = " غير منطلقة",
             ["ClearFilter"] = "",
         };
 
@@ -1389,6 +1377,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 gridView1.ActiveFilterString = saved.FilterCriteria; // fallback if parsing fails
             }
 
+            _currentFilterLabel = saved.Name; // ← show the saved filter's name in cellFilterText
+
             // Force the existing sibling-restore logic to run, since setting the
             // criteria in code isn't guaranteed to raise ColumnFilterChanged reliably.
             gridView1_ColumnFilterChanged(gridView1, EventArgs.Empty);
@@ -1404,7 +1394,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         protected internal override void ButtonClick(string tag)
         {
-            XtraMessageBox.Show($"Tag received: {tag}");   // ← temporary, remove after testing
+         //   XtraMessageBox.Show($"Tag received: {tag}");   
 
 
             if (tag != null && tag.StartsWith("SavedFilter:"))
@@ -1467,7 +1457,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     ApplyProjectLevelFilter(r => r.ProjectStatusId == 2);
                     break;
                 case "ClearFilter":
-                    //  gridView1.ActiveFilterString = "";
                     ApplyProjectLevelFilter(null);
 
                     break;

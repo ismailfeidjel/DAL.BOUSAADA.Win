@@ -528,6 +528,9 @@
     <Compile Include="Core\BaseForms\frmLookupBase.Designer.cs">
       <DependentUpon>frmLookupBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\BaseForms\frmManageSavedFilters.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Core\BaseForms\frmLookupBaseDesignerSurrogate.cs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -850,6 +853,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Core\BaseForms\frmLookupBase.resx">
       <DependentUpon>frmLookupBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\BaseForms\frmManageSavedFilters.resx">
+      <DependentUpon>frmManageSavedFilters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Core\BaseForms\frmLookupBaseDesignerSurrogate.cs.resx">
       <DependentUpon>frmLookupBaseDesignerSurrogate.cs.cs</DependentUpon>

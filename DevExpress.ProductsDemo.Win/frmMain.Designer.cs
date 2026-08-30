@@ -461,7 +461,6 @@
             galleryItem2.Tag = "StatusFilterUnregistered";
             galleryItem2.Value = "StatusFilterUnregistered";
             resources.ApplyResources(galleryItem3, "galleryItem3");
-            galleryItem3.Checked = true;
             galleryItem3.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.ToDoList;
             galleryItem3.Tag = "StatusFilterOngoing";
             galleryItem3.Value = "StatusFilterOngoing";
@@ -474,6 +473,7 @@
             galleryItem5.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.important;
             galleryItem5.Tag = "TaskPrioritized";
             resources.ApplyResources(galleryItem6, "galleryItem6");
+            galleryItem6.Checked = true;
             galleryItem6.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Overdue;
             galleryItem6.Tag = "StatusFilterOverdueActive";
             galleryItem6.Value = "StatusFilterOverdueActive";

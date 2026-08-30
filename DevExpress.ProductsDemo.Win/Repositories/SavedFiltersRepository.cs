@@ -47,6 +47,22 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                 }
             }
         }
+        public void Update(int id, string name)
+        {
+            using (var conn = new DbHelper().GetConnection())
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE SavedFilters SET Name = @name WHERE Id = @id";
+                    var p1 = cmd.CreateParameter(); p1.ParameterName = "@name"; p1.Value = name;
+                    var p2 = cmd.CreateParameter(); p2.ParameterName = "@id"; p2.Value = id;
+                    cmd.Parameters.Add(p1);
+                    cmd.Parameters.Add(p2);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
 
         public void Delete(int id)
         {
