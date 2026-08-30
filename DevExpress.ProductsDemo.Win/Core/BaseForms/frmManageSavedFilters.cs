@@ -7,13 +7,17 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
+
 namespace DevExpress.ProductsDemo.Win.Core.BaseForms
 {
     public partial class frmManageSavedFilters : XtraForm
     {
+        private readonly string _iconsFolder =
+    System.IO.Path.Combine(Application.StartupPath, "Resources", "FilterIcons");
         private System.ComponentModel.IContainer components = null;
         private readonly SavedFiltersRepository _repo = new SavedFiltersRepository();
         private List<SavedFilterItem> _data;
+        protected SimpleButton btnChooseIcon;
         private readonly HashSet<int> _dirtyIds = new HashSet<int>();
         public frmManageSavedFilters()
         {
@@ -32,6 +36,10 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             colName.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             colName.OptionsColumn.AllowEdit = true;
 
+            var colIcon = gridView.Columns.AddVisible("IconName", "الأيقونة");
+            colIcon.Width = 100;
+            colIcon.OptionsColumn.AllowEdit = false;
+
             gridView.OptionsView.ShowIndicator = true;
             gridView.CellValueChanged += GridView_CellValueChanged;
 
@@ -39,8 +47,30 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             btnDelete.Click += BtnDelete_Click;
             btnSave.Click += BtnSave_Click;
             btnClose.Click += (s, e) => Close();
+            btnChooseIcon.Click += BtnChooseIcon_Click;
 
             LoadData();
+        }
+        private void BtnChooseIcon_Click(object sender, EventArgs e)
+        {
+            var item = gridView.GetFocusedRow() as SavedFilterItem;
+            if (item == null)
+            {
+                XtraMessageBox.Show("الرجاء تحديد فلتر أولاً.", "تنبيه",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (var picker = new frmIconPicker(_iconsFolder, item.IconName))
+            {
+                if (picker.ShowDialog(this) == DialogResult.OK)
+                {
+                    item.IconName = picker.SelectedIconName;
+                    _repo.UpdateIcon(item.Id, item.IconName);
+                    gridView.RefreshData();
+                    SetStatus("تم تحديث الأيقونة", Color.Green);
+                }
+            }
         }
         private void LoadData()
         {
@@ -141,6 +171,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.bbiNewTask = new DevExpress.XtraBars.BarButtonItem();
+            this.btnChooseIcon = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl)).BeginInit();
@@ -202,6 +233,7 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             // 
             // sidePanel1
             // 
+            this.sidePanel1.Controls.Add(this.btnChooseIcon);
             this.sidePanel1.Controls.Add(this.btnSave);
             this.sidePanel1.Controls.Add(this.btnClose);
             this.sidePanel1.Controls.Add(this.btnRefresh);
@@ -331,6 +363,20 @@ namespace DevExpress.ProductsDemo.Win.Core.BaseForms
             // bbiNewTask
             // 
             this.bbiNewTask.Name = "bbiNewTask";
+            // 
+            // btnChooseIcon
+            // 
+            this.btnChooseIcon.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnChooseIcon.Appearance.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChooseIcon.Appearance.Options.UseFont = true;
+            this.btnChooseIcon.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.btnChooseIcon.Location = new System.Drawing.Point(489, 3);
+            this.btnChooseIcon.Name = "btnChooseIcon";
+            this.btnChooseIcon.PaintStyle = DevExpress.XtraEditors.Controls.PaintStyles.Light;
+            this.btnChooseIcon.Size = new System.Drawing.Size(75, 48);
+            this.btnChooseIcon.TabIndex = 6;
+            this.btnChooseIcon.Text = "icon";
             // 
             // frmManageSavedFilters
             // 

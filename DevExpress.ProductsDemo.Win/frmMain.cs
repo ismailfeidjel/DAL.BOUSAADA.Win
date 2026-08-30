@@ -104,6 +104,8 @@ namespace DevExpress.ProductsDemo.Win
             if (_savedFiltersGroup == null) return;
 
             _savedFiltersGroup.Items.Clear();
+            string iconsFolder = Path.Combine(Application.StartupPath, "Resources", "FilterIcons");
+
 
             foreach (var f in new Repositories.SavedFiltersRepository().GetAll())
             {
@@ -112,7 +114,22 @@ namespace DevExpress.ProductsDemo.Win
                 item.Tag = $"SavedFilter:{f.Id}";
                 item.Value= $"SavedFilter:{f.Id}";
                 item.Checked = true;
-                item.ImageOptions.SvgImage = global::DevExpress.ProductsDemo.Win.Properties.Resources.Card;
+                DevExpress.Utils.Svg.SvgImage icon = null;
+                if (!string.IsNullOrEmpty(f.IconName))
+                {
+                    string path = Path.Combine(iconsFolder, f.IconName);
+                    if (File.Exists(path))
+                    {
+                        try
+                        {
+                            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                                icon = DevExpress.Utils.Svg.SvgImage.FromStream(fs);
+                        }
+                        catch { /* fall back to default below */ }
+                    }
+                }
+
+                item.ImageOptions.SvgImage = icon ?? Properties.Resources.Card;
                 _savedFiltersGroup.Items.Add(item);
             }
         }
@@ -696,3 +713,4 @@ namespace DevExpress.ProductsDemo.Win
     }
 
 }
+//ALTER TABLE SavedFilters ADD IconName NVARCHAR(100) NULL;

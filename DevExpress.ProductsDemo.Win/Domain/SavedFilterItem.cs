@@ -5,5 +5,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
         public string FilterCriteria { get; set; }
+        public string IconName { get; set; } // e.g. "Star.svg"
+
     }
 }

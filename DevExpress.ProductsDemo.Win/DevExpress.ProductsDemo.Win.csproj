@@ -516,6 +516,9 @@
     <Compile Include="Core\BaseForms\frmDomains .cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Core\BaseForms\frmIconPicker .cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Core\BaseForms\FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
