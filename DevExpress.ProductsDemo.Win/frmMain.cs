@@ -80,14 +80,16 @@ namespace DevExpress.ProductsDemo.Win
 
         private void SetupSavedFiltersGalleryGroup()
         {
-            _savedFiltersGroup = new GalleryItemGroup();
-            _savedFiltersGroup.Caption = "الفلاتر المحفوظة";
-            rgbiCurrentViewTasks.Gallery.Groups.Add(_savedFiltersGroup);
+            // Target the very first existing group (on top) instead of adding a new one
+            _savedFiltersGroup = rgbiCurrentViewTasks.Gallery.Groups[0];
+
+            // Optional: Rename the group if desired
+            // _savedFiltersGroup.Caption = "الفلاتر المحفوظة";
+
             RefreshSavedFilterGallery();
 
             bbiManageSavedFilters = new BarButtonItem(ribbonControl1.Manager, "إدارة الفلاتر المحفوظة...");
             bbiManageSavedFilters.ItemClick += BbiManageSavedFilters_ItemClick;
-
         }
 
         private void BbiManageSavedFilters_ItemClick(object sender, ItemClickEventArgs e)
@@ -103,17 +105,25 @@ namespace DevExpress.ProductsDemo.Win
         {
             if (_savedFiltersGroup == null) return;
 
-            _savedFiltersGroup.Items.Clear();
+            // Keep the first default item (Index 0) and remove previously generated filters
+            while (_savedFiltersGroup.Items.Count > 1)
+            {
+                _savedFiltersGroup.Items.RemoveAt(1);
+            }
+
             string iconsFolder = Path.Combine(Application.StartupPath, "Resources", "FilterIcons");
 
+            // Track where to insert the new items (starting at the second position)
+            int insertIndex = 1;
 
             foreach (var f in new Repositories.SavedFiltersRepository().GetAll())
             {
                 var item = new XtraBars.Ribbon.GalleryItem();
                 item.Caption = f.Name;
                 item.Tag = $"SavedFilter:{f.Id}";
-                item.Value= $"SavedFilter:{f.Id}";
+                item.Value = $"SavedFilter:{f.Id}";
                 item.Checked = true;
+
                 DevExpress.Utils.Svg.SvgImage icon = null;
                 if (!string.IsNullOrEmpty(f.IconName))
                 {
@@ -130,10 +140,12 @@ namespace DevExpress.ProductsDemo.Win
                 }
 
                 item.ImageOptions.SvgImage = icon ?? Properties.Resources.Card;
-                _savedFiltersGroup.Items.Add(item);
+
+                // Insert the item at the targeted position
+                _savedFiltersGroup.Items.Insert(insertIndex, item);
+                insertIndex++;
             }
         }
-
 
         private void SetupProgramSelectorRibbon()
         {
@@ -208,13 +220,6 @@ namespace DevExpress.ProductsDemo.Win
             InitBarButtonItem(bbiDeleteContact, TagResources.ContactDelete, Properties.Resources.DeleteContactDescription);
             InitBarButtonItem(bbiFlipLayout, TagResources.FlipLayout, Properties.Resources.FlipLayoutDescription);
             InitGalleryItem(rgbiCurrentViewTasks.Gallery.Groups[0].Items[0], TagResources.TaskList, Properties.Resources.TaskListDescription);
-            InitGalleryItem(rgbiCurrentViewTasks.Gallery.Groups[0].Items[1], TagResources.TaskToDoList, Properties.Resources.TaskToDoListDescription);
-            InitGalleryItem(rgbiCurrentViewTasks.Gallery.Groups[0].Items[2], TagResources.TaskCompleted, Properties.Resources.TaskCompletedDescription);
-            InitGalleryItem(rgbiCurrentViewTasks.Gallery.Groups[0].Items[3], TagResources.TaskToday, Properties.Resources.TaskTodayDescription);
-            InitGalleryItem(rgbiCurrentViewTasks.Gallery.Groups[0].Items[4], TagResources.TaskPrioritized, Properties.Resources.TaskPrioritizedDescription);
-            InitGalleryItem(rgbiCurrentViewTasks.Gallery.Groups[0].Items[5], TagResources.TaskOverdue, Properties.Resources.TaskOverdueDescription);
-            InitGalleryItem(rgbiCurrentViewTasks.Gallery.Groups[0].Items[6], TagResources.TaskSimpleList, Properties.Resources.TaskSimpleListDescription);
-            InitGalleryItem(rgbiCurrentViewTasks.Gallery.Groups[0].Items[7], TagResources.TaskDeferred, Properties.Resources.TaskDeferredDescription);
             InitGalleryItem(rgbiCurrentView.Gallery.Groups[0].Items[0], TagResources.ContactList, Properties.Resources.ContactListDescription);
             InitGalleryItem(rgbiCurrentView.Gallery.Groups[0].Items[1], TagResources.ContactAlphabetical, Properties.Resources.ContactAlphabeticalDescription);
             InitGalleryItem(rgbiCurrentView.Gallery.Groups[0].Items[2], TagResources.ContactByState, Properties.Resources.ContactByStateDescription);
@@ -713,4 +718,3 @@ namespace DevExpress.ProductsDemo.Win
     }
 
 }
-//ALTER TABLE SavedFilters ADD IconName NVARCHAR(100) NULL;
