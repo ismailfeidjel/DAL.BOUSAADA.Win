@@ -1469,6 +1469,7 @@
     <Folder Include="DataBase\Reports\Templates\" />
     <Folder Include="Documents\" />
     <Folder Include="NewFolder1\" />
+    <Folder Include="Resources\FilterIcons\" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
