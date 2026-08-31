@@ -636,6 +636,11 @@ namespace DevExpress.ProductsDemo.Win
 
         private void barButtonItem2_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if (!CurrentSession.IsAdmin)
+            {
+                DialogHelper.Warning("ليس لك صلاحية التعديل.", "غير مسموح");
+                return;
+            }
             using (var frm = new DevExpress.ProductsDemo.Win.Forms.frmPrograms())
             {
                 frm.ShowDialog(this);
