@@ -819,6 +819,7 @@
     <Compile Include="Sales.Model\OleDataProvider.cs" />
     <Compile Include="Sales.Model\SalesForecastMaker.cs" />
     <Compile Include="Sales.Model\Utils.cs" />
+    <Compile Include="Service\DairaSummaryReportBuilder.cs" />
     <Compile Include="Service\CommuneSummaryReportBuilder.cs" />
     <Compile Include="Service\DomainSummaryReportBuilder.cs" />
     <Compile Include="Service\GridReportBuilder.cs" />
