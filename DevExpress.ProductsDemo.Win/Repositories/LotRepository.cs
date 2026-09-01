@@ -27,6 +27,9 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             p.operation_number,
             p.operation_name,
             pr.name AS program,
+            pr.type  AS programtype,
+            pr.year  AS programyear,
+pr.name  AS programname,
             
             p.program_id,
             p.daira_id,
@@ -129,6 +132,9 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                             OperationName = $"{rd["operation_name"]}{'\u001F'} {rd["lot_name"]}",
 
                             Program = rd["program"]?.ToString(),
+                            ProgramType = rd["programtype"]?.ToString(),
+                            ProgramYear = rd["programyear"]?.ToString(),
+                            ProgramName = rd["programname"]?.ToString(),
                             Daira = rd["daira"]?.ToString(),
                             Commune = rd["commune"]?.ToString(),
                             Domain = rd["domain_name"]?.ToString(),

@@ -1,4 +1,6 @@
-﻿using DevExpress.XtraReports.UI;
+﻿using DevExpress.Diagram.Core.Native.Generation;
+using DevExpress.ProductsDemo.Win.Domain;
+using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +11,9 @@ namespace DevExpress.ProductsDemo.Win.Services
 {
     public class DairaSummaryRow
     {
+        public string ProgramType { get; set; }
+        public string ProgramYear { get; set; }
+        public string ProgramName { get; set; }
         public string Daira { get; set; }
         public decimal AnnouncedAmount { get; set; }
         public decimal ConsumedAmount { get; set; }   
@@ -25,10 +30,42 @@ namespace DevExpress.ProductsDemo.Win.Services
        {
             "قالب_تقرير_الدائرة",
         };
-
-        public static XtraReport Build(List<LotGridModel> data, string programName)
+        // Removed the programs list parameter. Now it only relies on allData.
+        public static XtraReport Build(List<LotGridModel> allData)
         {
-            var rows = ComputeDairaRows(data);
+            // Group directly by the program fields available in the grid model, along with the Daira
+            var rows = allData
+                .GroupBy(r => new {
+                    r.ProgramType, // Ensure these properties exist in your LotGridModel
+                    r.ProgramYear,
+                    r.ProgramName,
+                    r.Daira
+                })
+                .Select(g =>
+                {
+                    var distinctProjectIds = g.Select(r => r.ProjectId).Distinct().ToList();
+
+                    int closedCount = g.Where(r => r.ProjectStatusId == 7)
+                                       .Select(r => r.ProjectId).Distinct().Count();
+
+                    return new DairaSummaryRow
+                    {
+                        // Extract directly from the Group Key
+                        ProgramType = g.Key.ProgramType ?? "",
+                        ProgramYear = g.Key.ProgramYear ?? "",
+                        ProgramName = g.Key.ProgramName ?? "",
+                        Daira = g.Key.Daira ?? "",
+
+                        AnnouncedAmount = g.Sum(r => r.LotBudget),
+                        AnnouncedCount = distinctProjectIds.Count,
+                        ClosedCount = closedCount,
+                        ConsumedAmount = g.Sum(r => r.ConsumedAmount)
+                    };
+                })
+                .OrderBy(r => r.ProgramType)
+                .ThenByDescending(r => r.ProgramYear)
+                .ThenBy(r => r.Daira)
+                .ToList();
 
             var partReports = new List<XtraReport>();
             foreach (string key in PartTemplateKeys)
@@ -38,16 +75,16 @@ namespace DevExpress.ProductsDemo.Win.Services
                     throw new InvalidOperationException($"القالب غير موجود: {path}\nيرجى إنشائه أولاً من تبويب التقارير.");
 
                 XtraReport partReport = XtraReport.FromFile(path, true);
+
                 GridReportBuilder.EnsureSafeMargins(partReport);
+
                 partReport.Landscape = false;
                 partReport.DataSource = rows;
-                ApplyProgramTitle(partReport, programName);
-                partReport.CreateDocument();
 
+                partReport.CreateDocument();
                 partReports.Add(partReport);
             }
 
-            // Merge every part's generated pages into the first report's document
             XtraReport combined = partReports[0];
             for (int i = 1; i < partReports.Count; i++)
             {
@@ -61,51 +98,8 @@ namespace DevExpress.ProductsDemo.Win.Services
 
             return combined;
         }
-        private static void ApplyProgramTitle(XtraReport report, string programName)
-        {
-            var control = report.FindControl("cellProgramName", true); // the title label in your ReportHeader
-            if (control is XRLabel lbl)
-                lbl.Text = programName;
-        }
-        internal static List<DairaSummaryRow> ComputeDairaRows(List<LotGridModel> data)
-        {
-            var result = new List<DairaSummaryRow>();
-
-            var byDaira = data.GroupBy(r => new { r.Daira, r.Program });
-
-            foreach (var g in byDaira.OrderBy(x => x.Key.Daira).ThenBy(x => x.Key.Program))
-            {
-                var rows = g.ToList();                                    // all LOT rows — used for money sums
-                var projects = rows.GroupBy(r => r.ProjectId)
-                                    .Select(pg => pg.First())
-                                    .ToList();                              // one row per PROJECT — used for all counts
-
-                int Count(Func<LotGridModel, bool> predicate) => projects.Count(predicate);
-
-                int announced = projects.Count;
-                int received = Count(r => r.AdministrativeProcedureId == 4 || r.ProjectStatusId == 2 || r.ProjectStatusId == 6
-                                        || r.ProjectStatusId == 4 || r.ProjectStatusId == 3 || r.ProjectStatusId == 7 || r.ProjectStatusId == 5);
-                int remaining = announced - received;
-
-                var row = new DairaSummaryRow
-                {
-                    Daira = g.Key.Daira,
-
-                    // Money still sums across ALL lots (a project can have multiple budget lines)
-                    AnnouncedAmount = rows.Sum(r => r.LotBudget),
-                    ConsumedAmount = rows.Sum(r => r.ConsumedAmount),
-
-                    AnnouncedCount = announced,
-
-                    ClosedCount = Count(r => r.ProjectStatusId == 7),
-                };
 
 
-                result.Add(row);
-            }
-
-            return result;
-        }
     }
 
 }

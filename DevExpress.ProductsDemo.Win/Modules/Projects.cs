@@ -1616,17 +1616,11 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             try
             {
-                LoadData();
-                var allData = _lotRepo.GetGridData();
-                var data = _selectedProgramId.HasValue
-                    ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
-                    : allData;
+                var allData = _lotRepo.GetGridData(); 
 
-                string programName = GetPrograms()
-                    .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
-
-                var report = DairaSummaryReportBuilder.Build(data, programName);
-                report.ShowPreviewDialog();   // ← no CreateDocument() here — Build() already produced the merged document
+                var report = DairaSummaryReportBuilder.Build(allData);
+                report.CreateDocument();
+                report.ShowPreviewDialog();
             }
             catch (InvalidOperationException ex)
             {

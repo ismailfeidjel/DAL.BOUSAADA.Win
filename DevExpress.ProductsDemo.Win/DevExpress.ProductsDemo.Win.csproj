@@ -980,9 +980,6 @@
     <Content Include="grid_layout_projects_ADSEC.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="grid_layout_projects_CGSCL.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Modules\dal.sql" />
     <Content Include="nwindDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>

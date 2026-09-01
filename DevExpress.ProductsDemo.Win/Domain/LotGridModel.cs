@@ -14,7 +14,10 @@ public class LotGridModel
 
     // البرنامج والموقع
     public string Program { get; set; }
-    public int? ProgramId { get; set; }        // ← add
+    public int? ProgramId { get; set; }
+    public string ProgramType { get; set; }
+    public string ProgramYear { get; set; }// ← add
+    public string ProgramName { get; set; }// ← add
 
 
     public string Daira { get; set; }
