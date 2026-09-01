@@ -1422,6 +1422,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 case "PrintCommuneSummary2":
                     PrintCommuneSummaryReport2();
                     break;
+                case "PrintDairaSummary":
+                    PrintDairaSummaryReport();
+                    break;
                 case "PrintDomainSummary":
                     PrintDomainSummaryReport();
                     break;
@@ -1602,6 +1605,27 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
 
                 var report = CommuneSummary2ReportBuilder.Build(data, programName);
+                report.ShowPreviewDialog();   // ← no CreateDocument() here — Build() already produced the merged document
+            }
+            catch (InvalidOperationException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        public void PrintDairaSummaryReport()
+        {
+            try
+            {
+                LoadData();
+                var allData = _lotRepo.GetGridData();
+                var data = _selectedProgramId.HasValue
+                    ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
+                    : allData;
+
+                string programName = GetPrograms()
+                    .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
+
+                var report = DairaSummaryReportBuilder.Build(data, programName);
                 report.ShowPreviewDialog();   // ← no CreateDocument() here — Build() already produced the merged document
             }
             catch (InvalidOperationException ex)

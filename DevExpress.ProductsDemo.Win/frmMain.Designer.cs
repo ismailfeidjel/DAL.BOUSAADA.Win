@@ -778,6 +778,8 @@
             galleryItem19.Value = "PrintFinancialConsumptionReport";
             resources.ApplyResources(galleryItem20, "galleryItem20");
             galleryItem20.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage7")));
+            galleryItem20.Tag = "PrintDairaSummary";
+            galleryItem20.Value = "PrintDairaSummary";
             resources.ApplyResources(galleryItem21, "galleryItem21");
             galleryItem21.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage8")));
             galleryItem21.Tag = "btnExportToPowerPoint_Click";

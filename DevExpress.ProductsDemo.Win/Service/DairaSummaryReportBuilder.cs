@@ -28,7 +28,7 @@ namespace DevExpress.ProductsDemo.Win.Services
 
         public static XtraReport Build(List<LotGridModel> data, string programName)
         {
-            var rows = CommuneSummaryReportBuilder.ComputeCommuneRows(data);
+            var rows = ComputeDairaRows(data);
 
             var partReports = new List<XtraReport>();
             foreach (string key in PartTemplateKeys)
@@ -71,9 +71,9 @@ namespace DevExpress.ProductsDemo.Win.Services
         {
             var result = new List<DairaSummaryRow>();
 
-            var byDaira = data.GroupBy(r => new { r.DairaId, r.Daira });
+            var byDaira = data.GroupBy(r => new { r.Daira, r.Program });
 
-            foreach (var g in byDaira.OrderBy(x => x.Key.DairaId).ThenBy(x => x.Key.Daira))
+            foreach (var g in byDaira.OrderBy(x => x.Key.Daira).ThenBy(x => x.Key.Program))
             {
                 var rows = g.ToList();                                    // all LOT rows — used for money sums
                 var projects = rows.GroupBy(r => r.ProjectId)
