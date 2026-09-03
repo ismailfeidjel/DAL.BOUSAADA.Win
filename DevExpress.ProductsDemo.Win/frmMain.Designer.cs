@@ -795,6 +795,9 @@
             galleryItem22.Tag = "PrintDomainSummary";
             galleryItem22.Value = "PrintDomainSummary";
             resources.ApplyResources(galleryItem23, "galleryItem23");
+            galleryItem23.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage10")));
+            galleryItem23.Tag = "PrintStartedSummary";
+            galleryItem23.Value = "PrintStartedSummary";
             resources.ApplyResources(galleryItem24, "galleryItem24");
             resources.ApplyResources(galleryItem25, "galleryItem25");
             galleryItemGroup7.Items.AddRange(new DevExpress.XtraBars.Ribbon.GalleryItem[] {

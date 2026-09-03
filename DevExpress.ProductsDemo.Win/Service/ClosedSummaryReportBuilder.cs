@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Services
 {
-    public class DairaSummaryRow
+    public class startedSummaryRow
     {
         public string ProgramType { get; set; }
         public string ProgramYear { get; set; }
@@ -19,17 +19,21 @@ namespace DevExpress.ProductsDemo.Win.Services
         public decimal RegistredAmount { get; set; }
         public decimal ConsumedAmount { get; set; }   
         public int AnnouncedCount { get; set; }
-        public int ClosedCount { get; set; }
+        public int TsCount { get; set; }
+        public int ApCount { get; set; }
+        public int NotstartedCount { get; set; }
+        public int StartedCount { get; set; }
+        public int CfCount { get; set; }
 
 
     }
 
     
-    public static class  DairaSummaryReportBuilder
+    public static class  StartedSummaryReportBuilder
     {
         private static readonly string[] PartTemplateKeys =
        {
-            "قالب_تقرير_الدائرة",
+            "قالب_تقرير_نسبة_البدء",
         };
         // Removed the programs list parameter. Now it only relies on allData.
         public static XtraReport Build(List<LotGridModel> allData)
@@ -46,10 +50,20 @@ namespace DevExpress.ProductsDemo.Win.Services
                 {
                     var distinctProjectIds = g.Select(r => r.ProjectId).Distinct().ToList();
 
-                    int closedCount = g.Where(r => r.ProjectStatusId == 7)
+                    int tsCount = g.Where(r => r.AdministrativeProcedureId == 6)
+                                       .Select(r => r.ProjectId).Distinct().Count();
+                    int cfCount = g.Where(r => r.AdministrativeProcedureId == 5)
                                        .Select(r => r.ProjectId).Distinct().Count();
 
-                    return new DairaSummaryRow
+                    int apCount = g.Where(r => r.AdministrativeProcedureId == 1 || r.AdministrativeProcedureId == 2 || r.AdministrativeProcedureId == 3 || r.AdministrativeProcedureId == 4)
+                                       .Select(r => r.ProjectId).Distinct().Count();
+                    int notstartedCount = g.Where(r => r.ProjectStatusId == 2 || r.ProjectStatusId == 1)
+                                       .Select(r => r.ProjectId).Distinct().Count();
+
+                    int startedCount = g.Where(r => r.ProjectStatusId == 3 || r.ProjectStatusId == 4 || r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId ==7 || r.ProjectStatusId == 8)
+                                       .Select(r => r.ProjectId).Distinct().Count();
+
+                    return new startedSummaryRow
                     {
                         // Extract directly from the Group Key
                         ProgramType = g.Key.ProgramType ?? "",
@@ -60,13 +74,15 @@ namespace DevExpress.ProductsDemo.Win.Services
                         AnnouncedAmount = g.Sum(r => r.LotBudget),
                         RegistredAmount = g.Sum(r => r.RegisteredAmount),
                         AnnouncedCount = distinctProjectIds.Count,
-                        ClosedCount = closedCount,
-                        ConsumedAmount = g.Sum(r => r.ConsumedAmount)
+                        TsCount=tsCount,
+                        CfCount = cfCount,
+                        ApCount =apCount,
+                        StartedCount=startedCount,
+                        NotstartedCount=notstartedCount
                     };
                 })
                 .OrderBy(r => r.ProgramType)
                 .ThenByDescending(r => r.ProgramYear)
-                //.ThenBy(r => r.Daira)
                 .ToList();
 
             var partReports = new List<XtraReport>();
@@ -80,7 +96,7 @@ namespace DevExpress.ProductsDemo.Win.Services
 
                 GridReportBuilder.EnsureSafeMargins(partReport);
 
-                partReport.Landscape = false;
+                partReport.Landscape = true;
                 partReport.DataSource = rows;
 
                 partReport.CreateDocument();

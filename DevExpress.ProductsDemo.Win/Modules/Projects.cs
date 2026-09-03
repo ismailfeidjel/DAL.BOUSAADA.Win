@@ -1425,6 +1425,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 case "PrintDairaSummary":
                     PrintDairaSummaryReport();
                     break;
+                case "PrintStartedSummary":
+                    PrintStartedSummaryReport();
+                    break;
                 case "PrintDomainSummary":
                     PrintDomainSummaryReport();
                     break;
@@ -1614,11 +1617,50 @@ namespace DevExpress.ProductsDemo.Win.Modules
         }
         public void PrintDairaSummaryReport()
         {
+            List<int> selectedProgramIds;
+
+            using (var dlg = new frmSelectPrograms())
+            {
+                if (dlg.ShowDialog(this) != DialogResult.OK)
+                    return; // user cancelled
+
+                selectedProgramIds = dlg.SelectedProgramIds;
+            }
+
             try
             {
-                var allData = _lotRepo.GetGridData(); 
+                var allData = _lotRepo.GetGridData()
+                    .Where(r => r.ProgramId.HasValue && selectedProgramIds.Contains(r.ProgramId.Value))
+                    .ToList();
 
                 var report = DairaSummaryReportBuilder.Build(allData);
+                report.CreateDocument();
+                report.ShowPreviewDialog();
+            }
+            catch (InvalidOperationException ex)
+            {
+                XtraMessageBox.Show(ex.Message, "تنبيه", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        public void PrintStartedSummaryReport()
+        {
+            List<int> selectedProgramIds;
+
+            using (var dlg = new frmSelectPrograms())
+            {
+                if (dlg.ShowDialog(this) != DialogResult.OK)
+                    return; // user cancelled
+
+                selectedProgramIds = dlg.SelectedProgramIds;
+            }
+
+            try
+            {
+                var allData = _lotRepo.GetGridData()
+                    .Where(r => r.ProgramId.HasValue && selectedProgramIds.Contains(r.ProgramId.Value))
+                    .ToList();
+
+                var report = StartedSummaryReportBuilder.Build(allData);
                 report.CreateDocument();
                 report.ShowPreviewDialog();
             }

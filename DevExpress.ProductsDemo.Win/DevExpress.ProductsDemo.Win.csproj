@@ -561,6 +561,9 @@
     <Compile Include="Core\BaseForms\frmSelectDairas.Designer.cs">
       <DependentUpon>frmSelectDairas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Core\BaseForms\frmSelectPrograms .cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Core\BaseForms\frmUsers .cs">
       <SubType>Form</SubType>
     </Compile>
@@ -819,6 +822,7 @@
     <Compile Include="Sales.Model\OleDataProvider.cs" />
     <Compile Include="Sales.Model\SalesForecastMaker.cs" />
     <Compile Include="Sales.Model\Utils.cs" />
+    <Compile Include="Service\ClosedSummaryReportBuilder.cs" />
     <Compile Include="Service\DairaSummaryReportBuilder.cs" />
     <Compile Include="Service\CommuneSummaryReportBuilder.cs" />
     <Compile Include="Service\DomainSummaryReportBuilder.cs" />
