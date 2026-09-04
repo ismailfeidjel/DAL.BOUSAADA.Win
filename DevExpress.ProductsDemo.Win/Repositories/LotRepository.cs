@@ -128,7 +128,7 @@ pr.name  AS programname,
                             Id = Convert.ToInt32(rd["id"]),
                             ProjectId = Convert.ToInt32(rd["project_id"]),
 
-                            OperationNumber = rd["operation_number"].ToString(),
+                            //OperationNumber = rd["operation_number"].ToString(),
                             OperationName = $"{rd["operation_name"]}{'\u001F'} {rd["lot_name"]}",
 
                             Program = rd["program"]?.ToString(),
@@ -316,7 +316,7 @@ pr.name  AS programname,
                                 Id = Convert.ToInt32(rd["id"]),
                                 ProjectId = Convert.ToInt32(rd["project_id"]),
 
-                                OperationNumber = rd["operation_number"].ToString(),
+                              //  OperationNumber = rd["operation_number"].ToString(),
                                 OperationName = $"{rd["operation_name"]}{Environment.NewLine} {rd["lot_name"]}",
 
                                 Program = rd["program"]?.ToString(),

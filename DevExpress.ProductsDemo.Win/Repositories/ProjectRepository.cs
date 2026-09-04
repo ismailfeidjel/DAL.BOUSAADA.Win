@@ -20,7 +20,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                 string sql = @"
                 SELECT *
                 FROM projects
-                ORDER BY operation_number";
+                ORDER BY id";
 
                 using (var cmd = new MySqlCommand(sql, conn))
                 using (var rd = cmd.ExecuteReader())
@@ -30,7 +30,6 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                         list.Add(new Project
                         {
                             Id = Convert.ToInt32(rd["id"]),
-                            OperationNumber = rd["operation_number"].ToString(),
                             OperationName = rd["operation_name"].ToString(),
 
                             ProgramId = Convert.ToInt32(rd["program_id"]),
@@ -62,7 +61,6 @@ namespace DevExpress.ProductsDemo.Win.Repositories
         {
             string sql = @"
         UPDATE projects SET
-            operation_number = @operation_number,
             operation_name = @operation_name,
             program_id = @program_id,
             daira_id = @daira_id,
@@ -75,7 +73,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
             using (var cmd = new MySqlCommand(sql, conn, transaction))
             {
-                cmd.Parameters.AddWithValue("@operation_number", p.OperationNumber);
+               // cmd.Parameters.AddWithValue("@operation_number", p.OperationNumber);
                 cmd.Parameters.AddWithValue("@operation_name", p.OperationName);
                 cmd.Parameters.AddWithValue("@program_id", p.ProgramId);
                 cmd.Parameters.AddWithValue("@daira_id", p.DairaId);
@@ -99,7 +97,6 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                 string sql = @"
         INSERT INTO projects
         (
-            operation_number,
             operation_name,
             program_id,
             daira_id,
@@ -110,7 +107,6 @@ namespace DevExpress.ProductsDemo.Win.Repositories
         )
         VALUES
         (
-            @operation_number,
             @operation_name,
             @program_id,
             @daira_id,
@@ -124,7 +120,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
 
                 using (var cmd = new MySqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@operation_number", p.OperationNumber);
+                  //  cmd.Parameters.AddWithValue("@operation_number", p.OperationNumber);
                     cmd.Parameters.AddWithValue("@operation_name", p.OperationName);
 
                     cmd.Parameters.AddWithValue("@program_id", p.ProgramId);

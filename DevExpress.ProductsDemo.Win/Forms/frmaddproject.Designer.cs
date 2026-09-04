@@ -34,6 +34,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.cmbProgram = new DevExpress.XtraEditors.LookUpEdit();
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.cutItem1 = new DevExpress.XtraRichEdit.UI.CutItem();
             this.copyItem1 = new DevExpress.XtraRichEdit.UI.CopyItem();
@@ -197,7 +198,6 @@
             this.homeRibbonPage1 = new DevExpress.XtraRichEdit.UI.HomeRibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.cmbProgram = new DevExpress.XtraEditors.LookUpEdit();
             this.label2 = new System.Windows.Forms.Label();
             this.txtLotName = new DevExpress.XtraEditors.TextEdit();
             this.label4 = new System.Windows.Forms.Label();
@@ -206,7 +206,7 @@
             this.cmbDomain = new DevExpress.XtraEditors.LookUpEdit();
             this.spnLotNumber = new DevExpress.XtraEditors.SpinEdit();
             this.cmbSector = new DevExpress.XtraEditors.LookUpEdit();
-            this.txtOperationNumber = new DevExpress.XtraEditors.TextEdit();
+            this.txtOperationName = new DevExpress.XtraEditors.MemoEdit();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.txtLotNotes = new DevExpress.XtraEditors.MemoEdit();
             this.groupControl5 = new DevExpress.XtraEditors.GroupControl();
@@ -304,7 +304,6 @@
             this.showEditStyleFormItem1 = new DevExpress.XtraRichEdit.UI.ShowEditStyleFormItem();
             this.showInsertTableCellsFormItem1 = new DevExpress.XtraRichEdit.UI.ShowInsertTableCellsFormItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.txtOperationName = new DevExpress.XtraEditors.MemoEdit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -315,6 +314,7 @@
             this.tabLot1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbProgram.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFontEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichEditFontSizeEdit1)).BeginInit();
@@ -322,14 +322,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBorderLineStyle1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBorderLineWeight1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFloatingObjectOutlineWeight1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbProgram.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDaira.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCommune.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDomain.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spnLotNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSector.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOperationNumber.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOperationName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNotes.Properties)).BeginInit();
@@ -412,7 +411,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.icCategory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.richEditBarController1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOperationName.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -469,7 +467,6 @@
             this.groupControl1.Controls.Add(this.cmbDomain);
             this.groupControl1.Controls.Add(this.spnLotNumber);
             this.groupControl1.Controls.Add(this.cmbSector);
-            this.groupControl1.Controls.Add(this.txtOperationNumber);
             this.groupControl1.Controls.Add(this.txtOperationName);
             resources.ApplyResources(this.groupControl1, "groupControl1");
             this.groupControl1.Name = "groupControl1";
@@ -493,6 +490,14 @@
             // 
             resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
+            // 
+            // cmbProgram
+            // 
+            resources.ApplyResources(this.cmbProgram, "cmbProgram");
+            this.cmbProgram.MenuManager = this.ribbonControl1;
+            this.cmbProgram.Name = "cmbProgram";
+            this.cmbProgram.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbProgram.Properties.Buttons"))))});
             // 
             // ribbonControl1
             // 
@@ -1752,14 +1757,6 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.btnRemoveLot);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             // 
-            // cmbProgram
-            // 
-            resources.ApplyResources(this.cmbProgram, "cmbProgram");
-            this.cmbProgram.MenuManager = this.ribbonControl1;
-            this.cmbProgram.Name = "cmbProgram";
-            this.cmbProgram.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbProgram.Properties.Buttons"))))});
-            // 
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
@@ -1816,11 +1813,11 @@
             this.cmbSector.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbSector.Properties.Buttons"))))});
             // 
-            // txtOperationNumber
+            // txtOperationName
             // 
-            resources.ApplyResources(this.txtOperationNumber, "txtOperationNumber");
-            this.txtOperationNumber.MenuManager = this.ribbonControl1;
-            this.txtOperationNumber.Name = "txtOperationNumber";
+            resources.ApplyResources(this.txtOperationName, "txtOperationName");
+            this.txtOperationName.MenuManager = this.ribbonControl1;
+            this.txtOperationName.Name = "txtOperationName";
             // 
             // groupControl4
             // 
@@ -2639,12 +2636,6 @@
             // 
             this.dxValidationProvider1.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Auto;
             // 
-            // txtOperationName
-            // 
-            resources.ApplyResources(this.txtOperationName, "txtOperationName");
-            this.txtOperationName.MenuManager = this.ribbonControl1;
-            this.txtOperationName.Name = "txtOperationName";
-            // 
             // frmaddproject
             // 
             resources.ApplyResources(this, "$this");
@@ -2668,6 +2659,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cmbProgram.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFontEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRichEditFontSizeEdit1)).EndInit();
@@ -2675,14 +2667,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBorderLineStyle1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemBorderLineWeight1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemFloatingObjectOutlineWeight1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cmbProgram.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLotName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDaira.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbCommune.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbDomain.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spnLotNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSector.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOperationNumber.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtOperationName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.txtLotNotes.Properties)).EndInit();
@@ -2773,7 +2764,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.icCategory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.richEditBarController1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dxValidationProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOperationName.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2950,7 +2940,6 @@
         private XtraBars.BarButtonItem barButtonItem1;
         private XtraBars.BarButtonItem barButtonItem2;
         private XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private XtraEditors.TextEdit txtOperationNumber;
         private XtraEditors.TextEdit txtConsumedAmount;
         private XtraEditors.TextEdit txtRegisteredAmount;
         private XtraEditors.TextEdit txtLotBudget;

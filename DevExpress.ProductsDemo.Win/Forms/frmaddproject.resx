@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="splitContainerControl1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 158</value>
+    <value>0, 160</value>
   </data>
   <data name="tabContainer.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="label9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 75</value>
+    <value>109, 75</value>
   </data>
   <data name="label9.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -476,7 +476,7 @@
     <value>Yes</value>
   </data>
   <data name="ribbonControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>901, 158</value>
+    <value>901, 160</value>
   </data>
   <data name="&gt;&gt;ribbonControl1.Name" xml:space="preserve">
     <value>ribbonControl1</value>
@@ -695,7 +695,7 @@
     <value>False</value>
   </data>
   <data name="spnLotNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 75</value>
+    <value>5, 75</value>
   </data>
   <data name="spnLotNumber.Properties.Buttons" type="DevExpress.XtraEditors.Controls.ButtonPredefines, DevExpress.Utils.v24.1">
     <value>Combo</value>
@@ -742,27 +742,6 @@
   <data name="&gt;&gt;cmbSector.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="txtOperationNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 74</value>
-  </data>
-  <data name="txtOperationNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
-  </data>
-  <data name="txtOperationNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;txtOperationNumber.Name" xml:space="preserve">
-    <value>txtOperationNumber</value>
-  </data>
-  <data name="&gt;&gt;txtOperationNumber.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.TextEdit, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="&gt;&gt;txtOperationNumber.Parent" xml:space="preserve">
-    <value>groupControl1</value>
-  </data>
-  <data name="&gt;&gt;txtOperationNumber.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
   <data name="txtOperationName.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 129</value>
   </data>
@@ -782,7 +761,7 @@
     <value>groupControl1</value>
   </data>
   <data name="&gt;&gt;txtOperationName.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="groupControl1.Location" type="System.Drawing.Point, System.Drawing">
     <value>467, 2</value>
@@ -3491,7 +3470,7 @@
     <value>1</value>
   </data>
   <data name="splitContainerControl1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>901, 504</value>
+    <value>901, 502</value>
   </data>
   <data name="splitContainerControl1.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

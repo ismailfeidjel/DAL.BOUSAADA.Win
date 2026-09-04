@@ -60,7 +60,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
                 LoadLot1(lot1); cmbDaira.EditValue = lot1.DairaId; cmbCommune.EditValue = lot1.CommuneId;
                 cmbDomain.EditValue = lot1.DomainId;
                 cmbSector.EditValue = lot1.SectorId;
-                txtOperationNumber.Text = lot1.OperationNumber;
+                //txtOperationNumber.Text = lot1.OperationNumber;
                 cmbProgram.EditValue = lot1.ProgramId;
             }
 
@@ -244,7 +244,8 @@ namespace DevExpress.ProductsDemo.Win.Forms
                         var project = new Domain.Project
                         {
                             Id = _lot.ProjectId,
-                            OperationNumber = txtOperationNumber.Text.Trim(),
+                           
+                            //OperationNumber = txtOperationNumber.Text.Trim(),
                             OperationName = txtOperationName.Text.Trim(),
                             ProgramId = Convert.ToInt32(cmbProgram.EditValue),
                             DairaId = Convert.ToInt32(cmbDaira.EditValue),
@@ -375,7 +376,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
         {
             bool ok = true;
 
-            ok &= Require(txtOperationNumber, "Operation Number is required");
+           // ok &= Require(txtOperationNumber, "Operation Number is required");
             ok &= Require(txtOperationName, "Operation Name is required");
             ok &= RequireLookup(cmbProgram, "Program is required");
             ok &= RequireLookup(cmbDaira, "Daira is required");

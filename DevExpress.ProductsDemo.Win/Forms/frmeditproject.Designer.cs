@@ -195,6 +195,7 @@
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.btnAddLot = new DevExpress.XtraBars.BarButtonItem();
             this.btnRemoveLot = new DevExpress.XtraBars.BarButtonItem();
+            this.btnsave = new DevExpress.XtraBars.BarButtonItem();
             this.homeRibbonPage1 = new DevExpress.XtraRichEdit.UI.HomeRibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -206,7 +207,6 @@
             this.cmbDomain = new DevExpress.XtraEditors.LookUpEdit();
             this.spnLotNumber = new DevExpress.XtraEditors.SpinEdit();
             this.cmbSector = new DevExpress.XtraEditors.LookUpEdit();
-            this.txtOperationNumber = new DevExpress.XtraEditors.TextEdit();
             this.txtOperationName = new DevExpress.XtraEditors.MemoEdit();
             this.groupControl4 = new DevExpress.XtraEditors.GroupControl();
             this.txtLotNotes = new DevExpress.XtraEditors.MemoEdit();
@@ -305,7 +305,6 @@
             this.showEditStyleFormItem1 = new DevExpress.XtraRichEdit.UI.ShowEditStyleFormItem();
             this.showInsertTableCellsFormItem1 = new DevExpress.XtraRichEdit.UI.ShowInsertTableCellsFormItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
-            this.btnsave = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -330,7 +329,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.cmbDomain.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spnLotNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSector.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOperationNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperationName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).BeginInit();
             this.groupControl4.SuspendLayout();
@@ -470,7 +468,6 @@
             this.groupControl1.Controls.Add(this.cmbDomain);
             this.groupControl1.Controls.Add(this.spnLotNumber);
             this.groupControl1.Controls.Add(this.cmbSector);
-            this.groupControl1.Controls.Add(this.txtOperationNumber);
             this.groupControl1.Controls.Add(this.txtOperationName);
             resources.ApplyResources(this.groupControl1, "groupControl1");
             this.groupControl1.Name = "groupControl1";
@@ -1746,6 +1743,15 @@
             this.btnRemoveLot.Name = "btnRemoveLot";
             this.btnRemoveLot.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnRemoveLot_ItemClick);
             // 
+            // btnsave
+            // 
+            resources.ApplyResources(this.btnsave, "btnsave");
+            this.btnsave.Enabled = false;
+            this.btnsave.Id = 155;
+            this.btnsave.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("btnsave.ImageOptions.LargeImage")));
+            this.btnsave.Name = "btnsave";
+            this.btnsave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiSave_ItemClick);
+            // 
             // homeRibbonPage1
             // 
             this.homeRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -1821,12 +1827,6 @@
             this.cmbSector.Name = "cmbSector";
             this.cmbSector.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(((DevExpress.XtraEditors.Controls.ButtonPredefines)(resources.GetObject("cmbSector.Properties.Buttons"))))});
-            // 
-            // txtOperationNumber
-            // 
-            resources.ApplyResources(this.txtOperationNumber, "txtOperationNumber");
-            this.txtOperationNumber.MenuManager = this.ribbonControl1;
-            this.txtOperationNumber.Name = "txtOperationNumber";
             // 
             // txtOperationName
             // 
@@ -2651,15 +2651,6 @@
             // 
             this.dxValidationProvider1.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Auto;
             // 
-            // btnsave
-            // 
-            resources.ApplyResources(this.btnsave, "btnsave");
-            this.btnsave.Enabled = false;
-            this.btnsave.Id = 155;
-            this.btnsave.ImageOptions.LargeImage = ((System.Drawing.Image)(resources.GetObject("barButtonItem4.ImageOptions.LargeImage")));
-            this.btnsave.Name = "btnsave";
-            this.btnsave.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.bbiSave_ItemClick);
-            // 
             // frmeditproject
             // 
             resources.ApplyResources(this, "$this");
@@ -2697,7 +2688,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.cmbDomain.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spnLotNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cmbSector.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtOperationNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtOperationName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl4)).EndInit();
             this.groupControl4.ResumeLayout(false);
@@ -2965,7 +2955,6 @@
         private XtraBars.BarButtonItem barButtonItem1;
         private XtraBars.BarButtonItem barButtonItem2;
         private XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private XtraEditors.TextEdit txtOperationNumber;
         private XtraEditors.TextEdit txtConsumedAmount;
         private XtraEditors.TextEdit txtRegisteredAmount;
         private XtraEditors.TextEdit txtLotBudget;

@@ -925,14 +925,14 @@ namespace DevExpress.ProductsDemo.Win.Modules
                             SpecialStatus3Id = lot.SpecialStatus3Id,
                             ProjectStatusId = lot.ProjectStatusId,
                             Notes = lot.Notes,
-                            FlagsId = lot.FlagsId  // ← add this
+                            FlagsId = lot.FlagsId  
 
                         };
 
                         var updatedProject = new Domain.Project
                         {
                             Id = lot.ProjectId,
-                            OperationNumber = lot.OperationNumber,
+                         //   OperationNumber = lot.OperationNumber,
                             OperationName = lot.OperationName.Split('\u001F')[0].Trim(),
                             ProgramId = lot.ProgramId ?? 0,
                             DairaId = lot.DairaId ?? 0,
