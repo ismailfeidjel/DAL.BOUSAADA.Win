@@ -452,7 +452,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             AddCol("Daira", "الدائرة", 100);
             // gridView1.Columns["Daira"].OptionsColumn.AllowMerge = DefaultBoolean.True;
-            AddCol("LotNumber", "N", 100);
+           // AddCol("LotNumber", "N", 100);
 
             AddCol("Commune", "البلدية", 100);
             AddCol("ProgramId", "البرنامج", 110);
@@ -501,7 +501,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
             AddCol("LotBudget", "الغلاف المالي", 110, "{0:N2}");
-            AddCol("SortOrder", "S", 110);
+          //  AddCol("SortOrder", "S", 110);
             AddCol("RegisteredAmount", "المبلغ المسجل", 110, "{0:N2}");
             AddCol("ConsumedAmount", "المبلغ المستهلك", 110, "{0:N2}");
             AddCol("Remaining", "الباقي", 110, "{0:N2}");

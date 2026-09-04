@@ -63,29 +63,25 @@ namespace DevExpress.ProductsDemo.Win
             guideGenerator = new GuideGenerator();
             guideGenerator.CreateWhatsThisItem(ribbonControl1, () => { return this; });
         }
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-            SplashScreenManager.CloseForm(false);
-            // DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
-            if (MainFormHelper.TakeScreens)
-            {
-                this.StartPosition = FormStartPosition.Manual;
-                this.Location = new Point(0, 0);
-                this.Height = 700;
-                links = new NavBarItem[] { nbiGrid, nbiScheduler, nbiSpreadsheet, nbiWord, nbiPdf };
-                MainFormHelper.TakeAllScreens(TakeModule, links.Length, this, pcMain, null, demoName: "DevExpress.ProductsDemo.Win");
-            }
-        }
+        //protected override void OnLoad(EventArgs e)
+        //{
+        //    base.OnLoad(e);
+        //    SplashScreenManager.CloseForm(false);
+        //    // DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
+        //    if (MainFormHelper.TakeScreens)
+        //    {
+        //        this.StartPosition = FormStartPosition.Manual;
+        //        this.Location = new Point(0, 0);
+        //        this.Height = 700;
+        //        links = new NavBarItem[] { nbiGrid, nbiScheduler, nbiSpreadsheet, nbiWord, nbiPdf };
+        //        MainFormHelper.TakeAllScreens(TakeModule, links.Length, this, pcMain, null, demoName: "DevExpress.ProductsDemo.Win");
+        //    }
+        //}
 
         private void SetupSavedFiltersGalleryGroup()
         {
             // Target the very first existing group (on top) instead of adding a new one
             _savedFiltersGroup = rgbiCurrentViewTasks.Gallery.Groups[0];
-
-            // Optional: Rename the group if desired
-            // _savedFiltersGroup.Caption = "الفلاتر المحفوظة";
-
             RefreshSavedFilterGallery();
 
             bbiManageSavedFilters = new BarButtonItem(ribbonControl1.Manager, "إدارة الفلاتر المحفوظة...");
@@ -317,20 +313,15 @@ namespace DevExpress.ProductsDemo.Win
 
         void InitNavBarItemLinks()
         {
-            nbiSpreadsheet.Tag = new NavBarGroupTagObject("Spreadsheet", typeof(DevExpress.ProductsDemo.Win.Modules.SpreadsheetModule), RibbonControlColorScheme.Green);
             nbiWord.Tag = new NavBarGroupTagObject("Word", typeof(DevExpress.ProductsDemo.Win.Modules.WordModule), RibbonControlColorScheme.DarkBlue);
             nbiReports.Tag = new NavBarGroupTagObject("Reports", typeof(DevExpress.ProductsDemo.Win.Modules.ReportsModule), RibbonControlColorScheme.Teal);
 #if !NET
             nbiSnap.Tag = new NavBarGroupTagObject("Snap", typeof(DevExpress.ProductsDemo.Win.Modules.SnapModule), RibbonControlColorScheme.Teal);
-            nbiPivot.Tag = new NavBarGroupTagObject("Pivot", typeof(DevExpress.ProductsDemo.Win.Modules.PivotModuleNew));
 #else
             nbiPivot.Visible = false;
 #endif
             nbiSnap.Visible = false;
-            //nbiCharts.Tag = new NavBarGroupTagObject("Charts", typeof(DevExpress.ProductsDemo.Win.Modules.AnalyticsModule));
-            // nbiScheduler.Tag = new NavBarGroupTagObject("Scheduler", typeof(DevExpress.ProductsDemo.Win.Modules.SchedulerModule), RibbonControlColorScheme.Purple);
             nbiPdf.Tag = new NavBarGroupTagObject("PdfViewer", typeof(DevExpress.ProductsDemo.Win.Modules.PdfViewerModule), RibbonControlColorScheme.Orange);
-            nbiMaps.Tag = new NavBarGroupTagObject("Maps", typeof(DevExpress.ProductsDemo.Win.Modules.MapsModule), RibbonControlColorScheme.Red);
             nbgModules.SelectedLinkIndex = 0;
         }
         internal void EnableLayoutButtons(bool enabled)
@@ -422,8 +413,8 @@ namespace DevExpress.ProductsDemo.Win
 
         private void rgbiCurrentView_GalleryInitDropDownGallery(object sender, InplaceGalleryEventArgs e)
         {
-            e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiManageView);
-            e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiSaveCurrentView);
+           // e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiManageView);
+           // e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiSaveCurrentView);
             e.PopupGallery.SynchWithInRibbonGallery = true;
         }
 

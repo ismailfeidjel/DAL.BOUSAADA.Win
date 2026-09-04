@@ -115,7 +115,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
                     {
                         var project = new Domain.Project
                         {
-                            OperationNumber = txtOperationNumber.Text.Trim(),
+                         //   OperationNumber = txtOperationNumber.Text.Trim(),
                             OperationName = txtOperationName.Text.Trim(),
                             ProgramId = Convert.ToInt32(cmbProgram.EditValue),
                             DairaId = Convert.ToInt32(cmbDaira.EditValue),
@@ -245,7 +245,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
         {
             bool ok = true;
 
-            ok &= Require(txtOperationNumber, "Operation Number is required");
+           // ok &= Require(txtOperationNumber, "Operation Number is required");
             ok &= Require(txtOperationName, "Operation Name is required");
             ok &= RequireLookup(cmbProgram, "Program is required");
             ok &= RequireLookup(cmbDaira, "Daira is required");

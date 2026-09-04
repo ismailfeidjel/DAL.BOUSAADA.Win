@@ -88,8 +88,6 @@
             this.bbiNormal = new DevExpress.XtraBars.BarButtonItem();
             this.bbiReading = new DevExpress.XtraBars.BarButtonItem();
             this.bsiTemp = new DevExpress.XtraBars.BarStaticItem();
-            this.bbiManageView = new DevExpress.XtraBars.BarButtonItem();
-            this.bbiSaveCurrentView = new DevExpress.XtraBars.BarButtonItem();
             this.rgbiCurrentViewTasks = new DevExpress.XtraBars.RibbonGalleryBarItem();
             this.bbiTodayFlag = new DevExpress.XtraBars.BarButtonItem();
             this.bbiTomorrowFlag = new DevExpress.XtraBars.BarButtonItem();
@@ -181,8 +179,6 @@
             this.bbiNormal,
             this.bbiReading,
             this.bsiTemp,
-            this.bbiManageView,
-            this.bbiSaveCurrentView,
             this.rgbiCurrentViewTasks,
             this.bbiTodayFlag,
             this.bbiTomorrowFlag,
@@ -412,20 +408,7 @@
             // 
             this.bsiTemp.Id = 41;
             this.bsiTemp.Name = "bsiTemp";
-            // 
-            // bbiManageView
-            // 
-            resources.ApplyResources(this.bbiManageView, "bbiManageView");
-            this.bbiManageView.Enabled = false;
-            this.bbiManageView.Id = 42;
-            this.bbiManageView.Name = "bbiManageView";
-            // 
-            // bbiSaveCurrentView
-            // 
-            resources.ApplyResources(this.bbiSaveCurrentView, "bbiSaveCurrentView");
-            this.bbiSaveCurrentView.Enabled = false;
-            this.bbiSaveCurrentView.Id = 43;
-            this.bbiSaveCurrentView.Name = "bbiSaveCurrentView";
+            
             // 
             // rgbiCurrentViewTasks
             // 
@@ -1140,8 +1123,6 @@
         private DevExpress.XtraBars.BarButtonItem bbiNormal;
         private DevExpress.XtraBars.BarButtonItem bbiReading;
         private DevExpress.XtraBars.BarStaticItem bsiTemp;
-        private DevExpress.XtraBars.BarButtonItem bbiManageView;
-        private DevExpress.XtraBars.BarButtonItem bbiSaveCurrentView;
         private DevExpress.XtraBars.RibbonGalleryBarItem rgbiCurrentViewTasks;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup rpdCurrentViewTasks;
         private DevExpress.XtraBars.BarButtonItem bbiTodayFlag;

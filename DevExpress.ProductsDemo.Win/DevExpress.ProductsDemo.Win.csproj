@@ -679,19 +679,6 @@
     <Compile Include="MasterDetailReport\XtraReport1.Designer.cs">
       <DependentUpon>XtraReport1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Analytics.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Analytics.Designer.cs">
-      <DependentUpon>Analytics.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Class1.cs" />
-    <Compile Include="Modules\Contacts.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Contacts.Designer.cs">
-      <DependentUpon>Contacts.cs</DependentUpon>
-    </Compile>
     <Compile Include="DemoUtils.cs" />
     <Compile Include="Modules\DetailLotControl .cs">
       <SubType>UserControl</SubType>
@@ -702,20 +689,11 @@
     <Compile Include="Modules\Projects.Designer.cs">
       <DependentUpon>Projects.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\OutgoingMail\Models\OutgoingMail.cs" />
-    <Compile Include="Modules\OutgoingMail\Repositories\IOutgoingMailRepository.cs" />
-    <Compile Include="Modules\OutgoingMail\Repositories\OutgoingMailRepository.cs" />
     <Compile Include="Modules\PdfViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\PdfViewer.Designer.cs">
       <DependentUpon>PdfViewer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Reports - Copy.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Reports - Copy.Designer.cs">
-      <DependentUpon>Reports - Copy.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Sales\BaseModule.cs">
       <SubType>UserControl</SubType>
@@ -741,12 +719,6 @@
     <Compile Include="Modules\Sales\ucValuePresenter.Designer.cs">
       <DependentUpon>ucValuePresenter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Pivot.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Pivot.Designer.cs">
-      <DependentUpon>Pivot.cs</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Reports.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -759,29 +731,11 @@
     <Compile Include="Modules\Snap.Designer.cs">
       <DependentUpon>Snap.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\Maps.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Maps.Designer.cs">
-      <DependentUpon>Maps.cs</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Word.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Modules\Word.Designer.cs">
       <DependentUpon>Word.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Grid.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Grid.Designer.cs">
-      <DependentUpon>Grid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Modules\Spreadsheet.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Modules\Spreadsheet.Designer.cs">
-      <DependentUpon>Spreadsheet.cs</DependentUpon>
     </Compile>
     <Compile Include="nwindDataSet.cs">
       <DependentUpon>nwindDataSet.xsd</DependentUpon>
@@ -908,33 +862,12 @@
     <EmbeddedResource Include="MasterDetailReport\XtraReport1.resx">
       <DependentUpon>XtraReport1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Analytics.resx">
-      <DependentUpon>Analytics.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Contacts.resx">
-      <DependentUpon>Contacts.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Modules\Projects.resx">
       <DependentUpon>Projects.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Grid.resx">
-      <DependentUpon>Grid.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Maps.resx">
-      <DependentUpon>Maps.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Modules\PdfViewer.resx">
       <DependentUpon>PdfViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Pivot.resx">
-      <DependentUpon>Pivot.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Reports - Copy.resx">
-      <DependentUpon>Reports - Copy.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Reports.resx">
       <DependentUpon>Reports.cs</DependentUpon>
@@ -951,9 +884,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Snap.resx">
       <DependentUpon>Snap.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Modules\Spreadsheet.resx">
-      <DependentUpon>Spreadsheet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Modules\Word.resx">
       <DependentUpon>Word.cs</DependentUpon>
@@ -984,7 +914,6 @@
     <Content Include="grid_layout_projects_ADSEC.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Modules\dal.sql" />
     <Content Include="nwindDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>nwindDataSet1.Designer.cs</LastGenOutput>
@@ -1062,7 +991,6 @@
     <None Include="Resources\icons8_c_32px_1.png" />
     <None Include="Resources\adsec.svg" />
     <None Include="Resources\csgcl.svg" />
-    <Content Include="Reports\Templates\dal %289%29.sql" />
     <Content Include="Resources\FilterIcons\Action_Export_ToCSV.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
