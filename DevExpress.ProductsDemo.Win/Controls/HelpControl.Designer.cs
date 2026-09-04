@@ -30,12 +30,10 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             DevExpress.XtraBars.Ribbon.GalleryItem galleryItem3 = new DevExpress.XtraBars.Ribbon.GalleryItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.galleryControl1 = new DevExpress.XtraBars.Ribbon.GalleryControl();
-            this.galleryControlClient2 = new DevExpress.XtraBars.Ribbon.GalleryControlClient();
             this.galleryControlClient1 = new DevExpress.XtraBars.Ribbon.GalleryControlClient();
             this.backstageViewLabel1 = new DevExpress.ProductsDemo.Win.BackstageViewLabel();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            this.galleryControlClient2 = new DevExpress.XtraBars.Ribbon.GalleryControlClient();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,9 +58,7 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Violet;
-            this.splitContainer1.Panel2.Controls.Add(this.simpleButton2);
-            this.splitContainer1.Panel2.Controls.Add(this.simpleButton1);
+            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.splitContainer1.Panel2.Controls.Add(this.labelControl4);
             // 
             // galleryControl1
@@ -114,11 +110,6 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.galleryControl1.Gallery.ItemClick += new DevExpress.XtraBars.Ribbon.GalleryItemClickEventHandler(this.galleryControlGallery1_ItemClick);
             this.galleryControl1.Name = "galleryControl1";
             // 
-            // galleryControlClient2
-            // 
-            this.galleryControlClient2.GalleryControl = null;
-            resources.ApplyResources(this.galleryControlClient2, "galleryControlClient2");
-            // 
             // galleryControlClient1
             // 
             this.galleryControlClient1.GalleryControl = this.galleryControl1;
@@ -134,22 +125,17 @@ namespace DevExpress.ProductsDemo.Win.Controls {
             this.backstageViewLabel1.Name = "backstageViewLabel1";
             this.backstageViewLabel1.ShowLineShadow = false;
             // 
-            // simpleButton2
-            // 
-            resources.ApplyResources(this.simpleButton2, "simpleButton2");
-            this.simpleButton2.Name = "simpleButton2";
-            // 
-            // simpleButton1
-            // 
-            resources.ApplyResources(this.simpleButton1, "simpleButton1");
-            this.simpleButton1.Name = "simpleButton1";
-            // 
             // labelControl4
             // 
             resources.ApplyResources(this.labelControl4, "labelControl4");
             this.labelControl4.LineOrientation = DevExpress.XtraEditors.LabelLineOrientation.Vertical;
             this.labelControl4.LineVisible = true;
             this.labelControl4.Name = "labelControl4";
+            // 
+            // galleryControlClient2
+            // 
+            this.galleryControlClient2.GalleryControl = null;
+            resources.ApplyResources(this.galleryControlClient2, "galleryControlClient2");
             // 
             // HelpControl
             // 
@@ -176,8 +162,6 @@ namespace DevExpress.ProductsDemo.Win.Controls {
         private DevExpress.XtraBars.Ribbon.GalleryControl galleryControl1;
         private DevExpress.XtraBars.Ribbon.GalleryControlClient galleryControlClient1;
         private DevExpress.XtraEditors.LabelControl labelControl4;
-        private XtraEditors.SimpleButton simpleButton2;
-        private XtraEditors.SimpleButton simpleButton1;
         private XtraBars.Ribbon.GalleryControlClient galleryControlClient2;
     }
 }

@@ -243,7 +243,7 @@
     <value>backstageViewLabel1</value>
   </data>
   <data name="&gt;&gt;backstageViewLabel1.Type" xml:space="preserve">
-    <value>DevExpress.ProductsDemo.Win.BackstageViewLabel, DevExpress.ProductsDemo.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DevExpress.ProductsDemo.Win.BackstageViewLabel, Bousaada.Dal.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;backstageViewLabel1.Parent" xml:space="preserve">
     <value>splitContainer1.Panel1</value>
@@ -265,54 +265,6 @@
   </data>
   <data name="&gt;&gt;splitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="simpleButton2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 188</value>
-  </data>
-  <data name="simpleButton2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 23</value>
-  </data>
-  <data name="simpleButton2.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="simpleButton2.Text" xml:space="preserve">
-    <value>simpleButton2</value>
-  </data>
-  <data name="&gt;&gt;simpleButton2.Name" xml:space="preserve">
-    <value>simpleButton2</value>
-  </data>
-  <data name="&gt;&gt;simpleButton2.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.SimpleButton, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="&gt;&gt;simpleButton2.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
-  </data>
-  <data name="&gt;&gt;simpleButton2.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="simpleButton1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 103</value>
-  </data>
-  <data name="simpleButton1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>197, 23</value>
-  </data>
-  <data name="simpleButton1.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="simpleButton1.Text" xml:space="preserve">
-    <value>simpleButton1</value>
-  </data>
-  <data name="&gt;&gt;simpleButton1.Name" xml:space="preserve">
-    <value>simpleButton1</value>
-  </data>
-  <data name="&gt;&gt;simpleButton1.Type" xml:space="preserve">
-    <value>DevExpress.XtraEditors.SimpleButton, DevExpress.XtraEditors.v24.1, Version=24.1.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="&gt;&gt;simpleButton1.Parent" xml:space="preserve">
-    <value>splitContainer1.Panel2</value>
-  </data>
-  <data name="&gt;&gt;simpleButton1.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="labelControl4.AutoSizeMode" type="DevExpress.XtraEditors.LabelAutoSizeMode, DevExpress.XtraEditors.v24.1">
     <value>None</value>
@@ -339,7 +291,7 @@
     <value>splitContainer1.Panel2</value>
   </data>
   <data name="&gt;&gt;labelControl4.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;splitContainer1.Panel2.Name" xml:space="preserve">
     <value>splitContainer1.Panel2</value>
@@ -399,6 +351,6 @@
     <value>HelpControl</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DevExpress.ProductsDemo.Win.Controls.RibbonApplicationUserControl, DevExpress.ProductsDemo.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DevExpress.ProductsDemo.Win.Controls.RibbonApplicationUserControl, Bousaada.Dal.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

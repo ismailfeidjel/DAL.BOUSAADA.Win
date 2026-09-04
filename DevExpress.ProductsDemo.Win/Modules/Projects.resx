@@ -741,6 +741,6 @@
     <value>ProjectModule</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>DevExpress.ProductsDemo.Win.BaseModule, DevExpress.ProductsDemo.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>DevExpress.ProductsDemo.Win.BaseModule, Bousaada.Dal.Win, Version=24.1.7.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

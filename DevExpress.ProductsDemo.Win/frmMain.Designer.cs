@@ -408,7 +408,6 @@
             // 
             this.bsiTemp.Id = 41;
             this.bsiTemp.Name = "bsiTemp";
-            
             // 
             // rgbiCurrentViewTasks
             // 

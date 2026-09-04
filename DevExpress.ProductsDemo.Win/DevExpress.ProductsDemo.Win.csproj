@@ -911,9 +911,6 @@
     <Content Include="DataBase\DBB.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="grid_layout_projects_ADSEC.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="nwindDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>nwindDataSet1.Designer.cs</LastGenOutput>
@@ -1998,7 +1995,6 @@
     <Folder Include="Core\Models\" />
     <Folder Include="DataBase\Reports\Templates\" />
     <Folder Include="Documents\" />
-    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

@@ -8,7 +8,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
         public SplashScreen1()
         {
             InitializeComponent();
-            this.labelCopyright.Text = "Copyright © 1998-" + DateTime.Now.Year.ToString();
+            this.labelCopyright.Text = "ismail feidjel © 2026-" + DateTime.Now.Year.ToString();
         }
 
         #region Overrides
@@ -20,10 +20,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
 
         #endregion
 
-        public enum SplashScreenCommand
-        {
-        }
-
+       
         private void labelCopyright_Click(object sender, EventArgs e)
         {
 

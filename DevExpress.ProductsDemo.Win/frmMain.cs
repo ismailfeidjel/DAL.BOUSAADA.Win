@@ -63,20 +63,6 @@ namespace DevExpress.ProductsDemo.Win
             guideGenerator = new GuideGenerator();
             guideGenerator.CreateWhatsThisItem(ribbonControl1, () => { return this; });
         }
-        //protected override void OnLoad(EventArgs e)
-        //{
-        //    base.OnLoad(e);
-        //    SplashScreenManager.CloseForm(false);
-        //    // DevExpress.XtraSplashScreen.SplashScreenManager.CloseForm();
-        //    if (MainFormHelper.TakeScreens)
-        //    {
-        //        this.StartPosition = FormStartPosition.Manual;
-        //        this.Location = new Point(0, 0);
-        //        this.Height = 700;
-        //        links = new NavBarItem[] { nbiGrid, nbiScheduler, nbiSpreadsheet, nbiWord, nbiPdf };
-        //        MainFormHelper.TakeAllScreens(TakeModule, links.Length, this, pcMain, null, demoName: "DevExpress.ProductsDemo.Win");
-        //    }
-        //}
 
         private void SetupSavedFiltersGalleryGroup()
         {
@@ -324,29 +310,24 @@ namespace DevExpress.ProductsDemo.Win
             nbiPdf.Tag = new NavBarGroupTagObject("PdfViewer", typeof(DevExpress.ProductsDemo.Win.Modules.PdfViewerModule), RibbonControlColorScheme.Orange);
             nbgModules.SelectedLinkIndex = 0;
         }
-        internal void EnableLayoutButtons(bool enabled)
+
+        public void CloseStartupSplash()
         {
-            bbiFlipLayout.Enabled = enabled;
-        }
-        internal void EnableEditContact(bool enabled)
-        {
-            bbiDeleteContact.Enabled = enabled;
-            bbiEditContact.Enabled = enabled;
-        }
-        internal void EnabledFlagButtons(bool enabledCurrentTask, bool enabledEdit, Task task)
-        {
-            List<BarButtonItem> list = new List<BarButtonItem> { bbiTodayFlag, bbiTomorrowFlag, bbiThisWeekFlag,
-                bbiNextWeekFlag, bbiNoDateFlag, bbiCustomFlag };
-            foreach (BarButtonItem item in list)
+            BeginInvoke(new Action(() =>
             {
-                item.Enabled = enabledCurrentTask;
-                if (task != null)
-                    item.Down = task.FlagStatus.Equals(item.Tag);
-                else item.Down = false;
-            }
-            bbiDeleteTask.Enabled = enabledCurrentTask;
-            bbiEditTask.Enabled = enabledEdit;
+                try
+                {
+                    SplashScreenManager.CloseForm(false);
+                }
+                catch
+                {
+                    // Splash already closed
+                }
+            }));
         }
+
+
+
         internal void EnableZoomControl(bool enabled)
         {
             beiZoom.Visibility = enabled ? BarItemVisibility.Always : BarItemVisibility.Never;

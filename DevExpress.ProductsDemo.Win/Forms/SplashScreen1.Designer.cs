@@ -66,7 +66,7 @@
             this.labelStatus.Location = new System.Drawing.Point(24, 215);
             this.labelStatus.Margin = new System.Windows.Forms.Padding(3, 3, 3, 1);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(45, 13);
+            this.labelStatus.Size = new System.Drawing.Size(50, 13);
             this.labelStatus.TabIndex = 7;
             this.labelStatus.Text = "Starting...";
             // 

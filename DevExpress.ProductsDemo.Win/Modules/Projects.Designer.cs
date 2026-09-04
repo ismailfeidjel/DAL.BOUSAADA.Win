@@ -190,7 +190,11 @@
             this.gridView1.OptionsBehavior.AllowPixelScrolling = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsBehavior.AutoExpandAllGroups = true;
             this.gridView1.OptionsFilter.ColumnFilterPopupMode = DevExpress.XtraGrid.Columns.ColumnFilterPopupMode.Excel;
-            this.gridView1.OptionsFind.FindFilterColumns = "Subject";
+            this.gridView1.OptionsFind.AllowFindInExpandedDetails = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.OptionsFind.AlwaysVisible = true;
+            this.gridView1.OptionsFind.FindFilterColumns = "OperationName";
+            this.gridView1.OptionsFind.FindNullPrompt = "ابحث عن عملية";
+            this.gridView1.OptionsMenu.ShowAddNewSummaryItem = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsPrint.PrintHorzLines = false;
             this.gridView1.OptionsPrint.PrintVertLines = false;
             this.gridView1.OptionsSelection.CheckBoxSelectorColumnWidth = 35;
