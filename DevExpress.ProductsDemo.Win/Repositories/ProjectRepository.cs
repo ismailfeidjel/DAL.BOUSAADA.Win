@@ -1,3 +1,4 @@
+using DevExpress.ProductsDemo.Win.Core.Helpers;
 using DevExpress.ProductsDemo.Win.Domain;
 using MySql.Data.MySqlClient;
 using System;
@@ -81,7 +82,7 @@ namespace DevExpress.ProductsDemo.Win.Repositories
                 cmd.Parameters.AddWithValue("@domain_id", p.DomainId);
                 cmd.Parameters.AddWithValue("@sector_id", p.SectorId);
                 cmd.Parameters.AddWithValue("@has_lots", p.HasLots);
-                cmd.Parameters.AddWithValue("@updated_by", (object)p.UpdatedBy ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@updated_by", (object) CurrentSession.User?.Id ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@id", p.Id);
                 return cmd.ExecuteNonQuery() > 0;
             }
@@ -103,7 +104,9 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             commune_id,
             domain_id,
             sector_id,
-            has_lots
+            has_lots,
+            updated_by
+
         )
         VALUES
         (
@@ -113,27 +116,23 @@ namespace DevExpress.ProductsDemo.Win.Repositories
             @commune_id,
             @domain_id,
             @sector_id,
-            @has_lots
+            @has_lots,
+            @updated_by
+
         );
 
         SELECT LAST_INSERT_ID();";
 
                 using (var cmd = new MySqlCommand(sql, conn))
                 {
-                  //  cmd.Parameters.AddWithValue("@operation_number", p.OperationNumber);
                     cmd.Parameters.AddWithValue("@operation_name", p.OperationName);
-
                     cmd.Parameters.AddWithValue("@program_id", p.ProgramId);
                     cmd.Parameters.AddWithValue("@daira_id", p.DairaId);
                     cmd.Parameters.AddWithValue("@commune_id", p.CommuneId);
-
                     cmd.Parameters.AddWithValue("@domain_id", p.DomainId);
                     cmd.Parameters.AddWithValue("@sector_id", p.SectorId);
-
-
                     cmd.Parameters.AddWithValue("@has_lots", p.HasLots);
-
-
+                    cmd.Parameters.AddWithValue("@updated_by", CurrentSession.User?.Id ?? (object)DBNull.Value);
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }

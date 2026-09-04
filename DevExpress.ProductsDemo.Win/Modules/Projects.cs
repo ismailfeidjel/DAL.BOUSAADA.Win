@@ -1,5 +1,6 @@
 ﻿using DevExpress.Data.Filtering;
 using DevExpress.Data.Linq.Helpers;
+using DevExpress.ProductsDemo.Win.Core.Helpers;
 using DevExpress.ProductsDemo.Win.Domain;
 using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.ProductsDemo.Win.Repositories;
@@ -966,7 +967,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
                         var updatedProject = new Domain.Project
                         {
                             Id = lot.ProjectId,
-                            //   OperationNumber = lot.OperationNumber,
                             OperationName = lot.OperationName.Split('\u001F')[0].Trim(),
                             ProgramId = lot.ProgramId ?? 0,
                             DairaId = lot.DairaId ?? 0,
@@ -974,8 +974,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
                             DomainId = lot.DomainId ?? 0,
                             SectorId = lot.SectorId ?? 0,
                             HasLots = lot.LotNumber > 1,
-                            UpdatedBy = 1
                         };
+
 
                         _projectRepo.Update(updatedProject, conn, transaction);
                         _lotRepo.Update(updatedLot, conn, transaction);

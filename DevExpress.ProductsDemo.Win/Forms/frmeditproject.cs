@@ -1,4 +1,5 @@
-﻿using DevExpress.ProductsDemo.Win.Domain;
+﻿using DevExpress.ProductsDemo.Win.Core.Helpers;
+using DevExpress.ProductsDemo.Win.Domain;
 using DevExpress.ProductsDemo.Win.Repositories;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
@@ -245,7 +246,6 @@ namespace DevExpress.ProductsDemo.Win.Forms
                         {
                             Id = _lot.ProjectId,
                            
-                            //OperationNumber = txtOperationNumber.Text.Trim(),
                             OperationName = txtOperationName.Text.Trim(),
                             ProgramId = Convert.ToInt32(cmbProgram.EditValue),
                             DairaId = Convert.ToInt32(cmbDaira.EditValue),
@@ -253,7 +253,6 @@ namespace DevExpress.ProductsDemo.Win.Forms
                             DomainId = Convert.ToInt32(cmbDomain.EditValue),
                             SectorId = Convert.ToInt32(cmbSector.EditValue),
                             HasLots = HasLots,
-                            UpdatedBy = 1
                         };
 
                         _projectRepo.Update(project, conn, transaction);
@@ -338,7 +337,7 @@ namespace DevExpress.ProductsDemo.Win.Forms
                                     SpecialStatus2Id = NullableId(lookUpEdit16),
                                     SpecialStatus3Id = NullableId(lookUpEdit19),
                                     ProjectStatusId = NullableId(lookUpEdit20),
-                                    Notes = NullIfBlank(memoEdit2.Text)
+                                    Notes = NullIfBlank(memoEdit2.Text),
                                 };
                                 _lotRepo.Update(updatedLot3, conn, transaction);
                             }
@@ -383,7 +382,6 @@ namespace DevExpress.ProductsDemo.Win.Forms
             ok &= RequireLookup(cmbCommune, "Commune is required");
             ok &= RequireLookup(cmbDomain, "Domain is required");
             ok &= RequireLookup(cmbSector, "Sector is required");
-            ok &= Require(txtLotName, "Lot Name is required");
             return ok;
         }
         private bool Require(TextEdit txt, string msg)

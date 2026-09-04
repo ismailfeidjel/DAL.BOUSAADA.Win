@@ -1,4 +1,5 @@
-﻿using DevExpress.ProductsDemo.Win.Domain;
+﻿using DevExpress.ProductsDemo.Win.Core.Helpers;
+using DevExpress.ProductsDemo.Win.Domain;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -69,6 +70,7 @@ pr.name  AS programname,
             ps.name AS project_status,
 
             l.Notes, l.FlagsId, 
+            u.username AS updated_by_name,
 
 
             l.updated_by,
@@ -109,13 +111,13 @@ pr.name  AS programname,
         LEFT JOIN project_statuses ps
             ON ps.id = l.project_status_id
 
+        LEFT JOIN users u
+            ON u.id = l.updated_by
+
         ORDER BY
-
         p.sort_order,
-
     p.daira_id,
     p.commune_id,
-    p.operation_number DESC,
     l.lot_number ";
 
                 using (var cmd = new MySqlCommand(sql, conn))
@@ -127,10 +129,7 @@ pr.name  AS programname,
                         {
                             Id = Convert.ToInt32(rd["id"]),
                             ProjectId = Convert.ToInt32(rd["project_id"]),
-
-                            //OperationNumber = rd["operation_number"].ToString(),
                             OperationName = $"{rd["operation_name"]}{'\u001F'} {rd["lot_name"]}",
-
                             Program = rd["program"]?.ToString(),
                             ProgramType = rd["programtype"]?.ToString(),
                             ProgramYear = rd["programyear"]?.ToString(),
@@ -198,7 +197,8 @@ pr.name  AS programname,
                                     : rd["notes"].ToString(),
                             FlagsId = rd["FlagsId"] != DBNull.Value ? (int?)rd["FlagsId"] : null,
 
-                            UpdatedBy = rd["updated_by"] == DBNull.Value ? null : rd["updated_by"].ToString(),
+                           // UpdatedBy = rd["updated_by"] == DBNull.Value ? null : rd["updated_by"].ToString(),
+                            UpdatedBy = rd["updated_by_name"] == DBNull.Value ? null : rd["updated_by_name"].ToString(),
                             UpdatedAt = rd["updated_at"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(rd["updated_at"])
                         });
                     }
@@ -234,6 +234,7 @@ pr.name  AS programname,
             l.special_status2_id,
             l.special_status3_id,
             l.project_status_id,
+            l.updated_by,
 
             d.name AS daira,
             c.name AS commune,
@@ -300,7 +301,6 @@ pr.name  AS programname,
         WHERE l.project_id = @project_id
 
         ORDER BY
-            p.operation_number,
             l.lot_number DESC";
 
                 using (var cmd = new MySqlCommand(sql, conn))
@@ -315,8 +315,6 @@ pr.name  AS programname,
                             {
                                 Id = Convert.ToInt32(rd["id"]),
                                 ProjectId = Convert.ToInt32(rd["project_id"]),
-
-                              //  OperationNumber = rd["operation_number"].ToString(),
                                 OperationName = $"{rd["operation_name"]}{Environment.NewLine} {rd["lot_name"]}",
 
                                 Program = rd["program"]?.ToString(),
@@ -365,7 +363,8 @@ pr.name  AS programname,
 
                                 Notes = rd["notes"] == DBNull.Value
                                         ? null
-                                        : rd["notes"].ToString()
+                                        : rd["notes"].ToString(),
+                                UpdatedBy = rd["updated_by"]?.ToString()
                             });
                         }
                     }
@@ -444,7 +443,9 @@ pr.name  AS programname,
                     @special_status2_id,
                     @special_status3_id,
                     @project_status_id,
-                    @notes
+                    @notes,
+                    @updated_by
+
                 );
 
                 SELECT LAST_INSERT_ID();";
@@ -452,6 +453,7 @@ pr.name  AS programname,
                 using (var cmd = new MySqlCommand(sql, conn))
                 {
                     FillParameters(cmd, lot);
+                    cmd.Parameters.AddWithValue("@updated_by", CurrentSession.User?.Id ?? (object)DBNull.Value);
 
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
@@ -477,6 +479,7 @@ pr.name  AS programname,
             special_status3_id = @special_status3_id,
             project_status_id = @project_status_id,
             notes = @notes,
+            updated_by=@updated_by,
             FlagsId = @FlagsId
         WHERE id = @id";
 
@@ -484,6 +487,7 @@ pr.name  AS programname,
             {
                 FillParameters(cmd, lot);
                 cmd.Parameters.AddWithValue("@id", lot.Id);
+                cmd.Parameters.AddWithValue("@updated_by", CurrentSession.User?.Id ?? (object)DBNull.Value); 
                 cmd.Parameters.AddWithValue("@FlagsId", lot.FlagsId ?? (object)DBNull.Value);
                 return cmd.ExecuteNonQuery() > 0;
             }
