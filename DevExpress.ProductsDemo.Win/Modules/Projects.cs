@@ -123,14 +123,11 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         private void gridView1_CustomRowFilter(object sender, DevExpress.XtraGrid.Views.Base.RowFilterEventArgs e)
         {
-            // Check if either AutoFilter/Criteria OR Find Panel search is active
-            bool hasActiveFilter = !ReferenceEquals(gridView1.ActiveFilterCriteria, null)
-                                || !string.IsNullOrEmpty(gridView1.FindFilterText);
-
-            if (!hasActiveFilter)
+            // If there is no active filter, let the grid display everything normally
+            if (ReferenceEquals(gridView1.ActiveFilterCriteria, null))
                 return;
 
-            // Only intervene during custom second pass
+            // Only intervene during our custom second pass
             if (_isCustomFiltering)
             {
                 var dataSource = gridView1.DataSource as System.Collections.IList;
@@ -328,8 +325,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
         public ProjectModule()
         {
             InitializeComponent();
-            NotifyStartupCompleted();
-
         }
         RepositoryItemMemoEdit memo = new RepositoryItemMemoEdit();
 
@@ -456,6 +451,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.Columns["FlagsId"].Width = 60;
 
             AddCol("Daira", "الدائرة", 100);
+            // gridView1.Columns["Daira"].OptionsColumn.AllowMerge = DefaultBoolean.True;
+           // AddCol("LotNumber", "N", 100);
+
             AddCol("Commune", "البلدية", 100);
             AddCol("ProgramId", "البرنامج", 110);
             AddCol("ExpectedEndDate", " الاجال", 120, "{0:dd/MM/yyyy}", FormatType.DateTime);
@@ -475,13 +473,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             AddCol("FinancialProgress", "التقدم المالي", 100, "{0:N0} %");
             AddCol("OperationName", "اسم العملية", 180);
-            if (gridView1.Columns["OperationName"] != null)
-            {
-                gridView1.Columns["OperationName"].FilterMode = DevExpress.XtraGrid.ColumnFilterMode.DisplayText;
-            }
-            gridView1.OptionsFind.FindFilterColumns = "OperationName";
-            // gridView1.OptionsFind.AlwaysHighlightFindResults = true;
-            gridView1.OptionsFind.Behavior = FindPanelBehavior.Filter;
             AddCol("DomainId", "القطاع", 110);
             domainLookup = new RepositoryItemLookUpEdit();
             domainLookup.DataSource = new LookupRepository().GetAll("domains");
@@ -510,6 +501,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
 
             AddCol("LotBudget", "الغلاف المالي", 110, "{0:N2}");
+          //  AddCol("SortOrder", "S", 110);
             AddCol("RegisteredAmount", "المبلغ المسجل", 110, "{0:N2}");
             AddCol("ConsumedAmount", "المبلغ المستهلك", 110, "{0:N2}");
             AddCol("Remaining", "الباقي", 110, "{0:N2}");
@@ -634,25 +626,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             //----------------------------------------------------------------------------
             gridView1.OptionsView.ShowFooter = true;
 
-
-            // Subscribe to the custom calculation event
-            gridView1.CustomSummaryCalculate -= gridView1_CustomSummaryCalculate;
-            gridView1.CustomSummaryCalculate += gridView1_CustomSummaryCalculate;
-
-            // Configure custom summary item
-            var distinctProjectSummary = new DevExpress.XtraGrid.GridColumnSummaryItem(
-                DevExpress.Data.SummaryItemType.Custom,
-                "OperationName",
-                "المشاريع: {0}"
-            )
-            {
-                Tag = "DistinctProjectCount"
-            };
-
-            gridView1.Columns["OperationName"].Summary.Clear();
-            gridView1.Columns["OperationName"].Summary.Add(distinctProjectSummary);
-
-
             gridView1.Columns["LotBudget"].Summary.Add(
                 DevExpress.Data.SummaryItemType.Sum, "LotBudget", "{0:N2}");
 
@@ -666,6 +639,11 @@ namespace DevExpress.ProductsDemo.Win.Modules
                DevExpress.Data.SummaryItemType.Sum, "Remaining", "{0:N2}");
 
 
+            //gridView1.Columns["OperationName"].Summary.Add(
+            //    DevExpress.Data.SummaryItemType.Count,
+            //    "Daira",
+            //    "عددها: {0}");
+
             gridView1.Appearance.FooterPanel.Font =
     new Font("Tahoma", 8, FontStyle.Bold);
 
@@ -673,6 +651,11 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 DevExpress.Utils.HorzAlignment.Center;
             gridView1.Appearance.FooterPanel.TextOptions.WordWrap =
     DevExpress.Utils.WordWrap.Wrap;  // ← add this
+
+
+
+
+
 
             //  gridView1.Columns["OperationName"].ColumnEdit = memo;
             gridView1.OptionsView.RowAutoHeight = true;
@@ -689,68 +672,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
         }
         /// <summary>
         /// 
+        /// </summary>
         /// 
-        // HashSet to keep track of unique projects during the summary calculation
-        private readonly HashSet<int> _distinctProjectsForSummary = new HashSet<int>();
-
-        private void gridView1_CustomSummaryCalculate(object sender, DevExpress.Data.CustomSummaryEventArgs e)
-        {
-            var summaryItem = e.Item as DevExpress.XtraGrid.GridSummaryItem;
-            if (summaryItem == null || summaryItem.Tag?.ToString() != "DistinctProjectCount")
-                return;
-
-            // 1. Reset set on calculation start
-            if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Start)
-            {
-                _distinctProjectsForSummary.Clear();
-            }
-
-            // 2. Fetch value via e.GetValue (DevExpress reliable API)
-            if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Calculate)
-            {
-                object projectIdVal = e.GetValue("ProjectId");
-                if (projectIdVal != null && projectIdVal != DBNull.Value)
-                {
-                    _distinctProjectsForSummary.Add(Convert.ToInt32(projectIdVal));
-                }
-            }
-
-            // 3. Assign total count
-            if (e.SummaryProcess == DevExpress.Data.CustomSummaryProcess.Finalize)
-            {
-                e.TotalValue = _distinctProjectsForSummary.Count;
-            }
-        }
-
-
-
-
         private LotGridModel _draggedRow;
         private Point _dragStartPoint;
-        private bool _startupCompleted;
-
-        private void NotifyStartupCompleted()
-        {
-            if (_startupCompleted)
-                return;
-
-            _startupCompleted = true;
-
-            BeginInvoke(new Action(() =>
-            {
-                gridControl1.RefreshDataSource();
-
-                gridView1.BestFitColumns();
-
-                gridView1.RefreshData();
-
-                Application.DoEvents();
-
-                var mainForm = FindForm() as frmMain;
-
-                mainForm?.CloseStartupSplash();
-            }));
-        }
 
         private void SetupProjectDragReorder()
         {
@@ -918,6 +843,23 @@ namespace DevExpress.ProductsDemo.Win.Modules
             if (e.RowHeight < MinRowHeight)
                 e.RowHeight = MinRowHeight;
         }
+        private void gridView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            var hitInfo = gridView1.CalcHitInfo(new Point(e.X, e.Y));
+            if (!hitInfo.InRow) return;
+
+            var row = gridView1.GetRow(hitInfo.RowHandle) as LotGridModel;
+            if (row == null) return;
+
+            // Select every row belonging to the same project, so dragging any one of them drags the whole group
+            gridView1.ClearSelection();
+            for (int i = 0; i < gridView1.DataRowCount; i++)
+            {
+                if (gridView1.GetRow(i) is LotGridModel r && r.ProjectId == row.ProjectId)
+                    gridView1.SelectRow(i);
+            }
+        }
+
 
         private bool _layoutReady = false;
         private void SaveLayout()
@@ -983,14 +925,14 @@ namespace DevExpress.ProductsDemo.Win.Modules
                             SpecialStatus3Id = lot.SpecialStatus3Id,
                             ProjectStatusId = lot.ProjectStatusId,
                             Notes = lot.Notes,
-                            FlagsId = lot.FlagsId
+                            FlagsId = lot.FlagsId  
 
                         };
 
                         var updatedProject = new Domain.Project
                         {
                             Id = lot.ProjectId,
-                            //   OperationNumber = lot.OperationNumber,
+                         //   OperationNumber = lot.OperationNumber,
                             OperationName = lot.OperationName.Split('\u001F')[0].Trim(),
                             ProgramId = lot.ProgramId ?? 0,
                             DairaId = lot.DairaId ?? 0,
@@ -1054,8 +996,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             // Re-apply the current project-level filter if one is active,
             // otherwise bind the full dataset directly
             ApplyProjectLevelFilter(_currentLotFilter);
-            NotifyStartupCompleted();
-
         }
 
         // ── Detail Panel ─────────────────────────────────────────────
@@ -1454,7 +1394,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         protected internal override void ButtonClick(string tag)
         {
-            //   XtraMessageBox.Show($"Tag received: {tag}");   
+         //   XtraMessageBox.Show($"Tag received: {tag}");   
 
 
             if (tag != null && tag.StartsWith("SavedFilter:"))
@@ -1532,7 +1472,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
         }
 
-
+        
 
 
 
@@ -1842,6 +1782,61 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 }
             }
         }
+        public void ShowPreviewWithPowerPointButton(XtraReport report)
+        {
+            // 1. Generate the document first
+            report.CreateDocument();
+
+            // 2. Wrap the report in a Print Tool
+            using (ReportPrintTool printTool = new ReportPrintTool(report))
+            {
+                // 3. Access the Ribbon-based Preview Form
+                PrintPreviewRibbonFormEx ribbonForm = printTool.PreviewRibbonForm;
+
+                // 4. Create your custom button
+                BarButtonItem btnExportPptx = new BarButtonItem();
+                btnExportPptx.Caption = "تصدير إلى PowerPoint";
+
+                // Optional: If you want to use a built-in DevExpress SVG icon
+                // btnExportPptx.ImageOptions.SvgImage = DevExpress.Images.SvgImageCollection.FromResources("...svg");
+
+                // 5. Attach the click event using the exporter class we just built
+                btnExportPptx.ItemClick += (sender, e) =>
+                {
+                    using (SaveFileDialog dialog = new SaveFileDialog())
+                    {
+                        dialog.Filter = "PowerPoint Presentation|*.pptx";
+                        dialog.Title = "تصدير التقرير إلى عرض تقديمي";
+                        dialog.FileName = "تقرير_المشاريع.pptx";
+
+                        if (dialog.ShowDialog() == DialogResult.OK)
+                        {
+                            // Call the PowerPointExoporter class
+                            //PowerPointReportExporter.ExportReportToPptx(report, dialog.FileName);
+
+                            // Open the file for the user
+                            System.Diagnostics.Process.Start(dialog.FileName);
+                        }
+                    }
+                };
+
+                // 6. Add the button to a new group on the main Preview tab
+                if (ribbonForm.Ribbon.Pages.Count > 0)
+                {
+                    RibbonPage previewPage = ribbonForm.Ribbon.Pages[0]; // The main print preview page
+
+                    RibbonPageGroup customGroup = new RibbonPageGroup("إضافات"); // "Extras" or custom group name
+                    customGroup.ItemLinks.Add(btnExportPptx);
+
+                    // Add the group to the page
+                    previewPage.Groups.Add(customGroup);
+                }
+
+                // 7. Show the custom preview dialog
+                printTool.ShowPreviewDialog();
+            }
+        }
+
         private void gridView1_CustomDrawCell(object sender, RowCellCustomDrawEventArgs e)
         {
             // FIX: Ensure we are only customizing standard data rows. 
