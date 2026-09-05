@@ -101,10 +101,11 @@ namespace DevExpress.ProductsDemo.Win
             foreach (var f in new Repositories.SavedFiltersRepository().GetAll())
             {
                 var item = new XtraBars.Ribbon.GalleryItem();
-                item.Caption = f.Name;
+                // item.Caption = f.Name;
+                item.Caption = FormatCaptionForRibbon(f.Name);
                 item.Tag = $"SavedFilter:{f.Id}";
                 item.Value = $"SavedFilter:{f.Id}";
-                item.Checked = true;
+              //  item.Checked = true;
 
                 DevExpress.Utils.Svg.SvgImage icon = null;
                 if (!string.IsNullOrEmpty(f.IconName))
@@ -127,6 +128,26 @@ namespace DevExpress.ProductsDemo.Win
                 _savedFiltersGroup.Items.Insert(insertIndex, item);
                 insertIndex++;
             }
+        }
+
+        private string FormatCaptionForRibbon(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return name;
+
+            // Split the text into individual words
+            var words = name.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            // If it's only one word, no need to wrap
+            if (words.Length <= 1) return name;
+
+            // Find the middle point (if 3 words, put 2 on the first line)
+            int mid = words.Length == 3 ? 2 : (int)Math.Ceiling(words.Length / 2.0);
+
+            string line1 = string.Join(" ", words.Take(mid));
+            string line2 = string.Join(" ", words.Skip(mid));
+
+            // Join the two halves with a newline
+            return $"{line1}\n{line2}";
         }
 
         private void SetupProgramSelectorRibbon()
@@ -213,7 +234,7 @@ namespace DevExpress.ProductsDemo.Win
             AllowCustomizationMenuList.Add(bsiNavigation);
             AllowCustomizationMenuList.Add(skinDropDownButtonItem1);
             ribbonControl1.Toolbar.ItemLinks.Add(skinDropDownButtonItem1);
-            AllowCustomizationMenuList.Add(skinPaletteRibbonGalleryBarItem1); 
+            AllowCustomizationMenuList.Add(skinPaletteRibbonGalleryBarItem1);
             ribbonControl1.Toolbar.ItemLinks.Add(skinPaletteRibbonGalleryBarItem1);
         }
 
@@ -394,8 +415,8 @@ namespace DevExpress.ProductsDemo.Win
 
         private void rgbiCurrentView_GalleryInitDropDownGallery(object sender, InplaceGalleryEventArgs e)
         {
-           // e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiManageView);
-           // e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiSaveCurrentView);
+            // e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiManageView);
+            // e.PopupGallery.GalleryDropDown.ItemLinks.Add(bbiSaveCurrentView);
             e.PopupGallery.SynchWithInRibbonGallery = true;
         }
 
@@ -405,18 +426,18 @@ namespace DevExpress.ProductsDemo.Win
             if (modulesNavigator.CurrentModule == null) return;
 
 
-                if (e.Item.Checked)
-                {
-                    // First press: Item becomes checked -> Apply the specific filter
-                    modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Value));
-                }
-                else
-                {
-                    //if ( !  e.Item.Value.ToString().StartsWith("SaveCurrentFilter"))
-                        // Second press: Item becomes unchecked -> Send a command to clear the filter
-                        modulesNavigator.CurrentModule.ButtonClick("ClearFilter");
-                }
-            
+            if (e.Item.Checked)
+            {
+                // First press: Item becomes checked -> Apply the specific filter
+                modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Value));
+            }
+            else
+            {
+                //if ( !  e.Item.Value.ToString().StartsWith("SaveCurrentFilter"))
+                // Second press: Item becomes unchecked -> Send a command to clear the filter
+                modulesNavigator.CurrentModule.ButtonClick("ClearFilter");
+            }
+
         }
 
         private void galleryReportPrinting_GalleryItemClick(object sender, GalleryItemClickEventArgs e)
@@ -667,6 +688,10 @@ namespace DevExpress.ProductsDemo.Win
         {
             e.PopupGallery.SynchWithInRibbonGallery = true;
 
+            // 1. Enable Word Wrap for the dropdown gallery items
+            e.PopupGallery.Appearance.ItemCaptionAppearance.Normal.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            e.PopupGallery.Appearance.ItemCaptionAppearance.Normal.Options.UseTextOptions = true;
+
             bool alreadyAdded = e.PopupGallery.GalleryDropDown.ItemLinks
                 .Cast<BarItemLink>()
                 .Any(l => l.Item == bbiManageSavedFilters);
@@ -677,10 +702,13 @@ namespace DevExpress.ProductsDemo.Win
             {
                 if (modulesNavigator.CurrentModule == null) return;
 
-                string caption = args.Item.Caption;
+                // 2. Clean the caption by replacing newlines with spaces so it matches the DB Name
+                string rawCaption = args.Item.Caption ?? "";
+                string cleanCaption = rawCaption.Replace("\r", "").Replace("\n", " ").Replace("  ", " ").Trim();
+
                 var match = new Repositories.SavedFiltersRepository()
                     .GetAll()
-                    .FirstOrDefault(f => f.Name == caption);
+                    .FirstOrDefault(f => f.Name == cleanCaption || f.Name == rawCaption);
 
                 if (match != null)
                 {
@@ -693,5 +721,4 @@ namespace DevExpress.ProductsDemo.Win
             };
         }
     }
-
 }
