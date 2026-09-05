@@ -52,25 +52,33 @@ namespace DevExpress.ProductsDemo.Win
 
             var mainForm = new frmMain();
 
-            mainForm.Show();
+           // mainForm.Show();
 
             SplashScreenManager.CloseForm(false);
             mainForm.Enabled = false;
+            mainForm.Opacity = 0;                 // invisible until fully painted -> no flicker
 
-            bool loggedIn;
-            using (var loginForm = new DevExpress.ProductsDemo.Win.Forms.frmLogin())
+            mainForm.Shown += (s, e) =>
             {
-                 loggedIn = loginForm.ShowDialog(mainForm) == DialogResult.OK;
-               // loggedIn = true;
-            }
+                // Shown fires after the first paint request; BeginInvoke defers until that paint is done
+                mainForm.BeginInvoke(new Action(() =>
+                {
+                    mainForm.Update();            // flush any remaining paint messages
+                    SplashScreenManager.CloseForm(false);
+                    FadeIn(mainForm);
+                    mainForm.Activate();
+                    bool loggedIn;
+                    using (var loginForm = new DevExpress.ProductsDemo.Win.Forms.frmLogin())
+                        loggedIn = loginForm.ShowDialog(mainForm) == DialogResult.OK;
+                    if (!loggedIn) { mainForm.Close(); return; }
+                    mainForm.Enabled = true;
+                }));
+            };
 
-            if (!loggedIn)
-            {
-                mainForm.Close();
-                return;
-            }
 
-            mainForm.Enabled = true;
+
+            mainForm.Show();
+
             Application.Run(mainForm);
         }
         static Assembly OnCurrentDomainAssemblyResolve(object sender, ResolveEventArgs args)
@@ -83,6 +91,17 @@ namespace DevExpress.ProductsDemo.Win
             }
             return null;
 
+        }
+        //SplashScreenManager.Default.SendCommand(cmd, "جاري تحميل البيانات...")
+        static void FadeIn(Form form)
+        {
+            var timer = new Timer { Interval = 15 };
+            timer.Tick += (s, e) =>
+            {
+                form.Opacity = Math.Min(1.0, form.Opacity + 0.1);
+                if (form.Opacity >= 1.0) { timer.Stop(); timer.Dispose(); }
+            };
+            timer.Start();
         }
     }
 }

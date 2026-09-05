@@ -332,20 +332,6 @@ namespace DevExpress.ProductsDemo.Win
             nbgModules.SelectedLinkIndex = 0;
         }
 
-        public void CloseStartupSplash()
-        {
-            BeginInvoke(new Action(() =>
-            {
-                try
-                {
-                    SplashScreenManager.CloseForm(false);
-                }
-                catch
-                {
-                    // Splash already closed
-                }
-            }));
-        }
 
 
 
