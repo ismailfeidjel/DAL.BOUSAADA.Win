@@ -70,7 +70,7 @@ namespace DevExpress.ProductsDemo.Win
                     bool loggedIn;
                     using (var loginForm = new DevExpress.ProductsDemo.Win.Forms.frmLogin())
                         loggedIn = loginForm.ShowDialog(mainForm) == DialogResult.OK;
-                    if (!loggedIn) { mainForm.Close(); return; }
+                    //if (!loggedIn) { mainForm.Close(); return; }
                     mainForm.Enabled = true;
                 }));
             };

@@ -22,7 +22,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace DevExpress.ProductsDemo.Win.Modules
@@ -1369,7 +1368,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
             var report = BuildReportFromTemplateOrDefault();
             report.CreateDocument();
-            report.ShowPreviewDialog();
+            PowerPointReportExporter.ShowPreviewWithPowerPointButton(report);
+
+           // report.ShowPreviewDialog();
         }
         private string _currentFilterLabel = "";
 
@@ -1549,7 +1550,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             try
             {
-                LoadData();
+               // LoadData();
                 var allData = _lotRepo.GetGridData();
                 var data = _selectedProgramId.HasValue
                     ? allData.Where(r => r.ProgramId == _selectedProgramId.Value).ToList()
@@ -1558,8 +1559,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     .FirstOrDefault(p => p.Id == _selectedProgramId)?.Name ?? "";
 
                 var report = StatusSummaryReportBuilder.Build(data, programName);
-                report.CreateDocument();
-                report.ShowPreviewDialog();
+              PowerPointReportExporter.ShowPreviewWithPowerPointButton(report);  
+
             }
             catch (InvalidOperationException ex)
             {
@@ -1757,11 +1758,12 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 {
                     var all = _lotRepo.GetGridData();
                     return all.Where(r =>
-                        r.ProgramId == programId &&
+                        r.ProgramId == programId &&r.ProjectStatusId!=7&&
                         (selectedDairaIds.Count == 0 || (r.DairaId.HasValue && selectedDairaIds.Contains(r.DairaId.Value)))
                     ).ToList();
-                });
-                report.ShowPreviewDialog();
+                }, LifecycleGrouping.ByDaira);
+                //report.ShowPreviewDialog();
+                PowerPointReportExporter.ShowPreviewWithPowerPointButton(report);
             }
             catch (InvalidOperationException ex)
             {

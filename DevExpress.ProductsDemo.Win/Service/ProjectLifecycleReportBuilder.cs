@@ -14,6 +14,11 @@ namespace DevExpress.ProductsDemo.Win.Services
         public int StageOrder { get; set; }
         public string StageLabel { get; set; }
     }
+    public enum LifecycleGrouping
+    {
+        ByStage,
+        ByDaira
+    }
     public static class ProjectLifecycleReportBuilder
     {
         public const string TemplateKey = "قالب_تقرير_المشاريع_حسب_المرحلة";
@@ -37,7 +42,7 @@ namespace DevExpress.ProductsDemo.Win.Services
         /// Builds the lifecycle report for a SINGLE program type (e.g. all ADSEC programs).
         /// Do not pass programs mixing multiple types — throws if it detects that.
         /// </summary>
-        public static XtraReport Build(GridView gridView, List<ProgramLookupItem> programs, Func<int, List<LotGridModel>> getDataForProgram)
+        public static XtraReport Build(GridView gridView, List<ProgramLookupItem> programs, Func<int, List<LotGridModel>> getDataForProgram, LifecycleGrouping grouping = LifecycleGrouping.ByStage)
         {
             if (programs.Select(p => p.Type).Distinct().Count() > 1)
                 throw new InvalidOperationException("هذا التقرير يجب أن يشمل نوع برنامج واحد فقط.");
@@ -56,7 +61,12 @@ namespace DevExpress.ProductsDemo.Win.Services
             foreach (var program in orderedPrograms)
             {
                 var data = getDataForProgram(program.Id);
-                var stageRows = ComputeStageRows(data);
+
+                var stageRows = grouping == LifecycleGrouping.ByDaira
+            ? ComputeDairaRows(data)
+            : ComputeStageRows(data);
+
+
                 if (stageRows.Count == 0) continue;
 
                 XtraReport titlePage = BuildTitlePage(titleTemplatePath, program.Name);
@@ -118,6 +128,8 @@ namespace DevExpress.ProductsDemo.Win.Services
                     AppendPages(combined, titlePage);
                     AppendPages(combined, listPage);
                 }
+                combined.PrintingSystem.ContinuousPageNumbering = true; // optional, fixes page X of Y across parts
+
             }
 
             return combined ?? BuildTitlePage(titleTemplatePath, "لا توجد برامج");
@@ -189,6 +201,47 @@ namespace DevExpress.ProductsDemo.Win.Services
             // 4. Sort by Stage -> Project -> internal Lot order so they display perfectly grouped
             return result
                 .OrderBy(r => r.StageOrder)
+                .ThenBy(r => r.ProjectId)
+                .ThenBy(r => r.LotNumber)
+                .ToList();
+        }
+
+        private static List<ProjectStageRow> ComputeDairaRows(List<LotGridModel> data)
+        {
+            var result = new List<ProjectStageRow>();
+            var sourceProps = typeof(LotGridModel).GetProperties();
+
+            // Give each daira a stable order: by name (Arabic culture) so the same daira
+            // always gets the same position across programs
+            var dairaOrder = data
+                .Select(r => new { r.DairaId, Name = r.Daira ?? "" })
+                .Distinct()
+                //.OrderBy(d => d.Name, StringComparer.Create(new System.Globalization.CultureInfo("ar-DZ"), true))
+                .Select((d, index) => new { d.DairaId, d.Name, Order = index + 1 })
+                .ToList();
+
+            foreach (var row in data)
+            {
+                var daira = dairaOrder.First(d => d.DairaId == row.DairaId && d.Name == (row.Daira ?? ""));
+
+                var groupRow = new ProjectStageRow();
+                foreach (var prop in sourceProps)
+                {
+                    var targetProp = typeof(ProjectStageRow).GetProperty(prop.Name);
+                    if (targetProp != null && targetProp.CanWrite)
+                        targetProp.SetValue(groupRow, prop.GetValue(row));
+                }
+
+                // Reuse the template's group fields: order/label now describe the daira
+                groupRow.StageOrder = daira.Order;
+                groupRow.StageLabel = string.IsNullOrWhiteSpace(daira.Name) ? "بدون دائرة" : daira.Name;
+
+                result.Add(groupRow);
+            }
+
+            return result
+                .OrderBy(r => r.StageOrder)
+                //.ThenBy(r => r.Commune)      // inside a daira, keep communes together
                 .ThenBy(r => r.ProjectId)
                 .ThenBy(r => r.LotNumber)
                 .ToList();
