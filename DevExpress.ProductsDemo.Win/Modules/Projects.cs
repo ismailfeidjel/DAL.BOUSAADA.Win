@@ -386,9 +386,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.ColumnFilterChanged += gridView1_ColumnFilterChanged;
             gridView1.CustomRowFilter += gridView1_CustomRowFilter;
 
-
-
-
             gridControl1.MainView = gridView1;
             gridView1.OptionsView.ShowGroupPanel = true;
             gridView1.OptionsBehavior.Editable = true;
@@ -396,6 +393,13 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.OptionsSelection.MultiSelect = false;
             gridView1.ColumnWidthChanged += (s, e) => SaveLayout();
             gridView1.ColumnPositionChanged += (s, e) => SaveLayout();
+
+            gridView1.OptionsLayout.StoreDataSettings = false;   // excludes filter, sort, grouping from the saved layout
+            gridView1.OptionsLayout.StoreVisualOptions = true;    // keeps column widths/visibility (already true, leave as-is)
+            gridView1.OptionsLayout.StoreAppearance = false;      // already false, fine
+            gridView1.OptionsLayout.StoreFormatRules = false;     // already false, fine
+            gridView1.OptionsLayout.StoreFormatRules = false;
+            gridView1.OptionsLayout.StoreAppearance = false;
 
 
             gridView1.Appearance.HeaderPanel.Font =
