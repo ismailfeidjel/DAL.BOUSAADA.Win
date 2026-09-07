@@ -1742,27 +1742,32 @@ namespace DevExpress.ProductsDemo.Win.Modules
         public void PrintProjectLifecycleReport()
         {
             List<int> selectedDairaIds;
+            LifecycleGrouping selectedGrouping;
 
-            using (var dlg = new frmSelectDairas())
+            // Use the renamed modern form
+            using (var dlg = new frmSelectReportOptions())
             {
                 if (dlg.ShowDialog(this) != DialogResult.OK)
                     return; // user cancelled — don't generate anything
 
                 selectedDairaIds = dlg.SelectedDairaIds;
+                selectedGrouping = dlg.SelectedGrouping; // Retrieve user choice
             }
 
             try
             {
                 var programs = GetPrograms().Cast<ProgramLookupItem>().ToList();
+
+                // Pass the selectedGrouping dynamically instead of hardcoding ByCommune
                 var report = ProjectLifecycleReportBuilder.Build(gridView1, programs, programId =>
                 {
                     var all = _lotRepo.GetGridData();
                     return all.Where(r =>
-                        r.ProgramId == programId &&r.ProjectStatusId!=7&&
+                        r.ProgramId == programId && r.ProjectStatusId != 7 &&
                         (selectedDairaIds.Count == 0 || (r.DairaId.HasValue && selectedDairaIds.Contains(r.DairaId.Value)))
                     ).ToList();
-                }, LifecycleGrouping.ByDaira);
-                //report.ShowPreviewDialog();
+                }, selectedGrouping);
+
                 PowerPointReportExporter.ShowPreviewWithPowerPointButton(report);
             }
             catch (InvalidOperationException ex)
@@ -1775,7 +1780,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
         {
             List<int> selectedDairaIds;
 
-            using (var dlg = new frmSelectDairas())
+            using (var dlg = new frmSelectReportOptions())
             {
                 if (dlg.ShowDialog(this) != DialogResult.OK)
                     return; // user cancelled — don't generate anything

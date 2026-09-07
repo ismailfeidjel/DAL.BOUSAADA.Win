@@ -555,11 +555,11 @@
     <Compile Include="Core\BaseForms\frmSectors.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\BaseForms\frmSelectDairas.cs">
+    <Compile Include="Core\BaseForms\frmSelectReportOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\BaseForms\frmSelectDairas.Designer.cs">
-      <DependentUpon>frmSelectDairas.cs</DependentUpon>
+    <Compile Include="Core\BaseForms\frmSelectReportOptions.Designer.cs">
+      <DependentUpon>frmSelectReportOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="Core\BaseForms\frmSelectPrograms .cs">
       <SubType>Form</SubType>
@@ -990,6 +990,7 @@
     <None Include="Resources\icons8_c_32px_1.png" />
     <None Include="Resources\adsec.svg" />
     <None Include="Resources\csgcl.svg" />
+    <Content Include="Reports\06092026.sql" />
     <Content Include="Resources\FilterIcons\Action_Export_ToCSV.svg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

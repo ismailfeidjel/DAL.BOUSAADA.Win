@@ -17,7 +17,8 @@ namespace DevExpress.ProductsDemo.Win.Services
     public enum LifecycleGrouping
     {
         ByStage,
-        ByDaira
+        ByDaira,
+        ByCommune
     }
     public static class ProjectLifecycleReportBuilder
     {
@@ -62,9 +63,20 @@ namespace DevExpress.ProductsDemo.Win.Services
             {
                 var data = getDataForProgram(program.Id);
 
-                var stageRows = grouping == LifecycleGrouping.ByDaira
-            ? ComputeDairaRows(data)
-            : ComputeStageRows(data);
+                List<ProjectStageRow> stageRows;
+                switch (grouping)
+                {
+                    case LifecycleGrouping.ByDaira:
+                        stageRows = ComputeDairaRows(data);
+                        break;
+                    case LifecycleGrouping.ByCommune:
+                        stageRows = ComputeCommuneRows(data);
+                        break;
+                    case LifecycleGrouping.ByStage:
+                    default:
+                        stageRows = ComputeStageRows(data);
+                        break;
+                }
 
 
                 if (stageRows.Count == 0) continue;
@@ -81,38 +93,34 @@ namespace DevExpress.ProductsDemo.Win.Services
                 var lifecycleOptions = new GridReportOptions
                 {
                     GroupIdField = "ProjectId",
-
                     FieldAliases = new Dictionary<string, string>
-    {
-        { "Program", "ProgramId" },
-        { "ProjectStatus", "ProjectStatusId" },
-        { "Domain", "DomainId" },
-        { "Sector", "SectorId" }
-    },
-
+                    {
+                        { "Program", "ProgramId" },
+                        { "ProjectStatus", "ProjectStatusId" },
+                        { "Domain", "DomainId" },
+                        { "Sector", "SectorId" }
+                    },
                     FixedColumnWidths = new Dictionary<string, float>
-    {
-        { "__RowNumber__", 30f },
-        { "OperationNumber", 60f },
-        { "Daira", 50f },
-        { "Commune", 50f },
-        { "Program", 40f },
-        { "ExpectedEndDate", 50f },
-        { "LotBudget", 95f },
-        { "RegisteredAmount", 95f },
-        { "ConsumedAmount", 95f },
-        { "Remaining", 95f },
-        { "Contractor", 60f },
-        { "StartDate", 70f },
-        { "ExecutionDuration", 40f },
-        { "PhysicalProgress", 45f },
-        { "FinancialProgress", 40f },
-        { "Domain", 45f },
-        { "Sector", 45f },
-        { "ProjectStatus", 40f }
-    }
-
-                    // add HighlightField/HighlightValue/HighlightColor or UniqueRowIdField here if you want those to apply too
+                    {
+                        { "__RowNumber__", 30f },
+                        { "OperationNumber", 60f },
+                        { "Daira", 50f },
+                        { "Commune", 50f },
+                        { "Program", 40f },
+                        { "ExpectedEndDate", 50f },
+                        { "LotBudget", 95f },
+                        { "RegisteredAmount", 95f },
+                        { "ConsumedAmount", 95f },
+                        { "Remaining", 95f },
+                        { "Contractor", 60f },
+                        { "StartDate", 70f },
+                        { "ExecutionDuration", 40f },
+                        { "PhysicalProgress", 45f },
+                        { "FinancialProgress", 40f },
+                        { "Domain", 45f },
+                        { "Sector", 45f },
+                        { "ProjectStatus", 40f }
+                    }
                 };
                 GridReportBuilder.ApplyGridColumnVisibility(listPage, gridView, lifecycleOptions, out _, out _);
                 GridReportBuilder.ApplyGroupNumbering(listPage, stageRows, lifecycleOptions, "StageOrder");
@@ -242,6 +250,42 @@ namespace DevExpress.ProductsDemo.Win.Services
             return result
                 .OrderBy(r => r.StageOrder)
                 //.ThenBy(r => r.Commune)      // inside a daira, keep communes together
+                .ThenBy(r => r.ProjectId)
+                .ThenBy(r => r.LotNumber)
+                .ToList();
+        }
+
+        private static List<ProjectStageRow> ComputeCommuneRows(List<LotGridModel> data)
+        {
+            var result = new List<ProjectStageRow>();
+            var sourceProps = typeof(LotGridModel).GetProperties();
+
+            var communeOrder = data
+                .Select(r => new { r.CommuneId, Name = r.Commune ?? "" })
+                .Distinct()
+                .Select((c, index) => new { c.CommuneId, c.Name, Order = index + 1 })
+                .ToList();
+
+            foreach (var row in data)
+            {
+                var commune = communeOrder.First(c => c.CommuneId == row.CommuneId && c.Name == (row.Commune ?? ""));
+
+                var groupRow = new ProjectStageRow();
+                foreach (var prop in sourceProps)
+                {
+                    var targetProp = typeof(ProjectStageRow).GetProperty(prop.Name);
+                    if (targetProp != null && targetProp.CanWrite)
+                        targetProp.SetValue(groupRow, prop.GetValue(row));
+                }
+
+                groupRow.StageOrder = commune.Order;
+                groupRow.StageLabel = string.IsNullOrWhiteSpace(commune.Name) ? "بدون بلدية" : commune.Name;
+
+                result.Add(groupRow);
+            }
+
+            return result
+                .OrderBy(r => r.StageOrder)
                 .ThenBy(r => r.ProjectId)
                 .ThenBy(r => r.LotNumber)
                 .ToList();
