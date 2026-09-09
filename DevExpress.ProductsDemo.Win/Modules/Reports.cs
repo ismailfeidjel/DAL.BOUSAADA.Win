@@ -99,8 +99,8 @@ namespace DevExpress.ProductsDemo.Win.Modules
 
                 reportDesigner1.ContainerControl = this;
                 reportDesigner1.OpenReport(path);
-                if (MainRibbon != null && ribbonPagePreview != null)
-                    MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
+                if (MainRibbon != null && ribbonPage1 != null)
+                    MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPage1.Name);
             }
         }
         private void RefreshTemplatesList()
@@ -132,8 +132,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
             // designer's native Save button write directly back to this file.
             reportDesigner1.OpenReport(path);
 
-            if (MainRibbon != null && ribbonPagePreview != null)
-                MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
+
+            if (MainRibbon != null && ribbonPage1 != null)
+                MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPage1.Name);
         }
 
 
@@ -144,42 +145,14 @@ namespace DevExpress.ProductsDemo.Win.Modules
             {
                 reportDesigner1.ContainerControl = this;
 
-                string templatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", "قالب_تقرير_المشاريع.repx");
-
-                if (File.Exists(templatePath))
-                {
-                    XtraReport report = XtraReport.FromFile(templatePath, true);
-
-                    foreach (XtraReportBase item in report.AllControls<XtraReportBase>())
-                    {
-                        item.ReportPrintOptions.DetailCountAtDesignTime = 0;
-                    }
-
-                    reportDesigner1.OpenReport(report);
-                   // _currentOpenReport = report;   // ← track it
-                }
-                else
-                {
-                    XtraMessageBox.Show(
-                        $"القالب غير موجود:\n{templatePath}",
-                        "تنبيه",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                }
-
                 MainRibbon.AutoHideEmptyItems = true;
                 MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByText("VIEW");
                 MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
-                var reportControl = reportDesigner1.ActiveDesignPanel.GetService(typeof(DevExpress.XtraReports.Design.ReportTabControl)) as DevExpress.XtraReports.Design.ReportTabControl;
-                if (reportControl == null || reportControl.PreviewControl == null) return;
-                DevExpress.XtraBars.Docking.DockPanel documentMapDockPanel = reportControl.PreviewControl.GetDockPanel(XtraPrinting.Preview.PreviewDockPanelKind.DocumentMap);
-                if (documentMapDockPanel != null)
-                {
-                    documentMapDockPanel.SavedDock = DevExpress.XtraBars.Docking.DockingStyle.Right;
-                }
+
+                // Nothing is opened by default — the user picks a template from the القوالب panel.
                 return;
             }
-            MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
+            MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPage1.Name);
         }
         public void OpenExternalReport(XtraReport report)
         {
@@ -188,9 +161,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
             reportDesigner1.OpenReport(report);
             _currentOpenReport = report;   // ← track it
 
-            if (MainRibbon != null && ribbonPagePreview != null)
+            if (MainRibbon != null && ribbonPage1 != null)
             {
-                MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPagePreview.Name);
+                MainRibbon.SelectedPage = MainRibbon.MergedPages.GetPageByName(ribbonPage1.Name);
             }
         }
         protected override bool AutoMergeRibbon { get { return true; } }
