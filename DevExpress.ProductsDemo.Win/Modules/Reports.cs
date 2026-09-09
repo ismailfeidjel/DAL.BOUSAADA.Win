@@ -137,15 +137,6 @@ namespace DevExpress.ProductsDemo.Win.Modules
         }
 
 
-
-
-
-
-
-
-
-
-
         internal override void ShowModule(bool firstShow)
         {
             base.ShowModule(firstShow);
@@ -165,7 +156,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     }
 
                     reportDesigner1.OpenReport(report);
-                    _currentOpenReport = report;   // ← track it
+                   // _currentOpenReport = report;   // ← track it
                 }
                 else
                 {

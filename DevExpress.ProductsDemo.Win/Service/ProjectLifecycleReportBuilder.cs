@@ -119,7 +119,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                         { "FinancialProgress", 40f },
                         { "Domain", 45f },
                         { "Sector", 45f },
-                        { "ProjectStatus", 40f }
+                        { "ProjectStatus", 50f }
                     }
                 };
                 GridReportBuilder.ApplyGridColumnVisibility(listPage, gridView, lifecycleOptions, out _, out _);

@@ -14,9 +14,7 @@ namespace DevExpress.ProductsDemo.Win.Services
         public decimal LotBudget { get; set; }
         public decimal RegisteredAmount { get; set; }
         public decimal RemainingAmount { get; set; }
-        public decimal ConsumedAmount { get; set; }   
-
-
+        public decimal ConsumedAmount { get; set; }  
         public int AnnouncedCount { get; set; }
         public int ReceivedCount { get; set; }
 

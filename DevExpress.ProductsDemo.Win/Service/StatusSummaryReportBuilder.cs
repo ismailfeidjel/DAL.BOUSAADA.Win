@@ -88,19 +88,18 @@ namespace DevExpress.ProductsDemo.Win.Services
             decimal specialStatus2Budget = data.Where(r => r.SpecialStatus2Id == 1).Sum(r => r.LotBudget);
 
             decimal registeredOperationsAmount2 = data
-    .Where(r => r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
-                r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7)
+    .Where(r => r.SpecialStatus2Id == 1 )
     .Sum(r => r.RegisteredAmount);
 
             decimal registeredOperationsAmount3 = data
-    .Where(r => r.ProjectStatusId == 1 )
+    .Where(r => r.SpecialStatus2Id == 2 )
     .Sum(r => r.LotBudget);
 
 
             decimal registeredOperationsAmount1 =
     data.Where(r => r.ProjectStatusId == 2 || r.ProjectStatusId == 3 || r.ProjectStatusId == 4 ||
                     r.ProjectStatusId == 5 || r.ProjectStatusId == 6 || r.ProjectStatusId == 7 || r.AdministrativeProcedureId == 4 || r.AdministrativeProcedureId == 5)
-        .Sum(r => r.RegisteredAmount)
+        .Sum(r => r.LotBudget)
     + data.Where(r => r.AdministrativeProcedureId == 4)
           .Sum(r => r.LotBudget);
 
@@ -159,7 +158,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                 ["tableCell80"] = (registeredOperationsAmount3).ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ غير مسجل :
                 ["tableCell84"] = registeredOperationsAmount2.ToString("N2", CultureInfo.InvariantCulture) + "دج",//مبلغ تسجيل نهائي :
                // ["tableCell90"] = totalreg.ToString("N2", CultureInfo.InvariantCulture) + "دج",//الرصيد :
-                ["tableCell90"] = (totalBudget - registeredOperationsAmount2).ToString("N2", CultureInfo.InvariantCulture) + "دج",//الرصيد :
+                ["tableCell90"] = (registeredOperationsAmount1 - registeredOperationsAmount2).ToString("N2", CultureInfo.InvariantCulture) + "دج",//الرصيد :
 
                 ["tableCell94"] = (totalBudget - totalreg).ToString("N2", CultureInfo.InvariantCulture) + "دج",//الباقي :
 
