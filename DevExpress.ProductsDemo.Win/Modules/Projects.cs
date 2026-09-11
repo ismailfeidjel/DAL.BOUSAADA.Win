@@ -1763,7 +1763,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 {
                     var all = _lotRepo.GetGridData();
                     return all.Where(r =>
-                        r.ProgramId == programId && r.ProjectStatusId != 7 &&
+                        r.ProgramId == programId && r.ProjectStatusId != 7 && r.FlagsId != 4 && //4 mains Hide this operation
                         (selectedDairaIds.Count == 0 || (r.DairaId.HasValue && selectedDairaIds.Contains(r.DairaId.Value)))
                     ).ToList();
                 }, selectedGrouping);
