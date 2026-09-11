@@ -12,6 +12,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using DevExpress.Utils.Taskbar;
 
 namespace DevExpress.ProductsDemo.Win
 {
@@ -103,6 +104,8 @@ namespace DevExpress.ProductsDemo.Win
 
 
             mainForm.Show();
+            TaskbarAssistant.Default.JumpListTasksCategory.Clear();
+            TaskbarAssistant.Default.JumpListCustomCategories.Clear();
 
             Application.Run(mainForm);
         }

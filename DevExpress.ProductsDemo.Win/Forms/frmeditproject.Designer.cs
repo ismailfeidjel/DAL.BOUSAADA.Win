@@ -305,6 +305,8 @@
             this.showEditStyleFormItem1 = new DevExpress.XtraRichEdit.UI.ShowEditStyleFormItem();
             this.showInsertTableCellsFormItem1 = new DevExpress.XtraRichEdit.UI.ShowInsertTableCellsFormItem();
             this.dxValidationProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXValidationProvider(this.components);
+            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.deletebtn = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).BeginInit();
             this.splitContainerControl1.Panel1.SuspendLayout();
@@ -659,9 +661,10 @@
             this.barButtonItem3,
             this.btnAddLot,
             this.btnRemoveLot,
-            this.btnsave});
+            this.btnsave,
+            this.deletebtn});
             resources.ApplyResources(this.ribbonControl1, "ribbonControl1");
-            this.ribbonControl1.MaxItemId = 156;
+            this.ribbonControl1.MaxItemId = 157;
             this.ribbonControl1.Name = "ribbonControl1";
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.homeRibbonPage1});
@@ -1756,7 +1759,8 @@
             // 
             this.homeRibbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1,
-            this.ribbonPageGroup2});
+            this.ribbonPageGroup2,
+            this.ribbonPageGroup3});
             this.homeRibbonPage1.Name = "homeRibbonPage1";
             resources.ApplyResources(this.homeRibbonPage1, "homeRibbonPage1");
             // 
@@ -2651,6 +2655,19 @@
             // 
             this.dxValidationProvider1.ValidationMode = DevExpress.XtraEditors.DXErrorProvider.ValidationMode.Auto;
             // 
+            // ribbonPageGroup3
+            // 
+            this.ribbonPageGroup3.ItemLinks.Add(this.deletebtn);
+            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            resources.ApplyResources(this.ribbonPageGroup3, "ribbonPageGroup3");
+            // 
+            // deletebtn
+            // 
+            resources.ApplyResources(this.deletebtn, "deletebtn");
+            this.deletebtn.Id = 156;
+            this.deletebtn.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem4.ImageOptions.SvgImage")));
+            this.deletebtn.Name = "deletebtn";
+            // 
             // frmeditproject
             // 
             resources.ApplyResources(this, "$this");
@@ -3064,5 +3081,7 @@
         private XtraEditors.TextEdit textEdit14;
         private XtraEditors.MemoEdit txtOperationName;
         private XtraBars.BarButtonItem btnsave;
+        private XtraBars.BarButtonItem deletebtn;
+        private XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
     }
 }

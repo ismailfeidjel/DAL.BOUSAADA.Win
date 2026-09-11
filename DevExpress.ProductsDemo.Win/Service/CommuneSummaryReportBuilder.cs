@@ -111,8 +111,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                 int Count(Func<LotGridModel, bool> predicate) => projects.Count(predicate);
 
                 int announced = projects.Count;
-                int received = Count(r => r.AdministrativeProcedureId == 4 || r.ProjectStatusId == 2 || r.ProjectStatusId == 6
-                                        || r.ProjectStatusId == 4 || r.ProjectStatusId == 3 || r.ProjectStatusId == 7 || r.ProjectStatusId == 5);
+                int received = Count(r => r.SpecialStatus2Id == 1 );
                 int remaining = announced - received;
 
                 var row = new CommuneSummaryRow
