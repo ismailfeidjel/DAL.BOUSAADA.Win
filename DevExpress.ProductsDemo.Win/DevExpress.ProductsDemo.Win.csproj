@@ -970,18 +970,21 @@
     <None Include="Reports\Templates\قالب_تقرير_البلديات_جزء3.repx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Reports\Templates\قالب_تقرير_الدائرة.repx" />
     <None Include="Reports\Templates\قالب_تقرير_المشاريع.repx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Reports\Templates\قالب_تقرير_المشاريع_حسب_المرحلة.repx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Reports\Templates\قالب_تقرير_الواجهات.repx" />
     <None Include="Reports\Templates\قالب_تقرير_الوضعية.repx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Reports\Templates\قالب_تقرير_حسب_مجال_التدخل.repx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Reports\Templates\قالب_تقرير_نسبة_البدء.repx" />
     <None Include="Reports\Templates\قالب_صفحة_فاصلة_البرنامج.repx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

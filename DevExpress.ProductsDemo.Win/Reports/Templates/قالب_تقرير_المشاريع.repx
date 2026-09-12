@@ -72,7 +72,7 @@
     </Item2>
     <Item3 Ref="43" ControlType="DetailBand" Name="Detail" HeightF="39.5833321" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle">
       <Controls>
-        <Item1 Ref="44" ControlType="XRTable" Name="table2" TextAlignment="MiddleCenter" SizeF="1162.45837,39.5833321" LocationFloat="0,0" Font="Segoe UI, 10pt" Borders="All">
+        <Item1 Ref="44" ControlType="XRTable" Name="table2" TextAlignment="MiddleCenter" SizeF="1162.45837,39.5833321" LocationFloat="0,0" Font="Segoe UI, 20pt" Borders="All">
           <Rows>
             <Item1 Ref="45" ControlType="XRTableRow" Name="tableRow2" Weight="11.5">
               <Cells>
@@ -102,7 +102,7 @@
                   </ExpressionBindings>
                   <StylePriority Ref="59" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
                 </Item4>
-                <Item5 Ref="60" ControlType="XRTableCell" Name="tableCell14" Weight="814679.271345758" Multiline="true" TextAlignment="MiddleLeft" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 8pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
+                <Item5 Ref="60" ControlType="XRTableCell" Name="tableCell14" Weight="814679.271345758" Multiline="true" TextAlignment="MiddleLeft" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Bottom">
                   <ExpressionBindings>
                     <Item1 Ref="61" EventName="BeforePrint" PropertyName="Text" Expression="[OperationName]" />
                     <Item2 Ref="62" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
@@ -197,7 +197,7 @@
                   </ExpressionBindings>
                   <StylePriority Ref="115" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
                 </Item17>
-                <Item18 Ref="116" ControlType="XRTableCell" Name="tableCell22" Weight="2054143.7128855693" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 8pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Right, Bottom">
+                <Item18 Ref="116" ControlType="XRTableCell" Name="tableCell22" Weight="2054143.7128855693" Multiline="true" TextAlignment="MiddleCenter" EvenStyleName="ReportEvenStyle" OddStyleName="ReportOddStyle" StyleName="ReportDetailBandStyle" Font="Segoe UI, 10pt, style=Bold" ForeColor="Black" BackColor="White" Padding="4,4,0,0,100" Borders="Left, Right, Bottom">
                   <ExpressionBindings>
                     <Item1 Ref="117" EventName="BeforePrint" PropertyName="Text" Expression="[Notes]" />
                     <Item2 Ref="118" EventName="BeforePrint" PropertyName="BackColor" Expression="Iif([ProjectStatusId] = 7, '255,245,150', '255,255,255')" />
@@ -221,39 +221,39 @@
     </Item4>
     <Item5 Ref="124" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="155.208466">
       <Controls>
-        <Item1 Ref="125" ControlType="XRLabel" Name="cellProgramName" RightToLeft="Yes" Multiline="true" Text="ADSEC 2026" TextAlignment="TopRight" SizeF="252.374878,26.45833" LocationFloat="825.2211,0" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+        <Item1 Ref="125" ControlType="XRLabel" Name="cellProgramName" RightToLeft="Yes" Multiline="true" Text="ADSEC 2026" TextAlignment="TopRight" SizeF="252.374878,26.45833" LocationFloat="825.2211,0" Font="Segoe UI, 16pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
           <StylePriority Ref="126" UseFont="false" UseBorders="false" UseTextAlignment="false" />
         </Item1>
-        <Item2 Ref="127" ControlType="XRLabel" Name="xrLabel5" RightToLeft="Yes" Multiline="true" CanGrow="false" Text="مصلحة التخطيط ومتابعة البرامج التنموية" TextAlignment="TopLeft" SizeF="346.124878,32.91667" LocationFloat="0,26.4583263" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+        <Item2 Ref="127" ControlType="XRLabel" Name="xrLabel5" RightToLeft="Yes" Multiline="true" CanGrow="false" Text="مصلحة التخطيط ومتابعة البرامج التنموية" TextAlignment="TopLeft" SizeF="346.124878,32.91667" LocationFloat="0,26.4583263" Font="Segoe UI, 14pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
           <StylePriority Ref="128" UseFont="false" UseBorders="false" UseTextAlignment="false" />
         </Item2>
-        <Item3 Ref="129" ControlType="XRLabel" Name="xrLabel4" RightToLeft="Yes" Multiline="true" Text="مديرية الادارة المحلية" TextAlignment="TopLeft" SizeF="252.374878,26.45833" LocationFloat="0,0" Font="Segoe UI, 12pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
+        <Item3 Ref="129" ControlType="XRLabel" Name="xrLabel4" RightToLeft="Yes" Multiline="true" Text="مديرية الادارة المحلية" TextAlignment="TopLeft" SizeF="252.374878,26.45833" LocationFloat="0,0" Font="Segoe UI, 14pt, style=Bold" Padding="2,2,0,0,100" Borders="None">
           <StylePriority Ref="130" UseFont="false" UseBorders="false" UseTextAlignment="false" />
         </Item3>
         <Item4 Ref="131" ControlType="XRTable" Name="xrTable1" AnchorVertical="Both" AnchorHorizontal="Both" TextAlignment="TopLeft" SizeF="791.737732,94.16676" LocationFloat="152.727264,61.0417061" Font="Segoe UI, 11pt, style=Bold" Padding="2,2,0,0,96" Borders="All">
           <Rows>
             <Item1 Ref="132" ControlType="XRTableRow" Name="xrTableRow1" Weight="1">
               <Cells>
-                <Item1 Ref="133" ControlType="XRTableCell" Name="xrTableCell1" Weight="0.49797434095023008" CanGrow="false" Multiline="true" Text="ولايــــــــــــــــــــــــــــــــة:" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                <Item1 Ref="133" ControlType="XRTableCell" Name="xrTableCell1" Weight="0.49797434095023008" CanGrow="false" Multiline="true" Text="ولايــــــــــــــــــــــــــــــــة:" TextAlignment="MiddleLeft" Font="Segoe UI, 11pt, style=Bold">
                   <StylePriority Ref="134" UseFont="false" UseTextAlignment="false" />
                 </Item1>
-                <Item2 Ref="135" ControlType="XRTableCell" Name="xrTableCell2" Weight="2.0345458280443212" CanGrow="false" Multiline="true" Text="بوسعادة" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                <Item2 Ref="135" ControlType="XRTableCell" Name="xrTableCell2" Weight="2.0345458280443212" CanGrow="false" Multiline="true" Text="بوسعادة" TextAlignment="MiddleLeft" Font="Segoe UI, 11pt, style=Bold">
                   <StylePriority Ref="136" UseFont="false" UseTextAlignment="false" />
                 </Item2>
               </Cells>
             </Item1>
             <Item2 Ref="137" ControlType="XRTableRow" Name="xrTableRow2" Weight="1">
               <Cells>
-                <Item1 Ref="138" ControlType="XRTableCell" Name="xrTableCell4" Weight="0.49797492664707632" CanGrow="false" Multiline="true" Text="وضعية المشاريع :" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                <Item1 Ref="138" ControlType="XRTableCell" Name="xrTableCell4" Weight="0.49797492664707632" CanGrow="false" Multiline="true" Text="وضعية المشاريع :" TextAlignment="MiddleLeft" Font="Segoe UI, 11pt, style=Bold">
                   <StylePriority Ref="139" UseFont="false" UseTextAlignment="false" />
                 </Item1>
-                <Item2 Ref="140" ControlType="XRTableCell" Name="cellFilterText" Weight="1.2682851578501992" CanGrow="false" Multiline="true" Text="المسجلة" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                <Item2 Ref="140" ControlType="XRTableCell" Name="cellFilterText" Weight="1.2682851578501992" CanGrow="false" Multiline="true" Text="المسجلة" TextAlignment="MiddleLeft" Font="Segoe UI, 11pt, style=Bold">
                   <StylePriority Ref="141" UseFont="false" UseTextAlignment="false" />
                 </Item2>
-                <Item3 Ref="142" ControlType="XRTableCell" Name="tableCell34" Weight="0.38313004224863778" CanGrow="false" Multiline="true" Text="عددها:" TextAlignment="MiddleRight" Font="Segoe UI, 8pt, style=Bold" Borders="Left, Top, Bottom">
+                <Item3 Ref="142" ControlType="XRTableCell" Name="tableCell34" Weight="0.38313004224863778" CanGrow="false" Multiline="true" Text="عددها:" TextAlignment="MiddleRight" Font="Segoe UI, 11pt, style=Bold" Borders="Left, Top, Bottom">
                   <StylePriority Ref="143" UseFont="false" UseBorders="false" UseTextAlignment="false" />
                 </Item3>
-                <Item4 Ref="144" ControlType="XRTableCell" Name="cellProjectCounter" Weight="0.38313004224863778" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 7pt, style=Bold" Borders="Top, Right, Bottom">
+                <Item4 Ref="144" ControlType="XRTableCell" Name="cellProjectCounter" Weight="0.38313004224863778" CanGrow="false" Multiline="true" TextAlignment="MiddleLeft" Font="Segoe UI, 14pt, style=Bold" Borders="Top, Right, Bottom">
                   <Summary Ref="145" Running="Report" />
                   <ExpressionBindings>
                     <Item1 Ref="146" EventName="BeforePrint" PropertyName="Text" Expression="sumDCount([ProjectId])" />
@@ -264,10 +264,10 @@
             </Item2>
             <Item3 Ref="148" ControlType="XRTableRow" Name="xrTableRow3" Weight="1">
               <Cells>
-                <Item1 Ref="149" ControlType="XRTableCell" Name="xrTableCell3" Weight="0.49797492664707632" CanGrow="false" Multiline="true" Text="موقــــــوفة بتـــاريخ:" TextAlignment="MiddleLeft" Font="Segoe UI, 8pt, style=Bold">
+                <Item1 Ref="149" ControlType="XRTableCell" Name="xrTableCell3" Weight="0.49797492664707632" CanGrow="false" Multiline="true" Text="موقــــــوفة بتـــاريخ:" TextAlignment="MiddleLeft" Font="Segoe UI, 11pt, style=Bold">
                   <StylePriority Ref="150" UseFont="false" UseTextAlignment="false" />
                 </Item1>
-                <Item2 Ref="151" ControlType="XRTableCell" Name="xrTableCell6" Weight="2.034545242347475" CanGrow="false" TextFormatString="{0:MM/dd/yyyy}" Multiline="true" Text="12-12-2012" Font="Segoe UI, 8pt, style=Bold">
+                <Item2 Ref="151" ControlType="XRTableCell" Name="xrTableCell6" Weight="2.034545242347475" CanGrow="false" TextFormatString="{0:yyyy-MM-dd}" Multiline="true" Text="12-12-2012" Font="Segoe UI, 11pt, style=Bold">
                   <ExpressionBindings>
                     <Item1 Ref="152" EventName="BeforePrint" PropertyName="Text" Expression="Today()" />
                   </ExpressionBindings>

@@ -56,10 +56,10 @@
           <Rows>
             <Item1 Ref="27" ControlType="XRTableRow" Name="tableRow4" Weight="7.7633832295735665">
               <Cells>
-                <Item1 Ref="28" ControlType="XRTableCell" Name="tableCell21" Weight="1532926.2301981836" Multiline="true" Text="total Lotbudjet" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
+                <Item1 Ref="28" ControlType="XRTableCell" Name="tableCell21" Weight="1532926.2301981836" Multiline="true" Text="الغلاف المالي" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
                   <StylePriority Ref="29" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
                 </Item1>
-                <Item2 Ref="30" ControlType="XRTableCell" Name="tableCell24" Weight="1150580.5645801681" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="All">
+                <Item2 Ref="30" ControlType="XRTableCell" Name="tableCell24" Weight="1150580.5645801681" TextFormatString="{0:N0}%" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="All">
                   <Summary Ref="31" Running="Report" />
                   <ExpressionBindings>
                     <Item1 Ref="32" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([LotBudget])" />
@@ -83,7 +83,7 @@
                 <Item1 Ref="41" ControlType="XRTableCell" Name="tableCell25" Weight="1532926.2301981836" Multiline="true" Text="مبلغ العمليات التي صب الاعانة" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
                   <StylePriority Ref="42" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
                 </Item1>
-                <Item2 Ref="43" ControlType="XRTableCell" Name="tableCell26" Weight="1150580.5645801681" Multiline="true" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="All">
+                <Item2 Ref="43" ControlType="XRTableCell" Name="tableCell26" Weight="1150580.5645801681" TextFormatString="{0:N0}%" Multiline="true" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="All">
                   <Summary Ref="44" Running="Report" />
                   <ExpressionBindings>
                     <Item1 Ref="45" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([FundeddAmount])" />
@@ -149,7 +149,7 @@
                 <Item1 Ref="76" ControlType="XRTableCell" Name="tableCell43" Weight="411102.93491698231" Multiline="true" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
                   <StylePriority Ref="77" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
                 </Item1>
-                <Item2 Ref="78" ControlType="XRTableCell" Name="tableCell44" Weight="468441.66176015674" Multiline="true" Text="المسجلة" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
+                <Item2 Ref="78" ControlType="XRTableCell" Name="tableCell44" Weight="468441.66176015674" Multiline="true" Text="غير منطلقة" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
                   <StylePriority Ref="79" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
                 </Item2>
                 <Item3 Ref="80" ControlType="XRTableCell" Name="tableCell45" Weight="468441.65290212736" Multiline="true" Text="الجارية" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
@@ -167,7 +167,7 @@
                 <Item7 Ref="88" ControlType="XRTableCell" Name="tableCell65" Weight="468441.639727019" Multiline="true" Text="المغلقة" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
                   <StylePriority Ref="89" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
                 </Item7>
-                <Item8 Ref="90" ControlType="XRTableCell" Name="tableCell2" Weight="468441.639727019" Multiline="true" Text="دراسة الملف" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
+                <Item8 Ref="90" ControlType="XRTableCell" Name="tableCell2" Weight="468441.639727019" Multiline="true" Text="ملغاة" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="Left, Top, Bottom">
                   <StylePriority Ref="91" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
                 </Item8>
                 <Item9 Ref="92" ControlType="XRTableCell" Name="tableCell64" Weight="771063.76026757387" Multiline="true" Text="مجموع" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="255,242,242,242" Borders="All">
@@ -183,7 +183,7 @@
                 <Item2 Ref="97" ControlType="XRTableCell" Name="tableCell10" Weight="468441.63620083162" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="All">
                   <Summary Ref="98" Running="Report" />
                   <ExpressionBindings>
-                    <Item1 Ref="99" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([NotstartedCount])" />
+                    <Item1 Ref="99" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([NotstartedCount])+sumSum([UnregisteredCount])" />
                   </ExpressionBindings>
                   <StylePriority Ref="100" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
                 </Item2>
@@ -225,14 +225,14 @@
                 <Item8 Ref="121" ControlType="XRTableCell" Name="tableCell8" Weight="468441.66229757259" Multiline="true" Text="tableCell8" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="Left, Top, Bottom">
                   <Summary Ref="122" Running="Report" />
                   <ExpressionBindings>
-                    <Item1 Ref="123" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([StudiededCount])" />
+                    <Item1 Ref="123" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([SCount])" />
                   </ExpressionBindings>
                   <StylePriority Ref="124" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
                 </Item8>
                 <Item9 Ref="125" ControlType="XRTableCell" Name="tableCell20" Weight="771063.77542157774" Multiline="true" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="All">
                   <Summary Ref="126" Running="Report" />
                   <ExpressionBindings>
-                    <Item1 Ref="127" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([ReceivedFundsCount])+sumSum([FinishedCount])+sumSum([StoppedCount])+sumSum([OngoingCount])+sumSum([NotstartedCount])+sumSum([ClosedCount])+sumSum([StudiededCount])&#xA;&#xA;" />
+                    <Item1 Ref="127" EventName="BeforePrint" PropertyName="Text" Expression="sumSum([ReceivedFundsCount])+sumSum([FinishedCount])+sumSum([StoppedCount])+sumSum([OngoingCount])+sumSum([NotstartedCount])+sumSum([ClosedCount])+sumSum([SCount])+sumSum([UnregisteredCount])&#xA;&#xA;" />
                   </ExpressionBindings>
                   <StylePriority Ref="128" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
                 </Item9>
@@ -288,7 +288,7 @@
                 <Item8 Ref="156" ControlType="XRTableCell" Name="tableCell9" Weight="468441.66229757265" TextFormatString="{0:N0}%" Multiline="true" Text="tableCell9" TextAlignment="MiddleCenter" Font="Segoe UI, 7pt, style=Bold" BackColor="White" Borders="Left, Top, Bottom">
                   <Summary Ref="157" Running="Report" />
                   <ExpressionBindings>
-                    <Item1 Ref="158" EventName="BeforePrint" PropertyName="Text" Expression="Iif(sumSum([AnnouncedCount]) = 0, 0, sumSum([StudiededCount])* 100 / sumSum([AnnouncedCount]) )&#xA;" />
+                    <Item1 Ref="158" EventName="BeforePrint" PropertyName="Text" Expression="Iif(sumSum([AnnouncedCount]) = 0, 0, sumSum([SCount])* 100 / sumSum([AnnouncedCount]) )&#xA;" />
                   </ExpressionBindings>
                   <StylePriority Ref="159" UseFont="false" UseBackColor="false" UseTextAlignment="false" />
                 </Item8>
