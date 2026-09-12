@@ -6,11 +6,13 @@ using DevExpress.ProductsDemo.Win.Forms;
 using DevExpress.Skins;
 using DevExpress.XtraEditors;
 using DevExpress.XtraSplashScreen;
+using MySql.Data.MySqlClient;
 using System;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using DevExpress.Utils.Taskbar;
 
 namespace DevExpress.ProductsDemo.Win
 {
@@ -50,6 +52,30 @@ namespace DevExpress.ProductsDemo.Win
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+
+
+            // =========================================================
+            // 1. TEST DATABASE CONNECTION HERE BEFORE LOADING MAIN FORM
+            // =========================================================
+            try
+            {
+
+                // Example 2 (If using ADO.NET / MySQL):
+                 using (var conn = new MySqlConnection("Server=localhost;Port=3306;Database=dal;Uid=root;Pwd=;")) { conn.Open();conn.Close(); }
+            }
+            catch (Exception ex)
+            {
+                // Close the splash screen so the error dialog is visible
+                SplashScreenManager.CloseForm(false);
+                // Show the error message
+                XtraMessageBox.Show("تعذر الاتصال بقاعدة البيانات. يرجى التحقق من الخادم والمحاولة مرة أخرى.\n \n" ,
+                                    "خطأ في الاتصال", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                // Exit the application completely
+                return;
+            }
+            // =========================================================
+
             var mainForm = new frmMain();
 
            // mainForm.Show();
@@ -78,6 +104,8 @@ namespace DevExpress.ProductsDemo.Win
 
 
             mainForm.Show();
+            TaskbarAssistant.Default.JumpListTasksCategory.Clear();
+            TaskbarAssistant.Default.JumpListCustomCategories.Clear();
 
             Application.Run(mainForm);
         }

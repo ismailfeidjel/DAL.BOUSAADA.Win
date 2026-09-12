@@ -393,10 +393,10 @@ namespace DevExpress.ProductsDemo.Win.Modules
             gridView1.ColumnWidthChanged += (s, e) => SaveLayout();
             gridView1.ColumnPositionChanged += (s, e) => SaveLayout();
 
-            gridView1.OptionsLayout.StoreDataSettings = false;   // excludes filter, sort, grouping from the saved layout
+            gridView1.OptionsLayout.StoreDataSettings = false;   // excludes filter, sort, grouping from the saved layout(crtical)
             gridView1.OptionsLayout.StoreVisualOptions = true;    // keeps column widths/visibility (already true, leave as-is)
-            gridView1.OptionsLayout.StoreAppearance = false;      // already false, fine
-            gridView1.OptionsLayout.StoreFormatRules = false;     // already false, fine
+            gridView1.OptionsLayout.StoreAppearance = false;      //  false, 
+            gridView1.OptionsLayout.StoreFormatRules = false;     //  false, 
             gridView1.OptionsLayout.StoreFormatRules = false;
             gridView1.OptionsLayout.StoreAppearance = false;
 
@@ -610,6 +610,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
     "AdministrativeProcedureId",
     "SpecialStatus1Id",
     "SpecialStatus2Id",
+    "Daira",
     "SpecialStatus3Id",
     "Notes"
 );
@@ -1763,7 +1764,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                 {
                     var all = _lotRepo.GetGridData();
                     return all.Where(r =>
-                        r.ProgramId == programId && r.ProjectStatusId != 7 &&
+                        r.ProgramId == programId && r.ProjectStatusId != 7 && r.FlagsId != 4 && //4 mains Hide this operation
                         (selectedDairaIds.Count == 0 || (r.DairaId.HasValue && selectedDairaIds.Contains(r.DairaId.Value)))
                     ).ToList();
                 }, selectedGrouping);

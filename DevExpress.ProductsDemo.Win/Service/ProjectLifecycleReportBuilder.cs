@@ -22,8 +22,10 @@ namespace DevExpress.ProductsDemo.Win.Services
     }
     public static class ProjectLifecycleReportBuilder
     {
+        public const string TitleKey = "قالب_صفحة_واجهة_الاجتماع";
         public const string TemplateKey = "قالب_تقرير_المشاريع_حسب_المرحلة";
         public const string TitleTemplateKey = "قالب_صفحة_فاصلة_البرنامج";
+        public static string TitleTemplate = "";
 
         private static readonly (int order, string label, bool isAdminProc, int id)[] Stages =
         {
@@ -39,6 +41,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             (10, "مستلمة",  false, 6),
         };
 
+
         /// <summary>
         /// Builds the lifecycle report for a SINGLE program type (e.g. all ADSEC programs).
         /// Do not pass programs mixing multiple types — throws if it detects that.
@@ -50,14 +53,23 @@ namespace DevExpress.ProductsDemo.Win.Services
 
             string listTemplatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", TemplateKey + ".repx");
             if (!File.Exists(listTemplatePath))
-                throw new InvalidOperationException($"القالب غير موجود: {listTemplatePath}\nيرجى إنشائه أولاً من تبويب التقارير.");
+                throw new InvalidOperationException($"القالب غير موجود: {listTemplatePath}\nيرجى إنشائه أولاً   .");
 
             string titleTemplatePath = Path.Combine(Application.StartupPath, "Reports", "Templates", TitleTemplateKey + ".repx");
             if (!File.Exists(titleTemplatePath))
-                throw new InvalidOperationException($"قالب الصفحة الفاصلة غير موجود: {titleTemplatePath}\nيرجى إنشائه أولاً من تبويب التقارير.");
+                throw new InvalidOperationException($"قالب الصفحة الفاصلة غير موجود: {titleTemplatePath}\nيرجى إنشائه أولاً   .");
+
+            string titlePath = Path.Combine(Application.StartupPath, "Reports", "Templates", TitleKey + ".repx");
+            if (!File.Exists(titlePath))
+                throw new InvalidOperationException($"قالب الصفحة واجهة الاجتماع غير موجود: {titlePath}\nيرجى إنشائه أولاً  .");
+
 
             var orderedPrograms = programs.OrderBy(p => p.Year).ToList();
             XtraReport combined = null;
+
+            XtraReport firstPage = BuildTitlePage(titleTemplatePath, "");
+            firstPage.CreateDocument();
+            combined = firstPage;
 
             foreach (var program in orderedPrograms)
             {
@@ -68,20 +80,23 @@ namespace DevExpress.ProductsDemo.Win.Services
                 {
                     case LifecycleGrouping.ByDaira:
                         stageRows = ComputeDairaRows(data);
+                        TitleTemplate = "وضعية المشاريع التنموية حسب الدائرة لبرنامج ";
                         break;
                     case LifecycleGrouping.ByCommune:
                         stageRows = ComputeCommuneRows(data);
+                        TitleTemplate = "وضعية المشاريع التنموية حسب البلدية لبرنامج ";
                         break;
                     case LifecycleGrouping.ByStage:
                     default:
                         stageRows = ComputeStageRows(data);
+                        TitleTemplate = "وضعية المشاريع التنموية حسب الوضعية لبرنامج ";
                         break;
                 }
 
 
                 if (stageRows.Count == 0) continue;
 
-                XtraReport titlePage = BuildTitlePage(titleTemplatePath, program.Name);
+                XtraReport titlePage = BuildTitlePage(titleTemplatePath, TitleTemplate +"\n"+ program.Name);
                 titlePage.CreateDocument();
 
                 XtraReport listPage = XtraReport.FromFile(listTemplatePath, true);
