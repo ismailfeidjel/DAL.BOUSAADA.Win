@@ -209,6 +209,7 @@ namespace DevExpress.ProductsDemo.Win.Services
             // 4. Sort by Stage -> Project -> internal Lot order so they display perfectly grouped
             return result
                 .OrderBy(r => r.StageOrder)
+                .ThenBy(r => r.SortOrder)
                 .ThenBy(r => r.ProjectId)
                 .ThenBy(r => r.LotNumber)
                 .ToList();
@@ -224,7 +225,6 @@ namespace DevExpress.ProductsDemo.Win.Services
             var dairaOrder = data
                 .Select(r => new { r.DairaId, Name = r.Daira ?? "" })
                 .Distinct()
-                //.OrderBy(d => d.Name, StringComparer.Create(new System.Globalization.CultureInfo("ar-DZ"), true))
                 .Select((d, index) => new { d.DairaId, d.Name, Order = index + 1 })
                 .ToList();
 
@@ -249,7 +249,7 @@ namespace DevExpress.ProductsDemo.Win.Services
 
             return result
                 .OrderBy(r => r.StageOrder)
-                //.ThenBy(r => r.Commune)      // inside a daira, keep communes together
+                .ThenBy(r => r.SortOrder)    
                 .ThenBy(r => r.ProjectId)
                 .ThenBy(r => r.LotNumber)
                 .ToList();
@@ -286,6 +286,7 @@ namespace DevExpress.ProductsDemo.Win.Services
 
             return result
                 .OrderBy(r => r.StageOrder)
+                .ThenBy(r => r.SortOrder)
                 .ThenBy(r => r.ProjectId)
                 .ThenBy(r => r.LotNumber)
                 .ToList();
