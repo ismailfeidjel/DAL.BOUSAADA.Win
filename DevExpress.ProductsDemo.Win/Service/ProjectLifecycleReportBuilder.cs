@@ -59,17 +59,17 @@ namespace DevExpress.ProductsDemo.Win.Services
             if (!File.Exists(titleTemplatePath))
                 throw new InvalidOperationException($"قالب الصفحة الفاصلة غير موجود: {titleTemplatePath}\nيرجى إنشائه أولاً   .");
 
-            string titlePath = Path.Combine(Application.StartupPath, "Reports", "Templates", TitleKey + ".repx");
-            if (!File.Exists(titlePath))
-                throw new InvalidOperationException($"قالب الصفحة واجهة الاجتماع غير موجود: {titlePath}\nيرجى إنشائه أولاً  .");
+           // string titlePath = Path.Combine(Application.StartupPath, "Reports", "Templates", TitleKey + ".repx");
+          //  if (!File.Exists(titlePath))
+           //     throw new InvalidOperationException($"قالب الصفحة واجهة الاجتماع غير موجود: {titlePath}\nيرجى إنشائه أولاً  .");
 
 
             var orderedPrograms = programs.OrderBy(p => p.Year).ToList();
             XtraReport combined = null;
 
-            XtraReport firstPage = BuildTitlePage(titleTemplatePath, "");
-            firstPage.CreateDocument();
-            combined = firstPage;
+           // XtraReport firstPage = BuildTitlePage(titleTemplatePath, "");
+           // firstPage.CreateDocument();
+         //   combined = firstPage;
 
             foreach (var program in orderedPrograms)
             {
