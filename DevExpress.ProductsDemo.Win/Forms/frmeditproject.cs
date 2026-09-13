@@ -16,14 +16,11 @@ namespace DevExpress.ProductsDemo.Win.Forms
 
     public partial class frmeditproject : RibbonForm
     {
+        private List<UCLot> _lotEditors = new List<UCLot>();
         public Domain.Project NewProject { get; private set; }
         private readonly LookupRepository _lookup = new LookupRepository();
         private FormMode _mode;
-        private LotGridModel _lot; // store current lot
-
-        public Lot NewLot { get; private set; }
-        public Lot NewLot2 { get; private set; }
-        public Lot NewLot3 { get; private set; }
+        private LotGridModel _lot;
 
         bool HasLots = false;
 
@@ -33,10 +30,8 @@ namespace DevExpress.ProductsDemo.Win.Forms
         public frmeditproject()
         {
             InitializeComponent();
-            PopulateLookups();
-
-
         }
+
         public frmeditproject(LotGridModel lot, FormMode mode) : this()
         {
             _mode = mode;
@@ -46,86 +41,42 @@ namespace DevExpress.ProductsDemo.Win.Forms
 
         private void LoadProjectData(LotGridModel sourceLot)
         {
-            // ── Project fields from LotGridModel ─────────────────────
-            string[] parts = (sourceLot.OperationName ?? "").Split('\u001F');
-            txtOperationName.Text = parts.Length > 0 ? parts[0].Trim() : "";
             _lot = sourceLot;
 
+            var lots = _lotRepo.GetByProjectId(sourceLot.ProjectId).OrderBy(l => l.LotNumber).ToList();
 
-            // ── Lots from database ────────────────────────────────────
-            var lots = _lotRepo.GetByProjectId(sourceLot.ProjectId);
+            foreach (var tab in tabContainer.TabPages.Where(t => t != tabMain).ToList())
+                tabContainer.TabPages.Remove(tab);
+
+            _lotEditors.Clear();
 
             var lot1 = lots.FirstOrDefault(l => l.LotNumber == 1);
             if (lot1 != null)
             {
-                LoadLot1(lot1); cmbDaira.EditValue = lot1.DairaId; cmbCommune.EditValue = lot1.CommuneId;
-                cmbDomain.EditValue = lot1.DomainId;
-                cmbSector.EditValue = lot1.SectorId;
-                //txtOperationNumber.Text = lot1.OperationNumber;
-                cmbProgram.EditValue = lot1.ProgramId;
+                ucLotMain.BindLookups(_lookup);   // ← embedded UCLot instance living on tabMain
+                ucLotMain.LoadLot(lot1);
+                ucLotMain.ShowProjectFields(true);
+                _lotEditors.Add(ucLotMain);
             }
 
-            var lot2 = lots.FirstOrDefault(l => l.LotNumber == 2);
-            if (lot2 != null) { tabLot2.PageVisible = true; HasLots = true; LoadLot2(lot2); }
+            foreach (var lot in lots.Where(l => l.LotNumber != 1))
+                AddLotTab(lot);
 
-            var lot3 = lots.FirstOrDefault(l => l.LotNumber == 3);
-            if (lot3 != null) { tabLot3.PageVisible = true; LoadLot3(lot3); }
+            HasLots = lots.Count > 1;
         }
 
-
-
-        private void LoadLot1(LotGridModel lot)
+        private void AddLotTab(LotGridModel lot)
         {
-            txtLotName.Text = lot.LotName ?? "";
-            txtContractor.Text = lot.Contractor ?? "";
-            txtLotBudget.Text = lot.LotBudget.ToString();
-            txtRegisteredAmount.Text = lot.RegisteredAmount.ToString();
-            txtConsumedAmount.Text = lot.ConsumedAmount.ToString();
-            spnExecutionDuration.Value = lot.ExecutionDuration ?? 0;
-            dtStartDate.EditValue = lot.StartDate;
-            spnPhysicalProgress.Value = lot.PhysicalProgress;
-            cmbAdminProcedure.EditValue = lot.AdministrativeProcedureId;
-            cmbSpecialStatus1.EditValue = lot.SpecialStatus1Id;
-            cmbSpecialStatus2.EditValue = lot.SpecialStatus2Id;
-            cmbSpecialStatus3.EditValue = lot.SpecialStatus3Id;
-            cmbProjectStatus.EditValue = lot.ProjectStatusId;
-            txtLotNotes.Text = lot.Notes ?? "";
-        }
+            var editor = new UCLot { Dock = DockStyle.Fill };
+            editor.BindLookups(_lookup);
+            editor.LoadLot(lot);
+            editor.ShowProjectFields(false);
 
-        private void LoadLot2(LotGridModel lot)
-        {
-            textEdit2.Text = lot.LotName ?? "";
-            textEdit4.Text = lot.Contractor ?? "";
-            textEdit6.Text = lot.LotBudget.ToString();
-            textEdit5.Text = lot.RegisteredAmount.ToString();
-            textEdit7.Text = lot.ConsumedAmount.ToString();
-            spinEdit2.Value = lot.ExecutionDuration ?? 0;
-            dateEdit1.EditValue = lot.StartDate;
-            spinEdit3.Value = lot.PhysicalProgress;
-            lookUpEdit7.EditValue = lot.AdministrativeProcedureId;
-            lookUpEdit8.EditValue = lot.SpecialStatus1Id;
-            lookUpEdit6.EditValue = lot.SpecialStatus2Id;
-            lookUpEdit9.EditValue = lot.SpecialStatus3Id;
-            lookUpEdit10.EditValue = lot.ProjectStatusId;
-            memoEdit1.Text = lot.Notes ?? "";
-        }
+            var page = new DevExpress.XtraTab.XtraTabPage { Text = $"الحصة {lot.LotNumber}" };
+            page.Controls.Add(editor);
 
-        private void LoadLot3(LotGridModel lot)
-        {
-            textEdit9.Text = lot.LotName ?? "";
-            textEdit11.Text = lot.Contractor ?? "";
-            textEdit13.Text = lot.LotBudget.ToString();
-            textEdit12.Text = lot.RegisteredAmount.ToString();
-            textEdit14.Text = lot.ConsumedAmount.ToString();
-            spinEdit5.Value = lot.ExecutionDuration ?? 0;
-            dateEdit2.EditValue = lot.StartDate;
-            spinEdit6.Value = lot.PhysicalProgress;
-            lookUpEdit17.EditValue = lot.AdministrativeProcedureId;
-            lookUpEdit18.EditValue = lot.SpecialStatus1Id;
-            lookUpEdit16.EditValue = lot.SpecialStatus2Id;
-            lookUpEdit19.EditValue = lot.SpecialStatus3Id;
-            lookUpEdit20.EditValue = lot.ProjectStatusId;
-            memoEdit2.Text = lot.Notes ?? "";
+            tabContainer.TabPages.Add(page);
+            _lotEditors.Add(editor);
         }
 
         private void ApplyMode()
@@ -134,23 +85,13 @@ namespace DevExpress.ProductsDemo.Win.Forms
 
             foreach (Control c in GetAllControls(this))
             {
-                if (c is TextEdit ||
-                    c is LookUpEdit ||
-                    c is DateEdit ||
-                    c is SpinEdit ||
-                    c is MemoEdit ||
-                    c is CheckEdit)
-                {
+                if (c is TextEdit || c is LookUpEdit || c is DateEdit || c is SpinEdit || c is MemoEdit || c is CheckEdit)
                     c.Enabled = editable;
-                }
             }
 
-            // bbiSave.Enabled = editable;
-            // bbiEdit.Enabled = !editable;
             btnAddLot.Enabled = editable;
-            btnRemoveLot.Enabled = false;// editable;
+            btnRemoveLot.Enabled = editable && _lotEditors.Count > 1;
             btnsave.Enabled = editable;
-
         }
 
         private void bbiEdit_ItemClick(object sender, ItemClickEventArgs e)
@@ -158,62 +99,6 @@ namespace DevExpress.ProductsDemo.Win.Forms
             _mode = FormMode.Edit;
             ApplyMode();
         }
-
-        private void PopulateLookups()
-        {
-            try
-            {
-                // ── Project lookups ───────────────────────────────────────────────
-                BindLookup(cmbProgram, _lookup.GetAll("programs"));
-                BindLookup(cmbDaira, _lookup.GetAll("dairas"));
-                BindLookup(cmbCommune, _lookup.GetAll("communes"));
-                BindLookup(cmbDomain, _lookup.GetAll("domains"));
-                BindLookup(cmbSector, _lookup.GetAll("sectors"));
-
-                // ── Lot lookups ───────────────────────────────────────────────────
-                BindLookup(cmbAdminProcedure, _lookup.GetAll("administrative_procedures"));
-                BindLookup(cmbSpecialStatus1, _lookup.GetAll("special_status1"));
-                BindLookup(cmbSpecialStatus2, _lookup.GetAll("special_status2"));
-                BindLookup(cmbSpecialStatus3, _lookup.GetAll("special_status3"));
-                BindLookup(cmbProjectStatus, _lookup.GetAll("project_statuses"));
-
-                // ── Lot2 lookups ───────────────────────────────────────────────────
-                BindLookup(lookUpEdit7, _lookup.GetAll("administrative_procedures"));
-                BindLookup(lookUpEdit8, _lookup.GetAll("special_status1"));
-                BindLookup(lookUpEdit6, _lookup.GetAll("special_status2"));
-                BindLookup(lookUpEdit9, _lookup.GetAll("special_status3"));
-                BindLookup(lookUpEdit10, _lookup.GetAll("project_statuses"));
-
-                // ── Lot3 lookups ───────────────────────────────────────────────────
-                BindLookup(lookUpEdit17, _lookup.GetAll("administrative_procedures"));
-                BindLookup(lookUpEdit18, _lookup.GetAll("special_status1"));
-                BindLookup(lookUpEdit16, _lookup.GetAll("special_status2"));
-                BindLookup(lookUpEdit19, _lookup.GetAll("special_status3"));
-                BindLookup(lookUpEdit20, _lookup.GetAll("project_statuses"));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    $"Failed to load lookup data:\n{ex.Message}",
-                    "Startup Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
-        }
-
-
-        private static void BindLookup(LookUpEdit cmb, System.Collections.Generic.List<LookupItem> src)
-        {
-            cmb.Properties.DataSource = src;
-            cmb.Properties.DisplayMember = "Name";
-            cmb.Properties.ValueMember = "Id";
-            cmb.Properties.ShowHeader = false;
-            cmb.Properties.NullText = "— اختر —";
-            cmb.Properties.SearchMode = SearchMode.AutoFilter;
-            cmb.Properties.Columns.Clear();
-            cmb.Properties.Columns.Add(new LookUpColumnInfo("Name", 240));
-        }
-
 
         private IEnumerable<Control> GetAllControls(Control root)
         {
@@ -224,11 +109,15 @@ namespace DevExpress.ProductsDemo.Win.Forms
             }
         }
 
-
-
-
-
-
+        private bool ValidateAll()
+        {
+            foreach (var editor in _lotEditors)
+            {
+                if (!editor.Validate())
+                    return false;
+            }
+            return true;
+        }
 
         private void bbiSave_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -242,112 +131,28 @@ namespace DevExpress.ProductsDemo.Win.Forms
                 {
                     try
                     {
-                        var project = new Domain.Project
-                        {
-                            Id = _lot.ProjectId,
-                           
-                            OperationName = txtOperationName.Text.Trim(),
-                            ProgramId = Convert.ToInt32(cmbProgram.EditValue),
-                            DairaId = Convert.ToInt32(cmbDaira.EditValue),
-                            CommuneId = Convert.ToInt32(cmbCommune.EditValue),
-                            DomainId = Convert.ToInt32(cmbDomain.EditValue),
-                            SectorId = Convert.ToInt32(cmbSector.EditValue),
-                            HasLots = HasLots,
-                        };
-
+                        // 1. Project fields come from the main lot's editor
+                        var project = ucLotMain.GetProjectForSave(_lot.ProjectId);
+                        project.HasLots = HasLots;
                         _projectRepo.Update(project, conn, transaction);
                         NewProject = project;
 
-                        var lots = _lotRepo.GetByProjectId(_lot.ProjectId);
-                        var lot1 = lots.FirstOrDefault(l => l.LotNumber == 1);
-
-                        if (lot1 != null)
+                        // 2. Then every lot (main + extras)
+                        foreach (var editor in _lotEditors)
                         {
+                            var lotToSave = editor.GetLotForSave();
+                            lotToSave.ProjectId = _lot.ProjectId;
 
-                            var updatedLot1 = new Domain.Lot
-                            {
-                                Id = lot1.Id,//
-                                LotNumber = lot1.LotNumber,
-                                LotName = txtLotName.Text.Trim(),
-                                LotBudget = string.IsNullOrWhiteSpace(txtLotBudget.Text) ? 0 : Convert.ToDecimal(txtLotBudget.Text),
-                                RegisteredAmount = string.IsNullOrWhiteSpace(txtRegisteredAmount.Text) ? 0 : Convert.ToDecimal(txtRegisteredAmount.Text),
-                                ConsumedAmount = string.IsNullOrWhiteSpace(txtConsumedAmount.Text) ? 0 : Convert.ToDecimal(txtConsumedAmount.Text),
-                                Contractor = NullIfBlank(txtContractor.Text),
-                                ExecutionDuration = spnExecutionDuration.Value > 0 ? (int?)Convert.ToInt32(spnExecutionDuration.Value) : null,
-                                StartDate = dtStartDate.EditValue == null || dtStartDate.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dtStartDate.EditValue),
-                                PhysicalProgress = spnPhysicalProgress.Value,
-                                AdministrativeProcedureId = NullableId(cmbAdminProcedure),
-                                SpecialStatus1Id = NullableId(cmbSpecialStatus1),
-                                SpecialStatus2Id = NullableId(cmbSpecialStatus2),
-                                SpecialStatus3Id = NullableId(cmbSpecialStatus3),
-                                ProjectStatusId = NullableId(cmbProjectStatus),
-                                Notes = NullIfBlank(txtLotNotes.Text)
-                            };
-
-                            _lotRepo.Update(updatedLot1, conn, transaction);
+                            if (lotToSave.Id == 0)
+                                _lotRepo.Insert(lotToSave);
+                            else
+                                _lotRepo.Update(lotToSave, conn, transaction);
                         }
-
-                        // ── Update Lot 2 ──────────────────────────────────────
-                        if (tabLot2.PageVisible)
-                        {
-                            var lot2 = lots.FirstOrDefault(l => l.LotNumber == 2);
-                            if (lot2 != null)
-                            {
-                                var updatedLot2 = new Domain.Lot
-                                {
-                                    Id = lot2.Id,//
-                                    LotNumber = lot2.LotNumber,
-                                    LotName = textEdit2.Text.Trim(),
-                                    LotBudget = string.IsNullOrWhiteSpace(textEdit6.Text) ? 0 : Convert.ToDecimal(textEdit6.Text),
-                                    RegisteredAmount = string.IsNullOrWhiteSpace(textEdit5.Text) ? 0 : Convert.ToDecimal(textEdit5.Text),
-                                    ConsumedAmount = string.IsNullOrWhiteSpace(textEdit7.Text) ? 0 : Convert.ToDecimal(textEdit7.Text),
-                                    Contractor = NullIfBlank(textEdit4.Text),
-                                    ExecutionDuration = spinEdit2.Value > 0 ? (int?)Convert.ToInt32(spinEdit2.Value) : null,
-                                    StartDate = dateEdit1.EditValue == null || dateEdit1.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dateEdit1.EditValue),
-                                    PhysicalProgress = spinEdit3.Value,
-                                    AdministrativeProcedureId = NullableId(lookUpEdit7),
-                                    SpecialStatus1Id = NullableId(lookUpEdit8),
-                                    SpecialStatus2Id = NullableId(lookUpEdit6),
-                                    SpecialStatus3Id = NullableId(lookUpEdit9),
-                                    ProjectStatusId = NullableId(lookUpEdit10),
-                                    Notes = NullIfBlank(memoEdit1.Text)
-                                };
-                                _lotRepo.Update(updatedLot2, conn, transaction);
-                            }
-                        }
-                        if (tabLot3.PageVisible)
-                        {
-                            var lot3 = lots.FirstOrDefault(l => l.LotNumber == 3);
-                            if (lot3 != null)
-                            {
-                                var updatedLot3 = new Domain.Lot
-                                {
-                                    Id = lot3.Id,//
-                                    LotNumber = lot3.LotNumber,
-                                    LotName = textEdit9.Text.Trim(),
-                                    LotBudget = string.IsNullOrWhiteSpace(textEdit13.Text) ? 0 : Convert.ToDecimal(textEdit13.Text),
-                                    RegisteredAmount = string.IsNullOrWhiteSpace(textEdit12.Text) ? 0 : Convert.ToDecimal(textEdit12.Text),
-                                    ConsumedAmount = string.IsNullOrWhiteSpace(textEdit14.Text) ? 0 : Convert.ToDecimal(textEdit14.Text),
-                                    Contractor = NullIfBlank(textEdit11.Text),
-                                    ExecutionDuration = spinEdit5.Value > 0 ? (int?)Convert.ToInt32(spinEdit5.Value) : null,
-                                    StartDate = dateEdit2.EditValue == null || dateEdit2.EditValue == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(dateEdit2.EditValue),
-                                    PhysicalProgress = spinEdit6.Value,
-                                    AdministrativeProcedureId = NullableId(lookUpEdit17),
-                                    SpecialStatus1Id = NullableId(lookUpEdit18),
-                                    SpecialStatus2Id = NullableId(lookUpEdit16),
-                                    SpecialStatus3Id = NullableId(lookUpEdit19),
-                                    ProjectStatusId = NullableId(lookUpEdit20),
-                                    Notes = NullIfBlank(memoEdit2.Text),
-                                };
-                                _lotRepo.Update(updatedLot3, conn, transaction);
-                            }
-                        }
-
-
 
                         transaction.Commit();
                         DialogResult = DialogResult.OK;
-                        XtraMessageBox.Show("تم تعديل بيانات المشروع", "تم", MessageBoxButtons.OK, MessageBoxIcon.Information); Close();
+                        XtraMessageBox.Show("تم تعديل بيانات المشروع", "تم", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Close();
                     }
                     catch (Exception ex)
                     {
@@ -356,130 +161,53 @@ namespace DevExpress.ProductsDemo.Win.Forms
                             $"فشل التعديل، تم التراجع عن جميع التغييرات.\n\n{ex.Message}\n{ex.InnerException?.Message}",
                             "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
                 }
-
             }
-
-
-
-        }
-        private void bbiCancel_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
-        // ── Validation ────────────────────────────────────────────────────
-
-        private bool ValidateAll()
-        {
-            bool ok = true;
-
-           // ok &= Require(txtOperationNumber, "Operation Number is required");
-            ok &= Require(txtOperationName, "Operation Name is required");
-            ok &= RequireLookup(cmbProgram, "Program is required");
-            ok &= RequireLookup(cmbDaira, "Daira is required");
-            ok &= RequireLookup(cmbCommune, "Commune is required");
-            ok &= RequireLookup(cmbDomain, "Domain is required");
-            ok &= RequireLookup(cmbSector, "Sector is required");
-            return ok;
-        }
-        private bool Require(TextEdit txt, string msg)
-        {
-            if (!string.IsNullOrWhiteSpace(txt.Text)) return true;
-            XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            txt.Focus();
-            return false;
-        }
-        private bool RequireLookup(LookUpEdit cmb, string msg)
-        {
-            if (cmb.EditValue != null && cmb.EditValue != DBNull.Value) return true;
-            XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            cmb.Focus();
-            return false;
-        }
-        private bool Fail(string msg)
-        {
-            XtraMessageBox.Show(msg, "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return false;
-        }
-
-        // ── Helpers ───────────────────────────────────────────────────────
-        private static string NullIfBlank(string s) =>
-            string.IsNullOrWhiteSpace(s) ? null : s.Trim();
-
-        private static int? NullableId(LookUpEdit cmb) =>
-            cmb.EditValue == null || cmb.EditValue == DBNull.Value
-                ? (int?)null : Convert.ToInt32(cmb.EditValue);
-
-
-
-        // Caller reads this after ShowDialog returns OK
-
-
-
-
-        private void ucContactInfo1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupControl5_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void ribbonControl1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void barButtonItem4_ItemClick(object sender, ItemClickEventArgs e)
         {
+            int nextLotNumber = _lotEditors.Count + 1;
 
+            var editor = new UCLot { Dock = DockStyle.Fill };
+            editor.BindLookups(_lookup);
+            editor.LoadNew(nextLotNumber);
+            editor.ShowProjectFields(false);
 
-            if (!tabLot2.PageVisible)
-            {
-                tabLot2.PageVisible = true;
-                tabContainer.SelectedTabPage = tabLot2;
-                btnRemoveLot.Enabled = true;
-                HasLots = true; // أو chkHasLots.Checked = true
+            var page = new DevExpress.XtraTab.XtraTabPage { Text = $"الحصة {nextLotNumber}" };
+            page.Controls.Add(editor);
 
-                return;
-            }
+            tabContainer.TabPages.Add(page);
+            _lotEditors.Add(editor);
+            tabContainer.SelectedTabPage = page;
 
-            if (!tabLot3.PageVisible && tabLot2.PageVisible)
-            {
-                tabLot3.PageVisible = true;
-                tabContainer.SelectedTabPage = tabLot3;
-                btnRemoveLot.Enabled = true;
-                btnAddLot.Enabled = false;
-                HasLots = true;
-                return;
-            }
-
-
+            HasLots = _lotEditors.Count > 1;
+            btnRemoveLot.Enabled = true;
         }
 
         private void btnRemoveLot_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (tabContainer.SelectedTabPage == tabLot3)
+            var currentPage = tabContainer.SelectedTabPage;
+            if (currentPage == tabMain) return; // Lot 1 can't be removed this way
+
+            var editor = _lotEditors.FirstOrDefault(ed => ed.Parent == currentPage);
+            if (editor == null) return;
+
+            if (!DialogHelper.ConfirmDelete($"الحصة رقم {editor.LotNumber}"))
+                return;
+
+            if (editor.LotId.HasValue)
             {
-                tabLot3.PageVisible = false;
-            }
-            else if (tabContainer.SelectedTabPage == tabLot2)
-            {
-
-                tabLot2.PageVisible = false;
-                tabLot3.PageVisible = false;
-                btnRemoveLot.Enabled = false;
-                HasLots = false;
-
-
+                try { _lotRepo.Delete(editor.LotId.Value); }
+                catch (Exception ex) { DialogHelper.DatabaseError(ex); return; }
             }
 
+            _lotEditors.Remove(editor);
+            tabContainer.TabPages.Remove(currentPage);
+
+            HasLots = _lotEditors.Count > 1;
             btnAddLot.Enabled = true;
-
+            btnRemoveLot.Enabled = _lotEditors.Count > 1;
         }
     }
 }
