@@ -41,6 +41,7 @@ namespace DevExpress.ProductsDemo.Win.Services
         public int FinishedCount { get; set; }     // 5
         public int ReceivedFundsCount { get; set; } // 6
         public int ClosedCount { get; set; }        // 7
+        public int CanceledCount { get; set; }      // 8
 
 
     }
@@ -147,6 +148,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                     FinishedCount = Count(r => r.ProjectStatusId == 5),
                     ReceivedFundsCount = Count(r => r.ProjectStatusId == 6),
                     ClosedCount = Count(r => r.ProjectStatusId == 7),
+                    CanceledCount = Count(r => r.ProjectStatusId == 8),
                 };
 
                 row.TotalRegisteredGroupCount = row.RegisteredCount + row.OngoingCount + row.StoppedCount

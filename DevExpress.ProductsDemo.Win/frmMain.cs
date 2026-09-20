@@ -105,7 +105,7 @@ namespace DevExpress.ProductsDemo.Win
                 item.Caption = FormatCaptionForRibbon(f.Name);
                 item.Tag = $"SavedFilter:{f.Id}";
                 item.Value = $"SavedFilter:{f.Id}";
-              //  item.Checked = true;
+               // item.Checked = false;
 
                 DevExpress.Utils.Svg.SvgImage icon = null;
                 if (!string.IsNullOrEmpty(f.IconName))
@@ -414,12 +414,14 @@ namespace DevExpress.ProductsDemo.Win
 
             if (e.Item.Checked)
             {
+                if (e.Item.Value.ToString().StartsWith("SaveCurrentFilter"))
+                    e.Item.Checked = false;
                 // First press: Item becomes checked -> Apply the specific filter
                 modulesNavigator.CurrentModule.ButtonClick(string.Format("{0}", e.Item.Value));
             }
             else
             {
-                //if ( !  e.Item.Value.ToString().StartsWith("SaveCurrentFilter"))
+                if ( !  e.Item.Value.ToString().StartsWith("SaveCurrentFilter"))
                 // Second press: Item becomes unchecked -> Send a command to clear the filter
                 modulesNavigator.CurrentModule.ButtonClick("ClearFilter");
             }

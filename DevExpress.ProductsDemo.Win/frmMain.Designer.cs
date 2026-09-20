@@ -67,11 +67,11 @@
             this.backstageViewClientControl1 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
             this.helpControl1 = new DevExpress.ProductsDemo.Win.Controls.HelpControl();
             this.backstageViewControl2 = new DevExpress.XtraBars.Ribbon.BackstageViewControl();
+            this.backstageViewClientControl5 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
             this.backstageViewClientControl3 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
             this.printControl1 = new DevExpress.ProductsDemo.Win.Controls.PrintControl();
             this.backstageViewClientControl4 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
             this.exportControl1 = new DevExpress.ProductsDemo.Win.Controls.ExportControl();
-            this.backstageViewClientControl5 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
             this.backstageViewClientControl2 = new DevExpress.XtraBars.Ribbon.BackstageViewClientControl();
             this.bvtiInfo = new DevExpress.XtraBars.Ribbon.BackstageViewTabItem();
             this.backstageViewTabItem2 = new DevExpress.XtraBars.Ribbon.BackstageViewTabItem();
@@ -267,6 +267,11 @@
             resources.ApplyResources(this.backstageViewControl2, "backstageViewControl2");
             this.backstageViewControl2.Name = "backstageViewControl2";
             // 
+            // backstageViewClientControl5
+            // 
+            resources.ApplyResources(this.backstageViewClientControl5, "backstageViewClientControl5");
+            this.backstageViewClientControl5.Name = "backstageViewClientControl5";
+            // 
             // backstageViewClientControl3
             // 
             this.backstageViewClientControl3.Controls.Add(this.printControl1);
@@ -291,11 +296,6 @@
             resources.ApplyResources(this.exportControl1, "exportControl1");
             this.exportControl1.ForeColor = System.Drawing.Color.Transparent;
             this.exportControl1.Name = "exportControl1";
-            // 
-            // backstageViewClientControl5
-            // 
-            resources.ApplyResources(this.backstageViewClientControl5, "backstageViewClientControl5");
-            this.backstageViewClientControl5.Name = "backstageViewClientControl5";
             // 
             // backstageViewClientControl2
             // 

@@ -440,7 +440,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
             // gridView1.Appearance.EvenRow.BackColor = Color.White;
             //gridView1.Appearance.OddRow.BackColor = Color.FromArgb(245, 245, 245);
             AddCol("OperationNumber", "رقم ", 110);
-            AddCol("FlagsId", "الرايات", 80);
+            AddCol("FlagsId", "العلامة", 80);
             // Create ImageComboBox tied to the imagelist
             var flagsCombo = new RepositoryItemImageComboBox();
             flagsCombo.SmallImages = imageList;  //
