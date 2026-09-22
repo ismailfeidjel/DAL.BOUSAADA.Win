@@ -61,14 +61,14 @@ namespace DevExpress.ProductsDemo.Win
             {
 
                 // Example 2 (If using ADO.NET / MySQL):
-                 using (var conn = new MySqlConnection("Server=localhost;Port=3306;Database=dal;Uid=root;Pwd=;")) { conn.Open();conn.Close(); }
+                 using (var conn = new DbHelper().GetConnection()) { conn.Open();conn.Close(); }
             }
             catch (Exception ex)
             {
                 // Close the splash screen so the error dialog is visible
                 SplashScreenManager.CloseForm(false);
                 // Show the error message
-                XtraMessageBox.Show("تعذر الاتصال بقاعدة البيانات. يرجى التحقق من الخادم والمحاولة مرة أخرى.\n \n" ,
+                XtraMessageBox.Show(ex.ToString()+"تعذر الاتصال بقاعدة البيانات. يرجى التحقق من الخادم والمحاولة مرة أخرى.\n \n" ,
                                     "خطأ في الاتصال", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 // Exit the application completely
