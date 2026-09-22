@@ -430,7 +430,6 @@
             this.rgbiCurrentViewTasks.Gallery.ColumnCount = 4;
             resources.ApplyResources(galleryItemGroup1, "galleryItemGroup1");
             resources.ApplyResources(galleryItem1, "galleryItem1");
-            galleryItem1.Checked = true;
             galleryItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage")));
             galleryItem1.Tag = "SaveCurrentFilter";
             galleryItem1.Value = "SaveCurrentFilter";
