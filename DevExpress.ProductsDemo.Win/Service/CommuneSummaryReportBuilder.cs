@@ -36,6 +36,7 @@ namespace DevExpress.ProductsDemo.Win.Services
         // Status counts
         public int TotalRegisteredGroupCount { get; set; } // sum of the 6 below
         public int RegisteredCount { get; set; }   // 2
+        public int UnRegisteredCount { get; set; }   // 1
         public int OngoingCount { get; set; }      // 3
         public int StoppedCount { get; set; }      // 4
         public int FinishedCount { get; set; }     // 5
@@ -143,6 +144,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                     RejectedCount = Count(r => r.AdministrativeProcedureId == 11),
 
                     RegisteredCount = Count(r => r.ProjectStatusId == 2),
+                    UnRegisteredCount = Count(r => r.ProjectStatusId == 1),
                     OngoingCount = Count(r => r.ProjectStatusId == 3),
                     StoppedCount = Count(r => r.ProjectStatusId == 4),
                     FinishedCount = Count(r => r.ProjectStatusId == 5),

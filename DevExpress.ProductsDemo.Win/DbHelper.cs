@@ -51,7 +51,7 @@ namespace DevExpress.ProductsDemo.Win
                     $"فشل قراءة إعدادات الاتصال بقاعدة البيانات:\n\n{ex.Message}\n\nسيتم استخدام الإعدادات الافتراضية.",
                     "خطأ في الإعدادات", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
-                return "Server=localhost;Port=3306;Database=dal;Uid=root;Pwd=;";
+                return "Server=localhost;Port=3306;Database=dal;Uid=root;Pwd=dal092026;";
             }
         }
     }
