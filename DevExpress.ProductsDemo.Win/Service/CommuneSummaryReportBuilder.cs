@@ -10,6 +10,7 @@ namespace DevExpress.ProductsDemo.Win.Services
     public class CommuneSummaryRow
     {
         public string Daira { get; set; }
+        public int DairaId { get; set; }
         public string Commune { get; set; }
         public decimal LotBudget { get; set; }
         public decimal RegisteredAmount { get; set; }
@@ -120,6 +121,7 @@ namespace DevExpress.ProductsDemo.Win.Services
                 {
                     Daira = g.Key.Daira,
                     Commune = g.Key.Commune,
+                    //DairaId = g.Key.DairaId,
 
                     // Money still sums across ALL lots (a project can have multiple budget lines)
                     LotBudget = rows.Sum(r => r.LotBudget),
@@ -219,10 +221,22 @@ namespace DevExpress.ProductsDemo.Win.Services
         {
         "قالب_تقرير_الاستهلاك_المالي",
     };
-
+        //
         public static XtraReport Build(List<LotGridModel> data, string programName)
         {
             var rows = CommuneSummaryReportBuilder.ComputeCommuneRows(data);
+            rows = rows
+        .GroupBy(r => r.DairaId != 0 ? r.DairaId : r.Daira.GetHashCode()) // group key — adjust if DairaId isn't on CommuneSummaryRow
+        .Select(g =>
+        {
+            decimal totalRegistered = g.Sum(r => r.RegisteredAmount);
+            decimal totalConsumed = g.Sum(r => r.ConsumedAmount);
+            decimal percent = totalRegistered > 0 ? (totalConsumed / totalRegistered) * 100 : 0;
+            return new { Percent = percent, Rows = g.ToList() };
+        })
+        .OrderByDescending(x => x.Percent)
+        .SelectMany(x => x.Rows)
+        .ToList();
 
             var partReports = new List<XtraReport>();
             foreach (string key in PartTemplateKeys)
