@@ -60,8 +60,8 @@ namespace DevExpress.ProductsDemo.Win
             InitNavBarItemLinks();
             NavigationInitialize();
             SetPageLayoutStyle();
-            guideGenerator = new GuideGenerator();
-            guideGenerator.CreateWhatsThisItem(ribbonControl1, () => { return this; });
+         //   guideGenerator = new GuideGenerator();
+         //   guideGenerator.CreateWhatsThisItem(ribbonControl1, () => { return this; });
         }
 
         private void SetupSavedFiltersGalleryGroup()

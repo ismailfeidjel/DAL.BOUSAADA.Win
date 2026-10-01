@@ -979,10 +979,9 @@ namespace DevExpress.ProductsDemo.Win.Modules
                             SectorId = lot.SectorId ?? 0,
                             HasLots = lot.LotNumber > 1,
                         };
-
-
                         _projectRepo.Update(updatedProject, conn, transaction);
                         _lotRepo.Update(updatedLot, conn, transaction);
+                        lot.UpdatedAt = DateTime.Now;
                         transaction.Commit();
                     }
                     catch (Exception ex)
@@ -1021,9 +1020,7 @@ namespace DevExpress.ProductsDemo.Win.Modules
                     MessageBoxIcon.Error);
             }
         }
-
         // ── Data ─────────────────────────────────────────────────────
-
         private void LoadData()
         {
             var all = _lotRepo.GetGridData();
@@ -1305,22 +1302,23 @@ namespace DevExpress.ProductsDemo.Win.Modules
             }
 
 
-            //
-
-
-
-
-
-            // Highlight ProjectStatusId and Notes in yellow when the project is closed
-            //  if ((e.Column.FieldName == "ProjectStatusId" || e.Column.FieldName == "Notes"))
-            //{
+            // Closed projects — yellow, takes priority over "recently updated"
             object statusVal = gridView1.GetRowCellValue(e.RowHandle, "ProjectStatusId");
-            if (statusVal != null && Convert.ToInt32(statusVal) == 7) // 7 = Closed, matches StatusFilterClosed
+            if (statusVal != null && Convert.ToInt32(statusVal) == 7)
             {
-                e.Appearance.BackColor = Color.FromArgb(255, 245, 150); // soft yellow
+                e.Appearance.BackColor = Color.FromArgb(255, 245, 150);
                 return;
             }
-            //}
+            // Recently updated (within last 7 days) — light blue, only if not already closed
+            object updatedVal = gridView1.GetRowCellValue(e.RowHandle, "UpdatedAt");
+            if (updatedVal != null && updatedVal != DBNull.Value && DateTime.TryParse(updatedVal.ToString(), out DateTime updatedAt))
+            {
+                if ((DateTime.Now - updatedAt).TotalDays <= 7)
+                {
+                    e.Appearance.BackColor = Color.FromArgb(220, 240, 255); // light blue
+                    return;
+                }
+            }
         }
 
         public void ShowPreview()

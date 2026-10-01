@@ -225,18 +225,26 @@ namespace DevExpress.ProductsDemo.Win.Services
         public static XtraReport Build(List<LotGridModel> data, string programName)
         {
             var rows = CommuneSummaryReportBuilder.ComputeCommuneRows(data);
+
+            decimal CommunePercent(CommuneSummaryRow r) =>
+                r.RegisteredAmount > 0 ? (r.ConsumedAmount / r.RegisteredAmount) * 100 : 0;
+
             rows = rows
-        .GroupBy(r => r.DairaId != 0 ? r.DairaId : r.Daira.GetHashCode()) // group key — adjust if DairaId isn't on CommuneSummaryRow
-        .Select(g =>
-        {
-            decimal totalRegistered = g.Sum(r => r.RegisteredAmount);
-            decimal totalConsumed = g.Sum(r => r.ConsumedAmount);
-            decimal percent = totalRegistered > 0 ? (totalConsumed / totalRegistered) * 100 : 0;
-            return new { Percent = percent, Rows = g.ToList() };
-        })
-        .OrderByDescending(x => x.Percent)
-        .SelectMany(x => x.Rows)
-        .ToList();
+                .GroupBy(r => r.Daira)
+                .Select(g =>
+                {
+                    decimal totalRegistered = g.Sum(r => r.RegisteredAmount);
+                    decimal totalConsumed = g.Sum(r => r.ConsumedAmount);
+                    decimal dairaPercent = totalRegistered > 0 ? (totalConsumed / totalRegistered) * 100 : 0;
+
+                    // Communes within this Daira, sorted by their own percentage, highest first
+                    var sortedCommunes = g.OrderByDescending(CommunePercent).ToList();
+
+                    return new { Percent = dairaPercent, Rows = sortedCommunes };
+                })
+                .OrderByDescending(x => x.Percent)   // Dairas ordered by overall percentage
+                .SelectMany(x => x.Rows)
+                .ToList();
 
             var partReports = new List<XtraReport>();
             foreach (string key in PartTemplateKeys)
